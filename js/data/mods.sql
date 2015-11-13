@@ -1,0 +1,1 @@
+SELECT *, GROUP_CONCAT(stats.Text SEPARATOR ",") as StatsTexts FROM `mods` LEFT JOIN stats ON mods.StatsKey1 = stats.Rows or mods.StatsKey2 = stats.Rows or mods.StatsKey3 = stats.Rows or mods.StatsKey4 = stats.Rows GROUP BY mods.Rows

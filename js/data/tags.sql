@@ -1,0 +1,1 @@
+SELECT `Rows`, Id FROM tags

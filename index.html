@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PoE Crafter</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="css/common.css" />
+        
+        <script src="js/libs/jquery/jquery.js"></script>
+        <script src="js/libs/Inheritance.js"></script>
+        
+        <script src="js/libs/Applicable.js"></script>
+        <script src="js/libs/Spawnable.js"></script>
+        <script src="js/libs/Rollable.js"></script>
+        
+        <script src="js/libs/GgpkEntry.js"></script>
+        <script src="js/libs/mods/Mod.js"></script>
+        <script src="js/libs/mods/RollableMod.js"></script>
+        
+        <script src="js/libs/ModGenerators/ModGenerator.js"></script>
+        <script src="js/libs/ModGenerators/Currency.js"></script>
+        <script src="js/libs/ModGenerators/Transmute.js"></script>
+        <script src="js/libs/ModGenerators/Augment.js"></script>
+        <script src="js/libs/ModGenerators/Scouring.js"></script>
+        <script src="js/libs/ModGenerators/ModGeneratorFactory.js"></script>
+        
+        <script src="js/libs/ModContainers/ModContainer.js"></script>
+        <script src="js/libs/ModContainers/Item.js"></script>
+        <script src="js/libs/ModContainers/ItemClass.js"></script>
+        <script src="js/libs/ModContainers/BaseItem.js"></script>
+        
+        <script src="js/test/mod.js"></script>
+    </head>
+    <body>
+        <h1>PoE Crafting Simulator</h1>
+        <p>or why we cant have nice things</p>
+        
+        <div class="template itembox">
+            <span class="itemboxheader-single"></span>
+            <span class="itembox-stats">
+                <span class="template itembox-statsgroup"></span>
+                <span class="template separator"></span>
+            </span>
+            <div class="itemboximage"></div>
+        </div>
+        
+        <h2>BaseItem</h2>
+        <section id="BaseItem">
+            <h3>ItemClass</h3>
+            <p>choose ItemClass</p>
+            <select id="item_classes">
+                <option class="template"></option>
+            </select>
+            
+            <p>choose BaseItem</p>
+            <select id="baseitems">
+                <option class="template"></option>
+            </select>
+            
+            <h3>Used BaseItems</h3>
+            <div id="used_baseitem"></div>
+        </section>
+        
+        <h2>ModGenerator</h2>
+        <section id="ModGenerator">
+            <p>choose your currency/bench</p>
+            <select id="mod_generators">
+                <option class="template"></option>
+            </select>
+            
+            <h3 id="used_mod_generator"></h3>
+            
+            <button id="use_mod_gen" type="button">Use</button>
+        </section>
+        
+        
+        
+        <h3>available Mods</h3>
+        <section id="available_mods">
+            <table id="implicits" class="mods">
+                <caption>implicits</caption>
+                <thead></thead>
+                <tbody>
+                    <tr class="template correct_group">
+                        <td colspan="4" class="correct_group"></td>
+                    </tr>
+                    <tr class="template mod">
+                        <td class="ilvl"></td>
+                        <td class="value"></td>
+                        <td class="name"></td>
+                        <td><button type="button" class="add_mod">add</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table id="prefixes" class="mods">
+                <caption>prefixes</caption>
+                <thead></thead>
+                <tbody>
+                    <tr class="template correct_group">
+                        <td colspan="4" class="correct_group"></td>
+                    </tr>
+                    <tr class="template mod">
+                        <td class="ilvl"></td>
+                        <td class="value"></td>
+                        <td class="name"></td>
+                        <td><button type="button" class="add_mod">add</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <table id="suffixes" class="mods">
+                <caption>Suffixes</caption>
+                <thead></thead>
+                <tbody>
+                    <tr class="template correct_group">
+                        <td colspan="4" class="correct_group"></td>
+                    </tr>
+                    <tr class="template mod">
+                        <td class="ilvl"></td>
+                        <td class="value"></td>
+                        <td class="name"></td>
+                        <td><button type="button" class="add_mod">add</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </body>
+</html>

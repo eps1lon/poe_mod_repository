@@ -1,0 +1,25 @@
+/* 
+    Created on : 09.11.2015, 19:34:32
+    Author     : eps1lon
+*/
+
+.correct_group, #implicits caption {
+    cursor: pointer;
+}
+
+#implicits caption {
+    /* TODO otherwise its jump when toggling tbody*/
+    text-align: left;
+}
+
+.mod[data-mod-gen-exception-ident] td {
+    background-color: red;
+}
+
+#available_mods #prefixes, #available_mods #suffixes {
+    float: left;
+}
+
+.template {
+    display: none;
+}
