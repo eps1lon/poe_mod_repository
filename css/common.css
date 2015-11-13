@@ -7,6 +7,10 @@
     cursor: pointer;
 }
 
+#implicits tbody {
+    display: none;
+}
+
 #implicits caption {
     /* TODO otherwise its jump when toggling tbody*/
     text-align: left;
