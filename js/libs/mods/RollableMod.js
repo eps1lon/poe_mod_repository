@@ -23,7 +23,7 @@
             var spawnweight_tags = $(this.valueAsArray("SpawnWeight_TagsKeys")).filter(mod_container.getTags()).toArray();
             
             if (spawnweight_tags.length === 0) {
-                this.spawnable_byte = RollableMod.ROLLABLE_FAILURES.NO_MATCHING_TAGS;
+                this.spawnable_byte = RollableMod.ROLLABLE_BYTE.NO_MATCHING_TAGS;
                 return 0;
             }
 
@@ -33,7 +33,7 @@
             
             if (this.spawnweight <= 0) {
                 this.spawnweight = 0;
-                this.spawnable_byte |= RollableMod.ROLLABLE_FAILURES.SPAWNWEIGHT_ZERO;
+                this.spawnable_byte |= RollableMod.ROLLABLE_BYTE.SPAWNWEIGHT_ZERO;
             }
             
             if (!this.spawnable_byte) {
@@ -48,11 +48,11 @@
             var open_suffix = mod_container.suffixes().length < mod_container.maxSuffixes();
             
             if (mod_container.domain !== __undefined && this.getProp("Domain") != mod_container.domain) {
-                this.applicable_byte |= RollableMod.ROLLABLE_FAILURES.WRONG_DOMAIN;
+                this.applicable_byte |= RollableMod.ROLLABLE_BYTE.WRONG_DOMAIN;
             }
 
             if (this.isPrefix() && !open_prefix || this.isSuffix() && !open_suffix) {
-                this.applicable_byte |= RollableMod.ROLLABLE_FAILURES.AFFIX_FULL;
+                this.applicable_byte |= RollableMod.ROLLABLE_BYTE.AFFIX_FULL;
             }
             
             if (!this.applicable_byte) {
@@ -71,11 +71,18 @@
                 this.rollable_byte = Rollable.SUCCESS;
             }
             
-            return !!(this.rollable_byte & Applicable.SUCCESS);
+            return !!(this.rollable_byte & Rollable.SUCCESS);
         }
     });
     
-    this.RollableMod.ROLLABLE_FAILURES = {
+    this.RollableMod.SPAWNABLE_BYTE = {
+        UNSCANNED: 0, // per convention 
+        NO_FAILURE: 1,
+        NO_MATCHING_TAGS: 64,
+        SPAWNWEIGHT_ZERO: 128
+    };
+    
+    this.RollableMod.APPLICABLE_BYTE = {
         UNSCANNED: 0, // per convention 
         NO_FAILURE: 1, 
         // Applicable
@@ -83,9 +90,8 @@
         NO_MATCHING_RARITY: 4,
         NO_MATCHING_ITEMCLASS: 8,
         ALREADY_PRESENT: 16,
-        WRONG_DOMAIN: 32,
-        // Spawnables
-        NO_MATCHING_TAGS: 64,
-        SPAWNWEIGHT_ZERO: 128
+        WRONG_DOMAIN: 32
     };
+    
+    this.RollableMod.ROLLABLE_BYTE = $.extend({}, this.RollableMod.APPLICABLE_BYTE, this.RollableMod.SPAWNABLE_BYTE)
 })();
