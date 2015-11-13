@@ -376,7 +376,9 @@
         });
         
         // test dom handles
-        $("#item_classes option:not(.template)").filter(":first").prop("selected", true);
+        $("#item_classes option:not(.template)").filter(function () {
+            return $(this).text().toLowerCase() === "bow";
+        }).prop("selected", true);
         $("#item_classes").trigger("change");
         
         $("#baseitems option:not(.template)").filter(":first").prop("selected", true);
