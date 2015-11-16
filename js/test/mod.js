@@ -74,8 +74,6 @@
             });
         }
         
-        
-
         // mod groups
         var prefixes = Spawnable.calculateSpawnchance($.grep(applicable_mods, function (mod) {
             return mod.isPrefix();
@@ -89,9 +87,9 @@
             return mod.isImplicit();
         }));
         
-        console.log("implicits", implicits);
-        console.log("prefixes", prefixes);
-        console.log("suffix", suffixes);
+        //console.log("implicits", implicits);
+        //console.log("prefixes", prefixes);
+        //console.log("suffix", suffixes);
         
         // display prefixes
         display_mod_group(prefixes, $("#prefixes"));
@@ -131,7 +129,7 @@
      */
     var display_mod_group = function (mods, table) {
         // empty mods
-        $("tbody tr:not(.template)", table).empty();
+        $("tbody tr:not(.template)", table).remove();
         
         // display prefix
         $.each(mods, function (_, mod) {
