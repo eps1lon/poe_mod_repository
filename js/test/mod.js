@@ -60,7 +60,7 @@
                 $statsgroup.append("<br>");
             }
             
-            $statsgroup.append(mod.text());
+            $statsgroup.append(mod.t());
         });
         
         // sep

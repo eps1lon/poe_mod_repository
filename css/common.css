@@ -28,7 +28,7 @@
     display: none;
 }
 
-.stats {
+.stats, .itembox-statsgroup {
     white-space: pre;
 }
 
