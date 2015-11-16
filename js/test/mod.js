@@ -63,6 +63,9 @@
     
     var display_available_mods = function (mod_generator, baseitem) {
         console.log(mod_generator, "@", baseitem, "?");
+        
+        // empty
+        $("#available_mods tbody tr:not(.template)").remove();
             
         // extends ModGenerator implements Applicable
         if (!(mod_generator instanceof ModGenerator)) {
@@ -117,7 +120,7 @@
         
         // display implicits 
         // empty mods
-        $("#implicits tbody tr:not(.template)").empty();
+        $("#implicits tbody tr:not(.template)").remove();
         
         // display prefix
         $.each(implicits, function (_, mod) {
@@ -393,7 +396,7 @@
         
         // test dom handles
         $("#item_classes option:not(.template)").filter(function () {
-            return $(this).text().toLowerCase() === "bow";
+            return $(this).text().toLowerCase() === "jewel";
         }).prop("selected", true);
         $("#item_classes").trigger("change");
         
