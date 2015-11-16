@@ -37,136 +37,160 @@
     };
     
     this.ItemClassFactory.ITEMCLASSES = {
-        AMULET: { // TODO
+        AMULET: {
             PRIMARY: 5, 
-            TAGS: [3], 
+            // amulet, default
+            TAGS: [3, 0], 
             DOMAIN: 1
         },
-        RING: { // TODO
+        RING: {
             PRIMARY: 6, 
-            TAGS: [], 
+            // ring, default
+            TAGS: [2, 0], 
             DOMAIN: 1
         },
-        CLAW: { // TODO
+        CLAW: {
             PRIMARY: 7, 
-            TAGS: [], 
+            // claw, onehandweapon, weapon
+            TAGS: [14, 81, 8], 
             DOMAIN: 1
         },
-        DAGGER: { // TODO
+        DAGGER: { 
             PRIMARY: 8, 
-            TAGS: [], 
+            // dagger, onehandweapon, weapon
+            TAGS: [13, 81, 8], 
             DOMAIN: 1
         },
-        WAND: { // TODO
+        WAND: { 
             PRIMARY: 9, 
-            TAGS: [], 
+            // wand, onehandweapon, weapon, ranged
+            TAGS: [9, 81, 8, 32],  
             DOMAIN: 1
         },
-        SWORD_1H: { // TODO
+        SWORD_1H: { 
             PRIMARY: 10, 
-            TAGS: [], 
+            // sword, onehandweapon, weapon
+            TAGS: [12, 81, 8], 
             DOMAIN: 1
         },
-        THRUSTING_SWORD_1H: { // TODO
+        THRUSTING_SWORD_1H: {
             PRIMARY: 11, 
-            TAGS: [], 
+            // sword, onehandweapon, weapon
+            TAGS: [12, 81, 8], 
             DOMAIN: 1
         },
-        AXE_1H: { // TODO
+        AXE_1H: {
             PRIMARY: 12, 
-            TAGS: [], 
+            // axe, onehandweapon, weapon
+            TAGS: [15, 81, 8],
             DOMAIN: 1
         },
-        MACE_1H: { // TODO
+        MACE_1H: { 
             PRIMARY: 13, 
-            TAGS: [], 
+            // mace, onehandweapon, weapon
+            TAGS: [11, 81, 8],
             DOMAIN: 1
         },
         BOW: {
             PRIMARY: 14,
-            // Weapon, Two-Handed Weapon, bow, ranged
-            TAGS: [8, 82, 5, 32],
+            // bow, twohandweapon, weapon, ranged
+            TAGS: [5, 82, 8, 32],
             DOMAIN: 1
         },
-        STAFF_2H: { // TODO
+        STAFF: { 
             PRIMARY: 15, 
-            TAGS: [], 
+            // Staff, twohandweapon, weapon
+            TAGS: [10, 82, 8],
             DOMAIN: 1
         },
-        SWORD_2H: { // TODO
+        SWORD_2H: { 
             PRIMARY: 16, 
-            TAGS: [], 
+            // sword, twohandweapon, weapon
+            TAGS: [12, 82, 8],
             DOMAIN: 1
         },
-        AXE_2H: { // TODO
+        AXE_2H: { 
             PRIMARY: 17, 
-            TAGS: [], 
+            // axe, twohandweapon, weapon
+            TAGS: [15, 82, 8], 
             DOMAIN: 1
         },
-        MACE_2H: { // TODO
+        MACE_2H: {
             PRIMARY: 18, 
-            TAGS: [], 
+            // mace, twohandweapon, weapon
+            TAGS: [11, 82, 8],
             DOMAIN: 1
         },
-        QUIVER: { // TODO
+        QUIVER: {
             PRIMARY: 21, 
-            TAGS: [], 
+            // quiver, default
+            TAGS: [21, 0], 
             DOMAIN: 1
         },
-        BELT: { // TODO
+        BELT: {
             PRIMARY: 22, 
-            TAGS: [], 
+            // belt, default
+            TAGS: [26, 0], 
             DOMAIN: 1
         },
-        GLOVES: { // TODO
+        GLOVES: {
             PRIMARY: 23, 
-            TAGS: [], 
+            // gloves, armour, default
+            TAGS: [22, 7, 0], 
             DOMAIN: 1
         },
-        BOOTS: { // TODO
+        BOOTS: {
             PRIMARY: 24, 
-            TAGS: [], 
+            // boots, armour, default
+            TAGS: [4, 7, 0], 
             DOMAIN: 1
         },
-        ARMOUR: { // TODO
+        ARMOUR: {
             PRIMARY: 25, 
-            TAGS: [], 
+            // body_armour, armour, default
+            TAGS: [16, 7, 0], 
             DOMAIN: 1
         },
-        HELMET: { // TODO
+        HELMET: {
             PRIMARY: 26, 
-            TAGS: [], 
+            // helmet, armour, default
+            TAGS: [25, 7, 0], 
             DOMAIN: 1
         },
-        SHIELD: { // TODO
+        SHIELD: { 
             PRIMARY: 27, 
-            TAGS: [], 
+            // shield, armour, default
+            TAGS: [1, 7, 0], 
             DOMAIN: 1
         },
-        SCEPTRE: { // TODO
+        SCEPTRE: {
             PRIMARY: 33, 
-            TAGS: [], 
+            // sceptre, onehandweapon, weapon
+            TAGS: [37, 81, 8],
             DOMAIN: 1
         },
-        MAP: { // TODO
+        MAP: {
             PRIMARY: 36, 
-            TAGS: [], 
-            DOMAIN: 1
+            // default
+            TAGS: [0], 
+            DOMAIN: 5
         },
-        FISHING_ROD: { // TODO
+        FISHING_ROD: {
             PRIMARY: 38, 
+            // fishing_rod
+            TAGS: [80], 
+            DOMAIN: 1
+        },
+        MAP_FRAGMENT: { 
+            PRIMARY: 39,
             TAGS: [], 
             DOMAIN: 1
         },
-        MAP_FRAGMENT: { // TODO
-            PRIMARY: 39, 
-            TAGS: [], 
-            DOMAIN: 1
-        },
-        JEWEL: { // TODO
+        JEWEL: {
             PRIMARY: 42, 
-            TAGS: [], 
-            DOMAIN: 1
+            // default
+            TAGS: [0], 
+            DOMAIN: 11
         }
     };
 })();
