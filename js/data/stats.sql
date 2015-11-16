@@ -1,0 +1,1 @@
+SELECT Rows, `Id`, `Text` FROM stats

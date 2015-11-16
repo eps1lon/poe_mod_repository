@@ -1,4 +1,9 @@
+/* global this */
+
 (function (__undefined) {
+    /**
+     * extends GgpkEntry implements Localizeable
+     */
     this.Mod = GgpkEntry.extend({
         init: function (props) {
             this._super(props);
@@ -15,19 +20,28 @@
         isAffix: function () {
             return this.isPrefix() || this.isSuffix();
         },
-        valueString: function () {
-            var stat_texts = this.valueAsArray("StatsTexts");
-            
+        statsJoined: function () {
             var that = this;
-            return $.map(stat_texts, function (_, i) {
-                var stat_min = that.getProp("Stat" + (i + 1) + "Min");
-                var stat_max = that.getProp("Stat" + (i + 1) + "Max");
-                
-                if (stat_min === stat_max) {
-                    return stat_min;
+            return $.map(this.valueAsArray("Stats"), function (row, i) {
+                if (row.toString().toLowerCase() === 'null') {
+                    // continue
+                    return null;
                 }
-                return [stat_min, stat_max].join(" - ");
-            }).join(" to ");
+                
+                var stat = new Stat(Mod.all_stats[row]);
+                stat.values = [
+                    +that.getProp("Stat" + (i + 1) + "Min"),
+                    +that.getProp("Stat" + (i + 1) + "Max")
+                ];
+                
+                return stat;
+            });
+        },
+        t: function () {
+            var stats = this.statsJoined();
+            return $.map(stats, function (stat) {
+                return stat.t(stats, Mod.localization);
+            }).join("\n");
         }
     });
     
@@ -52,5 +66,8 @@
         MASTER: 10,
         JEWEL: 11
     };
+    
+    this.Mod.localization = null;
+    this.Mod.all_stats = null;
 })();
 

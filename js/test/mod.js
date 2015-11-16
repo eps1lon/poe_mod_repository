@@ -1,10 +1,11 @@
-/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory */
+/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat */
 
 (function (__undefined) {
     // "tables"
     var mods = [],
         tags = [],
-        baseitemtypes;
+        baseitemtypes = [],
+        stats = [];
     
     var TAGS = {};
     
@@ -42,10 +43,9 @@
         }).join(", "));
         
         // sep
-        $statsgroup.appendTo($itembox);
-        $separator_template.clone().appendTo(".itembox-stats", $itembox);
+        $(".itembox-stats", $itembox).append($statsgroup);
+        $(".itembox-stats", $itembox).append($separator_template.clone())
         $statsgroup = $statsgroup_template.clone();
-        
         
         // implicits
         $.each(baseitem.implicits(), function (_, mod) {
@@ -53,9 +53,20 @@
         });
         
         // affixes
-        $.each(baseitem.affixes(), function (_, mod) {
+        $.each(baseitem.affixes(), function (i, mod) {
             console.log("affix", mod);
+            
+            if (i > 0) {
+                $statsgroup.append("<br>");
+            }
+            
+            $statsgroup.append(mod.text());
         });
+        
+        // sep
+        $(".itembox-stats", $itembox).append($statsgroup);
+        //$(".itembox-stats", $itembox).append($separator_template.clone())
+        //$statsgroup = $statsgroup_template.clone();
         
         // append new one
         return $("#used_baseitem").append($itembox);
@@ -132,10 +143,10 @@
             $(".ilvl", $tr).text(mod.getProp("Level"));
             
             // name
-            $(".name", $tr).text(mod.getProp("CorrectGroup"));
+            //$(".name", $tr).text(mod.getProp("CorrectGroup"));
             
             // value
-            $(".value", $tr).text(mod.valueString());
+            $(".stats", $tr).text(mod.t());
             
             $tr.appendTo("#implicits");
         });
@@ -180,7 +191,7 @@
             $(".name", $tr).text(mod.getProp("Name"));
             
             // value
-            $(".value", $tr).text(mod.valueString());
+            $(".stats", $tr).text(mod.t());
             
             $tr.data("mod", mod.serialize());
             
@@ -201,11 +212,19 @@
         }),
         $.getJSON("js/data/baseitemtypes.json", function (json) {
             baseitemtypes = json;
+        }),
+        $.getJSON("js/data/stats.json", function (json) {
+            stats = json;
+            Mod.all_stats = stats;
+        }),
+        $.getJSON("js/data/translations/English/stat_descriptions.json", function (json) {
+            Mod.localization = new Localization(json);
         })
     ).then(function () {
         console.log("loaded " + mods.length + " mods",
                     "loaded " + tags.length + " tags",
-                    "loaded " + baseitemtypes.length + " baseitemtypes"); 
+                    "loaded " + baseitemtypes.length + " baseitemtypes",
+                    "loaded " + stats.length + " stats"); 
         
         var ring_tag = TAGS.RING;
         var amulet_tag = TAGS.AMULET;
@@ -416,7 +435,7 @@
         
         // test dom handles
         $("#item_classes option:not(.template)").filter(function () {
-            return $(this).text().toLowerCase() === "jewel";
+            return $(this).text().toLowerCase() === "axe_1h";
         }).prop("selected", true);
         $("#item_classes").trigger("change");
         
