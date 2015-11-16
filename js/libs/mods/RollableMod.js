@@ -21,10 +21,12 @@
         },
         spawnableOn: function (mod_container) {
             var spawnweight_tags = $(this.valueAsArray("SpawnWeight_TagsKeys")).filter(mod_container.getTags()).toArray();
+            // reset
+            this.spawnable_byte = Spawnable.UNSCANNED;
             
             if (spawnweight_tags.length === 0) {
                 this.spawnable_byte = RollableMod.ROLLABLE_BYTE.NO_MATCHING_TAGS;
-                return 0;
+                return false;
             }
 
             // first spawnweight_tag to  match any item_tag gets to choose
@@ -46,6 +48,8 @@
         applicableTo: function (mod_container) {
             var open_prefix = mod_container.prefixes().length < mod_container.maxPrefixes();
             var open_suffix = mod_container.suffixes().length < mod_container.maxSuffixes();
+            // reset
+            this.applicable_byte = Applicable.UNSCANNED;
             
             if (mod_container.domain !== __undefined && this.getProp("Domain") != mod_container.domain) {
                 this.applicable_byte |= RollableMod.ROLLABLE_BYTE.WRONG_DOMAIN;
@@ -77,14 +81,14 @@
     
     this.RollableMod.SPAWNABLE_BYTE = {
         UNSCANNED: 0, // per convention 
-        NO_FAILURE: 1,
+        SUCCESS: 1,
         NO_MATCHING_TAGS: 64,
         SPAWNWEIGHT_ZERO: 128
     };
     
     this.RollableMod.APPLICABLE_BYTE = {
         UNSCANNED: 0, // per convention 
-        NO_FAILURE: 1, 
+        SUCCESS: 1, 
         // Applicable
         AFFIX_FULL: 2,
         NO_MATCHING_RARITY: 4,
