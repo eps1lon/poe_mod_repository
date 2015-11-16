@@ -27,3 +27,11 @@
 .template {
     display: none;
 }
+
+.stats {
+    white-space: pre;
+}
+
+#available_mods tbody td {
+    vertical-align: top;
+}
