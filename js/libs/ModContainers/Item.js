@@ -41,6 +41,10 @@
             }
             return false;
         },
+        /**
+         * returns tags of item + tags from mods
+         * @returns {Array}
+         */
         getTags: function () {
             return $.unique(this._super().concat(this.tags));
         },
