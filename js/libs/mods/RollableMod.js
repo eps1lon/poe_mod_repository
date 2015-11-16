@@ -93,5 +93,5 @@
         WRONG_DOMAIN: 32
     };
     
-    this.RollableMod.ROLLABLE_BYTE = $.extend({}, this.RollableMod.APPLICABLE_BYTE, this.RollableMod.SPAWNABLE_BYTE)
+    this.RollableMod.ROLLABLE_BYTE = $.extend({}, this.RollableMod.APPLICABLE_BYTE, this.RollableMod.SPAWNABLE_BYTE);
 })();
