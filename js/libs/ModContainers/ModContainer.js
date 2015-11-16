@@ -65,6 +65,12 @@
                 return mod.valueAsArray("TagsKeys");
             }));
         },
+        getTagsWithProps: function (all_tags) {
+            var tags = this.getTags();
+            return $.grep(all_tags, function (tag_props) {
+                return tags.indexOf(+tag_props.Rows) !== -1;
+            });
+        },
         prefixes: function () {
             return $.grep(this.mods, function (mod) {
                 return mod.isPrefix();

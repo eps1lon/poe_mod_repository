@@ -26,8 +26,26 @@
         }
         
         var $itembox = create_from_template(".itembox");
+        var $statsgroup_template = create_from_template(".itembox-statsgroup", $itembox);
+        var $statsgroup = $statsgroup_template.clone();
+        var $separator_template = create_from_template(".separator", $itembox);
         
+        // name
         $(".itemboxheader-single", $itembox).text(baseitem.name());
+        
+        // item_class
+        $statsgroup.append(baseitem.item_class);
+        
+        // tags
+        $statsgroup.append("<br>", $.map(baseitem.getTagsWithProps(tags), function (props) {
+            return props.Id;
+        }).join(", "));
+        
+        // sep
+        $statsgroup.appendTo($itembox);
+        $separator_template.clone().appendTo(".itembox-stats", $itembox);
+        $statsgroup = $statsgroup_template.clone();
+        
         
         // implicits
         $.each(baseitem.implicits(), function (_, mod) {
