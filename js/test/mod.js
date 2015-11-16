@@ -1,4 +1,4 @@
-/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable */
+/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory */
 
 (function (__undefined) {
     // "tables"
@@ -181,6 +181,8 @@
             
             // value
             $(".value", $tr).text(mod.valueString());
+            
+            $tr.data("mod", mod.serialize());
             
             $correct_group.after($tr);
         });
@@ -392,6 +394,24 @@
         // display implcits
         $("#implicits caption").on("click", function () {
             $(this).parents("table").children("tbody").toggle();
+        });
+        
+        // add mod
+        $(".add_mod").on("click", function () {
+            // assert baseitem instanceof baseitem
+            var serialized = $(this).parents("tr").data("mod");
+            var mod = ModFactory.deserialize(serialized);
+            
+            if (mod === null) {
+                console.log("could not deserialize", serialized);
+            }
+            console.log(baseitem, "+", mod);
+            
+            if (baseitem.addMod(mod)) {
+                display_baseitem(baseitem, "#used_baseitem");
+            } else {
+                // TODO flash error
+            }
         });
         
         // test dom handles

@@ -2,7 +2,7 @@
 
 (function (__undefined) {
     /**
-     * RollableMod extends Mod impliements Rollable
+     * RollableMod extends Mod impliements Rollable, Serializeable
      */
     this.RollableMod = Mod.extend({
         init: function (props) {
@@ -76,6 +76,12 @@
             }
             
             return !!(this.rollable_byte & Rollable.SUCCESS);
+        },
+        serialize: function () {
+            return {
+                klass: "RollableMod",
+                args: [this.props]
+            };
         }
     });
     
