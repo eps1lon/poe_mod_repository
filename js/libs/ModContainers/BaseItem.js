@@ -14,6 +14,9 @@
             
             this.random_name = "";
         },
+        getTags: function () {
+            return $.unique(this._super().concat(this.entry.valueAsArray("TagsKeys")));
+        },
         base_name: function () {
             return this.entry.getProp("Name");
         },
