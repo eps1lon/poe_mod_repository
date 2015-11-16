@@ -9,6 +9,10 @@
                 if (n === null || n === '') {
                     return null;
                 }
+                
+                if (isNaN(+n)) {
+                    return n;
+                }
                 return +n;
             });
         },
