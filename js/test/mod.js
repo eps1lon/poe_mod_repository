@@ -47,6 +47,18 @@
         $(".itembox-stats", $itembox).append($separator_template.clone());
         $statsgroup = $statsgroup_template.clone();
         
+        // Requirements TODO localize
+        $statsgroup.append($.map(baseitem.requirements(), function (requirement, key) {
+            return key + ": " + requirement;
+        }).join(", "), "<br>");
+        // ilvl
+        $statsgroup.append("iLvl: ", baseitem.item_level);
+        
+        // sep
+        $(".itembox-stats", $itembox).append($statsgroup);
+        $(".itembox-stats", $itembox).append($separator_template.clone());
+        $statsgroup = $statsgroup_template.clone();
+        
         // implicits
         $.each(baseitem.implicits(), function (_, mod) {
             console.log("implicit", mod);
