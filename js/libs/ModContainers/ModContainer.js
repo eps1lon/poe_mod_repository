@@ -32,10 +32,10 @@
         removeAllMods: function () {
             this.mods = [];
         },
-        removeMod: function (old_mod) {
+        removeMod: function (old_mod) {  
             var index = this.inMods(old_mod.getProp("Rows"));
             if (index !== -1) {
-                this.mods = this.mods.splice(index, 1);
+                this.mods.splice(index, 1);
                 return index;
             }
             return false;
