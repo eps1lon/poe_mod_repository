@@ -14,7 +14,7 @@
         if (context !== undefined) {
             selector = context.selector + " " + selector;
         }
-        return $(selector + ".template").clone(true).removeClass("template").show();
+        return $(selector + ".template").clone(true).removeClass("template");
     };
     
     var display_baseitem = function (baseitem, selector) {

@@ -32,7 +32,7 @@
     display: none;
 }
 
-.stats, .itembox-statsgroup {
+.stats {
     white-space: pre;
 }
 
