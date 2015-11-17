@@ -45,6 +45,11 @@
         },
         primary: function () {
             return +this.entry.getProp("Rows");
+        },
+        requirements: function () {
+            return {
+                level: this.entry.getProp("DropLevel")
+            };
         }
     });
     
