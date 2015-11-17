@@ -53,15 +53,22 @@
         });
         
         // affixes
+        var $affixes = create_from_template("ul.mods", $itembox);
         $.each(baseitem.affixes(), function (i, mod) {
-            console.log("affix", mod);
+            var $mod = create_from_template("li.mod", $affixes);
             
-            if (i > 0) {
-                $statsgroup.append("<br>");
-            }
+            $mod.data("primary", mod.getProp("Rows"));
             
-            $statsgroup.append(mod.t());
+            $.each(mod.t().split("\n"), function (j, stat_text) {
+                $("ul.stats", $mod).append("<li>" + stat_text + "</li>");
+            });
+            
+            $mod.appendTo($affixes);
         });
+
+        if ($(".stats li", $affixes).length > 0 || false) {
+            $affixes.appendTo($statsgroup);
+        }
         
         // sep
         $(".itembox-stats", $itembox).append($statsgroup);
@@ -455,6 +462,16 @@
             } else {
                 // TODO flash error
             }
+        });
+        
+        // remove mod
+        $(".remove_mod").on("click", function () {
+            var $mod = $(this).parents(".mod");
+            
+            baseitem.removeMod(baseitem.getMod($mod.data("primary")));
+            
+            display_baseitem(baseitem, "#used_baseitem");
+            display_available_mods(mod_generator, baseitem);
         });
         
         // test dom handles

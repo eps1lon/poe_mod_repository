@@ -5,5 +5,8 @@
 
 .itembox-statsgroup {
     display: block;
-    white-space: pre;
+}
+
+.itembox-statsgroup ul {
+    display: inline-block;
 }
