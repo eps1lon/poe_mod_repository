@@ -19,7 +19,13 @@
             // Rollable
             this.rollable_byte = 0;
         },
-        spawnableOn: function (mod_container) {
+        spawnableOn: function (mod_container, success) {
+            if (success === __undefined) {
+                success = Spawnable.SUCCESS;
+            } else {
+                success |= Spawnable.SUCCESS;
+            }
+            
             var spawnweight_tags = $(this.valueAsArray("SpawnWeight_TagsKeys")).filter(mod_container.getTags()).toArray();
             // reset
             this.spawnable_byte = Spawnable.UNSCANNED;
@@ -43,28 +49,53 @@
             }
             
             // to bool
-            return !!(this.spawnable_byte & Spawnable.SUCCESS);
+            return !!(this.spawnable_byte & success);
         },
-        applicableTo: function (mod_container) {
+        applicableTo: function (baseitem, success) {
+            if (success === __undefined) {
+                success = Applicable.SUCCESS;
+            } else {
+                success |= Applicable.SUCCESS;
+            }
+            
             // reset
             this.applicable_byte = Applicable.UNSCANNED;
             
-            var max_mods_in_domain_of = this.maxModsInDomainOf(mod_container);
-            if (this.getProp("Domain") != mod_container.domain || max_mods_in_domain_of === -1) {
+            var max_mods_in_domain_of = this.maxModsInDomainOf(baseitem);
+            if (this.getProp("Domain") != baseitem.domain || max_mods_in_domain_of === -1) {
                 this.applicable_byte |= RollableMod.ROLLABLE_BYTE.WRONG_DOMAIN;
             }
 
-            if (mod_container.numberOfModsOfType(+this.getProp("GenerationType")) >= max_mods_in_domain_of) {
+            if (baseitem.numberOfModsOfType(+this.getProp("GenerationType")) >= max_mods_in_domain_of) {
                 this.applicable_byte |= RollableMod.ROLLABLE_BYTE.DOMAIN_FULL;
             }
+            
+            if (+this.getProp("Level") > baseitem.item_level) {
+                this.applicable_byte |= RollableMod.ROLLABLE_BYTE.LOWER_ILVL;
+            }
+            
+            var correct_groups = $.map(baseitem.mods, function (mod) { 
+                return mod.getProp("CorrectGroup");
+            });
+            
+            if (correct_groups.indexOf(this.getProp("CorrectGroup")) !== -1) {
+                this.applicable_byte |= RollableMod.ROLLABLE_BYTE.ALREADY_PRESENT;
+            } 
             
             if (!this.applicable_byte) {
                 this.applicable_byte = Applicable.SUCCESS;         
             }
+            
             // to bool
-            return !!(this.applicable_byte & Applicable.SUCCESS);
+            return !!(this.applicable_byte & success);
         },
-        rollableOn: function (mod_container) {
+        rollableOn: function (mod_container, success) {
+            if (success === __undefined) {
+                success = Rollable.SUCCESS;
+            } else {
+                success |= Rollable.SUCCESS;
+            }
+            
             this.applicableTo(mod_container);
             this.spawnableOn(mod_container);
             
@@ -74,7 +105,7 @@
                 this.rollable_byte = Rollable.SUCCESS;
             }
             
-            return !!(this.rollable_byte & Rollable.SUCCESS);
+            return !!(this.rollable_byte & success);
         },
         serialize: function () {
             return {
@@ -99,7 +130,8 @@
         NO_MATCHING_RARITY: 4,
         NO_MATCHING_ITEMCLASS: 8,
         ALREADY_PRESENT: 16,
-        WRONG_DOMAIN: 32
+        WRONG_DOMAIN: 32,
+        LOWER_ILVL: 256
     };
     
     this.RollableMod.ROLLABLE_BYTE = $.extend({}, this.RollableMod.APPLICABLE_BYTE, this.RollableMod.SPAWNABLE_BYTE);

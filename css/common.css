@@ -20,6 +20,10 @@
     background-color: red;
 }
 
+#available_mods {
+    overflow: hidden;
+}
+
 #available_mods #prefixes, #available_mods #suffixes {
     float: left;
 }
@@ -34,4 +38,20 @@
 
 #available_mods tbody td {
     vertical-align: top;
+}
+
+.legend {
+    display: inline-block;
+}
+
+.applicable[title] {
+    cursor: help;
+}
+
+.applicable[data-applicable_byte] {
+    background-color: red;
+}
+
+.applicable[data-applicable_byte^="256"] {
+    background-color: blue;
 }

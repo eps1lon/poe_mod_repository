@@ -10,6 +10,7 @@
                         ItemClassFactory.ITEMCLASSES[item_class_ident].DOMAIN);
             
             // extended
+            this.item_level = BaseItem.MAX_ILVL;
             this.entry = new GgpkEntry(props);
             
             this.random_name = "";
@@ -46,5 +47,7 @@
             return +this.entry.getProp("Rows");
         }
     });
+    
+    this.BaseItem.MAX_ILVL = 100;
 })();
 

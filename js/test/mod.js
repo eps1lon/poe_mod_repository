@@ -1,4 +1,4 @@
-/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass */
+/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass, RollableMod */
 
 (function (__undefined) {
     // "tables"
@@ -92,7 +92,12 @@
         baseitem.rarity = ItemClass.RARITY.SHOWCASE;
         
         // filter
-        var applicable_mods = Applicable.mods(mod_generator.getAvailableMods(), baseitem);
+        var whitelist = RollableMod.ROLLABLE_BYTE.LOWER_ILVL
+                        | RollableMod.ROLLABLE_BYTE.DOMAIN_FULL
+                        | RollableMod.ROLLABLE_BYTE.ALREADY_PRESENT;
+        var applicable_mods = Applicable.mods(mod_generator.getAvailableMods(), 
+                                              baseitem, 
+                                              whitelist);
         
         // implements Spawnable?
         if (applicable_mods[0] !== __undefined && applicable_mods[0].spawnableOn) {
@@ -160,6 +165,7 @@
      * @returns {undefined}
      */
     var display_mod_group = function (mods, table) {
+        var applicable_bits = RollableMod.APPLICABLE_BYTE;
         // empty mods
         $("tbody tr:not(.template)", table).remove();
         
@@ -182,7 +188,23 @@
                 $("tbody", table).append($correct_group);
             }
             
-            // error TODO scan rollable_byte, spawnable_byte
+            // error TODO localize
+            if (mod.applicable_byte ^ applicable_bits.SUCCESS) {
+                var bits = [];
+                var titles = [];
+
+                $.each(applicable_bits, function (key, bit) {
+                    if (mod.applicable_byte & bit) {
+                        bits.push(bit);
+                        titles.push(key);
+                    }
+                });
+                
+                $tr.prop("title", titles.join(" and "));
+                $tr.attr("data-applicable_byte", bits.join("-"));
+            }
+            
+            // TODO spawnable_byte
             
             // ilvl
             $(".ilvl", $tr).text(mod.getProp("Level"));
@@ -428,6 +450,8 @@
             
             if (baseitem.addMod(mod)) {
                 display_baseitem(baseitem, "#used_baseitem");
+                
+                display_available_mods(mod_generator, baseitem);
             } else {
                 // TODO flash error
             }
@@ -435,7 +459,7 @@
         
         // test dom handles
         $("#item_classes option:not(.template)").filter(function () {
-            return $(this).text().toLowerCase() === "map";
+            return $(this).text().toLowerCase() === "dagger";
         }).prop("selected", true);
         $("#item_classes").trigger("change");
         

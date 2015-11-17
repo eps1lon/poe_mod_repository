@@ -20,9 +20,9 @@
         });
     };
     
-    this.Spawnable.mods = function (mod_collection, mod_container) {
+    this.Spawnable.mods = function (mod_collection, mod_container, success) {
         return $.grep(mod_collection.slice(), function (mod) {
-            return mod.spawnableOn();
+            return mod.spawnableOn(mod_container, success);
         });
     };
     

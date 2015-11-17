@@ -17,9 +17,9 @@
         });
     };
     
-    this.Applicable.mods = function (mod_collection, mod_container) {
+    this.Applicable.mods = function (mod_collection, mod_container, success) {
         return $.grep(mod_collection.slice(), function (mod) {
-            return mod.applicableTo(mod_container);
+            return mod.applicableTo(mod_container, success);
         });
     };
     

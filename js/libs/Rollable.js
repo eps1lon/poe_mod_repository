@@ -18,9 +18,9 @@
         });
     };
     
-    this.Rollable.mods = function (mod_collection, mod_container) {
+    this.Rollable.mods = function (mod_collection, mod_container, success) {
         return $.grep(mod_collection.slice(), function (mod) {
-            return mod.rollableOn(mod_container);
+            return mod.rollableOn(mod_container, success);
         });
     };
     
