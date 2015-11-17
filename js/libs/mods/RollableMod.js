@@ -1,4 +1,4 @@
-/* global Mod, this, Rollable, Spawnable */
+/* global Mod, this, Rollable, Spawnable, Applicable */
 
 (function (__undefined) {
     /**
@@ -46,17 +46,16 @@
             return !!(this.spawnable_byte & Spawnable.SUCCESS);
         },
         applicableTo: function (mod_container) {
-            var open_prefix = mod_container.prefixes().length < mod_container.maxPrefixes();
-            var open_suffix = mod_container.suffixes().length < mod_container.maxSuffixes();
             // reset
             this.applicable_byte = Applicable.UNSCANNED;
             
-            if (mod_container.domain !== __undefined && this.getProp("Domain") != mod_container.domain) {
+            var max_mods_in_domain_of = this.maxModsInDomainOf(mod_container);
+            if (this.getProp("Domain") != mod_container.domain || max_mods_in_domain_of === -1) {
                 this.applicable_byte |= RollableMod.ROLLABLE_BYTE.WRONG_DOMAIN;
             }
 
-            if (this.isPrefix() && !open_prefix || this.isSuffix() && !open_suffix) {
-                this.applicable_byte |= RollableMod.ROLLABLE_BYTE.AFFIX_FULL;
+            if (mod_container.numberOfModsOfType(+this.getProp("GenerationType")) >= max_mods_in_domain_of) {
+                this.applicable_byte |= RollableMod.ROLLABLE_BYTE.DOMAIN_FULL;
             }
             
             if (!this.applicable_byte) {
@@ -96,7 +95,7 @@
         UNSCANNED: 0, // per convention 
         SUCCESS: 1, 
         // Applicable
-        AFFIX_FULL: 2,
+        DOMAIN_FULL: 2,
         NO_MATCHING_RARITY: 4,
         NO_MATCHING_ITEMCLASS: 8,
         ALREADY_PRESENT: 16,

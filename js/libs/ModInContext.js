@@ -1,6 +1,9 @@
 /* global Mod */
 
 (function (__undefined) {
+    /**
+     * deprecated
+     */
     this.ModInContext = Mod.extend({
         init: function (props) {
             this._super(props);

@@ -1,4 +1,4 @@
-/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat */
+/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass */
 
 (function (__undefined) {
     // "tables"
@@ -44,7 +44,7 @@
         
         // sep
         $(".itembox-stats", $itembox).append($statsgroup);
-        $(".itembox-stats", $itembox).append($separator_template.clone())
+        $(".itembox-stats", $itembox).append($separator_template.clone());
         $statsgroup = $statsgroup_template.clone();
         
         // implicits
@@ -89,14 +89,13 @@
             return false;
         }
         
-        // TODO remove showcase
         baseitem.rarity = ItemClass.RARITY.SHOWCASE;
         
         // filter
         var applicable_mods = Applicable.mods(mod_generator.getAvailableMods(), baseitem);
         
         // implements Spawnable?
-        if (applicable_mods[0].spawnableOn) {
+        if (applicable_mods[0] !== __undefined && applicable_mods[0].spawnableOn) {
             // Spawnable.mods(applicable_mods, baseitem)
             // but we rather scan for reasons and display them
             Spawnable.map(applicable_mods, baseitem);
@@ -157,6 +156,7 @@
     /**
      * 
      * @param {Array[Mod]} mods
+     * @param {jQuery} table visual container
      * @returns {undefined}
      */
     var display_mod_group = function (mods, table) {
@@ -435,7 +435,7 @@
         
         // test dom handles
         $("#item_classes option:not(.template)").filter(function () {
-            return $(this).text().toLowerCase() === "axe_1h";
+            return $(this).text().toLowerCase() === "map";
         }).prop("selected", true);
         $("#item_classes").trigger("change");
         

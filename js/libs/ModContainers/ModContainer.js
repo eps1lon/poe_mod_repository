@@ -1,3 +1,5 @@
+/* global this, Class, Mod */
+
 (function (__undefined) {
     // Interface pattern
     /*
@@ -18,7 +20,7 @@
             this.tags = [0];
         },
         addMod: function (new_mod) {
-            if (!(mod instanceof Mod)) {
+            if (!(new_mod instanceof Mod)) {
                 return false;
             }
             if (this.inMods(new_mod.getProp("Rows")) === -1) {
@@ -95,6 +97,11 @@
         },
         asArray: function () {
             return this.mods;
+        },
+        numberOfModsOfType: function (mod_type) {
+            return $.grep(this.mods, function (mod) {
+                return +mod.getProp("GenerationType") === mod_type;
+            }).length;
         }
     }); 
     
