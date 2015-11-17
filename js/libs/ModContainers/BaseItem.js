@@ -22,7 +22,7 @@
         },
         name: function () {
             switch (this.rarity) {
-                case Item.rarity.MAGIC:
+                case ItemClass.RARITY.MAGIC:
                     var name = "";
                     // prefix
                     if (this.prefixes().length) {
@@ -36,7 +36,7 @@
                     }
                     
                     return name;
-                case Item.rarity.RARE:
+                case ItemClass.RARITY.RARE:
                     return "Random Name + " + this.base_name();
                 default: 
                     return this.base_name();

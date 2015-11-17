@@ -18,7 +18,9 @@
             this.tags = [0];
         },
         addMod: function (new_mod) {
-            // TODO check if correct_group already present, only in item
+            if (!(mod instanceof Mod)) {
+                return false;
+            }
             if (this.inMods(new_mod.getProp("Rows")) === -1) {
                 this.mods.push(new_mod);
                 return true;
@@ -61,6 +63,7 @@
          * @returns {Array}
          */
         getTags: function () {
+            // jQuery map already flattens
             return $.unique($.map(this.mods, function (mod) {
                 return mod.valueAsArray("TagsKeys");
             }));

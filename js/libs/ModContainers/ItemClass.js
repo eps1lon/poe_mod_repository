@@ -1,18 +1,71 @@
-/* global Class, ItemClassFactory, Item, this */
+/* global Class, ItemClassFactory, Item, this, ModContainer */
 
 (function (__undefined) {
-    this.ItemClass = Item.extend({
+    /**
+     * abstract class ItemClass
+     */
+    this.ItemClass = ModContainer.extend({
         init: function (item_class_ident, tags, domain) {
             this._super();
+            this.rarity = ItemClass.RARITY.NORMAL;
             
-            this.tags = this.tags.concat(tags);
+            this.tags = [].concat(tags);
             this.item_class = item_class_ident;
             this.domain = domain;
+        },
+        addTag: function (tag_key) {
+            if (this.tags.indexOf(tag_key) === -1) {
+                this.tags.push(tag_key);
+                return true;
+            }
+            return false;
+        },
+        removeTag: function (tag_key) {
+            var index = this.tags.indexOf(tag_key);
+            if (index !== -1) {
+                this.tags = this.tags.splice(index, 1);
+                return tag_key;
+            }
+            return false;
+        },
+        /**
+         * returns tags of item + tags from mods
+         * @returns {Array}
+         */
+        getTags: function () {
+            return $.unique(this._super().concat(this.tags));
+        },
+        maxPrefixes: function () {
+            switch (this.rarity) {
+                case ItemClass.RARITY.NORMAL:
+                    return 0;
+                case ItemClass.RARITY.MAGIC:
+                    return 1;
+                case ItemClass.RARITY.RARE:
+                case ItemClass.RARITY.SHOWCASE:
+                    return 3;
+                case ItemClass.RARITY.UNIQUE:
+                    return Number.POSITIVE_INFINITY;
+            }
+        },
+        maxSuffixes: function () {
+            return this.maxPrefixes();
+        },
+        maxImplicits: function () {
+            return 1;
         },
         itemClassPrimary: function () {
             return ItemClassFactory.primary(this.item_class);
         }
     });
+    
+    this.ItemClass.RARITY = {
+        NORMAL: 1,
+        MAGIC: 2,
+        RARE: 3,
+        UNIQUE: 4,
+        SHOWCASE: 5
+    };
     
     this.ItemClassFactory = Class.extend({});
     

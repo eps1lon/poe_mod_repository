@@ -90,7 +90,7 @@
         }
         
         // TODO remove showcase
-        baseitem.rarity = Item.rarity.SHOWCASE;
+        baseitem.rarity = ItemClass.RARITY.SHOWCASE;
         
         // filter
         var applicable_mods = Applicable.mods(mod_generator.getAvailableMods(), baseitem);

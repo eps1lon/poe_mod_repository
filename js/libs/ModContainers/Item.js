@@ -1,7 +1,7 @@
 (function (__undefined) {
     /*
      * Item Class
-     * require ModContainer
+     * deprecated
      */
     this.Item = ModContainer.extend({
         init: function () {
