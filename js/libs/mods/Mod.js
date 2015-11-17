@@ -68,9 +68,11 @@
         },
         t: function () {
             var stats = this.statsJoined();
-            return $.map(stats, function (stat) {
+            // TODO maybe check before localizing cause unique on long strings might
+            // be inefficient. on the other hand we almost always handle < 10 mods
+            return $.unique($.map(stats, function (stat) {
                 return stat.t(stats, Mod.localization);
-            }).join("\n");
+            })).join("\n");
         }
     });
     
