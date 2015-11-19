@@ -10,6 +10,8 @@
         },
         spawnableOn: function (mod_container) {
             
+        },
+        humanSpawnchance: function (precision) {
         }
     });
     

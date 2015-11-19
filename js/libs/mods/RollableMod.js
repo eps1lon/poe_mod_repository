@@ -51,6 +51,17 @@
             // to bool
             return !!(this.spawnable_byte & success);
         },
+        humanSpawnchance: function (precision) {
+            if (precision === __undefined) {
+                precision = 2;
+            }
+            
+            if (this.spawnchance === null) {
+                return 'null';
+            }
+            return "0.0%";
+            return (this.spawnchance * 100).toPrecision(4) + "%";
+        },
         applicableTo: function (baseitem, success) {
             if (success === __undefined) {
                 success = Applicable.SUCCESS;

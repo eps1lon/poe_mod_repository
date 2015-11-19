@@ -175,6 +175,9 @@
             // value
             $(".stats", $tr).text(mod.t());
             
+            // chance
+            $(".spawn_chance", $tr).text(mod.humanSpawnchance());
+            
             $tr.appendTo("#implicits");
         });
         
@@ -243,6 +246,9 @@
             
             // value
             $(".stats", $tr).text(mod.t());
+            
+            // chance
+            $(".spawn_chance", $tr).text(mod.humanSpawnchance());
             
             $tr.data("mod", mod.serialize());
             
