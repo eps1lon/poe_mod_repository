@@ -94,6 +94,10 @@
     var display_available_mods = function (mod_generator, baseitem) {
         console.log(mod_generator, "@", baseitem, "?");
         
+        // shown groups
+        var $clicked_groups = $("#available_mods tr.clicked");
+        console.log($clicked_groups);
+        
         // empty
         $("#available_mods tbody tr:not(.template)").remove();
             
@@ -156,7 +160,7 @@
         // empty mods
         $("#implicits tbody tr:not(.template)").remove();
         
-        // display prefix
+        // display implicits
         $.each(implicits, function (_, mod) {
             var $tr = create_from_template("#implicits tbody tr.mod");
             
@@ -172,6 +176,11 @@
             $(".stats", $tr).text(mod.t());
             
             $tr.appendTo("#implicits");
+        });
+        
+        // restore toggle groups
+        $clicked_groups.each(function () {
+            $("#" + $(this).attr("id")).trigger("click");
         });
         
         return true;
@@ -200,6 +209,7 @@
             if (!$correct_group.length) {
                 // maybe change do data() and filter()
                 $correct_group = create_from_template("tbody tr.correct_group", table);
+                $correct_group.attr("id", "correct-group-" + correct_group);
                 $correct_group.attr("data-correct-group", correct_group);
                 
                 $("td.correct_group", $correct_group).text(correct_group);
@@ -447,13 +457,14 @@
         });
         
         // display mod group
-        $(".correct_group").on("click", function () {
-            $(this).nextUntil(".correct_group").toggle();
+        $("#available_mods tr.correct_group").on("click", function () {
+            $(this).toggleClass("clicked").nextUntil(".correct_group").toggle();
         });
         
         // display implcits
-        $("#implicits caption").on("click", function () {
-            $(this).parents("table").children("tbody").toggle();
+        $("#implicits-caption").on("click", function () {
+            console.log("clicked");
+            $(this).toggleClass("clicked").parents("table").children("tbody").toggle();
         });
         
         // add mod
