@@ -9,12 +9,10 @@
             this._super(props);
             
             // Spawnable
-            this.spawnweight = 0;
-            this.spawnchance = null;
-            this.spawnable_byte = 0;
+            this.resetSpawnable();
             
             // Applicable
-            this.applicable_byte = 0;
+            this.resetApplicable();
             
             // Rollable
             this.rollable_byte = 0;
@@ -28,7 +26,7 @@
             
             var spawnweight_tags = $(this.valueAsArray("SpawnWeight_TagsKeys")).filter(mod_container.getTags()).toArray();
             // reset
-            this.spawnable_byte = Spawnable.UNSCANNED;
+            this.resetSpawnable();
             
             if (spawnweight_tags.length === 0) {
                 this.spawnable_byte = RollableMod.ROLLABLE_BYTE.NO_MATCHING_TAGS;
@@ -62,6 +60,11 @@
             return "0.0%";
             return (this.spawnchance * 100).toPrecision(4) + "%";
         },
+        resetSpawnable: function () {
+            this.spawnweight = 0;
+            this.spawnchance = null;
+            this.spawnable_byte = Spawnable.UNSCANNED;
+        },
         applicableTo: function (baseitem, success) {
             if (success === __undefined) {
                 success = Applicable.SUCCESS;
@@ -70,7 +73,7 @@
             }
             
             // reset
-            this.applicable_byte = Applicable.UNSCANNED;
+            this.resetApplicable();
             
             var max_mods_in_domain_of = this.maxModsInDomainOf(baseitem);
             if (this.getProp("Domain") != baseitem.domain || max_mods_in_domain_of === -1) {
@@ -99,6 +102,9 @@
             
             // to bool
             return !!(this.applicable_byte & success);
+        },
+        resetApplicable: function () {
+            this.applicable_byte = Applicable.UNSCANNED;
         },
         rollableOn: function (mod_container, success) {
             if (success === __undefined) {

@@ -96,7 +96,6 @@
         
         // shown groups
         var $clicked_groups = $("#available_mods tr.clicked");
-        console.log($clicked_groups);
         
         // empty
         $("#available_mods tbody tr:not(.template)").remove();

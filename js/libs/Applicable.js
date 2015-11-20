@@ -7,6 +7,9 @@
         },
         applicableTo: function (mod_container) {
             
+        },
+        resetApplicable: function () {
+            
         }
     });
     

@@ -12,6 +12,9 @@
             
         },
         humanSpawnchance: function (precision) {
+        },
+        resetSpawnable: function () {
+            
         }
     });
     

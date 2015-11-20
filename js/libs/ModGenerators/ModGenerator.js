@@ -35,34 +35,7 @@
          * @returns {Array}
          */
         getAvailableMods: function () {
-            return this.available_mods;
-        },
-        mapApplicable: function (mod_container) {
-            return $.map(this.getAvailableMods().slice(), function (mod) {
-                mod.applicableTo(mod_container);
-                return mod;
-            });
-        },
-        applicableMods: function (mod_container) {
-            return $.grep(this.getAvailableMods().slice(), function (mod) {
-                return mod.applicableTo(mod_container);
-            });
-        },
-        mapRollable: function (mod_container) {
-            return $.map(this.getAvailableMods().slice(), function (mod) {
-                mod.rollableOn(mod_container);
-                return mod;
-            });
-        },
-        /**
-         * 
-         * @param {ModContainer} mod_container
-         * @returns {Array}
-         */
-        rollableMods: function (mod_container) {
-            return $.grep(this.getAvailableMods().slice(), function (mod) {
-                return mod.rollableOn(mod_container);
-            });
+            return this.available_mods.slice();
         },
         chooseRollableMod: function (mod_container, rng) {
             if (rng === __undefined) {
