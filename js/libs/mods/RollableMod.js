@@ -1,4 +1,4 @@
-/* global Mod, this, Rollable, Spawnable, Applicable */
+/* global Mod, this, Rollable, Spawnable, Applicable, ByteSet */
 
 (function (__undefined) {
     /**
@@ -65,6 +65,9 @@
             this.spawnchance = null;
             this.spawnable_byte = Spawnable.UNSCANNED;
         },
+        spawnableByteHuman: function() {
+            return ByteSet.human(this.spawnable_byte, RollableMod.SPAWNABLE_BYTE, RollableMod.APPLICABLE_BYTE.SUCCESS);
+        },
         applicableTo: function (baseitem, success) {
             if (success === __undefined) {
                 success = Applicable.SUCCESS;
@@ -122,6 +125,9 @@
             }
             
             return !!(this.rollable_byte & success);
+        },
+        applicableByteHuman: function() {
+            return ByteSet.human(this.applicable_byte, RollableMod.APPLICABLE_BYTE, RollableMod.APPLICABLE_BYTE.SUCCESS);
         },
         serialize: function () {
             return {

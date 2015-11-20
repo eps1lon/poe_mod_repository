@@ -15,6 +15,9 @@
         },
         resetSpawnable: function () {
             
+        },
+        spawnableByteHuman: function () {
+            
         }
     });
     

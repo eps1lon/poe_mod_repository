@@ -10,6 +10,9 @@
         },
         resetApplicable: function () {
             
+        },
+        applicableByteHuman: function () {
+            
         }
     });
     

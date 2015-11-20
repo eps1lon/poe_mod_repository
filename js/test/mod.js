@@ -198,7 +198,6 @@
      * @returns {undefined}
      */
     var display_mod_group = function (mods, table) {
-        var applicable_bits = RollableMod.APPLICABLE_BYTE;
         // empty mods
         $("tbody tr:not(.template)", table).remove();
         
@@ -222,23 +221,15 @@
                 $("tbody", table).append($correct_group);
             }
             
-            // error TODO localize
-            if (mod.applicable_byte ^ applicable_bits.SUCCESS) {
-                var bits = [];
-                var titles = [];
-
-                $.each(applicable_bits, function (key, bit) {
-                    if (mod.applicable_byte & bit) {
-                        bits.push(bit);
-                        titles.push(key);
-                    }
-                });
-                
-                $tr.prop("title", titles.join(" and "));
-                $tr.attr("data-applicable_byte", bits.join("-"));
-            }
+            // error
+            // TODO interface check
+            var applicable_byte_human = mod.applicableByteHuman();
+            $tr.attr("data-applicable_byte", applicable_byte_human.bits.join("-"));
             
-            // TODO spawnable_byte
+            var spawnable_byte_human = mod.spawnableByteHuman();
+            $tr.attr("data-spawnable-byte", spawnable_byte_human.bits.join("-"));
+            
+            $tr.prop("title", applicable_byte_human.strings.concat(spawnable_byte_human.strings).join(" and "));
             
             // ilvl
             $(".ilvl", $tr).text(mod.getProp("Level"));

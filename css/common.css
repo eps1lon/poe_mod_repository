@@ -44,11 +44,11 @@
     display: inline-block;
 }
 
-.applicable[title] {
+.applicable[title]:not([title=""]) {
     cursor: help;
 }
 
-.applicable[data-applicable_byte] {
+.applicable[data-applicable_byte]:not([data-applicable_byte=""]) {
     background-color: red;
 }
 
