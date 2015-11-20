@@ -70,6 +70,7 @@
             var $mod = create_from_template("li.mod", $affixes);
             
             $mod.data("primary", mod.getProp("Rows"));
+            $mod.addClass("mod-type-" + mod.modType());
             
             $.each(mod.t().split("\n"), function (j, stat_text) {
                 $("ul.stats", $mod).append("<li>" + stat_text + "</li>");

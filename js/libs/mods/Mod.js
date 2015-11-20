@@ -73,6 +73,16 @@
             return $.unique($.map(stats, function (stat) {
                 return stat.t(stats, Mod.localization);
             })).join("\n");
+        },
+        modType: function () {
+            var that = this;
+            return $.map(Mod.MOD_TYPE, function (mod_type, type_name) {
+                if (mod_type === +that.getProp("GenerationType")) {
+                    return type_name.toLowerCase();
+                }
+                
+                return null;
+            })[0];
         }
     });
     
