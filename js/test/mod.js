@@ -54,35 +54,34 @@
         // ilvl
         $statsgroup.append("iLvl: ", baseitem.item_level);
         
-        // sep
-        $(".itembox-stats", $itembox).append($statsgroup);
-        $(".itembox-stats", $itembox).append($separator_template.clone());
-        $statsgroup = $statsgroup_template.clone();
-        
-        // implicits
-        $.each(baseitem.implicits(), function (_, mod) {
-            console.log("implicit", mod);
-        });
-        
-        // affixes
-        var $affixes = create_from_template("ul.mods", $itembox);
-        $.each(baseitem.affixes(), function (i, mod) {
-            var $mod = create_from_template("li.mod", $affixes);
-            
-            $mod.data("primary", mod.getProp("Rows"));
-            $mod.addClass("mod-type-" + mod.modType());
-            
-            $.each(mod.t().split("\n"), function (j, stat_text) {
-                $("ul.stats", $mod).append("<li>" + stat_text + "</li>");
+        $.each(["implicits", "affixes"], function (_, modGetter) {
+            // sep
+            $(".itembox-stats", $itembox).append($statsgroup);
+            $(".itembox-stats", $itembox).append($separator_template.clone());
+            $statsgroup = $statsgroup_template.clone();
+
+            var $mods = create_from_template("ul.mods", $itembox);
+            $mods.addClass(modGetter);
+
+            // affixes
+            $.each(baseitem[modGetter](), function (i, mod) {
+                var $mod = create_from_template("li.mod", $mods);
+
+                $mod.data("primary", mod.getProp("Rows"));
+                $mod.addClass("mod-type-" + mod.modType());
+
+                $.each(mod.t().split("\n"), function (j, stat_text) {
+                    $("ul.stats", $mod).append("<li>" + stat_text + "</li>");
+                });
+
+                $mod.appendTo($mods);
             });
-            
-            $mod.appendTo($affixes);
+
+            if ($(".stats li", $mods).length > 0 || false) {
+                $mods.appendTo($statsgroup);
+            }
         });
 
-        if ($(".stats li", $affixes).length > 0 || false) {
-            $affixes.appendTo($statsgroup);
-        }
-        
         // sep
         $(".itembox-stats", $itembox).append($statsgroup);
         //$(".itembox-stats", $itembox).append($separator_template.clone())
@@ -177,6 +176,9 @@
             
             // chance
             $(".spawn_chance", $tr).text(mod.humanSpawnchance());
+            
+            // serialize
+            $tr.data("mod", mod.serialize());
             
             $tr.appendTo("#implicits");
         });
