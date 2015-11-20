@@ -37,14 +37,14 @@
                 return stat;
             });
         },
-        maxModsInDomainOf: function (item_class) {
+        maxModsInDomainOn: function (item_class) {
             if (!(item_class instanceof ItemClass)) {
                 console.log(item_class, "not instanceof ItemClass");
                 return -1;
             }
             
             // domain
-            var domain_rule = Mod.DOMAIN_RULES[item_class.domain];
+            var domain_rule = Mod.DOMAIN_RULES[this.getProp("Domain")];
             
             switch (typeof domain_rule) {
                 case "number": // single rule for hole domain

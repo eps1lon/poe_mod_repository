@@ -75,15 +75,14 @@
             // reset
             this.resetApplicable();
             
-            var max_mods_in_domain_of = this.maxModsInDomainOf(baseitem);
-            if (this.getProp("Domain") != baseitem.domain || max_mods_in_domain_of === -1) {
+            var max_mods_in_domain_on = this.maxModsInDomainOn(baseitem);
+            
+            if (max_mods_in_domain_on === -1) {
                 this.applicable_byte |= RollableMod.ROLLABLE_BYTE.WRONG_DOMAIN;
-            }
-
-            if (baseitem.numberOfModsOfType(+this.getProp("GenerationType")) >= max_mods_in_domain_of) {
+            } else if (baseitem.numberOfModsOfType(+this.getProp("GenerationType")) >= max_mods_in_domain_on) {
                 this.applicable_byte |= RollableMod.ROLLABLE_BYTE.DOMAIN_FULL;
             }
-            
+                       
             if (+this.getProp("Level") > baseitem.item_level) {
                 this.applicable_byte |= RollableMod.ROLLABLE_BYTE.LOWER_ILVL;
             }
