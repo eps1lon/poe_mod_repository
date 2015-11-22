@@ -1,4 +1,4 @@
-/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass, RollableMod */
+/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass, RollableMod, ApplicableMod */
 
 (function (__undefined) {
     // "tables"
@@ -115,22 +115,20 @@
         baseitem.rarity = Item.RARITY.SHOWCASE;
         
         // filter
-        var whitelist = RollableMod.ROLLABLE_BYTE.LOWER_ILVL
-                        | RollableMod.ROLLABLE_BYTE.DOMAIN_FULL
-                        | RollableMod.ROLLABLE_BYTE.ALREADY_PRESENT;
+        var whitelist = ApplicableMod.APPLICABLE_BYTE.LOWER_ILVL
+                        | ApplicableMod.APPLICABLE_BYTE.DOMAIN_FULL
+                        | ApplicableMod.APPLICABLE_BYTE.ALREADY_PRESENT;
         var applicable_mods = Applicable.mods(mod_generator.getAvailableMods(), 
                                               baseitem, 
                                               whitelist);
             
         // implements Spawnable?
         if (applicable_mods[0] !== __undefined && applicable_mods[0].spawnableOn) {
-            // Spawnable.mods(applicable_mods, baseitem)
-            // but we rather scan for reasons and display them
-            Spawnable.map(applicable_mods, baseitem);
+            var whitelist_spawnable = 0;
             
-            applicable_mods = $.grep(applicable_mods, function (mod) {
-                return mod.spawnweight > 0;
-            });
+            applicable_mods = Spawnable.mods(applicable_mods, 
+                                             baseitem, 
+                                             whitelist_spawnable);
         }
         
         // mod groups

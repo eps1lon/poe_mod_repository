@@ -15,7 +15,6 @@
         
         <script src="js/libs/Applicable.js"></script>
         <script src="js/libs/Spawnable.js"></script>
-        <script src="js/libs/Rollable.js"></script>
         
         <script src="js/libs/Localization.js"></script>
         <script src="js/libs/Localizeable.js"></script>
@@ -28,6 +27,7 @@
         
         <script src="js/libs/mods/Serializeable.js"></script>
         <script src="js/libs/mods/Mod.js"></script>
+        <script src="js/libs/mods/ApplicableMod.js"></script>
         <script src="js/libs/mods/RollableMod.js"></script>
         <script src="js/libs/mods/ModFactory.js"></script>
         
@@ -144,16 +144,18 @@
                 </tbody>
             </table>
         </section>
-        <ul class="legend" id="rollable_legend">
+        <ul class="legend" id="applicable_legend">
             <li class="applicable">SUCCESS</li>
             <li class="applicable" data-applicable_byte="2">DOMAIN_FULL</li>
-            <li class="applicable" data-applicable_byte="4">NO_MATCHING_RARITY</li>
-            <li class="applicable" data-applicable_byte="8">NO_MATCHING_ITEMCLASS</li>
-            <li class="applicable" data-applicable_byte="16">ALREADY_PRESENT</li>
-            <li class="applicable" data-applicable_byte="32">WRONG_DOMAIN</li>
-            <li class="applicable" data-applicable_byte="64">NO_MATCHING_TAGS</li>
-            <li class="applicable" data-applicable_byte="128">SPAWNWEIGHT_ZERO</li>
-            <li class="applicable" data-applicable_byte="256">LOWER_ILVL</li>
+            <li class="applicable" data-applicable_byte="4">ALREADY_PRESENT</li>
+            <li class="applicable" data-applicable_byte="8">WRONG_DOMAIN</li>
+            <li class="applicable" data-applicable_byte="16">LOWER_ILVL</li>
+        </ul>
+        
+        <ul class="legend" id="spawnable_legend">
+            <li class="spawnable">SUCCESS</li>
+            <li class="spawnable" data-spawnable_byte="2">NO_MATCHING_TAGS</li>
+            <li class="spawnable" data-spawnable_byte="4">SPAWNWEIGHT_ZERO</li>
         </ul>
     </body>
 </html>
