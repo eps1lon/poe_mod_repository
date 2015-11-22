@@ -70,6 +70,7 @@
 
                 $mod.data("primary", mod.getProp("Rows"));
                 $mod.addClass("mod-type-" + mod.modType());
+                $mod.addClass(mod.serialize().klass);
                 
                 $(".name", $mod).text(mod.name());
                 
