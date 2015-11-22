@@ -18,14 +18,16 @@
     
     this.Applicable.map = function (mod_collection, mod_container) {
         return $.map(mod_collection.slice(), function (mod) {
-            mod.applicableTo(mod_container);
+            if (mod.applicableTo) {
+                mod.applicableTo(mod_container);
+            }
             return mod;
         });
     };
     
     this.Applicable.mods = function (mod_collection, mod_container, success) {
         return $.grep(mod_collection.slice(), function (mod) {
-            return mod.applicableTo(mod_container, success);
+            return mod.applicableTo && mod.applicableTo(mod_container, success);
         });
     };
     

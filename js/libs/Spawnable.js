@@ -23,14 +23,16 @@
     
     this.Spawnable.map = function (mod_collection, mod_container) {
         return $.map(mod_collection.slice(), function (mod) {
-            mod.spawnableOn(mod_container);
+            if (mod.spawnableOn) {
+                mod.spawnableOn(mod_container);
+            }
             return mod;
         });
     };
     
     this.Spawnable.mods = function (mod_collection, mod_container, success) {
         return $.grep(mod_collection.slice(), function (mod) {
-            return mod.spawnableOn(mod_container, success);
+            return mod.spawnableOn && mod.spawnableOn(mod_container, success);
         });
     };
     
