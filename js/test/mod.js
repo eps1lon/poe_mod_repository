@@ -70,7 +70,9 @@
 
                 $mod.data("primary", mod.getProp("Rows"));
                 $mod.addClass("mod-type-" + mod.modType());
-
+                
+                $(".name", $mod).text(mod.name());
+                
                 $.each(mod.t().split("\n"), function (j, stat_text) {
                     $("ul.stats", $mod).append("<li>" + stat_text + "</li>");
                 });
