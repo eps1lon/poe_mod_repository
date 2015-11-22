@@ -176,8 +176,13 @@
             // chance
             $(".spawn_chance", $tr).text(mod.humanSpawnchance());
             
-            // serialize
-            $tr.data("mod", mod.serialize());
+            // serialized
+            var serialized = mod.serialize();
+            $tr.data("mod", serialized);
+            
+            // visual
+            $tr.addClass(serialized.klass);
+            $tr.addClass(mod.modType());
             
             $tr.appendTo("#implicits");
         });
@@ -246,7 +251,13 @@
             // value
             $(".stats", $tr).text(mod.t());
             
-            $tr.data("mod", mod.serialize());
+            // serialize
+            var serialized = mod.serialize();
+            $tr.data("mod", serialized);
+            
+            // visual
+            $tr.addClass(serialized.klass);
+            $tr.addClass(mod.modType());
             
             $correct_group.after($tr);
         });

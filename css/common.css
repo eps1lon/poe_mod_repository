@@ -49,9 +49,17 @@
 }
 
 .applicable[data-applicable_byte]:not([data-applicable_byte=""]) {
-    background-color: red;
 }
 
 .applicable[data-applicable_byte^="256"] {
-    background-color: blue;
+}
+
+/* colors */
+
+.augmented-value, .mod .stats  {
+    color: #8888ff;
+}
+
+.crafted-mod, .mod.MasterMod .stats {
+    color: #B8DAF2;
 }
