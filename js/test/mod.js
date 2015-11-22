@@ -1,4 +1,4 @@
-/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass, RollableMod, ApplicableMod, MasterMod */
+/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass, RollableMod, ApplicableMod, MasterMod, baseitem */
 
 (function (__undefined) {
     // "tables"
@@ -53,7 +53,7 @@
             return key + ": " + requirement;
         }).join(", "), "<br>");
         // ilvl
-        $statsgroup.append("iLvl: ", baseitem.item_level);
+        $statsgroup.append(create_from_template(".ilvl", $itembox).val(baseitem.item_level));
         
         $.each(["implicits", "affixes"], function (_, modGetter) {
             // sep
@@ -389,7 +389,13 @@
                 return null;
             }
             
-            return new Item(baseitem_props);
+            var baseitem = new Item(baseitem_props);
+            var $ilvl = $("#used_baseitem input.ilvl:not(.template)");
+            if ($ilvl.length) {
+                baseitem.item_level = +$ilvl.val();
+            } 
+            
+            return baseitem;
         };
         
         // display item_classes
@@ -539,6 +545,13 @@
             baseitem.removeMod(baseitem.getMod($mod.data("primary")));
             
             display_baseitem(baseitem, "#used_baseitem");
+            display_available_mods(mod_generator, baseitem);
+        });
+        
+        // ilvl handle
+        $("input.ilvl").on("change", function () {
+            baseitem.item_level = +$(this).val();
+            
             display_available_mods(mod_generator, baseitem);
         });
         
