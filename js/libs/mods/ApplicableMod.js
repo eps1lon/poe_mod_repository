@@ -57,7 +57,10 @@
                 klass: "ApplicableMod",
                 args: [this.props]
             };
-        }
+        },
+        name: function () {
+            return this.getProp("Name");
+        }      
     });
     
     this.ApplicableMod.APPLICABLE_BYTE = {

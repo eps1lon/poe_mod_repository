@@ -47,6 +47,14 @@
                 "Adds one property to an item",
                 "Right click this item then left click a normal item to apply"
             ]
+        },
+        ItemShowcase: {
+            klass: "ItemShowcase",
+            name: "Showcase",
+            stats: [
+                "All Mods",
+                "shows all possible mods"
+            ]
         }
     };
 })();

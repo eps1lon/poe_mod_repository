@@ -54,6 +54,9 @@
                 
                 return null;
             })[0];
+        },
+        name: function () {
+            return this.getProp("Name");
         }
     });
     

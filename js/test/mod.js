@@ -1,4 +1,4 @@
-/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass, RollableMod, ApplicableMod */
+/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass, RollableMod, ApplicableMod, MasterMod */
 
 (function (__undefined) {
     // "tables"
@@ -36,7 +36,7 @@
         $(".itemboxheader-single", $itembox).text(baseitem.name());
         
         // item_class
-        $statsgroup.append(baseitem.item_class);
+        $statsgroup.append(baseitem.entry.getProp("ItemClass"));
         
         // tags
         $statsgroup.append("<br>", $.map(baseitem.getTagsWithProps(tags), function (props) {
@@ -121,15 +121,13 @@
         var applicable_mods = Applicable.mods(mod_generator.getAvailableMods(), 
                                               baseitem, 
                                               whitelist);
-            
+        
         // implements Spawnable?
-        if (applicable_mods[0] !== __undefined && applicable_mods[0].spawnableOn) {
-            var whitelist_spawnable = 0;
-            
-            applicable_mods = Spawnable.mods(applicable_mods, 
-                                             baseitem, 
-                                             whitelist_spawnable);
-        }
+        var whitelist_spawnable = 0;
+
+        applicable_mods = Spawnable.mods(applicable_mods, 
+                                         baseitem, 
+                                         whitelist_spawnable);
         
         // mod groups
         var prefixes = Spawnable.calculateSpawnchance($.grep(applicable_mods, function (mod) {
@@ -221,12 +219,19 @@
             }
             
             // error
-            // TODO interface check
             var applicable_byte_human = mod.applicableByteHuman();
             $tr.attr("data-applicable_byte", applicable_byte_human.bits.join("-"));
             
-            var spawnable_byte_human = mod.spawnableByteHuman();
-            $tr.attr("data-spawnable-byte", spawnable_byte_human.bits.join("-"));
+            var spawnable_byte_human = {
+                strings: []
+            };
+            if (mod.spawnableOn !== __undefined) { // has interface
+                spawnable_byte_human = mod.spawnableByteHuman();
+                $tr.attr("data-spawnable-byte", spawnable_byte_human.bits.join("-"));
+                
+                // chance
+                $(".spawn_chance", $tr).text(mod.humanSpawnchance());
+            }
             
             $tr.prop("title", applicable_byte_human.strings.concat(spawnable_byte_human.strings).join(" and "));
             
@@ -234,13 +239,10 @@
             $(".ilvl", $tr).text(mod.getProp("Level"));
             
             // name
-            $(".name", $tr).text(mod.getProp("Name"));
+            $(".name", $tr).text(mod.name());
             
             // value
             $(".stats", $tr).text(mod.t());
-            
-            // chance
-            $(".spawn_chance", $tr).text(mod.humanSpawnchance());
             
             $tr.data("mod", mod.serialize());
             
@@ -271,6 +273,9 @@
         }),
         $.getJSON("js/data/meta_data.json", function (json) {
             Item.meta_data = json;
+        }),
+        $.getJSON("js/data/craftingbenchoptions.json", function (json) {
+            MasterMod.craftingbenchoptions = json;
         })
     ).then(function () {
         console.log("loaded " + mods.length + " mods",
@@ -507,7 +512,7 @@
         $("#baseitems option:not(.template)").filter(":first").prop("selected", true);
         $("#baseitems").trigger("change");
         
-        $("#mod_generators option:not(.template)").filter(":first").prop("selected", true);
+        $("#mod_generators option:not(.template)").filter(":nth-of-type(3)").prop("selected", true);
         $("#mod_generators").trigger("change");
         
         //$("#use_mod_gen").trigger("click");

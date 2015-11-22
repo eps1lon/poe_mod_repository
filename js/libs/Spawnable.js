@@ -32,7 +32,7 @@
     
     this.Spawnable.mods = function (mod_collection, mod_container, success) {
         return $.grep(mod_collection.slice(), function (mod) {
-            return mod.spawnableOn && mod.spawnableOn(mod_container, success);
+            return mod.spawnableOn === __undefined || mod.spawnableOn(mod_container, success);
         });
     };
     
@@ -49,7 +49,10 @@
         });
         
         return $.map(spawnables, function (mod) {
-            mod.spawnchance = mod.spawnweight / sum_spawnweight;
+            if (mod.spawnweight !== __undefined) {
+                mod.spawnchance = mod.spawnweight / sum_spawnweight;
+            }
+            
             return mod;
         });
     };
