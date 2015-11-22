@@ -162,7 +162,22 @@
         $.each(implicits, function (_, mod) {
             var $tr = create_from_template("#implicits tbody tr.mod");
             
-            // error TODO scan rollable_byte, spawnable_byte
+            // error
+            var applicable_byte_human = mod.applicableByteHuman();
+            $tr.attr("data-applicable_byte", applicable_byte_human.bits.join("-"));
+            
+            var spawnable_byte_human = {
+                strings: []
+            };
+            if (mod.spawnableOn !== __undefined) { // has interface
+                spawnable_byte_human = mod.spawnableByteHuman();
+                $tr.attr("data-spawnable-byte", spawnable_byte_human.bits.join("-"));
+                
+                // chance
+                $(".spawn_chance", $tr).text(mod.humanSpawnchance());
+            }
+            
+            $tr.prop("title", applicable_byte_human.strings.concat(spawnable_byte_human.strings).join(" and "));
             
             // ilvl
             $(".ilvl", $tr).text(mod.getProp("Level"));
@@ -183,6 +198,11 @@
             // visual
             $tr.addClass(serialized.klass);
             $tr.addClass(mod.modType());
+            
+            // possible? TODO better way? maybe scan byte
+            if ($tr.prop("title")) {
+                $(".add_mod", $tr).remove();
+            }
             
             $tr.appendTo("#implicits");
         });
@@ -254,6 +274,11 @@
             // serialize
             var serialized = mod.serialize();
             $tr.data("mod", serialized);
+            
+            // possible? TODO better way? maybe scan byte
+            if ($tr.prop("title")) {
+                $(".add_mod", $tr).remove();
+            }
             
             // visual
             $tr.addClass(serialized.klass);
