@@ -68,7 +68,7 @@
         spawnableByteHuman: function() {
             return ByteSet.human(this.spawnable_byte, RollableMod.SPAWNABLE_BYTE, RollableMod.APPLICABLE_BYTE.SUCCESS);
         },
-        applicableTo: function (baseitem, success) {
+        applicableTo: function (item, success) {
             if (success === __undefined) {
                 success = Applicable.SUCCESS;
             } else {
@@ -78,19 +78,17 @@
             // reset
             this.resetApplicable();
             
-            var max_mods_in_domain_on = this.maxModsInDomainOn(baseitem);
-            
-            if (max_mods_in_domain_on === -1) {
+            if (!item.inDomainOf(+this.getProp("Domain"))) {
                 this.applicable_byte |= RollableMod.ROLLABLE_BYTE.WRONG_DOMAIN;
-            } else if (baseitem.numberOfModsOfType(+this.getProp("GenerationType")) >= max_mods_in_domain_on) {
+            } else if (!item.hasRoomFor(this)) {
                 this.applicable_byte |= RollableMod.ROLLABLE_BYTE.DOMAIN_FULL;
             }
                        
-            if (+this.getProp("Level") > baseitem.item_level) {
+            if (+this.getProp("Level") > item.item_level) {
                 this.applicable_byte |= RollableMod.ROLLABLE_BYTE.LOWER_ILVL;
             }
             
-            var correct_groups = $.map(baseitem.mods, function (mod) { 
+            var correct_groups = $.map(item.mods, function (mod) { 
                 return mod.getProp("CorrectGroup");
             });
             

@@ -17,12 +17,13 @@
         return $(selector + ".template").clone(true).removeClass("template");
     };
     
+        // assert baseitem typeof BaseItem
     var display_baseitem = function (baseitem, selector) {
         // assert baseitem typeof BaseItem
         // remove old itembox
         $(selector).empty();
         
-        if (!(baseitem instanceof BaseItem)) {
+        if (!(baseitem instanceof Item)) {
             return false;
         }
         
@@ -106,12 +107,12 @@
             return false;
         }
 
-        if (!(baseitem instanceof BaseItem)) {
+        if (!(baseitem instanceof Item)) {
             console.log("baseitem needs to be of type BaseItem");
             return false;
         }
         
-        baseitem.rarity = ItemClass.RARITY.SHOWCASE;
+        baseitem.rarity = Item.RARITY.SHOWCASE;
         
         // filter
         var whitelist = RollableMod.ROLLABLE_BYTE.LOWER_ILVL
@@ -120,7 +121,7 @@
         var applicable_mods = Applicable.mods(mod_generator.getAvailableMods(), 
                                               baseitem, 
                                               whitelist);
-        
+            
         // implements Spawnable?
         if (applicable_mods[0] !== __undefined && applicable_mods[0].spawnableOn) {
             // Spawnable.mods(applicable_mods, baseitem)
@@ -269,6 +270,9 @@
         }),
         $.getJSON("js/data/translations/English/stat_descriptions.json", function (json) {
             Mod.localization = new Localization(json);
+        }),
+        $.getJSON("js/data/meta_data.json", function (json) {
+            Item.meta_data = json;
         })
     ).then(function () {
         console.log("loaded " + mods.length + " mods",
@@ -343,11 +347,11 @@
                 return null;
             }
             
-            return new BaseItem(baseitem_props);
+            return new Item(baseitem_props);
         };
         
         // display item_classes
-        $.each(ItemClassFactory.ITEMCLASSES, function (ident, item_class) {
+        $.each(Item.ITEMCLASSES, function (ident, item_class) {
             var $option = create_from_template("#item_classes option");
             
             $option.text(ident);
@@ -361,7 +365,7 @@
             var $selected = $("option:selected", this);
             
             // selected ItemClass
-            var item_class = ItemClassFactory.build($selected.data("ident"));
+            var item_class = Item.ITEMCLASSES[$selected.data("ident")];
             if (item_class === null) {
                 return false;
             }
@@ -369,7 +373,7 @@
             // baseitems that have this ItemClass
             var baseitems = $.grep(baseitemtypes, function (baseitemtype) {
                 //console.log(baseitemtype.ItemClass);
-                return item_class.itemClassPrimary() === +baseitemtype.ItemClass;
+                return item_class.PRIMARY === +baseitemtype.ItemClass;
             });
             
             // empty baseitems

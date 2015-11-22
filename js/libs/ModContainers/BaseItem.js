@@ -14,45 +14,7 @@
             this.entry = new GgpkEntry(props);
             
             this.random_name = "";
-        },
-        getTags: function () {
-            return $.unique(this._super().concat(this.entry.valueAsArray("TagsKeys")));
-        },
-        base_name: function () {
-            return this.entry.getProp("Name");
-        },
-        name: function () {
-            switch (this.rarity) {
-                case ItemClass.RARITY.MAGIC:
-                    var name = "";
-                    // prefix
-                    if (this.prefixes().length) {
-                        name += this.prefixes()[0].getProp("Name") + " ";
-                    }
-                    // + base_name
-                    name += this.base_name();
-                    // + suffix
-                    if (this.suffixes().length) {
-                        name += " " + this.suffixes()[0].getProp("Name");
-                    }
-                    
-                    return name;
-                case ItemClass.RARITY.RARE:
-                    return "Random Name + " + this.base_name();
-                default: 
-                    return this.base_name();
-            }
-        },
-        primary: function () {
-            return +this.entry.getProp("Rows");
-        },
-        requirements: function () {
-            return {
-                level: this.entry.getProp("DropLevel")
-            };
         }
     });
-    
-    this.BaseItem.MAX_ILVL = 100;
 })();
 

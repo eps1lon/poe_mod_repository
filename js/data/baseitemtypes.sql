@@ -1,1 +1,1 @@
-SELECT `Rows`, `Name`, ItemClass, Width, Height, TagsKeys, Implicit_ModsKeys, DropLevel FROM baseitemtypes
+SELECT `Rows`, `Name`, ItemClass, Width, Height, TagsKeys, Implicit_ModsKeys, DropLevel, InheritsFrom FROM baseitemtypes

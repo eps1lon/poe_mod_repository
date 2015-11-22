@@ -17,7 +17,7 @@
              * @var this.mods Array<Mod>
              */
             
-            this.tags = [0];
+            this.tags = [];
         },
         addMod: function (new_mod) {
             if (!(new_mod instanceof Mod)) {
@@ -102,6 +102,13 @@
             return $.grep(this.mods, function (mod) {
                 return +mod.getProp("GenerationType") === mod_type;
             }).length;
+        },
+        hasRoomFor: function (mod) {
+            return this.numberOfModsOfType(+mod.getProp("GenerationType")) < this.maxModsOfType(mod);
+        },
+        maxModsOfType: function (mod) {
+            console.log("override abstract maxModsOfType");
+            return -1;
         }
     }); 
     
