@@ -208,6 +208,13 @@
             $tr.appendTo("#implicits");
         });
         
+        // remove not_rollable class if rollable
+        $.each(prefixes.concat(suffixes), function (i, mod) {
+            if (mod.rollableCached()) {
+                $("#correct-group-" + mod.getProp("CorrectGroup")).removeClass("not_rollable");
+            }
+        });
+        
         // restore toggle groups
         $clicked_groups.each(function () {
             $("#" + $(this).attr("id")).trigger("click");

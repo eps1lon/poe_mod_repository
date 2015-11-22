@@ -18,6 +18,9 @@
         },
         spawnableByteHuman: function () {
             
+        },
+        spawnableCached: function () {
+            
         }
     });
     

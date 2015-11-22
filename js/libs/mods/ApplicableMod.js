@@ -46,6 +46,10 @@
             // to bool
             return !!(this.applicable_byte & success);
         },
+        applicableCached: function () {
+            // to bool
+            return !!(this.applicable_byte & Applicable.SUCCESS);
+        },
         resetApplicable: function () {
             this.applicable_byte = Applicable.UNSCANNED;
         },
@@ -60,7 +64,10 @@
         },
         name: function () {
             return this.getProp("Name");
-        }      
+        },
+        rollableCached: function () {
+            return this.applicableCached();
+        }
     });
     
     this.ApplicableMod.APPLICABLE_BYTE = {

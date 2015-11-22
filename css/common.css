@@ -40,6 +40,10 @@
     vertical-align: top;
 }
 
+.not_rollable {
+    text-decoration: line-through;
+}
+
 .legend {
     display: inline-block;
 }

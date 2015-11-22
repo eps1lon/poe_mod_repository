@@ -64,6 +64,10 @@
         spawnableByteHuman: function() {
             return ByteSet.human(this.spawnable_byte, RollableMod.SPAWNABLE_BYTE, RollableMod.SPAWNABLE_BYTE.SUCCESS);
         },
+        spawnableCached: function () {
+            // to bool
+            return !!(this.spawnable_byte & Spawnable.SUCCESS);
+        },
         rollableOn: function (mod_container) {
             this.rollable = this.applicableTo(mod_container) 
                             && this.spawnableOn(mod_container) ;
@@ -75,6 +79,9 @@
                 klass: "RollableMod",
                 args: [this.props]
             };
+        },
+        rollableCached: function () {
+            return this.spawnableCached() && this.applicableCached();
         }
     });
     

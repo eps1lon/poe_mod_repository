@@ -13,6 +13,9 @@
         },
         applicableByteHuman: function () {
             
+        },
+        applicableCached: function () {
+            
         }
     });
     
