@@ -1,4 +1,4 @@
-/* global ApplicableMod, Applicable */
+/* global ApplicableMod, Applicable, this */
 
 (function (__undefined) {
     this.MasterMod = ApplicableMod.extend({
@@ -31,6 +31,12 @@
             
             // to bool
             return !!(this.applicable_byte & success);
+        },
+        serialize: function () {
+            return {
+                klass: "MasterMod",
+                args: [this.props, this.bench.props]
+            };
         }
     });
     
