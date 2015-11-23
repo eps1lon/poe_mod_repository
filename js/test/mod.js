@@ -9,6 +9,20 @@
     
     var TAGS = {};
     
+    var underscore_to_human = function (string) {
+        return ucfirst(string
+                        // replace underscore
+                        .replace(/_(\w)/g, function (g) { return " " + g[1].toUpperCase(); }));
+    };
+    
+    var ucfirst = function (string) {
+        var strings = string.split(" ");
+        
+        return [
+            strings[0].toLowerCase().replace(/^([a-z])/, function (g) { return g.toUpperCase(); })
+        ].concat(strings.slice(1)).join(" ");         
+    };
+    
     // template methods
     var create_from_template = function (selector, context) {
         if (context !== undefined) {
@@ -28,37 +42,41 @@
         }
         
         var $itembox = create_from_template(".itembox");
+        
+        $itembox.addClass(baseitem.rarityIdent());
+        
         var $statsgroup_template = create_from_template(".itembox-statsgroup", $itembox);
         var $statsgroup = $statsgroup_template.clone();
-        var $separator_template = create_from_template(".separator", $itembox);
         
         // name
         $(".itemboxheader-single", $itembox).text(baseitem.name());
         
         // item_class
-        $statsgroup.append(baseitem.entry.getProp("ItemClass"));
+        $statsgroup.append(ucfirst(baseitem.itemclassIdent()));
         
         // tags
         $statsgroup.append("<br>", $.map(baseitem.getTagsWithProps(tags), function (props) {
-            return props.Id;
+            return underscore_to_human(props.Id);
         }).join(", "));
         
         // sep
         $(".itembox-stats", $itembox).append($statsgroup);
-        $(".itembox-stats", $itembox).append($separator_template.clone());
         $statsgroup = $statsgroup_template.clone();
         
-        // Requirements TODO localize
-        $statsgroup.append($.map(baseitem.requirements(), function (requirement, key) {
-            return key + ": " + requirement;
+        // Requirements
+        $statsgroup.append("Requires ", $.map(baseitem.requirements(), function (requirement, key) {
+            return key + " <span class='text-value'>" + requirement + "</span>";
         }).join(", "), "<br>");
         // ilvl
         $statsgroup.append(create_from_template(".ilvl", $itembox).val(baseitem.item_level));
         
+        // sep
+        $(".itembox-stats", $itembox).append($statsgroup);
+        $statsgroup = $statsgroup_template.clone();
+        
         $.each(["implicits", "affixes"], function (_, modGetter) {
             // sep
             $(".itembox-stats", $itembox).append($statsgroup);
-            $(".itembox-stats", $itembox).append($separator_template.clone());
             $statsgroup = $statsgroup_template.clone();
 
             var $mods = create_from_template("ul.mods", $itembox);

@@ -3,7 +3,6 @@
 (function (__undefined) {
     /*
      * Item Class
-     * deprecated
      */
     this.Item = ModContainer.extend({
         init: function (props) {
@@ -152,9 +151,38 @@
             return +this.entry.getProp("Rows");
         },
         requirements: function () {
-            return {
-                level: this.entry.getProp("DropLevel")
-            };
+            var requirements = {};
+            
+            $.each({
+                Level: this.entry.getProp("DropLevel"),
+                Str: this.entry.getProp("ReqStr"),
+                Dex: this.entry.getProp("ReqDex"),
+                Int: this.entry.getProp("ReqInt")
+            }, function (key, requirement) {
+                if (requirement > 0) {
+                    requirements[key] = requirement;
+                }
+            });
+            
+            return requirements;
+        },
+        itemclassIdent: function () {
+            var that = this;
+            return $.map(Item.ITEMCLASSES, function (itemclass, ident) {
+                if (+itemclass.PRIMARY === +that.entry.getProp("ItemClass")) {
+                    return ident;
+                }
+                return null;
+            })[0];
+        },
+        rarityIdent: function () {
+            var that = this;
+            return $.map(Item.RARITY, function (rarity, ident) {
+                if (rarity === +that.rarity) {
+                    return ident.toLowerCase();
+                }
+                return null;
+            })[0];
         }
     });
     

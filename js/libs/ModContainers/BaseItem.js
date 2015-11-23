@@ -1,6 +1,9 @@
 /* global ItemClass, ItemClassFactory, Item */
 
 (function (__undefined) {
+    /**
+     * deprecated
+     */
     this.BaseItem = ItemClass.extend({
         init: function (props) {
             // init ItemClass 

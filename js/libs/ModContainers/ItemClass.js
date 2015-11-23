@@ -3,6 +3,7 @@
 (function (__undefined) {
     /**
      * abstract class ItemClass
+     * deprecated
      */
     this.ItemClass = ModContainer.extend({
         init: function (item_class_ident, tags) {
