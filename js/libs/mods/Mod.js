@@ -45,6 +45,19 @@
                 return stat.t(stats, Mod.localization);
             })).join("\n");
         },
+        correctGroupTranslated: function () {
+            var correct_group = this.getProp("CorrectGroup");
+            var translated = Mod.correct_group_localization[correct_group];
+            
+            if (translated === __undefined || translated === "") {
+                // DeCamelize
+                return correct_group
+                        // insert a space before all caps
+                        .replace(/([A-Z])/g, ' $1');
+            }
+            
+            return translated;
+        },
         modType: function () {
             var that = this;
             return $.map(Mod.MOD_TYPE, function (mod_type, type_name) {
@@ -83,6 +96,7 @@
     };
     
     this.Mod.localization = null;
+    this.Mod.correct_group_localization;
     this.Mod.all_stats = null;
 })();
 

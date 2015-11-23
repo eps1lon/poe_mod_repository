@@ -253,7 +253,7 @@
                 $correct_group_header.attr("id", "correct-group-" + correct_group);
                 $correct_group.attr("data-correct-group", correct_group);
                 
-                $("th.correct_group", $correct_group_header).text(correct_group);
+                $("th.correct_group", $correct_group_header).text(mod.correctGroupTranslated());
                 
                 $table.append($correct_group_header, $correct_group);
             }
@@ -332,6 +332,9 @@
         }),
         $.getJSON("js/data/craftingbenchoptions.json", function (json) {
             MasterMod.craftingbenchoptions = json;
+        }),
+        $.getJSON("js/data/translations/English/mod_correct_groups.json", function (json) {
+            Mod.correct_group_localization = json;
         })
     ).then(function () {
         console.log("loaded " + mods.length + " mods",
@@ -397,7 +400,7 @@
         
         var get_selected_baseitem = function () {
             var baseitem_key = $("#baseitems option:selected").data("baseitem_key");
-
+            
             var baseitem_props = $.grep(baseitemtypes, function (baseitem_props) {
                 return baseitem_key === +baseitem_props.Rows;
             })[0];
@@ -411,7 +414,6 @@
             if ($ilvl.length) {
                 baseitem.item_level = +$ilvl.val();
             } 
-            
             return baseitem;
         };
         
