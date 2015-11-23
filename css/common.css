@@ -11,8 +11,7 @@
     display: none;
 }
 
-#implicits caption {
-    /* TODO otherwise its jump when toggling tbody*/
+th.correct_group {
     text-align: left;
 }
 

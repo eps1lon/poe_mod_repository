@@ -99,11 +99,8 @@
         console.log(mod_generator, "@", baseitem, "?");
         
         // shown groups
-        var $clicked_groups = $("#available_mods tr.clicked");
-        
-        // empty
-        $("#available_mods tbody tr:not(.template)").remove();
-            
+        var $clicked_groups = $("#available_mods tbody.clicked");
+                
         // extends ModGenerator implements Applicable
         if (!(mod_generator instanceof ModGenerator)) {
             console.log("mod_generator needs to be of type ModGenerator");
@@ -208,6 +205,11 @@
             $tr.appendTo("#implicits");
         });
         
+        // let the plugin know that we made a update 
+        $("#implicits").trigger("update"); 
+        // sort on ilvl desc
+        $("#implicits").trigger("sorton",[[[0,1]]]);
+        
         // remove not_rollable class if rollable
         $.each(prefixes.concat(suffixes), function (i, mod) {
             if (mod.rollableCached()) {
@@ -226,74 +228,81 @@
     /**
      * 
      * @param {Array[Mod]} mods
-     * @param {jQuery} table visual container
+     * @param {jQuery} $table visual container
      * @returns {undefined}
      */
-    var display_mod_group = function (mods, table) {
+    var display_mod_group = function (mods, $table) {
         // empty mods
-        $("tbody tr:not(.template)", table).remove();
+        $("tbody:not(.template)", $table).remove();
         
         // display prefix
         $.each(mods, function (_, mod) {
-            var $tr = create_from_template("tbody tr.mod", table).hide();
+            var $mod = create_from_template("tbody.mods.template .mod", $table);
             
             // grouping
             var correct_group = mod.getProp("CorrectGroup");
-            var $correct_group = $("tbody tr.correct_group[data-correct-group='" + correct_group + "']", table);
+            var $correct_group = $("tbody.mods[data-correct-group='" + correct_group + "']", $table);
             
             // new group?
             if (!$correct_group.length) {
+                var $correct_group_header = create_from_template("tbody.correct_group", $table);
+                $correct_group = create_from_template("tbody.mods", $table).hide();
+                
                 // maybe change do data() and filter()
-                $correct_group = create_from_template("tbody tr.correct_group", table);
-                $correct_group.attr("id", "correct-group-" + correct_group);
+                $correct_group_header.attr("id", "correct-group-" + correct_group);
                 $correct_group.attr("data-correct-group", correct_group);
                 
-                $("td.correct_group", $correct_group).text(correct_group);
+                $("th.correct_group", $correct_group_header).text(correct_group);
                 
-                $("tbody", table).append($correct_group);
+                $table.append($correct_group_header, $correct_group);
             }
             
             // error
             var applicable_byte_human = mod.applicableByteHuman();
-            $tr.attr("data-applicable_byte", applicable_byte_human.bits.join("-"));
+            $mod.attr("data-applicable_byte", applicable_byte_human.bits.join("-"));
             
             var spawnable_byte_human = {
                 strings: []
             };
             if (mod.spawnableOn !== __undefined) { // has interface
                 spawnable_byte_human = mod.spawnableByteHuman();
-                $tr.attr("data-spawnable-byte", spawnable_byte_human.bits.join("-"));
+                $mod.attr("data-spawnable-byte", spawnable_byte_human.bits.join("-"));
                 
                 // chance
-                $(".spawn_chance", $tr).text(mod.humanSpawnchance());
+                $(".spawn_chance", $mod).text(mod.humanSpawnchance());
             }
             
-            $tr.prop("title", applicable_byte_human.strings.concat(spawnable_byte_human.strings).join(" and "));
+            $mod.prop("title", applicable_byte_human.strings.concat(spawnable_byte_human.strings).join(" and "));
             
             // ilvl
-            $(".ilvl", $tr).text(mod.getProp("Level"));
+            $(".ilvl", $mod).text(mod.getProp("Level"));
             
             // name
-            $(".name", $tr).text(mod.name());
+            $(".name", $mod).text(mod.name());
             
             // value
-            $(".stats", $tr).text(mod.t());
+            $(".stats", $mod).text(mod.t());
             
             // serialize
             var serialized = mod.serialize();
-            $tr.data("mod", serialized);
+            $mod.data("mod", serialized);
             
             // possible? TODO better way? maybe scan byte
-            if ($tr.prop("title")) {
-                $(".add_mod", $tr).remove();
+            if ($mod.prop("title")) {
+                $(".add_mod", $mod).remove();
             }
             
             // visual
-            $tr.addClass(serialized.klass);
-            $tr.addClass(mod.modType());
+            $mod.addClass(serialized.klass);
+            $mod.addClass(mod.modType());
             
-            $correct_group.after($tr);
+            $correct_group.append($mod);
         });
+        
+        // let the plugin know that we made a update 
+        $table.trigger("update"); 
+        // sort on ilvl desc
+        $table.trigger("sorton",[[[0,1]]]);
     };
         
     $.when(
@@ -515,14 +524,18 @@
         });
         
         // display mod group
-        $("#available_mods tr.correct_group").on("click", function () {
-            $(this).toggleClass("clicked").nextUntil(".correct_group").toggle();
+        $("#available_mods tbody.correct_group").on("click", function () {
+            $(this).toggleClass("clicked").next().toggle();
         });
         
         // display implcits
         $("#implicits-caption").on("click", function () {
-            console.log("clicked");
             $(this).toggleClass("clicked").parents("table").children("tbody").toggle();
+        });
+        
+        // jQuery Tablesorter config
+        $("#prefixes, #suffixes, #implicits").tablesorter({
+            cssInfoBlock : "tablesorter-no-sort"
         });
         
         // add mod

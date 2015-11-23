@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="css/itembox.css" />
         
         <script src="js/libs/jquery/jquery.js"></script>
+        <script src="js/libs/jquery/jquery.metadata.js"></script>
+        <script src="js/libs/jquery/jquery.tablesorter.min.js"></script>
         <script src="js/libs/Inheritance.js"></script>
         
         <script src="js/libs/concerns/ByteSet.js"></script>
@@ -100,13 +102,15 @@
         
         <h3>available Mods</h3>
         <section id="available_mods">
-            <table id="implicits" class="mods">
+            <table id="implicits" class="mods sortable">
                 <caption id="implicits-caption">implicits</caption>
-                <thead></thead>
+                <thead>
+                    <th class="ilvl">ilvl</th>
+                    <th class="stats {sorter: false}">stats</th>
+                    <th class="spawn_chance">chance</th>
+                    <th class="{sorter: false}"></th>
+                </thead>
                 <tbody>
-                    <tr class="template correct_group">
-                        <td colspan="3" class="correct_group"></td>
-                    </tr>
                     <tr class="template mod applicable">
                         <td class="ilvl"></td>
                         <td class="stats"></td>
@@ -115,13 +119,23 @@
                     </tr>
                 </tbody>
             </table>
-            <table id="prefixes" class="mods">
+            <table id="prefixes" class="mods sortable">
                 <caption>prefixes</caption>
-                <thead></thead>
-                <tbody>
-                    <tr class="template correct_group not_rollable">
-                        <td colspan="4" class="correct_group"></td>
+                <thead>
+                    <tr>
+                        <th class="ilvl">ilvl</th>
+                        <th class="stats {sorter: false}">stats</th>
+                        <th class="name {sorter: false}">name</th>
+                        <th class="spawn_chance">spawn_chance</th>
+                        <th class="{sorter: false}"></th>
                     </tr>
+                </thead>
+                <tbody class="template correct_group not_rollable tablesorter-no-sort">
+                    <tr>
+                        <th colspan="5" class="correct_group"></th>
+                    </tr>
+                </tbody>
+                <tbody class="template mods">
                     <tr class="template mod applicable">
                         <td class="ilvl"></td>
                         <td class="stats"></td>
@@ -132,13 +146,23 @@
                 </tbody>
             </table>
             
-            <table id="suffixes" class="mods">
+            <table id="suffixes" class="mods sortable">
                 <caption>Suffixes</caption>
-                <thead></thead>
-                <tbody>
-                    <tr class="template correct_group not_rollable">
-                        <td colspan="4" class="correct_group"></td>
+                <thead>
+                    <tr>
+                        <th class="ilvl">ilvl</th>
+                        <th class="stats {sorter: false}">stats</th>
+                        <th class="name {sorter: false}">name</th>
+                        <th class="spawn_chance">spawn_chance</th>
+                        <th class="{sorter: false}"></th>
                     </tr>
+                </thead>
+                <tbody class="template correct_group not_rollable tablesorter-no-sort">
+                    <tr>
+                        <th colspan="5" class="correct_group"></th>
+                    </tr>
+                </tbody>
+                <tbody class="sortable template mods">
                     <tr class="template mod applicable">
                         <td class="ilvl"></td>
                         <td class="stats"></td>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="../libs/jquery/jquery.js"></script>
+        <script type="text/javascript" src="../libs/jquery/jquery.metadata.js"></script>
+        <script type="text/javascript" src="../libs/jquery/jquery.tablesorter.js"></script>
+        <script type="text/javascript" src="../libs/jquery/jquery.tablesorter.widgets.js"></script>
+    </head>
+    <body>
+        <table class="sortable">
+  <thead>
+    <tr><th>Name</th><th>A-head</th><th>B-head</th><th>C-head</th></tr>
+  </thead>
+  <tfoot>
+    <tr><th>Name</th><th>A-foot</th><th>B-foot</th><th>C-foot</th></tr>
+  </tfoot>
+
+  <!-- add "tablesorter-no-sort" class (changed by cssInfoBlock option) to skip sorting of this tbody -->
+  <tbody class="tablesorter-no-sort">
+    <tr><th colspan="4">This row is within the first tbody set as an info block - it is not sorted!</th></tr>
+  </tbody>
+
+  <tbody>
+    <tr><td>DDD</td><td>r1c1</td><td>r1c2</td><td>r1c3</td></tr>
+    <tr><td>AAA</td><td>r2c1</td><td>r2c2</td><td>r2c3</td></tr>
+    <tr><td>CCC</td><td>r3c1</td><td>r3c2</td><td>r3c3</td></tr>
+    <tr><td>BBB</td><td>r4c1</td><td>r4c2</td><td>r4c3</td></tr>
+  </tbody>
+
+  <tbody class="tablesorter-no-sort">
+    <tr><th colspan="4">summary info for the first group</th></tr>
+    <tr><th colspan="4">Another row referring to the first group</th></tr>
+  </tbody>
+
+  <tbody>
+    <tr><td>Zorro</td><td>r5c1</td><td>r5c2</td><td>r5c3</td></tr>
+    <tr><td>Caleb</td><td>r6c1</td><td>r6c2</td><td>r6c3</td></tr>
+    <tr><td>Momo</td><td>r7c1</td><td>r7c2</td><td>r7c3</td></tr>
+    <tr><td>Wolfie</td><td>r8c1</td><td>r8c2</td><td>r8c3</td></tr>
+  </tbody>
+
+  <tbody class="tablesorter-no-sort">
+    <tr><th colspan="4">summary info for the second group</th></tr>
+  </tbody>
+
+  <tbody>
+    <tr><td>Ulysses</td><td>r9c1</td><td>r9c2</td><td>r9c3</td></tr>
+    <tr><td>Penelope</td><td>r10c1</td><td>r10c2</td><td>r10c3</td></tr>
+    <tr><td>Edvald</td><td>r11c1</td><td>r11c2</td><td>r11c3</td></tr>
+    <tr><td>Jan</td><td>r12c1</td><td>r12c2</td><td>r12c3</td></tr>
+  </tbody>
+
+  <tbody class="tablesorter-no-sort">
+    <tr><th colspan="4">summary info for the last group</th></tr>
+  </tbody>
+
+</table>
+        <script type="text/javascript">
+            $("table").tablesorter({
+                theme : 'blue',
+                cssInfoBlock : "tablesorter-no-sort",
+                widgets: [ 'zebra', 'stickyHeaders' ]
+              });
+        </script>
+    </body>
+</html>
