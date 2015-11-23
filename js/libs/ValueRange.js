@@ -7,6 +7,12 @@
         avg: function () {
             return Math.floor((this.min + this.max) / 2);
         },
+        max: function () {
+            return Math.max.apply(Math, [this.min, this.max]);
+        },
+        min: function () {
+            return Math.min.apply(Math, [this.min, this.max]);
+        },
         add: function (value_range) {
             this.min += value_range.min;
             this.max += value_range.max;

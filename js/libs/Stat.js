@@ -35,7 +35,7 @@
                         return [[0, 0]];
                     }
 
-                    return [stat.values];
+                    return [stat.values.toArray()];
                 });
             }
             
