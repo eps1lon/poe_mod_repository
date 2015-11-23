@@ -53,8 +53,15 @@
             if (this.spawnchance === null) {
                 return 'null';
             }
-            return "0.0%";
-            return (this.spawnchance * 100).toPrecision(4) + "%";
+            
+            var spawnchance = 0.0;
+            
+            // spawnchance is basically zero if its not applicable
+            if (this.applicableCached()) {
+                spawnchance = this.spawnchance;
+            }
+
+            return (spawnchance * 100).toFixed(precision) + "%";
         },
         resetSpawnable: function () {
             this.spawnweight = 0;
