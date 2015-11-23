@@ -26,7 +26,7 @@
     
     this.Spawnable.map = function (mod_collection, mod_container) {
         return $.map(mod_collection.slice(), function (mod) {
-            if (mod.spawnableOn) {
+            if (Spawnable.implementedBy(mod)) {
                 mod.spawnableOn(mod_container);
             }
             return mod;
@@ -35,24 +35,30 @@
     
     this.Spawnable.mods = function (mod_collection, mod_container, success) {
         return $.grep(mod_collection.slice(), function (mod) {
-            return mod.spawnableOn === __undefined || mod.spawnableOn(mod_container, success);
+            return !Spawnable.implementedBy(mod) || mod.spawnableOn(mod_container, success);
         });
+    };
+    
+    this.Spawnable.implementedBy = function (clazz) {
+        return  clazz.spawnableOn !== __undefined;
     };
     
     /**
      * 
-     * @param {Array[Spawnable]} mod_container
+     * @param {Array[Spawnable]} spawnables
      * @returns {float}
      */
     this.Spawnable.calculateSpawnchance = function (spawnables) {
         var sum_spawnweight = 0;
         
         $.each(spawnables, function (_, mod) {
-            sum_spawnweight += mod.spawnweight;
+            if (Spawnable.implementedBy(mod)) {
+                sum_spawnweight += mod.spawnweight;
+            }
         });
         
         return $.map(spawnables, function (mod) {
-            if (mod.spawnweight !== __undefined) {
+            if (Spawnable.implementedBy(mod) && mod.spawnweight !== null) {
                 mod.spawnchance = mod.spawnweight / sum_spawnweight;
             }
             

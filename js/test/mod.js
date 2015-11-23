@@ -167,7 +167,8 @@
             var spawnable_byte_human = {
                 strings: []
             };
-            if (mod.spawnableOn !== __undefined) { // has interface
+            
+            if (Spawnable.implementedBy(mod)) {
                 spawnable_byte_human = mod.spawnableByteHuman();
                 $tr.attr("data-spawnable-byte", spawnable_byte_human.bits.join("-"));
                 
@@ -264,7 +265,7 @@
             var spawnable_byte_human = {
                 strings: []
             };
-            if (mod.spawnableOn !== __undefined) { // has interface
+            if (Spawnable.implementedBy(mod)) {
                 spawnable_byte_human = mod.spawnableByteHuman();
                 $mod.attr("data-spawnable-byte", spawnable_byte_human.bits.join("-"));
                 
