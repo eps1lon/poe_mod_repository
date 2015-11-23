@@ -185,11 +185,26 @@
             })[0];
         },
         stats: function () {
-            return $.map(this.mods, function (mod) {
+            var stats = {};
+            
+            // flatten mods.statsJoined()
+            $.each($.map(this.mods, function (mod) {
                 return mod.statsJoined();
+            }), function (_, stat) {
+                var id = stat.getProp("Id");
+                // group by stat.Id
+                if (stats[id]) {
+                    stats[id].values.add(stat.values);
+                } else {
+                    stats[id] = stat;
+                }
             });
+            
+            return stats;
         },
         localStats: function () {
+            var stats = this.stats();
+            
             if (this.meta_data.isA("AbstractWeapon")) {
                 
             } else if (this.meta_data.isA("AbstractArmour")) {

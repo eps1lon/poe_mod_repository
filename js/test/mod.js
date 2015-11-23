@@ -60,7 +60,7 @@
         }).join(", "));
         
         // stats
-        console.log(baseitem.stats());
+        console.log(baseitem.localStats());
         
         // sep
         $(".itembox-stats", $itembox).append($statsgroup);
