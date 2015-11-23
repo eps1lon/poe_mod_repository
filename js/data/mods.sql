@@ -1,4 +1,4 @@
-SELECT m.Rows as Rows, m.Id, m.ModTypeKey, m.Level, m.Domain, m.Name, m.GenerationType, 
+SELECT m.Rows as `primary`, m.Rows as Rows, m.Id, m.ModTypeKey, m.Level, m.Domain, m.Name, m.GenerationType, 
     m.CorrectGroup, m.Stat1Min, m.Stat1Max, m.Stat2Min, m.Stat2Max, 
     m.Stat3Min, m.Stat3Max, m.Stat4Min, m.Stat4Max, m.Stat5Min, m.Stat5Max, 
     CONCAT(IFNULL(s1.Rows, 'null'), ',', IFNULL(s2.Rows, 'null'), ',', IFNULL(s3.Rows, 'null'), ',', IFNULL(s4.Rows, 'null'), ',', IFNULL(s5.Rows, 'null')) as Stats,

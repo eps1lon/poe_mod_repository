@@ -1,1 +1,1 @@
-SELECT `Rows`, Id FROM tags
+SELECT `Rows` as `primary`, Rows, Id FROM tags

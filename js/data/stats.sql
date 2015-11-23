@@ -1,1 +1,1 @@
-SELECT Rows, `Id`, `Text` FROM stats
+SELECT Rows as `primary`, Rows, `Id`, `Text` FROM stats
