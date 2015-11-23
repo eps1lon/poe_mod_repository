@@ -183,6 +183,20 @@
                 }
                 return null;
             })[0];
+        },
+        stats: function () {
+            return $.map(this.mods, function (mod) {
+                return mod.statsJoined();
+            });
+        },
+        localStats: function () {
+            if (this.meta_data.isA("AbstractWeapon")) {
+                
+            } else if (this.meta_data.isA("AbstractArmour")) {
+                
+            }
+            
+            return {};
         }
     });
     

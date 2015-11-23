@@ -7,7 +7,7 @@
     this.Stat = GgpkEntry.extend({
         init: function (props) {
             this._super(props);
-            this.values = [];
+            this.values = new ValueRange(0, 0);
         },
         t: function (other_stats, localization) {
             if (localization === __undefined) {
@@ -22,7 +22,7 @@
             
             
             var other_params = localization.data[id].params;
-            var params = [this.values];
+            var params = [this.values.toArray()];
             
             if (other_params !== __undefined && other_params.length > 1) {
                 params = $.map(other_params, function (param_id) {
@@ -42,11 +42,7 @@
             return localization.t.apply(localization, [id].concat(params));
         },
         valueString: function () {
-            if (+this.values[0] === +this.values[1]) {
-                return this.values[0].toString();
-            }
-            
-            return "(" + this.values.join(" to ") + ")";
+            return "(" + this.values.toString() + ")";
         }
     });
     

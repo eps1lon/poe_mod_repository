@@ -29,10 +29,8 @@
                 }
                 
                 var stat = new Stat(Mod.all_stats[row]);
-                stat.values = [
-                    +that.getProp("Stat" + (i + 1) + "Min"),
-                    +that.getProp("Stat" + (i + 1) + "Max")
-                ];
+                stat.values = new ValueRange(+that.getProp("Stat" + (i + 1) + "Min"),
+                                             +that.getProp("Stat" + (i + 1) + "Max"));
                 
                 return stat;
             });

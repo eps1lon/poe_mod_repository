@@ -59,6 +59,9 @@
             return underscore_to_human(props.Id);
         }).join(", "));
         
+        // stats
+        console.log(baseitem.stats());
+        
         // sep
         $(".itembox-stats", $itembox).append($statsgroup);
         $statsgroup = $statsgroup_template.clone();

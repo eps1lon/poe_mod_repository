@@ -4,6 +4,7 @@
     this.Localization = Class.extend({
         init: function (data) {
             this.data = data;
+            console.log(data);
         },
         t: function (key) {
             return this.lookupString(key, Array.prototype.slice.call(arguments, 1));
