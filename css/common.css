@@ -57,12 +57,30 @@ th.correct_group {
 .applicable[data-applicable_byte^="256"] {
 }
 
+.itembox input.ilvl {
+    width: 3em;
+}
+
+.itembox ul {
+    list-style: none;
+    padding: 0;
+}
+
+.itembox ul.stats {
+    display: block;
+}
+
+.remove_mod {
+    display: inline-block;
+    
+}
+
 /* colors */
 
 .augmented-value, .mod .stats  {
     color: #8888ff;
 }
 
-.crafted-mod, .mod.MasterMod .stats {
+.crafted-mod, .mod.MasterMod .stats, .mod.EnchantMod .stats{
     color: #B8DAF2;
 }

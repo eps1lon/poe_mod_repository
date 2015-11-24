@@ -57,7 +57,12 @@
         <div class="template itembox">
             <label class="ilvl template">iLvl: </label>
             <input class="ilvl template" type="number" value="100">
-            <span class="itemboxheader-single"></span>
+            <span class="itemboxheader double-line">
+                <span class="itemboxheader-left"></span>
+                <span class="itemName"></span>
+                <span class="baseName"></span>
+                <span class="itemboxheader-right"></span>
+            </span>
             <span class="itembox-stats">
                 <span class="template itembox-statsgroup"></span>
                 <span class="template separator"></span>
@@ -65,9 +70,9 @@
             <div class="itemboximage"></div>
             <ul class="mods template">
                 <li class="mod template">
-                    <em class="name"></em>:
+                    <em class="name"></em>
+                    <button class="remove_mod" type="button">Remove</button>
                     <ul class="stats"></ul>
-                    <button class="remove_mod" type="button">Remove Mod</button>
                 </li>
             </ul>
         </div>

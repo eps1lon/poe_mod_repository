@@ -2,6 +2,181 @@
     Created on : 17.11.2015, 09:41:53
     Author     : eps1lon
 */
+.itembox {
+    background: url(icons/itembox/hover_background.png);
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+    color: #7f7f7f;
+    width: 360px;
+    position: relative;
+    font-family: FontinSmallCaps, Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14.3px;
+}
+
+.itemboxheader {
+    font-size: 19px;
+    display: block;
+    width: 360px;
+}
+
+.itemboxheader {
+    height: 33px;
+}
+
+.itemboxheader.double-line {
+    height: 53px;
+}
+
+.itemboxheader span {
+    display: block;
+}
+
+.itemboxheader.double-line .itemName {
+    min-height: 27px;
+}
+
+.itemboxheader .itemboxheader-left,
+.itemboxheader .itemboxheader-right {
+    position: absolute;
+}
+
+.itemboxheader .itemboxheader-left {
+    top: 0px; 
+    left: 0px;
+}
+
+.itemboxheader .itemboxheader-right {
+    top: 0px; 
+    right: 0px;
+}
+
+.itemboxheader.double-line .itemboxheader-left,
+.itemboxheader.double-line .itemboxheader-right {
+    display: block;
+    width: 43px;
+    height: 53px;
+}
+
+/* unique */
+.itembox.unique {
+    border-color: #af6025;
+}
+
+.itembox.unique .itemboxheader {
+    background-image: url(icons/itembox/ItemHeaderUniqueSingleLineMiddle.png);
+    color: #af6025;
+}
+
+.itembox.unique .itemboxheader.double-line {
+    background-image: url(icons/itembox/ItemHeaderUniqueMiddle.png);
+}
+
+.itembox.unique .double-line .itemboxheader-left {
+    background-image: url(icons/itembox/ItemHeaderUniqueLeft.png);
+}
+
+
+.itembox.unique .double-line .itemboxheader-right {
+    background-image: url(icons/itembox/ItemHeaderUniqueRight.png);
+}
+
+/* rare */
+.itembox.showcase, .itembox.rare {
+    border-color: #ff7;
+}
+
+.itembox.rare .itemboxheader,
+.itembox.showcase .itemboxheader {
+    background-image: url(icons/itembox/ItemHeaderRareSingleLineMiddle.png);
+    color: #ff7;
+}
+
+.itembox.rare .itemboxheader.double-line,
+.itembox.showcase .itemboxheader.double-line {
+    background-image: url(icons/itembox/ItemHeaderRareMiddle.png);
+}
+
+.itembox.rare .double-line .itemboxheader-left,
+.itembox.showcase .double-line .itemboxheader-left {
+    background-image: url(icons/itembox/ItemHeaderRareLeft.png);
+}
+
+
+.itembox.rare .double-line .itemboxheader-right,
+.itembox.showcase .double-line .itemboxheader-right {
+    background-image: url(icons/itembox/ItemHeaderRareRight.png);
+}
+
+/* magic */
+.itembox.magic {
+    border-color: #88f;
+}
+
+.itembox.magic .itemboxheader {
+    background-image: url(icons/itembox/ItemHeaderMagicMiddle.png);
+    color: #88f;
+}
+
+/* single to double line hack */
+.itembox.magic .double-line {
+    background-repeat: repeat-x;
+    background-size: 46px auto;
+}
+
+.itembox.magic .double-line span {
+    background-size: cover;
+}
+
+.itembox.magic .itemboxheader.double-line {
+    background-image: url(icons/itembox/ItemHeaderMagicMiddle.png);
+}
+
+.itembox.magic .double-line .itemboxheader-left {
+    background-image: url(icons/itembox/ItemHeaderMagicLeft.png);
+}
+
+
+.itembox.magic .double-line .itemboxheader-right {
+    background-image: url(icons/itembox/ItemHeaderMagicRight.png);
+}
+
+/* normal */
+.itembox.normal {
+    border-color: #c8c8c8;
+}
+
+.itembox.normal .itemboxheader {
+    background-image: url(icons/itembox/ItemHeaderWhiteMiddle.png);
+    color: #c8c8c8;
+}
+
+/* single to double line hack */
+.itembox.normal .double-line {
+    background-repeat: repeat-x;
+    background-size: 46px auto;
+}
+
+.itembox.normal .double-line span {
+    background-size: cover;
+}
+
+.itembox.normal .itemboxheader.double-line {
+    background-image: url(icons/itembox/ItemHeaderWhiteMiddle.png);
+}
+
+.itembox.normal .double-line .itemboxheader-left {
+    background-image: url(icons/itembox/ItemHeaderWhiteLeft.png);
+}
+
+
+.itembox.normal .double-line .itemboxheader-right {
+    background-image: url(icons/itembox/ItemHeaderWhiteRight.png);
+}
+
+.itembox .text-value {
+    color: white;
+}
 
 .itembox-statsgroup {
     display: block;
@@ -9,4 +184,10 @@
 
 .itembox-statsgroup ul {
     display: inline-block;
+}
+
+.itembox-statsgroup {
+    background-image: url(http://hydra-media.cursecdn.com/pathofexile.gamepedia.com/c/c2/Hover_separator_normal.png);
+    background-position: center bottom;
+    background-repeat: no-repeat;
 }

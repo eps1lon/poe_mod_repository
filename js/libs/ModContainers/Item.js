@@ -122,10 +122,10 @@
                     return mod_domain === this.modDomainEquiv();
             }
         },
-        base_name: function () {
+        baseName: function () {
             return this.entry.getProp("Name");
         },
-        name: function () {
+        itemName: function () {
             switch (this.rarity) {
                 case Item.RARITY.MAGIC:
                     var name = "";
@@ -134,7 +134,7 @@
                         name += this.prefixes()[0].getProp("Name") + " ";
                     }
                     // + base_name
-                    name += this.base_name();
+                    name += this.baseName();
                     // + suffix
                     if (this.suffixes().length) {
                         name += " " + this.suffixes()[0].getProp("Name");
@@ -143,9 +143,8 @@
                     return name;
                 case Item.RARITY.RARE:
                     return "Random Name + " + this.base_name();
-                default: 
-                    return this.base_name();
             }
+            return '';
         },
         primary: function () {
             return +this.entry.getProp("Rows");

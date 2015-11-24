@@ -49,7 +49,8 @@
         var $statsgroup = $statsgroup_template.clone();
         
         // name
-        $(".itemboxheader-single", $itembox).text(baseitem.name());
+        $(".itemboxheader .itemName", $itembox).text(baseitem.itemName());
+        $(".itemboxheader .baseName", $itembox).text(baseitem.baseName());
         
         // item_class
         $statsgroup.append(ucfirst(baseitem.itemclassIdent()));
@@ -618,6 +619,8 @@
         
         $("#mod_generators option:not(.template)").filter(":nth-of-type(3)").prop("selected", true);
         $("#mod_generators").trigger("change");
+
+        $("#prefixes tbody:not(.template) .add_mod:first").trigger("click");
         
         //$("#use_mod_gen").trigger("click");
     });
