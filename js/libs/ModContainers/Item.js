@@ -206,41 +206,101 @@
             var stats = this.stats();
             var local_stats = {};
             
+            // TODO quality
+            
             if (this.meta_data.isA('AbstractWeapon')) {
+                // added flat
+                $.each({
+                    "physical":  new ValueRange(+this.entry.getProp("DamageMin"),
+                                                +this.entry.getProp("DamageMax")),
+                    "fire": new ValueRange(0, 0),
+                    "cold": new ValueRange(0, 0),
+                    "lightning": new ValueRange(0, 0),
+                    "chaos": new ValueRange(0, 0)
+                }, function (source, damage) {
+                    if (stats['local_minimum_added_' + source + '_damage']) {
+                        damage.min = stats['local_minimum_added_' + source + '_damage'].values.add(damage.min);
+                    }     
+
+                    if (stats['local_maximum_added_' + source + '_damage']) {
+                        damage.max = stats['local_maximum_added_' + source + '_damage'].values.add(damage.max);
+                    } 
+
+                    // TODO combine ele damage
+                    if (!damage.isZero()) {
+                        local_stats[source.ucfirst() + ' Damage'] = damage;
+                    }
+                });
+                
+                // TODO combine ele
+                
+                // apply increases
+                local_stats['Physical Damage'] 
+                    = Item.applyStat(local_stats['Physical Damage'],
+                                     stats['local_physical_damage_+%'],
+                                     0);
+                
+                // Crit
                 local_stats['Critical Strike Chance'] 
                     = Item.applyStat(+this.entry.getProp('Critical') / 100,
                                      stats['local_critical_strike_chance_+%'],
                                      2).toString() + "%";
-
+                                    
+                // APS
                 local_stats['Attacks Per Second'] 
-                    = 1000 / +this.entry.getProp("Speed");
-            
-                local_stats['Physical Damage'] 
-                    = Item.applyStat(new ValueRange(+this.entry.getProp("DamageMin"),
-                                                    +this.entry.getProp("DamageMax")),
-                                     stats['local_physical_damage_+%'],
-                                     0);
+                    = Item.applyStat(1000 / +this.entry.getProp("Speed"),
+                                     stats['local_attack_speed_+%'],
+                                     2);
             } else if (this.meta_data.isA('AbstractArmour')) {
-                
+                var that = this;
+                // defences
+                $.each({
+                    // ComponentArmour => stat_name
+                    Armour: "physical_damage_reduction",
+                    Evasion: "evasion",
+                    EnergyShield: "energy_shield"
+                }, function (component, stat) {
+                    // inital value
+                    local_stats[component] = new ValueRange(+that.entry.getProp(component),
+                                                            +that.entry.getProp(component));
+                    
+                    // added flat
+                    if (stats['local_base_' + stat + '_rating']) {
+                        local_stats[component] = local_stats[component].add(stats['local_base_' + stat + '_rating'].values);
+                    }
+                    
+                    // increase
+                    local_stats[component] 
+                        = Item.applyStat(local_stats[component],
+                                         stats['local_' + stat + '_rating_+%'],
+                                         0);
+                    
+                    if (local_stats[component].isZero()) {
+                        delete local_stats[component];
+                    }
+                });
             }
             
+            // TODO color stats
             return local_stats;
         }
     });
     
     this.Item.applyStat = function (value, stat, precision) {
-        if (stat === __undefined) {
-            return value;
-        }
-        
-        // 100% increased := 2 = (100% / 100) + 1
-        var multiplier = stat.values.multiply(1 / 100).add(1);
-        
         var result = null;
-        if (value instanceof ValueRange) {
-            result = value.multiply(multiplier);
+        
+        if (stat === __undefined) {
+            result = value;
         } else {
-            result = multiplier.multiply(value);
+            // 100% increased := 2 = (100% / 100) + 1
+            var multiplier = stat.values.multiply(1 / 100).add(1);
+
+
+            if (value instanceof ValueRange) {
+                result = value.multiply(multiplier);
+            } else {
+                result = multiplier.multiply(value);
+            }
         }
         
         return result.toFixed(precision);

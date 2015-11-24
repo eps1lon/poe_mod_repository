@@ -609,7 +609,7 @@
         
         // test dom handles
         $("#item_classes option:not(.template)").filter(function () {
-            return $(this).text().toLowerCase() === "dagger";
+            return $(this).text().toLowerCase() === "armour";
         }).prop("selected", true);
         $("#item_classes").trigger("change");
         

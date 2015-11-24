@@ -80,6 +80,9 @@
         multiplyValueRange: function (value_range) {
             return new ValueRange(value_range.multiply(this.min), 
                                   value_range.multiply(this.max));
+        },
+        isZero: function () {
+            return this.min === 0 && this.max === 0;
         }
     });
     
