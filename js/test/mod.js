@@ -60,7 +60,9 @@
         }).join(", "));
         
         // stats
-        console.log(baseitem.localStats());
+        $.each(baseitem.localStats(), function (stat_desc, value) {
+            $statsgroup.append("<br>", stat_desc, ": ", "<span class='text-value'>" + value + "</span>");
+        });
         
         // sep
         $(".itembox-stats", $itembox).append($statsgroup);

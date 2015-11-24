@@ -1,4 +1,4 @@
-/* global Mod, MetaData */
+/* global Mod, MetaData, ValueRange, this */
 
 (function (__undefined) {
     /*
@@ -204,16 +204,47 @@
         },
         localStats: function () {
             var stats = this.stats();
+            var local_stats = {};
             
-            if (this.meta_data.isA("AbstractWeapon")) {
-                
-            } else if (this.meta_data.isA("AbstractArmour")) {
+            if (this.meta_data.isA('AbstractWeapon')) {
+                local_stats['Critical Strike Chance'] 
+                    = Item.applyStat(+this.entry.getProp('Critical') / 100,
+                                     stats['local_critical_strike_chance_+%'],
+                                     2).toString() + "%";
+
+                local_stats['Attacks Per Second'] 
+                    = 1000 / +this.entry.getProp("Speed");
+            
+                local_stats['Physical Damage'] 
+                    = Item.applyStat(new ValueRange(+this.entry.getProp("DamageMin"),
+                                                    +this.entry.getProp("DamageMax")),
+                                     stats['local_physical_damage_+%'],
+                                     0);
+            } else if (this.meta_data.isA('AbstractArmour')) {
                 
             }
             
-            return {};
+            return local_stats;
         }
     });
+    
+    this.Item.applyStat = function (value, stat, precision) {
+        if (stat === __undefined) {
+            return value;
+        }
+        
+        // 100% increased := 2 = (100% / 100) + 1
+        var multiplier = stat.values.multiply(1 / 100).add(1);
+        
+        var result = null;
+        if (value instanceof ValueRange) {
+            result = value.multiply(multiplier);
+        } else {
+            result = multiplier.multiply(value);
+        }
+        
+        return result.toFixed(precision);
+    };
     
     this.Item.meta_data = null;
     
