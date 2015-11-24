@@ -57,12 +57,11 @@
             return this.addScalar(value);
         },
         addScalar: function (lambda) {
-            console.log(typeof lambda);
             return new ValueRange(this.min + lambda, this.max + lambda);
         },
         addValueRange: function (value_range) {
-            return new ValueRange(value_range.addScalar(this.min), 
-                                  value_range.addScalar(this.max));
+            return new ValueRange(value_range.add(this.min), 
+                                  value_range.add(this.max));
         },
         equals: function (other_value_range) {
             return other_value_range instanceof ValueRange
@@ -79,8 +78,8 @@
             return new ValueRange(this.min * lambda, this.max * lambda);
         },
         multiplyValueRange: function (value_range) {
-            return new ValueRange(value_range.multiplyScalar(this.min), 
-                                  value_range.multiplyScalar(this.max));
+            return new ValueRange(value_range.multiply(this.min), 
+                                  value_range.multiply(this.max));
         }
     });
     
