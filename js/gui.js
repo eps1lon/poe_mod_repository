@@ -9,20 +9,6 @@
     
     var TAGS = {};
     
-    var underscore_to_human = function (string) {
-        return ucfirst(string
-                        // replace underscore
-                        .replace(/_(\w)/g, function (g) { return " " + g[1].toUpperCase(); }));
-    };
-    
-    var ucfirst = function (string) {
-        var strings = string.split(" ");
-        
-        return [
-            strings[0].toLowerCase().replace(/^([a-z])/, function (g) { return g.toUpperCase(); })
-        ].concat(strings.slice(1)).join(" ");         
-    };
-    
     // template methods
     var create_from_template = function (selector, context) {
         if (context !== undefined) {
@@ -53,11 +39,11 @@
         $(".itemboxheader .baseName", $itembox).text(baseitem.baseName());
         
         // item_class
-        $statsgroup.append(ucfirst(baseitem.itemclassIdent()));
+        $statsgroup.append(baseitem.itemclassIdent().toLowerCase().ucfirst());
         
         // tags
         $statsgroup.append("<br>", $.map(baseitem.getTagsWithProps(tags), function (props) {
-            return underscore_to_human(props.Id);
+            return props.Id.underscoreToHuman();
         }).join(", "));
         
         // stats
@@ -330,6 +316,7 @@
         $table.trigger("sorton",[[[0,1]]]);
     };
         
+    // load data
     $.when(
         $.getJSON("js/data/mods.json", function (json) {
             mods = json;
@@ -365,55 +352,7 @@
                     "loaded " + tags.length + " tags",
                     "loaded " + baseitemtypes.length + " baseitemtypes",
                     "loaded " + stats.length + " stats"); 
-        
-        var ring_tag = TAGS.RING;
-        var amulet_tag = TAGS.AMULET;
-        var transmute = new Transmute(mods);
-        /*
-        var item = new Item();
-        item.addTag(ring_tag);
-        item.addTag(amulet_tag);
-        
-        // test tags
-        console.log("assert tags = [3, 2]", item.getTags());
 
-        // test transmute
-        console.log("assert true", transmute.applyTo(item));
-        console.log("assert false", transmute.applyTo(item));
-        
-        // test addMod tags
-        console.log("assert true", item.addTag(118));
-        console.log("assert tags = [3,2,118]", item.getTags());
-        
-        console.log(item, transmute);
-        
-        // test applyTo
-        var item2 = new Item();
-        console.log("item2", item2);
-        item2.addTag(ring_tag);
-        console.log("transmute.applicableMods", transmute.applicableMods(item2));
-        
-        var no_attack_mods_mod = new Mod($.grep(mods, function (mod) {
-            return mod["ModTypeKey"] == 1225;
-        })[0]);
-        console.log("no_attack_mods_mod", no_attack_mods_mod);
-        
-        //console.log("assert true", item2.addMod(no_attack_mods_mod));
-        console.log("item2.tags", item2.getTags());
-        console.log("transmute.applyTo(item2) assert true", transmute.applyTo(item2));
-        console.log("item2", item2);
-        
-        
-        // test itemfactory
-        var bow = new ItemClass("BOW");
-        console.log("bow", bow);
-        console.log("transmute.applicableMods(bow)", $.unique($.map($.grep(transmute.applicableMods(bow), function (mod) {
-            return mod.mod.suffix();
-        }), function (mod) {
-            //return mod.mod;
-            return mod.mod.getProp("CorrectGroup");
-        })));*/
-        
         // persistence vars
         var mod_generator = null;
         var baseitem = null;
