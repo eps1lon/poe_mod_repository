@@ -2,7 +2,7 @@
 
 (function (__undefined) {
     /*
-     * abstract Class ModGenerator
+     * abstract Class ModGenerator implements Applicable
      */
     this.ModGenerator = Class.extend({
         /**
@@ -31,6 +31,8 @@
                 });
             }
             
+            // Applicable
+            this.applicable_byte = Applicable.UNSCANNED;
         },
         /**
          * abstract
@@ -42,11 +44,38 @@
         },
         /**
          * 
-         * @returns {Array}
+         * @returns {Array[Mod]}
          */
         getAvailableMods: function () {
             return this.available_mods.slice();
+        },
+        mods: function (mod_container, success) {
+            return this.getAvailableMods();
+        },
+        map: function (mod_container, success) {
+            
+        },
+        /**
+         * abstract
+         * @param {ModContainer} mod_container
+         * @returns {Boolean}
+         */
+        applicableTo: function (mod_container) {
+            return false;
+        },
+        resetApplicable: function () {
+            this.applicable_byte = Applicable.UNSCANNED;
+        },
+        /**
+         * abstract
+         * @returns {String}
+         */
+        applicableByteHuman: function () {
+            return 'abstract';
+        },
+        applicableCached: function () {
+            return this.applicable_byte;
         }
-    });
+    }); 
 })();
 

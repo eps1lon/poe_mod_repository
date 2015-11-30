@@ -1,3 +1,5 @@
+/* global this */
+
 (function (__undefined) {
     this.ModGeneratorFactory = Class.extend({});
     
@@ -11,7 +13,6 @@
     };
     
     this.ModGeneratorFactory.GENERATORS = {
-        /*
         TRANSMUTE: {
             klass: "Transmute",
             name: "Orb of Transmutation",
@@ -21,6 +22,7 @@
                 "Right click this item then left click a normal item to apply"
             ]
         },
+        /*
         AUGMENT: {
             klass: "Augment",
             name: "Orb of Augmentation",

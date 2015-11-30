@@ -1,4 +1,4 @@
-/* global Mod, MasterMod, ApplicableMod */
+/* global Mod, MasterMod, ApplicableMod, Spawnable, Item */
 
 (function (__undefined) {
     /**
@@ -46,6 +46,37 @@
         },
         applyTo: function (mod_container) {
             return false;
+        },
+        map: function (baseitem, success) {
+            // simulate showcase
+            var old_rarity = baseitem.rarity;
+            baseitem.rarity = Item.RARITY.SHOWCASE;
+            
+            var mods = $.map(this.getAvailableMods(), function (mod) {
+                mod.applicableTo(baseitem, success);
+                
+                if (Spawnable.implementedBy(mod)) {
+                    mod.spawnableOn(baseitem, success);
+                }
+                
+                return mod;
+            });
+            
+            baseitem.rarity = old_rarity;
+            return mods;
+        },
+        mods: function (baseitem, success) {
+            // simulate showcase
+            var old_rarity = baseitem.rarity;
+            baseitem.rarity = Item.RARITY.SHOWCASE;
+            
+            var mods = $.grep(this.getAvailableMods(), function (mod) {
+                return mod.applicableTo(baseitem, success)
+                        && (!Spawnable.implementedBy(mod) || mod.spawnableOn(baseitem));
+            });
+            
+            baseitem.rarity = old_rarity;
+            return mods;
         }
     });
 })();

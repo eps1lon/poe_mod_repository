@@ -122,22 +122,15 @@
             return false;
         }
         
-        baseitem.rarity = Item.RARITY.SHOWCASE;
-        
         // filter
         var whitelist = ApplicableMod.APPLICABLE_BYTE.LOWER_ILVL
                         | ApplicableMod.APPLICABLE_BYTE.DOMAIN_FULL
                         | ApplicableMod.APPLICABLE_BYTE.ALREADY_PRESENT;
-        var applicable_mods = Applicable.mods(mod_generator.getAvailableMods(), 
-                                              baseitem, 
-                                              whitelist);
         
         // implements Spawnable?
-        var whitelist_spawnable = 0;
-
-        applicable_mods = Spawnable.mods(applicable_mods, 
-                                         baseitem, 
-                                         whitelist_spawnable);
+        var whitelist_spawnable = Spawnable.SUCCESS;
+        
+        var applicable_mods = mod_generator.mods(baseitem, whitelist | whitelist_spawnable);
         
         // mod groups
         var prefixes = Spawnable.calculateSpawnchance($.grep(applicable_mods, function (mod) {
@@ -556,10 +549,10 @@
         $("#baseitems option:not(.template)").filter(":first").prop("selected", true);
         $("#baseitems").trigger("change");
         
-        $("#mod_generators option:not(.template)").filter(":nth-of-type(3)").prop("selected", true);
+        $("#mod_generators option:not(.template)").filter(":nth-of-type(2)").prop("selected", true);
         $("#mod_generators").trigger("change");
 
-        $("#prefixes tbody:not(.template) .add_mod:first").trigger("click");
+        //$("#prefixes tbody:not(.template) .add_mod:first").trigger("click");
         
         //$("#use_mod_gen").trigger("click");
     });
