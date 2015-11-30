@@ -31,7 +31,7 @@
                 "Enchants a magic item with a new random property",
                 "Right click this item then left click a normal item to apply"
             ]
-        },
+        },//*/
         SCOURING: {
             klass: "Scouring",
             name: "Orb of Scouring",
@@ -40,7 +40,7 @@
                 "Removes all properties from an item",
                 "Right click this item then left click a normal item to apply"
             ]
-        },//*/
+        },
         Currency: {
             klass: "Currency",
             name: "Orb of Testing",
