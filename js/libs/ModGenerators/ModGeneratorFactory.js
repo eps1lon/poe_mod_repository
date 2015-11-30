@@ -49,6 +49,15 @@
                 "Right click this item then left click a magic item to apply it. Current properties are retained and a new one is added."
             ]
         },
+        EXALTED: {
+            klass: "Exalted",
+            name: "Exalted Orb",
+            stats: [
+                "Currency",
+                "Enchants a rare item with a new random property",
+                "Right click this item then left click a rare item to apply it. Rare items can have up to six random properties."
+            ]
+        },
         ItemShowcase: {
             klass: "ItemShowcase",
             name: "Showcase",
