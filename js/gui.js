@@ -351,7 +351,7 @@
         var baseitem = null;
         
         var get_selected_mod_generator = function () {
-            return ModGeneratorFactory.build($("#mod_generators option:selected").data("ident"), mods);
+            return ModGeneratorFactory.build($("input.ModGenerator:radio:checked").val(), mods);
         };
         
         var get_selected_baseitem = function () {
@@ -432,19 +432,9 @@
             display_baseitem(baseitem, "#used_baseitem");
             display_available_mods(mod_generator, baseitem);          
         }); 
-        
-        // display generators
-        $.each(ModGeneratorFactory.GENERATORS, function (ident, generator) {
-            var $option = create_from_template("#mod_generators option");
-            
-            $option.text(generator.name);
-            $option.data("ident", ident);
-            
-            $option.appendTo("#mod_generators");
-        });
-        
+         
         // change modgen handle
-        $("#mod_generators").on("change", function () {
+        $("input.ModGenerator:radio").on("change", function () {
             // persistence
             mod_generator = get_selected_mod_generator();
             
@@ -537,8 +527,8 @@
         $("#baseitems option:not(.template)").filter(":first").prop("selected", true);
         $("#baseitems").trigger("change");
         
-        $("#mod_generators option:not(.template)").filter(":nth-of-type(2)").prop("selected", true);
-        $("#mod_generators").trigger("change");
+        $("input.ModGenerator:radio").filter(":first").prop("checked", true);
+        $("input.ModGenerator:radio").filter(":checked").trigger("change");
 
         //$("#prefixes tbody:not(.template) .add_mod:first").trigger("click");
         

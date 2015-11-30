@@ -84,3 +84,27 @@ th.correct_group {
 .crafted-mod, .mod.MasterMod .stats, .mod.EnchantMod .stats{
     color: #B8DAF2;
 }
+
+#currencies {
+    list-style: none;
+    padding: 0px;
+}
+
+#currencies li {
+    display: inline-block;
+}
+
+#currencies li * {
+    display: block;
+}
+
+#currencies li input {
+    display: block;
+    margin: 0px auto;
+}
+
+
+#currencies img {
+    width: 48px;
+    height: 48px;
+}

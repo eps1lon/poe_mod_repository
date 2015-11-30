@@ -58,7 +58,7 @@
                 "Right click this item then left click a rare item to apply it. Rare items can have up to six random properties."
             ]
         },
-        ItemShowcase: {
+        ITEMSHOWCASE: {
             klass: "ItemShowcase",
             name: "Showcase",
             stats: [
