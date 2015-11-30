@@ -1,25 +1,47 @@
-/* global Mod, ModGenerator, Item */
+/* global Mod, Item, this, Transmute, Applicable, ByteSet, Currency */
 
 (function (__undefined) {
-    this.Augment = ModGenerator.extend({
+    this.Augment = Currency.extend({
         init: function (all_mods) {
-            this._super(new Transmute(all_mods).available_mods);
+            this._super(all_mods, Transmute.mod_filter);
         },
-        applyTo: function (mod_container) { 
-            if (mod_container.rarity === Item.rarity.MAGIC) {
-                if (mod_container.addMod(this.chooseApplicableMod(mod_container))) {
-                    return true;
-                }
-                
-                throw new ModGeneratorException("already prefix and suffix");
-                
-                return false;
+        applyTo: function (item) { 
+            if (this.applicableTo(item)) {
+                item.addMod(this.chooseMod(item));
+            }
+        },
+        applicableTo: function (baseitem, success) {
+            this._super(baseitem, success);
+            // remove SUCCESS byte
+            this.applicable_byte &= ~Applicable.SUCCESS;
+            
+            if (success === __undefined) {
+                success = Applicable.SUCCESS;
+            } else {
+                success |= Applicable.SUCCESS;
             }
             
-            // TODO augment ingame msg when not white
-            throw new ModGeneratorException("not magic rarity");
+            if (baseitem.rarity !== Item.RARITY.MAGIC) {
+                this.applicable_byte |= Transmute.APPLICABLE_BYTE.NOT_MAGIC;
+            }
             
-            return false;
+            if (!this.applicable_byte) {
+                this.applicable_byte = Applicable.SUCCESS;         
+            }
+            
+            return !!(this.applicable_byte & success);
+        },
+        applicableByteHuman: function () {
+            return ByteSet.human(this.applicable_byte, Augment.APPLICABLE_BYTE, Augment.APPLICABLE_BYTE.SUCCESS);
         }
     });
+    
+    this.Augment.APPLICABLE_BYTE = {
+        // Currency
+        UNSCANNED: 0,
+        SUCCESS: 1,
+        NOT_AN_ITEM: 2,
+        // extended
+        NOT_MAGIC: 4
+    };
 })();
