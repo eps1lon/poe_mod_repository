@@ -29,7 +29,10 @@
         
         var $itembox = create_from_template(".itembox");
         
-        $itembox.addClass(baseitem.rarityIdent());
+        // rarity
+        var rarity_ident = baseitem.rarityIdent();
+        $itembox.addClass(rarity_ident);
+        $("#item_rarities option[value='" + rarity_ident.toUpperCase() + "']").prop("selected", true);
         
         var $statsgroup_template = create_from_template(".itembox-statsgroup", $itembox);
         var $statsgroup = $statsgroup_template.clone();
@@ -515,6 +518,14 @@
         $("input.ilvl").on("change", function () {
             baseitem.item_level = +$(this).val();
             
+            display_available_mods(mod_generator, baseitem);
+        });
+        
+        // rarity handle
+        $("#item_rarities").on("change", function () {
+            baseitem.rarity = Item.RARITY[$("option:selected", this).val()];
+            
+            display_baseitem(baseitem, "#used_baseitem");
             display_available_mods(mod_generator, baseitem);
         });
         
