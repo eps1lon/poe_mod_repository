@@ -1,4 +1,4 @@
-/* global Mod, MetaData, ValueRange, this */
+/* global Mod, MetaData, ValueRange, this, ModContainer */
 
 (function (__undefined) {
     /*

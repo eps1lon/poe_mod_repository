@@ -75,6 +75,13 @@
         },
         applicableCached: function () {
             return this.applicable_byte;
+        },
+        chooseMod: function (baseitem) {
+            
+            var mods = this.mods(baseitem);
+           
+            // TODO spawnweight
+            return mods[Math.floor(Math.random() * (mods.length - 1))];
         }
     }); 
 })();

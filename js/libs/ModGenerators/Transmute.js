@@ -5,33 +5,17 @@
         init: function (all_mods) {
             this._super(all_mods, Transmute.mod_filter);
         },
-        applyTo: function (mod_container) {
-            // TODO deprecated
-            if (mod_container.rarity === Item.rarity.NORMAL) {
-                // change to magic
-                mod_container.rarity = Item.rarity.MAGIC;
-
-                // add one affix
-                if (mod_container.addMod(this.chooseApplicableMod(mod_container))) {
-                    // and maybe another
-                    // TODO transmute rolls for number of affixes?
-                    if (Math.random() <= 0.5) {
-                        mod_container.addMod(this.chooseApplicableMod(mod_container));
-                    }
-                    return true;
-                }
-                // something went wrong revert to old rarity
-                mod_container.rarity = Item.rarity.NORMAL;
+        applyTo: function (item) {
+            if (this.applicableTo(item)) {
+                var mod = this.chooseMod(item);
                 
-                throw new ModGeneratorException("no applicable mods found");
+                // TODO 2 mods
                 
-                return false;
+                // upgrade to rare
+                item.rarity = Item.RARITY.MAGIC;
+                
+                item.addMod(mod);
             }
-            
-            // TODO transmute ingame msg when not white
-            throw new ModGeneratorException("not normal rarity");
-            
-            return false;
         },
         map: function (item, success) {
             if (this.applicableTo(item)) {
@@ -46,7 +30,6 @@
             return [];
         },
         mods: function (item, success) {
-            console.log(this.applicableTo(item), this.applicable_byte);
             if (this.applicableTo(item)) {
                 // simulate upgrade
                 item.rarity = Item.RARITY.MAGIC;
@@ -65,6 +48,8 @@
          */
         applicableTo: function (baseitem, success) {
             this._super(baseitem, success);
+            // remove SUCCESS byte
+            this.applicable_byte &= ~Applicable.SUCCESS;
             
             if (success === __undefined) {
                 success = Applicable.SUCCESS;

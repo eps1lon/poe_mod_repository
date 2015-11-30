@@ -461,29 +461,17 @@
                 return false;
             }
             
-            if (!(baseitem instanceof BaseItem)) {
-                console.log("baseitem needs to be of type BaseItem");
+            if (!(baseitem instanceof Item)) {
+                console.log("baseitem needs to be of type Item");
                 return false;
             }
             
             // apply
             mod_generator.applyTo(baseitem);
-            /*
-            try {
-                mod_generator.applyTo(baseitem);
-            } catch (e) {
-                if (e instanceof ModGeneratorException) {
-                    console.log("ModGeneratorException", e.message);
-                } else {
-                    console.trace(e);
-                }
-                
-                return false;
-            }//*/
-            
             
             // display
-            display_baseitem(baseitem);
+            display_baseitem(baseitem, "#used_baseitem");
+            display_available_mods(mod_generator, baseitem);
             
             return true;
         });
@@ -554,7 +542,7 @@
 
         //$("#prefixes tbody:not(.template) .add_mod:first").trigger("click");
         
-        //$("#use_mod_gen").trigger("click");
+        $("#use_mod_gen").trigger("click");
     });
 })();
 
