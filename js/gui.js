@@ -311,6 +311,26 @@
         // sort on ilvl desc
         $table.trigger("sorton",[[[0,1]]]);
     };
+    
+    var display_mod_gen_applicability = function (baseitem, all_mods) {
+        if (!(baseitem instanceof Item)) {
+            return false;
+        }
+        
+        $(".applicable input.ModGenerator:radio").each(function () {
+            var $this = $(this);
+            var $applicable = $this.parents(".applicable");
+            var mod_generator = ModGeneratorFactory.build($this.val(), all_mods);
+            
+            if (!mod_generator.applicableTo(baseitem)) {
+                $this.prop("disabled", true);
+            }
+            var applicable_byte = mod_generator.applicableByteHuman();
+
+            $applicable.attr("title", applicable_byte.strings.join(" and "));
+            $applicable.attr("data-applicable_byte", applicable_byte.bits.join("-"));
+        });
+    };
         
     // load data
     $.when(
@@ -433,7 +453,8 @@
             
             // update gui
             display_baseitem(baseitem, "#used_baseitem");
-            display_available_mods(mod_generator, baseitem);          
+            display_available_mods(mod_generator, baseitem);  
+            display_mod_gen_applicability(baseitem, mods);
         }); 
          
         // change modgen handle
@@ -460,12 +481,13 @@
             }
             
             // apply
-            mod_generator.applyTo(baseitem);
-            
-            // display
-            display_baseitem(baseitem, "#used_baseitem");
-            display_available_mods(mod_generator, baseitem);
-            
+            if (mod_generator.applyTo(baseitem)) {
+                // display
+                display_baseitem(baseitem, "#used_baseitem");
+                display_available_mods(mod_generator, baseitem);
+                display_mod_gen_applicability(baseitem, mods);
+            }
+
             return true;
         });
         
@@ -497,8 +519,8 @@
             
             if (baseitem.addMod(mod)) {
                 display_baseitem(baseitem, "#used_baseitem");
-                
                 display_available_mods(mod_generator, baseitem);
+                display_mod_gen_applicability(baseitem, mods);
             } else {
                 // TODO flash error
             }
@@ -527,6 +549,7 @@
             
             display_baseitem(baseitem, "#used_baseitem");
             display_available_mods(mod_generator, baseitem);
+            display_mod_gen_applicability(baseitem, mods);
         });
         
         // test dom handles

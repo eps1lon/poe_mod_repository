@@ -37,6 +37,9 @@
         <script src="js/libs/mods/MasterMod.js"></script>
         <script src="js/libs/mods/ModFactory.js"></script>
         
+        <script src="js/libs/ModContainers/ModContainer.js"></script>
+        <script src="js/libs/ModContainers/Item.js"></script>
+        
         <script src="js/libs/ModGenerators/ModGenerator.js"></script>
         <script src="js/libs/ModGenerators/Currency.js"></script>
         <script src="js/libs/ModGenerators/Transmute.js"></script>
@@ -46,9 +49,6 @@
         <script src="js/libs/ModGenerators/Regal.js"></script>
         <script src="js/libs/ModGenerators/Exalted.js"></script>
         <script src="js/libs/ModGenerators/ModGeneratorFactory.js"></script>
-        
-        <script src="js/libs/ModContainers/ModContainer.js"></script>
-        <script src="js/libs/ModContainers/Item.js"></script>
         
         <script src="js/gui.js"></script>
     </head>
@@ -102,37 +102,37 @@
             
             <h3>Currencies</h3>
             <ul id="currencies" class="mod_generators">
-                <li>
+                <li class="applicable">
                     <label for="mod_generator_transmute">
-                        <img class="itemimg1x1" src="http://webcdn.pathofexile.com/image/Art/2DItems/Currency/CurrencyUpgradeToMagic.png" alt="Orb of Transmutation" title="Orb of Transmutation">
+                        <img class="itemimg1x1" src="http://webcdn.pathofexile.com/image/Art/2DItems/Currency/CurrencyUpgradeToMagic.png" alt="Orb of Transmutation">
                     </label>
                     <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_transmute" value="TRANSMUTE">
                 </li>
                 
-                <li>
+                <li class="applicable">
                     <label for="mod_generator_augment">
-                        <img class="itemimg1x1" src="http://webcdn.pathofexile.com/image/Art/2DItems/Currency/CurrencyAddModToMagic.png" alt="Orb of Augmentation" title="Orb of Augmentation">
+                        <img class="itemimg1x1" src="http://webcdn.pathofexile.com/image/Art/2DItems/Currency/CurrencyAddModToMagic.png" alt="Orb of Augmentation">
                     </label>
                     <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_augment" value="AUGMENT">
                 </li>
                 
-                <li>
+                <li class="applicable">
                     <label for="mod_generator_regal">
-                        <img class="itemimg1x1" src="http://webcdn.pathofexile.com/image/Art/2DItems/Currency/CurrencyUpgradeMagicToRare.png" alt="Regal Orb" title="Regal Orb">
+                        <img class="itemimg1x1" src="http://webcdn.pathofexile.com/image/Art/2DItems/Currency/CurrencyUpgradeMagicToRare.png" alt="Regal Orb">
                     </label>
                     <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_regal" value="REGAL">
                 </li>
                 
-                <li>
+                <li class="applicable">
                     <label for="mod_generator_exalted">
-                        <img class="itemimg1x1" src="http://webcdn.pathofexile.com/image/Art/2DItems/Currency/CurrencyAddModToRare.png" alt="Exalted Orb" title="Exalted Orb">
+                        <img class="itemimg1x1" src="http://webcdn.pathofexile.com/image/Art/2DItems/Currency/CurrencyAddModToRare.png" alt="Exalted Orb">
                     </label>
                     <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_exalted" value="EXALTED">
                 </li>
                 
-                <li>
+                <li class="applicable">
                     <label for="mod_generator_scouring">
-                        <img class="itemimg1x1" src="http://webcdn.pathofexile.com/image/Art/2DItems/Currency/CurrencyConvertToNormal.png" alt="Orb of Scouring" title="Orb of Scouring">
+                        <img class="itemimg1x1" src="http://webcdn.pathofexile.com/image/Art/2DItems/Currency/CurrencyConvertToNormal.png" alt="Orb of Scouring">
                     </label>
                     <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_scouring" value="SCOURING">
                 </li>

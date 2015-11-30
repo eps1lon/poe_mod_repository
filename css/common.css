@@ -74,6 +74,14 @@ th.correct_group {
 .applicable[data-applicable_byte^="256"] {
 }
 
+#ModGenerator .applicable[data-applicable_byte]:not([data-applicable_byte=""]) {
+    
+}
+
+#ModGenerator .applicable[data-applicable_byte]:not([data-applicable_byte=""]) * {
+    opacity: .4;
+}
+
 .itembox input.ilvl {
     width: 3em;
 }
