@@ -22,7 +22,7 @@
             }
             
             if (baseitem.rarity !== Item.RARITY.MAGIC) {
-                this.applicable_byte |= Transmute.APPLICABLE_BYTE.NOT_MAGIC;
+                this.applicable_byte |= Augment.APPLICABLE_BYTE.NOT_MAGIC;
             }
             
             if (!this.applicable_byte) {
