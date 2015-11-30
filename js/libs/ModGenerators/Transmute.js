@@ -3,17 +3,7 @@
 (function (__undefined) {
     this.Transmute = Currency.extend({
         init: function (all_mods) {
-            this._super(all_mods);
-        },
-        mapApplicable: function (mod_container) {
-            var old_rarity = mod_container.rarity;
-            
-            // simulate applicable mods as blue item
-            mod_container.rarity = Item.rarity.MAGIC;
-            var applicable_mods = this._super(mod_container);
-            mod_container.rarity = old_rarity;
-            
-            return applicable_mods;
+            this._super(all_mods, Transmute.mod_filter);
         },
         applyTo: function (mod_container) {
             if (mod_container.rarity === Item.rarity.NORMAL) {
@@ -43,4 +33,9 @@
             return false;
         }
     });
+    
+    this.Transmute.mod_filter = function (mod_props) {
+        // prefix/suffix only
+        return [Mod.MOD_TYPE.PREFIX, Mod.MOD_TYPE.SUFFIX].indexOf(+mod_props["GenerationType"]) !== -1;
+    };
 })();
