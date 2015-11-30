@@ -11,8 +11,9 @@
                 item.rarity = Item.RARITY.MAGIC;
 
                 item.addMod(this.chooseMod(item));
-                // TODO 2 mods always?
-                item.addMod(this.chooseMod(item));
+                if (Math.random() <= 0.5) {
+                    item.addMod(this.chooseMod(item));
+                }
             }
         },
         map: function (item, success) {
