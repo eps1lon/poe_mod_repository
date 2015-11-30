@@ -7,39 +7,33 @@
         },
         applyTo: function (item) {
             if (this.applicableTo(item)) {
-                var mod = this.chooseMod(item);
-                
-                // TODO 2 mods
-                
                 // upgrade to rare
                 item.rarity = Item.RARITY.MAGIC;
-                
-                item.addMod(mod);
+
+                item.addMod(this.chooseMod(item));
+                // TODO 2 mods always?
+                item.addMod(this.chooseMod(item));
             }
         },
         map: function (item, success) {
-            if (this.applicableTo(item)) {
-                // simulate upgrade
-                item.rarity = Item.RARITY.MAGIC;
-                var mods = this._super(item, success);
-                item.rarity = Item.RARITY.NORMAL;
-                
-                return mods;
-            }
+            // simulate upgrade
+            var old_rarity = item.rarity;
+            item.rarity = Item.RARITY.MAGIC;
+            var mods = this._super(item, success);
+            item.rarity = old_rarity;
+
+            return mods;
             
             return [];
         },
         mods: function (item, success) {
-            if (this.applicableTo(item)) {
-                // simulate upgrade
-                item.rarity = Item.RARITY.MAGIC;
-                var mods = this._super(item, success);
-                item.rarity = Item.RARITY.NORMAL;
-                
-                return mods;
-            }
-            
-            return [];
+            // simulate upgrade
+            var old_rarity = item.rarity;
+            item.rarity = Item.RARITY.MAGIC;
+            var mods = this._super(item, success);
+            item.rarity = old_rarity;
+
+            return mods;
         },
         /**
          * 
