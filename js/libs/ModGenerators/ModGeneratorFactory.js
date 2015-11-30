@@ -40,6 +40,15 @@
                 "Right click this item then left click a normal item to apply"
             ]
         },
+        REGAL: {
+            klass: "Regal",
+            name: "Regal Orb",
+            stats: [
+                "Currency",
+                "Upgrades a magic item to a rare item",
+                "Right click this item then left click a magic item to apply it. Current properties are retained and a new one is added."
+            ]
+        },
         ItemShowcase: {
             klass: "ItemShowcase",
             name: "Showcase",

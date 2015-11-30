@@ -142,7 +142,7 @@
                     
                     return name;
                 case Item.RARITY.RARE:
-                    return "Random Name + " + this.base_name();
+                    return "Random Name + " + this.baseName();
             }
             return '';
         },
