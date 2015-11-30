@@ -10,8 +10,9 @@
                 // upgrade to rare
                 item.rarity = Item.RARITY.RARE;
 
-                item.addMod(this.chooseMod(item));
+                return item.addMod(this.chooseMod(item));
             }
+            return false;
         },
         map: function (item, success) {
             // simulate upgrade

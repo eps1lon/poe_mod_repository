@@ -14,7 +14,11 @@
                 if (Math.random() <= 0.5) {
                     item.addMod(this.chooseMod(item));
                 }
+                
+                return true;
             }
+            
+            return false;
         },
         map: function (item, success) {
             // simulate upgrade

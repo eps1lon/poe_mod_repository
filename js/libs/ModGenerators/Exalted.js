@@ -7,8 +7,9 @@
         },
         applyTo: function (item) { 
             if (this.applicableTo(item)) {
-                item.addMod(this.chooseMod(item));
+                return item.addMod(this.chooseMod(item));
             }
+            return false;
         },
         applicableTo: function (baseitem, success) {
             this._super(baseitem, success);
