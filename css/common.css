@@ -3,6 +3,27 @@
     Author     : eps1lon
 */
 
+body {
+    background: #000;
+    color: #a38d6d;
+    fonz-size: 13px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+#Item, #ModGenerator {
+    float: left;
+}
+
+#ModGenerator {
+    margin-left: 1em;
+    padding-left: 1em;
+    border-left: 2px dashed #ff7;
+}
+
+#available_mods {
+    clear: both;
+}
+
 .correct_group, #implicits caption {
     cursor: pointer;
 }
@@ -13,10 +34,6 @@
 
 th.correct_group {
     text-align: left;
-}
-
-.mod[data-mod-gen-exception-ident] td {
-    background-color: red;
 }
 
 #available_mods {
@@ -43,8 +60,8 @@ th.correct_group {
     text-decoration: line-through;
 }
 
-.legend {
-    display: inline-block;
+#legends {
+    display: none;
 }
 
 .applicable[title]:not([title=""]) {

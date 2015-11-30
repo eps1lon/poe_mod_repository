@@ -54,7 +54,6 @@
     </head>
     <body>
         <h1>PoE Crafting Simulator</h1>
-        <p>or why we cant have nice things</p>
         
         <div class="template itembox">
             <label class="ilvl template">iLvl: </label>
@@ -78,27 +77,26 @@
                 </li>
             </ul>
         </div>
-        
-        <h2>BaseItem</h2>
-        <section id="BaseItem">
-            <h3>ItemClass</h3>
-            <p>choose ItemClass</p>
+
+        <section id="Item">
+            <h2>Item</h2>
+            
+            <label for="item_classes">Itemclass</label>
             <select id="item_classes">
                 <option class="template"></option>
             </select>
             
-            <p>choose BaseItem</p>
+            <label for="baseitems">Base</label>
             <select id="baseitems">
                 <option class="template"></option>
             </select>
             
-            <h3>Used BaseItems</h3>
+            <h3>Preview</h3>
             <div id="used_baseitem"></div>
         </section>
-        
-        <h2>ModGenerator</h2>
+
         <section id="ModGenerator">
-            
+            <h2>Options</h2>
             <label for="mod_generator_showcase">All Affixes</label>
             <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_showcase" value="ITEMSHOWCASE">
             
@@ -144,11 +142,9 @@
             
             <button id="use_mod_gen" type="button">Use</button>
         </section>
-        
-        
-        
-        <h3>available Mods</h3>
+
         <section id="available_mods">
+            <h3>available Mods</h3>
             <table id="implicits" class="mods sortable">
                 <caption id="implicits-caption">implicits</caption>
                 <thead>
@@ -220,18 +216,23 @@
                 </tbody>
             </table>
         </section>
-        <ul class="legend" id="applicable_legend">
-            <li class="applicable">SUCCESS</li>
-            <li class="applicable" data-applicable_byte="2">DOMAIN_FULL</li>
-            <li class="applicable" data-applicable_byte="4">ALREADY_PRESENT</li>
-            <li class="applicable" data-applicable_byte="8">WRONG_DOMAIN</li>
-            <li class="applicable" data-applicable_byte="16">LOWER_ILVL</li>
-        </ul>
         
-        <ul class="legend" id="spawnable_legend">
-            <li class="spawnable">SUCCESS</li>
-            <li class="spawnable" data-spawnable_byte="2">NO_MATCHING_TAGS</li>
-            <li class="spawnable" data-spawnable_byte="4">SPAWNWEIGHT_ZERO</li>
-        </ul>
+        <div id="legends">
+            <h4>Criteria</h4>
+            <ul class="legend applicable RollableMod">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">No more Space for mods of this type</li>
+                <li class="applicable" data-applicable_byte="4">Modgroup already exists</li>
+                <li class="applicable" data-applicable_byte="8">Mod not applicable to this Item</li>
+                <li class="applicable" data-applicable_byte="16">iLvl to low</li>
+            </ul>
+
+            <ul class="legend spawnable RollableMod">
+                <li class="spawnable">Success</li>
+                <li class="spawnable" data-spawnable_byte="2">No matching tags</li>
+                <li class="spawnable" data-spawnable_byte="4">Spawnchance is zero</li>
+            </ul>
+        </div>
+        
     </body>
 </html>
