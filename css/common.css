@@ -34,6 +34,8 @@ body {
 
 th.correct_group {
     text-align: left;
+    font-weight: normal;
+    font-style: italic;
 }
 
 #available_mods {
@@ -128,8 +130,12 @@ th.correct_group {
     margin: 0px auto;
 }
 
-
 #currencies img {
     width: 48px;
     height: 48px;
+}
+
+#masterbenches {
+    list-style: none;
+    padding: 0px;
 }

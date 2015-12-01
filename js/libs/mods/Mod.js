@@ -96,5 +96,8 @@
     this.Mod.localization = null;
     this.Mod.correct_group_localization;
     this.Mod.all_stats = null;
+    
+    // table `mods`
+    this.mods = null;
 })();
 

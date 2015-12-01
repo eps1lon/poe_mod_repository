@@ -53,7 +53,7 @@
             return this.getAvailableMods();
         },
         map: function (mod_container, success) {
-            
+            return this.getAvailableMods();
         },
         /**
          * abstract

@@ -317,7 +317,7 @@
             return false;
         }
         
-        $(".applicable input.ModGenerator:radio").each(function () {
+        $("#currencies .applicable input.ModGenerator:radio").each(function () {
             var $this = $(this);
             var $applicable = $this.parents(".applicable");
             var mod_generator = ModGeneratorFactory.build($this.val(), all_mods);
@@ -336,6 +336,7 @@
     $.when(
         $.getJSON("js/data/mods.json", function (json) {
             mods = json;
+            Mod.mods = mods;
         }),
         $.getJSON("js/data/tags.json", function (json) {
             tags = json;
@@ -374,7 +375,14 @@
         var baseitem = null;
         
         var get_selected_mod_generator = function () {
-            return ModGeneratorFactory.build($("input.ModGenerator:radio:checked").val(), mods);
+            var $mod_generator = $("input.ModGenerator:radio:checked");
+            
+            if ($mod_generator.hasClass("Masterbench")) {
+                return new Masterbench(mods, +$mod_generator.data('npc_master_key'));
+            } else {
+                return ModGeneratorFactory.build($("input.ModGenerator:radio:checked").val(), mods);
+            }
+            
         };
         
         var get_selected_baseitem = function () {
