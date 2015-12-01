@@ -163,6 +163,7 @@
         $("#implicits tbody tr:not(.template)").remove();
         
         // display implicits
+        $("#implicits caption .count").text(implicits.length);
         $.each(implicits, function (_, mod) {
             var $tr = create_from_template("#implicits tbody tr.mod");
             
@@ -243,6 +244,7 @@
         $("tbody:not(.template)", $table).remove();
         
         // display prefix
+        $("caption .count", $table).text(mods.length);
         $.each(mods, function (_, mod) {
             var $mod = create_from_template("tbody.mods.template .mod", $table);
             
