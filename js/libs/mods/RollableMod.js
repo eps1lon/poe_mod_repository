@@ -13,6 +13,9 @@
             
             this.rollable = RollableMod.UNSCANNED;
         },
+        applicableByteHuman: function() {
+            return ByteSet.human(this.applicable_byte, RollableMod.APPLICABLE_BYTE, RollableMod.APPLICABLE_BYTE.SUCCESS, "RollableMod.applicable_byte");
+        },
         spawnableOn: function (mod_container, success) {
             if (success === __undefined) {
                 success = Spawnable.SUCCESS;
@@ -69,7 +72,7 @@
             this.spawnable_byte = Spawnable.UNSCANNED;
         },
         spawnableByteHuman: function() {
-            return ByteSet.human(this.spawnable_byte, RollableMod.SPAWNABLE_BYTE, RollableMod.SPAWNABLE_BYTE.SUCCESS);
+            return ByteSet.human(this.spawnable_byte, RollableMod.SPAWNABLE_BYTE, RollableMod.SPAWNABLE_BYTE.SUCCESS, "RollableMod.spawnable_byte");
         },
         spawnableCached: function () {
             // to bool

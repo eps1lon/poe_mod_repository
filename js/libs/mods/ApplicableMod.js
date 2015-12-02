@@ -54,7 +54,7 @@
             this.applicable_byte = Applicable.UNSCANNED;
         },
         applicableByteHuman: function() {
-            return ByteSet.human(this.applicable_byte, ApplicableMod.APPLICABLE_BYTE, ApplicableMod.APPLICABLE_BYTE.SUCCESS);
+            return ByteSet.human(this.applicable_byte, ApplicableMod.APPLICABLE_BYTE, ApplicableMod.APPLICABLE_BYTE.SUCCESS, "RollableMod.applicable_byte");
         },
         serialize: function () {
             return {

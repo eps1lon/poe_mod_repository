@@ -13,6 +13,7 @@
         <script src="js/libs/jquery/jquery.tablesorter.min.js"></script>
         <script src="js/libs/Inheritance.js"></script>
         
+        <script src="js/libs/concerns/Object.js"></script>
         <script src="js/libs/concerns/String.js"></script>
         <script src="js/libs/concerns/Number.js"></script>
         <script src="js/libs/concerns/ByteSet.js"></script>
@@ -256,7 +257,7 @@
         
         <div id="legends">
             <h4>Criteria</h4>
-            <ul class="legend applicable RollableMod">
+            <ul class="legend applicable RollableMod" data-klass="RollableMod" data-byte-ident="applicable_byte">
                 <li class="applicable">Success</li>
                 <li class="applicable" data-applicable_byte="2">No more Space for mods of this type</li>
                 <li class="applicable" data-applicable_byte="4">Modgroup already exists</li>
@@ -264,7 +265,7 @@
                 <li class="applicable" data-applicable_byte="16">iLvl to low</li>
             </ul>
 
-            <ul class="legend spawnable RollableMod">
+            <ul class="legend spawnable RollableMod" data-klass="RollableMod" data-byte-ident="spawnable_byte">
                 <li class="spawnable">Success</li>
                 <li class="spawnable" data-spawnable_byte="2">No matching tags</li>
                 <li class="spawnable" data-spawnable_byte="4">Spawnchance is zero</li>

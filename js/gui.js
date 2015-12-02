@@ -1,4 +1,4 @@
-/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass, RollableMod, ApplicableMod, MasterMod, baseitem */
+/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass, RollableMod, ApplicableMod, MasterMod, baseitem, ByteSet */
 
 (function (__undefined) {
     // "tables"
@@ -17,7 +17,11 @@
         return $(selector + ".template").clone(true).removeClass("template");
     };
     
-        // assert baseitem typeof BaseItem
+    var localizedByteSetFromLegend = function (klass, byteName, byteHuman) {
+        
+    };
+    
+    // assert baseitem typeof BaseItem
     var display_baseitem = function (baseitem, selector) {
         // assert baseitem typeof BaseItem
         // remove old itembox
@@ -166,6 +170,7 @@
         $("#implicits caption .count").text(implicits.length);
         $.each(implicits, function (_, mod) {
             var $tr = create_from_template("#implicits tbody tr.mod");
+            var serialized = mod.serialize();
             
             // error
             var applicable_byte_human = mod.applicableByteHuman();
@@ -198,7 +203,6 @@
             $(".spawn_chance", $tr).text(mod.humanSpawnchance());
             
             // serialized
-            var serialized = mod.serialize();
             $tr.data("mod", serialized);
             
             // visual
@@ -247,6 +251,7 @@
         $("caption .count", $table).text(mods.length);
         $.each(mods, function (_, mod) {
             var $mod = create_from_template("tbody.mods.template .mod", $table);
+            var serialized = mod.serialize();
             
             // grouping
             var correct_group = mod.getProp("CorrectGroup");
@@ -293,7 +298,6 @@
             $(".stats", $mod).text(mod.t());
             
             // serialize
-            var serialized = mod.serialize();
             $mod.data("mod", serialized);
             
             // possible? TODO better way? maybe scan byte
@@ -384,8 +388,10 @@
             } else {
                 return ModGeneratorFactory.build($("input.ModGenerator:radio:checked").val(), mods);
             }
-            
         };
+        
+        // get localization for byteset
+        ByteSet.initLocalization($("#legends"));
         
         var get_selected_baseitem = function () {
             var baseitem_key = $("#baseitems option:selected").data("baseitem_primary");
