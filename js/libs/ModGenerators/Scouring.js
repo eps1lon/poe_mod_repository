@@ -1,4 +1,4 @@
-/* global Item, ModGenerator, Applicable, this, ByteSet */
+/* global Item, ModGenerator, Applicable, this, ByteSet, Currency, MasterMod */
 
 (function (__undefined) {
     this.Scouring = Currency.extend({
@@ -6,15 +6,32 @@
             this._super([]);
         },
         applyTo: function (item) { 
+            var locked_prefixes, locked_suffixes;
+            var remaining_prefixes, remaining_suffixes;
+            
             if (this.applicableTo(item)) {
-                // TODO affixes cannot be changed
-                // and not necessarily change rarity
-
-                // white item
-                item.rarity = Item.RARITY.NORMAL;
-
-                // without mods
-                item.removeAllMods();
+                locked_prefixes = item.inMods(MasterMod.METAMOD.LOCKED_PREFIXES) !== -1;
+                locked_suffixes = item.inMods(MasterMod.METAMOD.LOCKED_SUFFIXES) !== -1;
+                
+                $.each(item.affixes(), function (_, mod) {
+                     if (mod.isPrefix() && !locked_prefixes) {
+                         item.removeMod(mod);
+                     } else if (mod.isSuffix() && !locked_suffixes) {
+                         item.removeMod(mod);
+                     }
+                });
+                
+                // set correct rarity
+                remaining_prefixes = item.prefixes().length;
+                remaining_suffixes = item.suffixes().length;
+                
+                if (remaining_prefixes === 0 && remaining_suffixes === 0) {
+                    item.rarity = Item.RARITY.NORMAL;
+                } else if (remaining_prefixes > 1 || remaining_suffixes > 1) {
+                    item.rarity = Item.RARITY.RARE;
+                } else {
+                    item.rarity = Item.RARITY.MAGIC;
+                }
 
                 return true;
             }
