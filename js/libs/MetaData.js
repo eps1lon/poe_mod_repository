@@ -1,4 +1,11 @@
+/* global Class, this */
+
 (function (__undefined) {
+    /**
+     * class Metadata
+     * 
+     * representation of a .ot file in METADATA 
+     */
     this.MetaData = Class.extend({
         init: function (clazz, props) {
             this.clazz = clazz;

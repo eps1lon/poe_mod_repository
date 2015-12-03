@@ -39,13 +39,14 @@
         });
     };
     
+    // interface pattern
     this.Spawnable.implementedBy = function (clazz) {
         return  clazz.spawnableOn !== __undefined;
     };
     
     /**
      * 
-     * @param {Array[Spawnable]} spawnables
+     * @param {Array<Spawnable>} spawnables
      * @returns {float}
      */
     this.Spawnable.calculateSpawnchance = function (spawnables) {

@@ -1,6 +1,9 @@
 /* global Class */
 
 (function (__undefined) {
+    /**
+     * interface Applicable
+     */
     this.Applicable = Class.extend({
         init: function () {
             this.applicable_byte = Applicable.SUCCESS;
@@ -34,6 +37,7 @@
         });
     };
     
+    // interface pattern
     this.Applicable.implementedBy = function (clazz) {
         return  clazz.applicableTo !== __undefined;
     };

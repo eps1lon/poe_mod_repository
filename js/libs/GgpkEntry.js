@@ -1,8 +1,18 @@
 (function (__undefined) {
+    /**
+     * table row from content.ggpk
+     */
     this.GgpkEntry = Class.extend({
         init: function (props) {
             this.props = props;
         },
+        /**
+         * comma separated values are arrays
+         * already int cast if possible
+         * 
+         * @param {string} key
+         * @returns {Array}
+         */
         valueAsArray: function (key) {
             // filter(empty) + map(parseInt)
             return $.map(this.getProp(key).split(","), function (n) {

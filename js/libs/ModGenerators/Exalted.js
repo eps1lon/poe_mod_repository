@@ -1,16 +1,38 @@
 /* global Currency, Transmute, Applicable, ByteSet, this, Item */
 
 (function (__undefined) {
+    /**
+     * class Exalted extends Currency
+     * 
+     * ingame representation of Exalted orb
+     */
     this.Exalted = Currency.extend({
+        /**
+         * @constructor
+         * @param {Array} all_mods
+         * @returns {Exalted}
+         */
         init: function (all_mods) {
             this._super(all_mods, Transmute.mod_filter);
         },
+        /**
+         * adds one random property to an item
+         * @param {Item} item
+         * @returns {Boolean}
+         */
         applyTo: function (item) { 
             if (this.applicableTo(item)) {
                 return item.addMod(this.chooseMod(item));
             }
             return false;
         },
+        /**
+         * only applicable to rare items
+         * 
+         * @param {Item} baseitem
+         * @param {byte} success whitelist
+         * @returns {Boolean}
+         */
         applicableTo: function (baseitem, success) {
             this._super(baseitem, success);
             // remove SUCCESS byte
@@ -32,6 +54,10 @@
             
             return !ByteSet.byteBlacklisted(this.applicable_byte, success);
         },
+        /**
+         * 
+         * @returns {ByteSet.human}
+         */
         applicableByteHuman: function () {
             return ByteSet.human(this.applicable_byte, Exalted.APPLICABLE_BYTE, Exalted.APPLICABLE_BYTE.SUCCESS);
         }

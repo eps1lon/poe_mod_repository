@@ -1,16 +1,32 @@
 /* global ApplicableMod, Applicable, this, ByteSet, ModContainer */
 
 (function (__undefined) {
+    /**
+     * class MasterMod extends ApplicableMod
+     * 
+     * mod from a masterbench
+     */
     this.MasterMod = ApplicableMod.extend({
         init: function (mod_props, bench_props) {
             this._super(mod_props);
 
             this.bench = new GgpkEntry(bench_props);
         },
+        /**
+         * modname with basic stats
+         * @returns {String}
+         */
         name: function () {
             return this.getProp("Name") + 
                     "(" + this.bench.getProp("MasterNameShort") + " Level: " + this.bench.getProp("MasterLevel") + ")";
         },
+        /**
+         * applicable logic
+         * 
+         * @param {Item} item
+         * @param {byte} success whitelist
+         * @returns {Boolean}
+         */
         applicableTo: function (item, success) {
             var base_item_classes;
             if (success === __undefined) {

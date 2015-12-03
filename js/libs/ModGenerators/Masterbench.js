@@ -2,9 +2,18 @@
 
 (function (__undefined) {
     /**
-     * Masterbench extends ModGenerator
+     * class Masterbench extends ModGenerator
+     * 
+     * ingame representation of a Craftingbench
      */
     this.Masterbench = ModGenerator.extend({
+        /**
+         * MasterMod.craftingbenchoptions needs to be initialized
+         * @constructor
+         * @param {Array} all_mods
+         * @param {Number} npc_master_key NPCMasterKey column
+         * @returns {Masterbench}
+         */
         init: function (all_mods, npc_master_key) {
             // all options
             // craftingbenchoptions instanceof {} so we cant use grep
@@ -44,6 +53,13 @@
             // possible interface between gui and class
             this.chosen_mod = null;
         },
+        /**
+         * applies a chosen craftingbenchoption
+         * 
+         * @param {Item} baseitem
+         * @param {Number} option_index option_index within this.craftingbenchoptions
+         * @returns {Boolean}
+         */
         applyTo: function (baseitem, option_index) {
             var mod, old_rarity;
             
@@ -79,6 +95,11 @@
             
             return false;
         },
+        /**
+         * every item is welcome
+         * @param {Item} item
+         * @returns {Boolean}
+         */
         applicableTo: function (item) {
             return true;
         },
@@ -88,10 +109,12 @@
                 bits: []
             };
         },
-        chooseMod: function (item) {
-            // todo interface between gui and choosemod
-            return this.getAvailableMods()[0];
-        },
+        /**
+         * greps mod::applicableTo 
+         * @param {Item} baseitem
+         * @param {byte} success whitelist
+         * @returns {Array}
+         */
         mods: function (baseitem, success) {
             // simulate blue if white
             var old_rarity = baseitem.rarity;
@@ -108,6 +131,13 @@
             
             return mods;
         },
+        /**
+         * greps mod::applicableTo
+         * 
+         * @param {Item} baseitem
+         * @param {byte} success whitelist
+         * @returns {Array}
+         */
         map: function (baseitem, success) {
             // simulate blue if white
             var old_rarity = baseitem.rarity;

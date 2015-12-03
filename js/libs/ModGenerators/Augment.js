@@ -1,10 +1,26 @@
 /* global Mod, Item, this, Transmute, Applicable, ByteSet, Currency */
 
 (function (__undefined) {
+    /**
+     * class Augment extends Currency
+     * 
+     * represantation of Orb of Augmentation
+     */
     this.Augment = Currency.extend({
+        /**
+         * @constructor
+         * @param {Array} all_mods
+         * @returns {Augment}
+         */
         init: function (all_mods) {
             this._super(all_mods, Transmute.mod_filter);
         },
+        /**
+         * adds one random property
+         * 
+         * @param {Item} item
+         * @returns {Boolean} @link Item::addMod
+         */
         applyTo: function (item) { 
             if (this.applicableTo(item)) {
                 return item.addMod(this.chooseMod(item));
@@ -12,6 +28,13 @@
             
             return false;
         },
+        /**
+         * item needs to be magic
+         * 
+         * @param {Item} baseitem
+         * @param {Byte} success whitelist
+         * @returns {Boolean}
+         */
         applicableTo: function (baseitem, success) {
             this._super(baseitem, success);
             // remove SUCCESS byte

@@ -1,10 +1,26 @@
 /* global Item, ModGenerator, Applicable, this, ByteSet, Currency, MasterMod */
 
 (function (__undefined) {
+    /**
+     * class Scouring extends @link Currency
+     */
     this.Scouring = Currency.extend({
+        /**
+         * no mods need for Scouring. it does the exact opposite of generating mods
+         * 
+         * @constructor
+         * @returns {Scouring}
+         */
         init: function () {
             this._super([]);
         },
+        /**
+         * applies Orb of Scouring to an item
+         * considers locked affixes metamods
+         * 
+         * @param {Item} item
+         * @returns {Boolean} true on success
+         */
         applyTo: function (item) { 
             var locked_prefixes, locked_suffixes;
             var remaining_prefixes, remaining_suffixes;
@@ -37,6 +53,13 @@
             }
             return false;
         },
+        /**
+         * checks if normal or unique rarity and returns false
+         * 
+         * @param {Item} baseitem
+         * @param {type} success whitelisted @link Scouring.APPLICABLE_BYTE that is considered a success
+         * @returns {Boolean} true on success
+         */
         applicableTo: function (baseitem, success) {
             this._super(baseitem, success);
             // remove SUCCESS byte
@@ -63,11 +86,18 @@
             
             return !ByteSet.byteBlacklisted(this.applicable_byte, success);
         },
+        /**
+         * 
+         * @returns {ByteSet.human}
+         */
         applicableByteHuman: function () {
             return ByteSet.human(this.applicable_byte, Scouring.APPLICABLE_BYTE, Scouring.APPLICABLE_BYTE.SUCCESS);
         }
     });
     
+    /**
+     * failure bits
+     */
     this.Scouring.APPLICABLE_BYTE = {
         // Currency
         UNSCANNED: 0,

@@ -20,6 +20,9 @@
         isAffix: function () {
             return this.isPrefix() || this.isSuffix();
         },
+        /**
+         * @returns {Array<Stat>} all stats from this mod
+         */
         statsJoined: function () {
             var that = this;
             return $.map(this.valueAsArray("Stats"), function (row, i) {
@@ -35,6 +38,10 @@
                 return stat;
             });
         },
+        /**
+         * translates the stats
+         * @returns {String}
+         */
         t: function () {
             var stats = this.statsJoined();
             // TODO maybe check before localizing cause unique on long strings might
@@ -43,6 +50,10 @@
                 return stat.t(stats, Mod.localization);
             })).join("\n");
         },
+        /**
+         * translates the correct group
+         * @returns {String}
+         */
         correctGroupTranslated: function () {
             var correct_group = this.getProp("CorrectGroup");
             var translated = Mod.correct_group_localization[correct_group];
@@ -56,6 +67,10 @@
             
             return translated;
         },
+        /**
+         * string identifier of the generation type
+         * @returns {String}
+         */
         modType: function () {
             var that = this;
             return $.map(Mod.MOD_TYPE, function (mod_type, type_name) {
@@ -69,6 +84,10 @@
         name: function () {
             return this.getProp("Name");
         },
+        /**
+         * unique id for dom
+         * @returns {String}
+         */
         domId: function () {
             return Mod.domId(this.getProp("Rows"));
         }

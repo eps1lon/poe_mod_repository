@@ -1,16 +1,28 @@
-/* global Applicable, ByteSet, this, MasterMod */
+/* global Applicable, ByteSet, this, MasterMod, Mod */
 
 (function (__undefined) {
     /**
-     * Applicable extends Mod impliements Applicable, Serializeable
+     * class Applicable extends Mod impliements Applicable, Serializeable
      */
     this.ApplicableMod = Mod.extend({
+        /**
+         * 
+         * @param {Object} props for GgpkEntry
+         * @returns {undefined}
+         */
         init: function (props) {
             this._super(props);
             
             // Applicable
             this.resetApplicable();
         },
+        /**
+         * applicable logic
+         * 
+         * @param {Item} item
+         * @param {byte} success
+         * @returns {Boolean} true if applicable
+         */
         applicableTo: function (item, success) {
             if (success === __undefined) {
                 success = Applicable.SUCCESS;
@@ -49,15 +61,31 @@
             
             return !ByteSet.byteBlacklisted(this.applicable_byte, success);
         },
+        /**
+         * 
+         * @returns {!ByteSet.byteBlacklisted}
+         */
         applicableCached: function () {
             return !ByteSet.byteBlacklisted(this.applicable_byte, Applicable.SUCCESS);
         },
+        /**
+         * 
+         * @returns {void}
+         */
         resetApplicable: function () {
             this.applicable_byte = Applicable.UNSCANNED;
         },
+        /**
+         * 
+         * @returns {ByteSet.human}
+         */
         applicableByteHuman: function() {
             return ByteSet.human(this.applicable_byte, ApplicableMod.APPLICABLE_BYTE, ApplicableMod.APPLICABLE_BYTE.SUCCESS, "RollableMod.applicable_byte");
         },
+        /**
+         * 
+         * @returns {Object} for Serializeable.deserialize
+         */
         serialize: function () {
             return {
                 klass: "ApplicableMod",

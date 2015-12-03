@@ -1,4 +1,4 @@
-/* global Mod, MasterMod, ApplicableMod, Spawnable, Item */
+/* global Mod, MasterMod, ApplicableMod, Spawnable, Item, ModGenerator */
 
 (function (__undefined) {
     /**
@@ -7,6 +7,11 @@
      * Masterbench/Currency hybrid
      */
     this.ItemShowcase = ModGenerator.extend({
+        /**
+         * 
+         * @param {Array} all_mods
+         * @returns {ItemShowcase}
+         */
         init: function (all_mods) {
             var mods = $.map(all_mods, function (mod) {
                 // only prefix,suffix or implicit
@@ -44,9 +49,23 @@
             
             //console.log(this.getAvailableMods());
         },
+        /**
+         * only abstract showcase, not for actual usage
+         * 
+         * @param {ModContainer} mod_container
+         * @returns {Boolean}
+         */
         applyTo: function (mod_container) {
             return false;
         },
+        /**
+         * maps mod::applicableTo and (if implemented) mod::spawnableOn 
+         * if we have all the space for mods we need
+         * 
+         * @param {Item} baseitem
+         * @param {byte} success whitelist
+         * @returns {Array}
+         */
         map: function (baseitem, success) {
             // simulate showcase
             var old_rarity = baseitem.rarity;
@@ -65,6 +84,14 @@
             baseitem.rarity = old_rarity;
             return mods;
         },
+        /**
+         * greps mod::applicableTo and (if implemented) mod::spawnableOn 
+         * if we have all the space for mods we need
+         * 
+         * @param {Item} baseitem
+         * @param {byte} success whitelist
+         * @returns {Array}
+         */
         mods: function (baseitem, success) {
             // simulate showcase
             var old_rarity = baseitem.rarity;

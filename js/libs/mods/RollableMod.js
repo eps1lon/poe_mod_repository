@@ -2,9 +2,14 @@
 
 (function (__undefined) {
     /**
-     * RollableMod extends ApplicableMod impliements Spawnable
+     * class RollableMod extends ApplicableMod impliements Spawnable
      */
     this.RollableMod = ApplicableMod.extend({
+        /**
+         * 
+         * @param {Object} props for GgpkEntry
+         * @returns {undefined}
+         */
         init: function (props) {
             this._super(props);
             
@@ -13,9 +18,20 @@
             
             this.rollable = RollableMod.UNSCANNED;
         },
+        /**
+         * 
+         * @returns {ByteSet.human}
+         */
         applicableByteHuman: function() {
             return ByteSet.human(this.applicable_byte, RollableMod.APPLICABLE_BYTE, RollableMod.APPLICABLE_BYTE.SUCCESS, "RollableMod.applicable_byte");
         },
+        /**
+         * checks if spawnable and sets the spawnweight
+         * 
+         * @param {ModContainer} mod_container
+         * @param {byte} success whitelist
+         * @returns {Boolean}
+         */
         spawnableOn: function (mod_container, success) {
             if (success === __undefined) {
                 success = Spawnable.SUCCESS;
@@ -47,6 +63,11 @@
             
             return !ByteSet.byteBlacklisted(this.spawnable_byte, success);
         },
+        /**
+         * spawnchance in [%]
+         * @param {Number} precision
+         * @returns {String}
+         */
         humanSpawnchance: function (precision) {
             if (precision === __undefined) {
                 precision = 2;
@@ -82,6 +103,10 @@
             
             return this.rollable;
         },
+        /**
+         * 
+         * @returns {Object} for Serializeable.deserialize
+         */
         serialize: function () {
             return {
                 klass: "RollableMod",

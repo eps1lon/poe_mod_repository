@@ -9,7 +9,8 @@
          * 
          * @param {Array[mods]} mod_collection
          * @param {String} mod_klass
-         * @returns {undefined}
+         * @param {Function} filter filter for mod_props
+         * @returns {ModGenerator}
          */
         init: function (mod_collection, mod_klass, filter) {
             this.uses = Number.POSITIVE_INFINITY;

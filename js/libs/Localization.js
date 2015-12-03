@@ -1,13 +1,35 @@
 /* global Class, this */
 
 (function (__undefined) {
+    /**
+     * class Localization
+     * 
+     * class for localizing a group of entities
+     */
     this.Localization = Class.extend({
+        /**
+         * 
+         * @param {Object} data the localization json data
+         * @returns {Localization}
+         */
         init: function (data) {
             this.data = data;
         },
+        /**
+         * 
+         * @param {string} key
+         * @param {*} ...args params for Localization::lookupString
+         * @returns {Localization::lookupString}
+         */
         t: function (key) {
             return this.lookupString(key, Array.prototype.slice.call(arguments, 1));
         },
+        /**
+         * checks all possible strings from key against the params
+         * @param {string} key
+         * @param {array} params
+         * @returns {Object|Class@call;extend.fillString.string}
+         */
         lookupString: function (key, params) {
             var used_option = null;
             
@@ -43,6 +65,13 @@
         }
     });
     
+    /**
+     * replaces the params within the string with the given params
+     * 
+     * @param {String} string
+     * @param {Array} params
+     * @returns {String}
+     */
     this.Localization.fillString = function (string, params) {
         $.each(params, function (i, param) {
             string = string.replace("{param_" + (i + 1) + "}", Localization.rangeString(param));
@@ -51,6 +80,12 @@
         return string;
     };
     
+    /**
+     * checks if values are within a range_string from the poe desc files 
+     * @param {type} range_string
+     * @param {type} values
+     * @returns {Boolean}
+     */
     this.Localization.inRange = function (range_string, values) {
         if (range_string === __undefined || values === __undefined) {
             return false;
@@ -82,6 +117,9 @@
         return "(" + range.join(" to ") + ")";
     };
     
+    /**
+     * lambdas  for parameter handles
+     */
     this.Localization.handles = {
         deciseconds_to_seconds: function (i) {
             return i * 10;

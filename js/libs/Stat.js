@@ -2,7 +2,7 @@
 
 (function (__undefined) {
     /**
-     * Stat extends GgpkEntry
+     * class Stat extends GgpkEntry
      */
     this.Stat = GgpkEntry.extend({
         init: function (props) {

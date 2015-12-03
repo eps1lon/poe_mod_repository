@@ -1,10 +1,17 @@
 /* global Mod, MetaData, ValueRange, this, ModContainer */
 
 (function (__undefined) {
-    /*
-     * Item Class
+    /**
+     * represents an ingame item (boots, maps, rings for example)
+     * 
+     * Item Class extends @link ModContainer
      */
     this.Item = ModContainer.extend({
+        /**
+         * @constructor
+         * @param {Object} props for @link GgpkEntry
+         * @returns {Item}
+         */
         init: function (props) {
             if (Item.meta_data === null) {
                 console.log("pls init meta data");
@@ -28,6 +35,14 @@
             // meta data exists?
             this.meta_data = MetaData.build(clazz, Item.meta_data);
         },
+        /**
+         * adds a mod if theres room for it
+         * no sophisticated domain check. only if affix type is full or not
+         * 
+         * @override
+         * @param {Mod} mod
+         * @returns {Boolean} true on success
+         */
         addMod: function (mod) {
             if (!(mod instanceof Mod)) {
                 return false;
@@ -41,9 +56,12 @@
             }
             return false;
         },
-        removeMod: function (mod) {
-            return this._super(mod);
-        },
+        /**
+         * adds a new tag to the item if its not already presen
+         * 
+         * @param {int} tag_key
+         * @returns {Boolean} true on success
+         */
         addTag: function (tag_key) {
             if (this.tags.indexOf(tag_key) === -1) {
                 this.tags.push(tag_key);
@@ -51,6 +69,12 @@
             }
             return false;
         },
+        /**
+         * removes an existing tag
+         * 
+         * @param {int} tag_key
+         * @returns {Boolean} true on success
+         */
         removeTag: function (tag_key) {
             var index = this.tags.indexOf(tag_key);
             if (index !== -1) {
@@ -66,6 +90,13 @@
         getTags: function () {
             return $.unique(this._super().concat(this.meta_data.props.tags, this.entry.valueAsArray("TagsKeys")));
         },
+        /**
+         * returns the max possible number of the given generation type
+         * 
+         * @override
+         * @param {Mod} mod
+         * @returns {Number} max number or -1 if not possible at all
+         */
         maxModsOfType: function (mod) {
             var generation_type = +mod.getProp("GenerationType");
             
@@ -80,6 +111,11 @@
             
             return -1;
         },
+        /**
+         * maximum number of prefixes
+         * 
+         * @returns {Number}
+         */
         maxPrefixes: function () {
             switch (this.rarity) {
                 case Item.RARITY.NORMAL:
@@ -96,12 +132,27 @@
                     return Number.POSITIVE_INFINITY;
             }
         },
+        /**
+         * maximum number of suffixes (=prefixes)
+         * 
+         * @returns {String}
+         */
         maxSuffixes: function () {
             return this.maxPrefixes();
         },
+        /**
+         * maximum number of implicits
+         * 
+         * @returns {Number}
+         */
         maxImplicits: function () {
             return 1;
         },
+        /**
+         * equiv mod domain
+         * 
+         * @returns {Mod.DOMAIN.*}
+         */
         modDomainEquiv: function () {
             if (this.meta_data.isA("AbstractJewel")) {
                 return Mod.DOMAIN.JEWEL;
@@ -114,6 +165,12 @@
             }
             return Mod.DOMAIN.ITEM;
         },
+        /**
+         * checks if the domains are equiv
+         * 
+         * @param {Mod.DOMAIN.*} mod_domain
+         * @returns {Boolean} true if in domain
+         */
         inDomainOf: function (mod_domain) {
             switch (mod_domain) {
                 case Mod.DOMAIN.MASTER:
@@ -122,9 +179,17 @@
                     return mod_domain === this.modDomainEquiv();
             }
         },
+        /**
+         * name of the base_item
+         * @returns {String}
+         */
         baseName: function () {
             return this.entry.getProp("Name");
         },
+        /**
+         * actual item name
+         * @returns {String}
+         */
         itemName: function () {
             switch (this.rarity) {
                 case Item.RARITY.MAGIC:
@@ -146,9 +211,18 @@
             }
             return '';
         },
+        /**
+         * primary key
+         * @returns {Number}
+         */
         primary: function () {
             return +this.entry.getProp("Rows");
         },
+        /**
+         * requirements to wear this item
+         * 
+         * @returns {Object} requirement desc => amount
+         */
         requirements: function () {
             var requirements = {};
             
@@ -165,6 +239,11 @@
             
             return requirements;
         },
+        /**
+         * string identifier of the item_class
+         * 
+         * @returns {String} key from @link Item.ITEMCLASSES
+         */
         itemclassIdent: function () {
             var that = this;
             return $.map(Item.ITEMCLASSES, function (itemclass, ident) {
@@ -174,6 +253,11 @@
                 return null;
             })[0];
         },
+        /**
+         * string identifier of the item rarity
+         * 
+         * @returns {String} key from @link Item.RARITY
+         */
         rarityIdent: function () {
             var that = this;
             return $.map(Item.RARITY, function (rarity, ident) {
@@ -183,6 +267,11 @@
                 return null;
             })[0];
         },
+        /**
+         * stats of mods combined
+         * 
+         * @returns {Object} stat_id => value
+         */
         stats: function () {
             var stats = {};
             
@@ -201,6 +290,11 @@
             
             return stats;
         },
+        /**
+         * stats from the item with stats from mods applied
+         * 
+         * @returns {Object} desc => valuerange
+         */
         localStats: function () {
             var stats = this.stats();
             var local_stats = {};
@@ -285,6 +379,14 @@
         }
     });
     
+    /**
+     * takes a increased stat and applies it to the value
+     * 
+     * @param {ValueRange|Number} value
+     * @param {Stat} stat
+     * @param {Number} precision
+     * @returns {ValueRange}
+     */
     this.Item.applyStat = function (value, stat, precision) {
         var result = null;
         
@@ -305,8 +407,14 @@
         return result.toFixed(precision);
     };
     
+    /**
+     * meta data object uninitialized
+     */
     this.Item.meta_data = null;
     
+    /**
+     * all possible rarities
+     */
     this.Item.RARITY = {
         NORMAL: 1,
         MAGIC: 2,
@@ -315,6 +423,9 @@
         SHOWCASE: 5
     };
     
+    /**
+     * maximum item level
+     */
     this.Item.MAX_ILVL = 100;
     
     /* tags are obsolte. they are derivated from the inheritance chain

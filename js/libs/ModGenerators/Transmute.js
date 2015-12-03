@@ -1,10 +1,25 @@
 /* global Mod, ModGenerator, Item, Currency, ByteSet, this, Applicable */
 
 (function (__undefined) {
+    /**
+     * class Transmute extends Currency
+     * 
+     * ingame representation of Orb of Transmutation
+     */
     this.Transmute = Currency.extend({
+        /**
+         * @constructor
+         * @param {type} all_mods
+         * @returns {Transmute}
+         */
         init: function (all_mods) {
             this._super(all_mods, Transmute.mod_filter);
         },
+        /**
+         * adds 1-2 mods
+         * @param {Item} item
+         * @returns {Boolean}
+         */
         applyTo: function (item) {
             if (this.applicableTo(item)) {
                 // upgrade to rare
@@ -20,6 +35,13 @@
             
             return false;
         },
+        /**
+         * maps mod::applicableTo as if it were already magic
+         * 
+         * @param {Item} item
+         * @param {byte} success whitelist
+         * @returns {Array}
+         */
         map: function (item, success) {
             // simulate upgrade
             var old_rarity = item.rarity;
@@ -28,9 +50,13 @@
             item.rarity = old_rarity;
 
             return mods;
-            
-            return [];
         },
+        /**
+         * greps mod::applicableTo as if it were already magic
+         * @param {type} item
+         * @param {type} success
+         * @returns {Array}
+         */
         mods: function (item, success) {
             // simulate upgrade
             var old_rarity = item.rarity;
@@ -42,7 +68,8 @@
         },
         /**
          * 
-         * @param {ModContainer} mod_container
+         * @param {Item} baseitem
+         * @param {byte} success whitelist
          * @returns {Boolean}
          */
         applicableTo: function (baseitem, success) {
@@ -68,7 +95,7 @@
         },
         /**
          *
-         * @returns {String}
+         * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
             return ByteSet.human(this.applicable_byte, Transmute.APPLICABLE_BYTE, Transmute.APPLICABLE_BYTE.SUCCESS);
