@@ -17,10 +17,6 @@
         return $(selector + ".template").clone(true).removeClass("template");
     };
     
-    var localizedByteSetFromLegend = function (klass, byteName, byteHuman) {
-        
-    };
-    
     // assert baseitem typeof BaseItem
     var display_baseitem = function (baseitem, selector) {
         // assert baseitem typeof BaseItem
@@ -328,9 +324,7 @@
             var $applicable = $this.parents(".applicable");
             var mod_generator = ModGeneratorFactory.build($this.val(), all_mods);
             
-            if (!mod_generator.applicableTo(baseitem)) {
-                $this.prop("disabled", true);
-            }
+            $this.prop("disabled", !mod_generator.applicableTo(baseitem));
             var applicable_byte = mod_generator.applicableByteHuman();
 
             $applicable.attr("title", applicable_byte.strings.join(" and "));
