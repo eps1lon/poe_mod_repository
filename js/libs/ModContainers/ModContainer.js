@@ -111,10 +111,4 @@
             return -1;
         }
     }); 
-    
-    this.ModContainer.METAMOD = {
-        LOCKED_PREFIXES: 4294,
-        LOCKED_SUFFIXES: 4295,
-        MULTIMOD: 4298
-    };
 })();
