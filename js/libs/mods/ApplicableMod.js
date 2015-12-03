@@ -1,4 +1,4 @@
-/* global Applicable, ByteSet */
+/* global Applicable, ByteSet, this */
 
 (function (__undefined) {
     /**
@@ -43,12 +43,11 @@
                 this.applicable_byte = Applicable.SUCCESS;         
             }
             
-            // to bool
-            return !!(this.applicable_byte & success);
+            
+            return !ByteSet.byteBlacklisted(this.applicable_byte, success);
         },
         applicableCached: function () {
-            // to bool
-            return !!(this.applicable_byte & Applicable.SUCCESS);
+            return !ByteSet.byteBlacklisted(this.applicable_byte, Applicable.SUCCESS);
         },
         resetApplicable: function () {
             this.applicable_byte = Applicable.UNSCANNED;

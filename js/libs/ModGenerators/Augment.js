@@ -31,7 +31,7 @@
                 this.applicable_byte = Applicable.SUCCESS;         
             }
             
-            return !!(this.applicable_byte & success);
+            return !ByteSet.byteBlacklisted(this.applicable_byte, success);
         },
         applicableByteHuman: function () {
             return ByteSet.human(this.applicable_byte, Augment.APPLICABLE_BYTE, Augment.APPLICABLE_BYTE.SUCCESS);

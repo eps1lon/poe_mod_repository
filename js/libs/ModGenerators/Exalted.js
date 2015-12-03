@@ -30,7 +30,7 @@
                 this.applicable_byte = Applicable.SUCCESS;         
             }
             
-            return !!(this.applicable_byte & success);
+            return !ByteSet.byteBlacklisted(this.applicable_byte, success);
         },
         applicableByteHuman: function () {
             return ByteSet.human(this.applicable_byte, Exalted.APPLICABLE_BYTE, Exalted.APPLICABLE_BYTE.SUCCESS);

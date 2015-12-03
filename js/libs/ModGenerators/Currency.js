@@ -48,7 +48,7 @@
                 this.applicable_byte = Applicable.SUCCESS;         
             }
             
-            return !!(this.applicable_byte & success);
+            return !ByteSet.byteBlacklisted(this.applicable_byte, success);
         },
         resetApplicable: function () {
             this.applicable_byte = Applicable.UNSCANNED;
@@ -61,8 +61,7 @@
             return ByteSet.human(this.applicable_byte, Currency.APPLICABLE_BYTE, Currency.APPLICABLE_BYTE.SUCCESS);
         },
         applicableCached: function () {
-            // to bool
-            return !!(this.applicable_byte & Applicable.SUCCESS);
+            return !ByteSet.byteBlacklisted(this.applicable_byte, Applicable.SUCCESS);
         }
     });
     

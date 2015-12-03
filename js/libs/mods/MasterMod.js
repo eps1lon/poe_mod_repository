@@ -1,4 +1,4 @@
-/* global ApplicableMod, Applicable, this */
+/* global ApplicableMod, Applicable, this, ByteSet */
 
 (function (__undefined) {
     this.MasterMod = ApplicableMod.extend({
@@ -29,14 +29,16 @@
                 this.applicable_byte ^= Applicable.SUCCESS;
             }
             
-            // to bool
-            return !!(this.applicable_byte & success);
+            return !ByteSet.byteBlacklisted(this.applicable_byte, success);
         },
         serialize: function () {
             return {
                 klass: "MasterMod",
                 args: [this.props, this.bench.props]
             };
+        },
+        applicableByteHuman: function() {
+            return ByteSet.human(this.applicable_byte, MasterMod.APPLICABLE_BYTE, MasterMod.APPLICABLE_BYTE.SUCCESS, "MasterMod.applicable_byte");
         }
     });
     

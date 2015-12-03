@@ -48,4 +48,9 @@
         
         console.log(ByteSet.localization);
     };
+    
+    // turn of everything blacklisted (byte xor (byte & blacklist) = byte & !blacklist)
+    this.ByteSet.byteBlacklisted = function (byte, blacklist) {
+        return byte & ~blacklist;
+    };
 })();

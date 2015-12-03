@@ -53,7 +53,7 @@
                 this.applicable_byte = Applicable.SUCCESS;         
             }
             
-            return !!(this.applicable_byte & success);
+            return !ByteSet.byteBlacklisted(this.applicable_byte, success);
         },
         /**
          *

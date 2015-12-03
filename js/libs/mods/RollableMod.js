@@ -45,8 +45,7 @@
                 this.spawnable_byte = Spawnable.SUCCESS;         
             }
             
-            // to bool
-            return !!(this.spawnable_byte & success);
+            return !ByteSet.byteBlacklisted(this.spawnable_byte, success);
         },
         humanSpawnchance: function (precision) {
             if (precision === __undefined) {
@@ -75,8 +74,7 @@
             return ByteSet.human(this.spawnable_byte, RollableMod.SPAWNABLE_BYTE, RollableMod.SPAWNABLE_BYTE.SUCCESS, "RollableMod.spawnable_byte");
         },
         spawnableCached: function () {
-            // to bool
-            return !!(this.spawnable_byte & Spawnable.SUCCESS);
+            return !ByteSet.byteBlacklisted(this.spawnable_byte, Spawnable.SUCCESS);
         },
         rollableOn: function (mod_container) {
             this.rollable = this.applicableTo(mod_container) 

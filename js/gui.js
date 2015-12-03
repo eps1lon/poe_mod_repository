@@ -129,11 +129,8 @@
         var whitelist = ApplicableMod.APPLICABLE_BYTE.LOWER_ILVL
                         | ApplicableMod.APPLICABLE_BYTE.DOMAIN_FULL
                         | ApplicableMod.APPLICABLE_BYTE.ALREADY_PRESENT;
-        
-        // implements Spawnable?
-        var whitelist_spawnable = Spawnable.SUCCESS;
-        
-        var applicable_mods = mod_generator.mods(baseitem, whitelist | whitelist_spawnable);
+           
+        var applicable_mods = mod_generator.mods(baseitem, whitelist);
         
         // mod groups
         var prefixes = Spawnable.calculateSpawnchance($.grep(applicable_mods, function (mod) {
