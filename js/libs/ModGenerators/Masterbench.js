@@ -44,7 +44,39 @@
             // possible interface between gui and class
             this.chosen_mod = null;
         },
-        applyTo: function (option) {
+        applyTo: function (baseitem, option_index) {
+            var mod, old_rarity;
+            
+            // option within options
+            var option = this.craftingbenchoptions[option_index];
+            if (option === __undefined) {
+                return false;
+            }
+            
+            mod = $.grep(this.getAvailableMods(), function (mod) {
+                return +mod.getProp("Rows") === +option["ModsKey"];
+            })[0];
+            
+            // valid mod?
+            if (!(mod instanceof MasterMod)) {
+                console.log(mod, "needs to be instanceof MasterMod");
+                return false;
+            }
+            
+            // white gets upgraded to blue
+            old_rarity = baseitem.rarity;
+            if (old_rarity === Item.RARITY.NORMAL) {
+                baseitem.rarity = Item.RARITY.MAGIC;
+            }
+            
+            // mod applicable
+            if (mod.applicableTo(baseitem)) {
+                return baseitem.addMod(mod);
+            }
+            
+            // return to old rarity on failure
+            baseitem.rarity = old_rarity;
+            
             return false;
         },
         applicableTo: function (item) {

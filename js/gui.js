@@ -1,4 +1,4 @@
-/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass, RollableMod, ApplicableMod, MasterMod, baseitem, ByteSet */
+/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass, RollableMod, ApplicableMod, MasterMod, baseitem, ByteSet, Masterbench */
 
 (function (__undefined) {
     // "tables"
@@ -168,6 +168,8 @@
             var $tr = create_from_template("#implicits tbody tr.mod");
             var serialized = mod.serialize();
             
+            $tr.attr("id", mod.domId());
+            
             // error
             var applicable_byte_human = mod.applicableByteHuman();
             $tr.attr("data-applicable_byte", applicable_byte_human.bits.join("-"));
@@ -243,11 +245,13 @@
         // empty mods
         $("tbody:not(.template)", $table).remove();
         
-        // display prefix
+        // display affixes
         $("caption .count", $table).text(mods.length);
         $.each(mods, function (_, mod) {
             var $mod = create_from_template("tbody.mods.template .mod", $table);
             var serialized = mod.serialize();
+            
+            $mod.attr("id", mod.domId());
             
             // grouping
             var correct_group = mod.getProp("CorrectGroup");
@@ -319,7 +323,7 @@
             return false;
         }
         
-        $("#currencies .applicable input.ModGenerator:radio").each(function () {
+        $("ul.currencies .applicable input.ModGenerator:radio").each(function () {
             var $this = $(this);
             var $applicable = $this.parents(".applicable");
             var mod_generator = ModGeneratorFactory.build($this.val(), all_mods);
@@ -471,13 +475,43 @@
         $("input.ModGenerator:radio").on("change", function () {
             // persistence
             mod_generator = get_selected_mod_generator();
-            
+
             // update gui
             display_available_mods(mod_generator, baseitem);
+            
+            // remove craftingbenchoptions
+            var $craftingbenchoptions = $("#craftingbenchoptions");
+            $(".craftingbenchoption:not(.template)", $craftingbenchoptions).remove();
+            
+            if (mod_generator instanceof Masterbench) {
+                // display options
+                $.each(mod_generator.craftingbenchoptions, function (i, craftingbenchoption) {
+                    // Mod atleast displayed so we also display the option
+                    if ($("#" + Mod.domId(craftingbenchoption["ModsKey"])).length) {
+                        var $option = create_from_template(".craftingbenchoption", $craftingbenchoptions);
+                        
+                        $option.val(i);
+                        $option.text(craftingbenchoption.Name);
+
+                        $craftingbenchoptions.append($option);
+                    }
+                });
+                
+                // display no options hint
+                $("#no_craftingbenchoptions").toggle($(".craftingbenchoption:not(.template)").length === 0);
+                
+                // select last option because otherwise a recently hidden
+                // #no_craftingbenchoptions will still be selected in chrome
+                // also selecting first visible yields to weird interactions
+                // with hidden options 
+                $("option:last", $craftingbenchoptions).prop("selected", true);
+            }
         });
         
         // mod gen handle
         $("#use_mod_gen").on("click", function () {
+            var args;
+            
             console.log(mod_generator, "@", baseitem);
             
             if (!(mod_generator instanceof ModGenerator)) {
@@ -490,12 +524,22 @@
                 return false;
             }
             
+            // build applyTo args
+            args = [baseitem];
+            
+            // we need the selected craftingbenchoption
+            if (mod_generator instanceof Masterbench) {
+                args.push(+$("#craftingbenchoptions option:selected").val());
+            }
+            
             // apply
-            if (mod_generator.applyTo(baseitem)) {
+            if (mod_generator.applyTo.apply(mod_generator, args)) {
                 // display
                 display_baseitem(baseitem, "#used_baseitem");
                 display_available_mods(mod_generator, baseitem);
                 display_mod_gen_applicability(baseitem, mods);
+            } else {
+                // flash error
             }
 
             return true;

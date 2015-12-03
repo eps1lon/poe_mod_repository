@@ -68,8 +68,15 @@
         },
         name: function () {
             return this.getProp("Name");
+        },
+        domId: function () {
+            return Mod.domId(this.getProp("Rows"));
         }
     });
+    
+    this.Mod.domId = function (id) {
+        return "mod_" + id;
+    };
     
     this.Mod.MOD_TYPE = {
         PREFIX: 1,

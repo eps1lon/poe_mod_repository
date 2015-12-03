@@ -112,30 +112,46 @@ th.correct_group {
     color: #B8DAF2;
 }
 
-#currencies {
+/* ModGenerators */
+label[for="mod_generator_showcase"] {
+    font-weight: bold;
+    font-size: 1.1em;
+    display: inline-block;
+    margin-bottom: 1em;
+}
+
+ul.currencies {
     list-style: none;
     padding: 0px;
 }
 
-#currencies li {
+ul.currencies li {
     display: inline-block;
 }
 
-#currencies li * {
+ul.currencies li * {
     display: block;
 }
 
-#currencies li input {
+ul.currencies li input {
     display: block;
     margin: 0px auto;
 }
 
-#currencies img {
+ul.currencies img {
     width: 48px;
     height: 48px;
 }
 
-#masterbenches {
+ul.masterbenches {
     list-style: none;
     padding: 0px;
+}
+
+fieldset.masterbenches {
+    margin-bottom: 2em;
+}
+
+#craftingbenchoptions {
+    display: block;
 }
