@@ -129,7 +129,8 @@
         var whitelist = ApplicableMod.APPLICABLE_BYTE.LOWER_ILVL
                         | ApplicableMod.APPLICABLE_BYTE.DOMAIN_FULL
                         | ApplicableMod.APPLICABLE_BYTE.ALREADY_PRESENT
-                        | MasterMod.APPLICABLE_BYTE.NO_MULTIMOD;
+                        | MasterMod.APPLICABLE_BYTE.NO_MULTIMOD
+                        | ApplicableMod.APPLICABLE_BYTE.ABOVE_LLD_LEVEL;
            
         var applicable_mods = mod_generator.mods(baseitem, whitelist);
         

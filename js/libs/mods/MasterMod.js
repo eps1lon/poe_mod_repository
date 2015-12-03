@@ -59,9 +59,10 @@
         ALREADY_PRESENT: 4,
         WRONG_DOMAIN: 8,
         LOWER_ILVL: 16,
+        ABOVE_LLD_LEVEL: 32,
         // MasterMod
-        WRONG_ITEMCLASS: 32,
-        NO_MULTIMOD: 64
+        WRONG_ITEMCLASS: 64,
+        NO_MULTIMOD: 128
     };
     
     this.MasterMod.METAMOD = {

@@ -1,4 +1,4 @@
-/* global Applicable, ByteSet, this */
+/* global Applicable, ByteSet, this, MasterMod */
 
 (function (__undefined) {
     /**
@@ -39,10 +39,13 @@
                 this.applicable_byte |= ApplicableMod.APPLICABLE_BYTE.ALREADY_PRESENT;
             } 
             
+            if (+this.getProp("Level") > 28 && item.inMods(MasterMod.METAMOD.LLD_MODS) !== -1) {
+                this.applicable_byte |= ApplicableMod.APPLICABLE_BYTE.ABOVE_LLD_LEVEL;
+            }
+            
             if (!this.applicable_byte) {
                 this.applicable_byte = Applicable.SUCCESS;         
             }
-            
             
             return !ByteSet.byteBlacklisted(this.applicable_byte, success);
         },
@@ -76,6 +79,7 @@
         DOMAIN_FULL: 2,
         ALREADY_PRESENT: 4,
         WRONG_DOMAIN: 8,
-        LOWER_ILVL: 16
+        LOWER_ILVL: 16,
+        ABOVE_LLD_LEVEL: 32
     };
 })();
