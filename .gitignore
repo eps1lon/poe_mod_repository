@@ -1,1 +1,8 @@
 image
+
+/* gulp deployment */
+dist
+.publish
+
+/* npm */
+node_modules
