@@ -1,4 +1,4 @@
-/* global Mod, MasterMod, ApplicableMod, Spawnable, Item, ModGenerator */
+/* global Mod, MasterMod, ApplicableMod, Spawnable, Item, ModGenerator, Transmute, Vaal */
 
 (function (__undefined) {
     /**
@@ -14,8 +14,8 @@
          */
         init: function (all_mods) {
             var mods = $.map(all_mods, function (mod) {
-                // only prefix,suffix or implicit
-                if ([Mod.MOD_TYPE.PREFIX, Mod.MOD_TYPE.SUFFIX, Mod.MOD_TYPE.IMPLICIT].indexOf(+mod["GenerationType"]) === -1 ) {
+                // transmute/vaal mods
+                if (!Transmute.mod_filter(mod) && !Vaal.mod_filter(mod)) {
                     return null;
                 }
                 
