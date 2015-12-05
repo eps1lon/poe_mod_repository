@@ -337,34 +337,34 @@
         
     // load data
     $.when(
-        $.getJSON("js/data/mods.json", function (json) {
+        new DataDependency("js/data/mods.json", "#data_loader_mods").getJSON(function (json) {
             mods = json;
             Mod.mods = mods;
         }),
-        $.getJSON("js/data/tags.json", function (json) {
+        new DataDependency("js/data/tags.json", "#data_loader_tags").getJSON(function (json) {
             tags = json;
             
             $(tags).each(function (_, tag) {
                 TAGS[tag.Id.toUpperCase()] = +tag.Rows;
             });
         }),
-        $.getJSON("js/data/baseitemtypes.json", function (json) {
+        new DataDependency("js/data/baseitemtypes.json", "#data_loader_baseitemtypes").getJSON(function (json) {
             baseitemtypes = json;
         }),
-        $.getJSON("js/data/stats.json", function (json) {
+        new DataDependency("js/data/stats.json", "#data_loader_stats").getJSON(function (json) {
             stats = json;
             Mod.all_stats = stats;
         }),
-        $.getJSON("js/data/translations/English/stat_descriptions.json", function (json) {
+        new DataDependency("js/data/translations/English/stat_descriptions.json", "#data_loader_stat_desc").getJSON(function (json) {
             Mod.localization = new Localization(json);
         }),
-        $.getJSON("js/data/meta_data.json", function (json) {
+        new DataDependency("js/data/meta_data.json", "#data_loader_meta_data").getJSON(function (json) {
             Item.meta_data = json;
         }),
-        $.getJSON("js/data/craftingbenchoptions.json", function (json) {
+        new DataDependency("js/data/craftingbenchoptions.json", "#data_loader_craftingbenchoptions").getJSON(function (json) {
             MasterMod.craftingbenchoptions = json;
         }),
-        $.getJSON("js/data/translations/English/mod_correct_groups.json", function (json) {
+        new DataDependency("js/data/translations/English/mod_correct_groups.json", "#data_loader_mod_correct_groups_loc").getJSON(function (json) {
             Mod.correct_group_localization = json;
         })
     ).then(function () {

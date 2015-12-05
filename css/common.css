@@ -6,7 +6,7 @@
 body {
     background: #000;
     color: #a38d6d;
-    fonz-size: 13px;
+    font-size: 13px;
     font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
@@ -158,4 +158,26 @@ fieldset.masterbenches {
 
 #craftingbenchoptions {
     display: block;
+}
+
+/* DataDependency */
+#data_loader {
+    padding: 0;
+    list-style: none;
+}
+
+.loading_indicator {
+    display: inline-block;
+}
+
+.loading_indicator[data-loading-state="1"]:after {
+    content: ":loading";
+}
+
+.loading_indicator[data-loading-state="2"]:after {
+    content: ":loaded";
+}
+
+.loading_indicator[data-loading-state="3"]:after {
+    content: ":fail";
 }
