@@ -15,7 +15,6 @@
             return +this.getProp("GenerationType") === Mod.MOD_TYPE.SUFFIX;
         },
         isImplicit: function () {
-            return +this.getProp("GenerationType") === Mod.MOD_TYPE.VAAL;
             return [Mod.MOD_TYPE.IMPLICIT, Mod.MOD_TYPE.VAAL].indexOf(+this.getProp("GenerationType")) !== -1;
         },
         isAffix: function () {
