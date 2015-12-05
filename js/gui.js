@@ -452,14 +452,14 @@
                 $option.appendTo("#baseitems");
             });
             
-            // select empty on 
-            $("#baseitems option.template").prop("selected", true);
+            // select first baseitem
+            $("#baseitems option:not(.template):first").prop("selected", true);
             
             // and trigger onchange
             $("#baseitems").trigger("change");
         }); 
         
-        // change item_class handle
+        // change baseitem handle
         $("#baseitems").on("change", function () {
             // persistence
             baseitem = get_selected_baseitem();
@@ -611,9 +611,7 @@
         }).prop("selected", true);
         $("#item_classes").trigger("change");
         
-        $("#baseitems option:not(.template)").filter(":first").prop("selected", true);
-        $("#baseitems").trigger("change");
-        
+        // all affixes selected by default
         $("input.ModGenerator:radio").filter(":first").prop("checked", true);
         $("input.ModGenerator:radio").filter(":checked").trigger("change");
 
