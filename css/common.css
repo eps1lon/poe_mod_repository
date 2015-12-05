@@ -99,8 +99,12 @@ th.correct_group {
 
 .remove_mod {
     display: inline-block;
-    
 }
+
+.mod-type-implicit .remove_mod {
+    display: none;
+}
+
 
 /* colors */
 
