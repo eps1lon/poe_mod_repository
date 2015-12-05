@@ -23,7 +23,7 @@
             // default
             this.rarity = Item.RARITY.NORMAL;
             this.item_level = Item.MAX_ILVL;
-            this.random_name = "";
+            this.random_name = "Random Name";
             
             // parse entry
             this.entry = new GgpkEntry(props);
@@ -207,7 +207,7 @@
                     
                     return name;
                 case Item.RARITY.RARE:
-                    return "Random Name + " + this.baseName();
+                    return this.random_name;
             }
             return '';
         },

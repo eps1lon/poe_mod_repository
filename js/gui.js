@@ -131,7 +131,7 @@
                         | ApplicableMod.APPLICABLE_BYTE.ALREADY_PRESENT
                         | MasterMod.APPLICABLE_BYTE.NO_MULTIMOD
                         | ApplicableMod.APPLICABLE_BYTE.ABOVE_LLD_LEVEL;
-           
+        
         var applicable_mods = mod_generator.mods(baseitem, whitelist);
         
         // mod groups
