@@ -100,9 +100,9 @@
     this.Mod.MOD_TYPE = {
         PREFIX: 1,
         SUFFIX: 2,
-        UNIQUE: 3,
+        IMPLICIT: 3,
         NEMESIS: 4,
-        IMPLICIT: 5,
+        VAAL: 5,
         BLOODLINES: 6,
         TORMENT: 7,
         TEMPEST: 8
