@@ -13,6 +13,7 @@
          * @returns {Item}
          */
         init: function (props) {
+            var that = this;
             if (Item.meta_data === null) {
                 console.log("pls init meta data");
                 return null;
@@ -34,6 +35,13 @@
             
             // meta data exists?
             this.meta_data = MetaData.build(clazz, Item.meta_data);
+            
+            // implicits
+            $.each(this.entry.valueAsArray("Implicit_ModsKeys"), function (_, mod_key) {
+                if (!that.addMod(new ApplicableMod(Mod.mods[mod_key]))) {
+                    console.log("could not add", mod_key);
+                }
+            });
         },
         /**
          * adds a mod if theres room for it
@@ -47,7 +55,6 @@
             if (!(mod instanceof Mod)) {
                 return false;
             }
-            
             if (mod.isPrefix() && this.prefixes().length < this.maxPrefixes()
                 || mod.isSuffix() && this.suffixes().length < this.maxSuffixes()
                 || mod.isImplicit() && this.implicits().length < this.maxImplicits()
