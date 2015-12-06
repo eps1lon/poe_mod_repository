@@ -1,4 +1,4 @@
-/* global this */
+/* global this, Class, ModGeneratorFactory */
 
 (function (__undefined) {
     this.ModGeneratorFactory = Class.extend({});

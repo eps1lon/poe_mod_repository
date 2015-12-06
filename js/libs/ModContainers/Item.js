@@ -1,4 +1,4 @@
-/* global Mod, MetaData, ValueRange, this, ModContainer */
+/* global Mod, MetaData, ValueRange, this, ModContainer, Item, GgpkEntry, ApplicableMod */
 
 (function (__undefined) {
     /**
@@ -55,9 +55,9 @@
             if (!(mod instanceof Mod)) {
                 return false;
             }
-            if (mod.isPrefix() && this.prefixes().length < this.maxPrefixes()
-                || mod.isSuffix() && this.suffixes().length < this.maxSuffixes()
-                || mod.isImplicit() && this.implicits().length < this.maxImplicits()
+            if (mod.isPrefix() && this.prefixes().length < this.maxPrefixes() || 
+                    mod.isSuffix() && this.suffixes().length < this.maxSuffixes() || 
+                    mod.isImplicit() && this.implicits().length < this.maxImplicits()
             ) {
                 return this._super(mod);
             }
@@ -335,22 +335,22 @@
                 // TODO combine ele
                 
                 // apply increases
-                local_stats['Physical Damage'] 
-                    = Item.applyStat(local_stats['Physical Damage'],
-                                     stats['local_physical_damage_+%'],
-                                     0);
+                local_stats['Physical Damage'] = 
+                        Item.applyStat(local_stats['Physical Damage'],
+                                       stats['local_physical_damage_+%'],
+                                       0);
                 
                 // Crit
-                local_stats['Critical Strike Chance'] 
-                    = Item.applyStat(+this.entry.getProp('Critical') / 100,
-                                     stats['local_critical_strike_chance_+%'],
-                                     2).toString() + "%";
+                local_stats['Critical Strike Chance'] = 
+                        Item.applyStat(+this.entry.getProp('Critical') / 100,
+                                       stats['local_critical_strike_chance_+%'],
+                                       2).toString() + "%";
                                     
                 // APS
-                local_stats['Attacks Per Second'] 
-                    = Item.applyStat(1000 / +this.entry.getProp("Speed"),
-                                     stats['local_attack_speed_+%'],
-                                     2);
+                local_stats['Attacks Per Second'] = 
+                        Item.applyStat(1000 / +this.entry.getProp("Speed"),
+                                       stats['local_attack_speed_+%'],
+                                       2);
             } else if (this.meta_data.isA('AbstractArmour')) {
                 var that = this;
                 // defences
@@ -370,10 +370,10 @@
                     }
                     
                     // increase
-                    local_stats[component] 
-                        = Item.applyStat(local_stats[component],
-                                         stats['local_' + stat + '_rating_+%'],
-                                         0);
+                    local_stats[component] = 
+                            Item.applyStat(local_stats[component],
+                                           stats['local_' + stat + '_rating_+%'],
+                                           0);
                     
                     if (local_stats[component].isZero()) {
                         delete local_stats[component];

@@ -18,7 +18,7 @@
             // all options
             // craftingbenchoptions instanceof {} so we cant use grep
             this.craftingbenchoptions = $.map(MasterMod.craftingbenchoptions, function (option) {
-                if (+option['NPCMasterKey'] === npc_master_key) {
+                if (+option.NPCMasterKey === npc_master_key) {
                     return option;
                 }
                 return null;
@@ -32,10 +32,10 @@
              */
             var that = this;
             this._super($.map(all_mods, function (mod_props) {
-                if (+mod_props['Domain'] === Mod.DOMAIN.MASTER) {
+                if (+mod_props.Domain === Mod.DOMAIN.MASTER) {
                     // mastermod? => look for craftingbench
                     var craftingbenchoption = $.grep(that.craftingbenchoptions, function (option) {
-                        return +option['ModsKey'] === +mod_props['Rows'];
+                        return +option.ModsKey === +mod_props.Rows;
                     })[0];
                     
                     if (!craftingbenchoption) {
@@ -70,7 +70,7 @@
             }
             
             mod = $.grep(this.getAvailableMods(), function (mod) {
-                return +mod.getProp("Rows") === +option["ModsKey"];
+                return +mod.getProp("Rows") === +option.ModsKey;
             })[0];
             
             // valid mod?

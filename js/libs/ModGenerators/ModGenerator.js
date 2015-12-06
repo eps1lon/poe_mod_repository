@@ -1,4 +1,4 @@
-/* global Class, Mod, ModInContext, this, ModGeneratorException, Applicable */
+/* global Class, this, Applicable */
 
 (function (__undefined) {
     /*

@@ -1,4 +1,5 @@
-/* global Mod, Item, this, Transmute, Applicable, ByteSet, Currency */
+/* global Item, this, Transmute, Applicable, ByteSet, Currency, Augment */
+/* jshint bitwise:false */
 
 (function (__undefined) {
     /**

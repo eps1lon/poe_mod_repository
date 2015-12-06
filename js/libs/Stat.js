@@ -1,4 +1,4 @@
-/* global GgpkEntry, this */
+/* global GgpkEntry, this, ValueRange, Stat */
 
 (function (__undefined) {
     /**

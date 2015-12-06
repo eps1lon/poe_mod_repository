@@ -1,3 +1,5 @@
+/* global Class */
+
 (function (__undefined) {
     /**
      * table row from content.ggpk

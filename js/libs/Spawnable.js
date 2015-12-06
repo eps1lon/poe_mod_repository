@@ -1,3 +1,5 @@
+/* global Class, Spawnable */
+
 (function (__undefined) {
     /**
      * Interface

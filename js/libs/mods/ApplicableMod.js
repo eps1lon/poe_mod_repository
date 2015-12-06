@@ -1,4 +1,5 @@
-/* global Applicable, ByteSet, this, MasterMod, Mod */
+/* global Applicable, ByteSet, this, MasterMod, Mod, ApplicableMod */
+/* jshint bitwise:false */
 
 (function (__undefined) {
     /**

@@ -1,4 +1,5 @@
 /* global ByteSet, Class */
+/* jshint bitwise:false */
 
 (function (__undefined) {
     // todo if-exists

@@ -1,4 +1,5 @@
-/* global Item, ModGenerator, Applicable, this, ByteSet, Currency, MasterMod */
+/* global Item, Applicable, this, ByteSet, Currency, MasterMod, Scouring */
+/* jshint bitwise:false */
 
 (function (__undefined) {
     /**

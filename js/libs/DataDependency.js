@@ -1,4 +1,4 @@
-/* global this, Class */
+/* global this, Class, DataDependency */
 
 (function (__undefined) {
     /**

@@ -1,4 +1,4 @@
-/* global Currency, Mod */
+/* global Currency, Mod, Vaal */
 
 (function (__undefined) {
     /**
@@ -19,6 +19,6 @@
     
     this.Vaal.mod_filter = function (mod_props) {
         // vaal implicits
-        return [Mod.MOD_TYPE.VAAL].indexOf(+mod_props["GenerationType"]) !== -1;
+        return [Mod.MOD_TYPE.VAAL].indexOf(+mod_props.GenerationType) !== -1;
     };
 })();

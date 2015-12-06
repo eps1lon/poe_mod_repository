@@ -1,4 +1,5 @@
-/* global Currency, Transmute, Applicable, ByteSet, this, Item */
+/* global Currency, Transmute, Applicable, ByteSet, this, Item, Exalted */
+/* jshint bitwise:false */
 
 (function (__undefined) {
     /**

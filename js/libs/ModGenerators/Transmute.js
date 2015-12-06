@@ -1,4 +1,5 @@
-/* global Mod, ModGenerator, Item, Currency, ByteSet, this, Applicable */
+/* global Mod, Item, Currency, ByteSet, this, Applicable, Transmute */
+/* jshint bitwise: false */
 
 (function (__undefined) {
     /**
@@ -113,6 +114,6 @@
     
     this.Transmute.mod_filter = function (mod_props) {
         // prefix/suffix only
-        return [Mod.MOD_TYPE.PREFIX, Mod.MOD_TYPE.SUFFIX].indexOf(+mod_props["GenerationType"]) !== -1;
+        return [Mod.MOD_TYPE.PREFIX, Mod.MOD_TYPE.SUFFIX].indexOf(+mod_props.GenerationType) !== -1;
     };
 })();

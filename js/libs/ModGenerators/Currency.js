@@ -1,4 +1,5 @@
-/* global RollableMod, Mod, ModGenerator, ByteSet, this, Item, Applicable */
+/* global RollableMod, Mod, ModGenerator, ByteSet, this, Item, Applicable, Currency */
+/* jshint bitwise:false */
 
 (function (__undefined) {
     /**
@@ -21,9 +22,9 @@
             }
             
             this._super(all_mods, RollableMod, function (mod) {
-                return [Mod.MOD_TYPE.PREFIX, Mod.MOD_TYPE.SUFFIX, Mod.MOD_TYPE.IMPLICIT].indexOf(+mod["GenerationType"]) !== -1 
-                        && mod["SpawnWeight_TagsKeys"] !== ""
-                        && and_filter(mod);
+                return [Mod.MOD_TYPE.PREFIX, Mod.MOD_TYPE.SUFFIX, Mod.MOD_TYPE.IMPLICIT].indexOf(+mod.GenerationType) !== -1 && 
+                        mod.SpawnWeight_TagsKeys !== "" && 
+                        and_filter(mod);
             });
         },
         /**
@@ -57,8 +58,8 @@
          */
         mods: function (item, success) {
             return $.grep(this.getAvailableMods(), function (mod) {
-                return mod.applicableTo(item, success)
-                        && mod.spawnableOn(item);
+                return mod.applicableTo(item, success) && 
+                        mod.spawnableOn(item);
             });
         },
         /**

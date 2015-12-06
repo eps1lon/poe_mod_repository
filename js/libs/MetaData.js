@@ -1,4 +1,4 @@
-/* global Class, this */
+/* global Class, this, MetaData */
 
 (function (__undefined) {
     /**
@@ -12,8 +12,8 @@
             this.props = props;
         },
         isA: function (clazz) {
-            return clazz === this.clazz 
-                    || this.props['inheritance'].indexOf(clazz) !== -1;
+            return clazz === this.clazz || 
+                    this.props.inheritance.indexOf(clazz) !== -1;
         },
         valueOf: function (fascade, key, expect) {
             if (this.props[fascade] && this.props[fascade][key]) {

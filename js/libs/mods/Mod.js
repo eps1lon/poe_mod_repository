@@ -1,4 +1,4 @@
-/* global this, ItemClass, GgpkEntry */
+/* global this, GgpkEntry, Mod, Stat, ValueRange */
 
 (function (__undefined) {
     /**
@@ -120,7 +120,7 @@
     };
     
     this.Mod.localization = null;
-    this.Mod.correct_group_localization;
+    this.Mod.correct_group_localization = null;
     this.Mod.all_stats = null;
     
     // table `mods`

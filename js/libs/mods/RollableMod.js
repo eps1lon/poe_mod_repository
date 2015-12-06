@@ -1,4 +1,5 @@
-/* global Mod, this, Rollable, Spawnable, Applicable, ByteSet, ApplicableMod */
+/* global this, Spawnable, ByteSet, ApplicableMod, RollableMod */
+/* jshint bitwise:false */
 
 (function (__undefined) {
     /**
@@ -98,8 +99,8 @@
             return !ByteSet.byteBlacklisted(this.spawnable_byte, Spawnable.SUCCESS);
         },
         rollableOn: function (mod_container) {
-            this.rollable = this.applicableTo(mod_container) 
-                            && this.spawnableOn(mod_container) ;
+            this.rollable = this.applicableTo(mod_container) && 
+                            this.spawnableOn(mod_container) ;
             
             return this.rollable;
         },

@@ -1,4 +1,4 @@
-/* global Class */
+/* global Class, Applicable */
 
 (function (__undefined) {
     /**

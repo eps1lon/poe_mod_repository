@@ -1,4 +1,4 @@
-/* global Mod, MasterMod, ApplicableMod, Spawnable, Item, ModGenerator, Transmute, Vaal */
+/* global Mod, MasterMod, ApplicableMod, Spawnable, Item, ModGenerator, Transmute, Vaal, RollableMod */
 
 (function (__undefined) {
     /**
@@ -19,10 +19,10 @@
                     return null;
                 }
                 
-                if (+mod['Domain'] === Mod.DOMAIN.MASTER) {
+                if (+mod.Domain === Mod.DOMAIN.MASTER) {
                     // mastermod? => look for craftingbench
                     var craftingbenchoption = $.map(MasterMod.craftingbenchoptions, function (option) {
-                        if (+option['ModsKey'] === +mod['Rows']) {
+                        if (+option.ModsKey === +mod.Rows) {
                             return option;
                         }
                         return null;
@@ -38,7 +38,7 @@
                 }
                 
                 // spawnable?
-                if (mod["SpawnWeight_TagsKeys"] !== "") {
+                if (mod.SpawnWeight_TagsKeys !== "") {
                     return new RollableMod(mod);
                 }
                 
@@ -98,8 +98,8 @@
             baseitem.rarity = Item.RARITY.SHOWCASE;
             
             var mods = $.grep(this.getAvailableMods(), function (mod) {
-                return mod.applicableTo(baseitem, success)
-                        && (!Spawnable.implementedBy(mod) || mod.spawnableOn(baseitem));
+                return mod.applicableTo(baseitem, success) && 
+                        (!Spawnable.implementedBy(mod) || mod.spawnableOn(baseitem));
             });
             
             baseitem.rarity = old_rarity;

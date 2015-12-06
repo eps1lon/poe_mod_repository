@@ -1,4 +1,5 @@
-/* global Mod, ModGenerator, Item, Currency, ByteSet, this, Applicable, Transmute */
+/* global Item, Currency, ByteSet, this, Applicable, Transmute, Regal */
+/* jshint bitwise:false */
 
 (function (__undefined) {
     /**

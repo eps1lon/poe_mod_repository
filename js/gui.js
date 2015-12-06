@@ -1,5 +1,5 @@
-/* global ItemClassFactory, ModGeneratorFactory, BaseItem, ModGenerator, ModGeneratorException, e, Mod, ModInContext, Spawnable, Item, Applicable, ModFactory, Stat, ItemClass, RollableMod, ApplicableMod, MasterMod, baseitem, ByteSet, Masterbench */
-
+/* global $, ModGeneratorFactory, ModGenerator, Mod, Spawnable, Item, ModFactory, ApplicableMod, MasterMod, ByteSet, Masterbench, DataDependency, Localization */
+/* jshint bitwise:false */
 (function (__undefined) {
     // "tables"
     var mods = [],
@@ -486,7 +486,7 @@
                 // display options
                 $.each(mod_generator.craftingbenchoptions, function (i, craftingbenchoption) {
                     // Mod atleast displayed so we also display the option
-                    if ($("#" + Mod.domId(craftingbenchoption["ModsKey"])).length) {
+                    if ($("#" + Mod.domId(craftingbenchoption.ModsKey)).length) {
                         var $option = create_from_template(".craftingbenchoption", $craftingbenchoptions);
                         
                         $option.val(i);
@@ -620,4 +620,3 @@
         $("#use_mod_gen").trigger("click");
     });
 })();
-

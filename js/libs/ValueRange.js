@@ -1,3 +1,5 @@
+/* global Class, ValueRange */
+
 (function (__undefined) {
     /**
      * class ValueRange
@@ -49,9 +51,9 @@
                 max = max.toString(depth + 1);
             } 
             
-            return (depth > 0 ? "(" : "")
-                    + [min, max].join(depth % 2 ? ValueRange.sepEven : ValueRange.sepOdd)
-                    + (depth > 0 ? ")" : "");
+            return (depth > 0 ? "(" : "") + 
+                    [min, max].join(depth % 2 ? ValueRange.sepEven : ValueRange.sepOdd) + 
+                    (depth > 0 ? ")" : "");
         },
         clone: function () {
             return new ValueRange(this.min, this.max);
@@ -70,9 +72,9 @@
                                   value_range.add(this.max));
         },
         equals: function (other_value_range) {
-            return other_value_range instanceof ValueRange
-                    && this.min.equals(other_value_range.min)
-                    && this.max.equals(other_value_range.max);
+            return other_value_range instanceof ValueRange && 
+                    this.min.equals(other_value_range.min) && 
+                    this.max.equals(other_value_range.max);
         },
         multiply: function (value) {
             if (value instanceof ValueRange) {

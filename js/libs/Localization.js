@@ -1,4 +1,5 @@
-/* global Class, this */
+/* global Class, this, Localization */
+/* jshint bitwise:false */
 
 (function (__undefined) {
     /**
