@@ -23,7 +23,13 @@ gulp.task('deploy', ['html'], function() {
     // copy json files
     gulp.src(SRC + 'js/data/**')
         .pipe(gulp.dest(DIST + 'js/data'));
-    
+        
+    // assets
+    // TODO consider gitignore
+    gulp.src(SRC + 'css/icons/*.png')
+        .pipe(gulp.dest(DIST + 'icons/'));
+    return;    
+        
     // deploy
     return gulp.src(DIST + '**/*')
         .pipe(ghPages());
