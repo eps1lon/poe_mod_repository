@@ -517,6 +517,11 @@
                 $("option:last", $craftingbenchoptions).prop("selected", true);
                 $craftingbenchoptions.trigger("change");
             }
+            
+            $("input:radio.ModGenerator").parents(".applicable").removeClass("selected");
+            // add selected class to .applicable container
+            $("input:radio:checked.ModGenerator").parents(".applicable").addClass("selected");
+            
         });
         
         // changed craftingbenchoption handle

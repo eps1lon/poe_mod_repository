@@ -84,6 +84,11 @@ th.correct_group {
     opacity: .4;
 }
 
+#ModGenerator .applicable.selected {
+    background-color: rgb(25,216,115);
+    color: #000;
+}
+
 .itembox input.ilvl {
     width: 3em;
 }

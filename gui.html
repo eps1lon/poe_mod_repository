@@ -120,8 +120,11 @@
 
         <section id="ModGenerator">
             <h2>Crafting options</h2>
-            <label for="mod_generator_showcase">All Affixes</label>
-            <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_showcase" value="ITEMSHOWCASE">
+            <span class="Itemshowcase applicable">
+                <label for="mod_generator_showcase">All Affixes</label>
+                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_showcase" value="ITEMSHOWCASE">
+            </span>
+            
             
             <fieldset class="currencies">
                 <legend>Currencies</legend>
@@ -174,27 +177,27 @@
                 <legend>Masterbenches</legend>
             
                 <ul class="masterbenches">
-                    <li>
+                    <li class="applicable">
                         <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_catarina" value="MASTERBENCH" data-npc_master_key="2">
                         <label for="mod_generator_catarina">Catarina</label>
                     </li>
-                    <li>
+                    <li class="applicable">
                         <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_elreon" value="MASTERBENCH" data-npc_master_key="5">
                         <label for="mod_generator_elreon">Elreon</label>
                     </li>
-                    <li>
+                    <li class="applicable">
                         <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_haku" value="MASTERBENCH" data-npc_master_key="6">
                         <label for="mod_generator_haku">Haku</label>
                     </li>
-                    <li>
+                    <li class="applicable">
                         <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_leo" value="MASTERBENCH" data-npc_master_key="7">
                         <label for="mod_generator_leo">Leo</label>
                     </li>
-                    <li>
+                    <li class="applicable">
                         <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_tora" value="MASTERBENCH" data-npc_master_key="1">
                         <label for="mod_generator_tora">Tora</label>
                     </li>
-                    <li>
+                    <li class="applicable">
                         <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_vagan" value="MASTERBENCH" data-npc_master_key="4">
                         <label for="mod_generator_vagan">Vagan</label>
                     </li>
