@@ -31,6 +31,15 @@
                 "Right click this item then left click a normal item to apply"
             ]
         },
+        ALTERATION: {
+            klass: "Alteration",
+            name: "Orb of Alteration",
+            stats: [
+                "Currency",
+                "Reforges a magic item with new random properties",
+                "Right click this item then left click a normal item to apply"
+            ]
+        },
         SCOURING: {
             klass: "Scouring",
             name: "Orb of Scouring",
