@@ -26,7 +26,7 @@ gulp.task('deploy', ['html'], function() {
         
     // assets
     // TODO consider gitignore
-    gulp.src(SRC + 'css/icons/*.png')
+    gulp.src(SRC + 'css/icons/*.(gif|png|jpeg)')
         .pipe(gulp.dest(DIST + 'icons/'));
 
     // deploy
