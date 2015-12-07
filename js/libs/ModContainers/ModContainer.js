@@ -120,7 +120,7 @@
          * 
          * @returns {Array}
          */
-        prefixes: function () {
+        getPrefixes: function () {
             return $.grep(this.mods, function (mod) {
                 return mod.isPrefix();
             });
@@ -130,19 +130,9 @@
          * 
          * @returns {Array}
          */
-        suffixes: function () {
+        getSuffixes: function () {
             return $.grep(this.mods, function (mod) {
                 return mod.isSuffix();
-            });
-        },
-        /**
-         * all implicit mods
-         * 
-         * @returns {Array}
-         */
-        implicits: function () {
-            return $.grep(this.mods, function (mod) {
-                return mod.isImplicit();
             });
         },
         /**
@@ -150,9 +140,9 @@
          * 
          * @returns {Array}
          */
-        affixes: function () {
+        getAffixes: function () {
             // rather order the mods than mix em up
-            return this.prefixes().concat(this.suffixes());
+            return this.getPrefixes().concat(this.getSuffixes());
         },
         /**
          * all mods 

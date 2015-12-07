@@ -78,6 +78,11 @@
                     mod.spawnableOn(baseitem, success);
                 }
                 
+                // vaals replace so we dont care about full or not
+                if (mod.isType("vaal") && mod.applicable_byte & ApplicableMod.APPLICABLE_BYTE.DOMAIN_FULL) {
+                    mod.applicable_byte ^= ApplicableMod.APPLICABLE_BYTE.DOMAIN_FULL;
+                }
+                
                 return mod;
             });
             
@@ -97,9 +102,17 @@
             var old_rarity = baseitem.rarity;
             baseitem.rarity = Item.RARITY.SHOWCASE;
             
-            var mods = $.grep(this.getAvailableMods(), function (mod) {
-                return mod.applicableTo(baseitem, success) && 
-                        (!Spawnable.implementedBy(mod) || mod.spawnableOn(baseitem));
+            var mods = $.map(this.getAvailableMods(), function (mod) {
+                if (mod.applicableTo(baseitem, success) && 
+                        (!Spawnable.implementedBy(mod) || mod.spawnableOn(baseitem))) {
+                    // vaals replace so we dont care about full or not
+                    if (mod.isType("vaal") && mod.applicable_byte & ApplicableMod.APPLICABLE_BYTE.DOMAIN_FULL) {
+                        mod.applicable_byte ^= ApplicableMod.APPLICABLE_BYTE.DOMAIN_FULL;
+                    }
+                    
+                    return mod;
+                }
+                return null;
             });
             
             baseitem.rarity = old_rarity;

@@ -2,9 +2,12 @@
 
 (function (__undefined) {
     /**
-     * represents an ingame item (boots, maps, rings for example)
      * 
      * Item Class extends @link ModContainer
+     * 
+     * represents an ingame item (boots, maps, rings for example)
+     * the class only represents the explicits and is a fascade for an 
+     * additional implicit container
      */
     this.Item = ModContainer.extend({
         /**
@@ -19,6 +22,7 @@
                 return null;
             }
             
+            // explicits
             this._super();
             
             // default
@@ -37,8 +41,9 @@
             this.meta_data = MetaData.build(clazz, Item.meta_data);
             
             // implicits
+            this.implicits = new ItemImplicits([]);
             $.each(this.entry.valueAsArray("Implicit_ModsKeys"), function (_, mod_key) {
-                if (!that.addMod(new ApplicableMod(Mod.mods[mod_key]))) {
+                if (!that.implicits.addMod(new ApplicableMod(Mod.mods[mod_key]))) {
                     console.log("could not add", mod_key);
                 }
             });
@@ -55,13 +60,51 @@
             if (!(mod instanceof Mod)) {
                 return false;
             }
-            if (mod.isPrefix() && this.prefixes().length < this.maxPrefixes() || 
-                    mod.isSuffix() && this.suffixes().length < this.maxSuffixes() || 
-                    mod.isImplicit() && this.implicits().length < this.maxImplicits()
+            
+            if (mod.isPrefix() && this.getPrefixes().length < this.maxPrefixes() || 
+                    mod.isSuffix() && this.getSuffixes().length < this.maxSuffixes()
             ) {
                 return this._super(mod);
             }
             return false;
+        },
+        /**
+         * @param {Mod} mod
+         * @returns {Boolean} true on success
+         */
+        addImplicits: function (mod) {
+            return this.implicits.addMod(mod);
+        },
+        /**
+         * ItemImplicts fascade
+         * @returns {ModContainer@call;removeAllMods}
+         */
+        removeAllImplicits: function () {
+            return this.implicits.removeAllMods();
+        },
+        /**
+         * ItemImplicits fascade
+         * @param {Mod} mod
+         * @returns {ModContainer@call;removeMod}
+         */
+        removeImplicits: function (mod) {
+            return this.implicits.removeMod(mod);
+        },
+        /**
+         * ItemImplicits fascade
+         * @param {Number} primary
+         * @returns {ModContainer@call;getMod}
+         */
+        getMod: function (primary) {
+            return this.implicits.getMod(primary);
+        },
+        /**
+         * ItemImplicits fascade
+         * @param {Number} primary
+         * @returns {ModContainer@call;inMods}
+         */
+        inMods: function (primary) {
+            return this.implicits.inMods(primary);
         },
         /**
          * adds a new tag to the item if its not already presen
@@ -112,8 +155,6 @@
                     return this.maxPrefixes();
                 case Mod.MOD_TYPE.SUFFIX:
                     return this.maxSuffixes();
-                case Mod.MOD_TYPE.IMPLICIT:
-                    return this.maxImplicits();
             }
             
             return -1;
@@ -148,14 +189,6 @@
             return this.maxPrefixes();
         },
         /**
-         * maximum number of implicits
-         * 
-         * @returns {Number}
-         */
-        maxImplicits: function () {
-            return 1;
-        },
-        /**
          * equiv mod domain
          * 
          * @returns {Mod.DOMAIN.*}
@@ -186,6 +219,9 @@
                     return mod_domain === this.modDomainEquiv();
             }
         },
+        getImplicits: function () {
+            return this.implicits.asArray();
+        },
         /**
          * name of the base_item
          * @returns {String}
@@ -202,14 +238,14 @@
                 case Item.RARITY.MAGIC:
                     var name = "";
                     // prefix
-                    if (this.prefixes().length) {
-                        name += this.prefixes()[0].getProp("Name") + " ";
+                    if (this.getPrefixes().length) {
+                        name += this.getPrefixes()[0].getProp("Name") + " ";
                     }
                     // + base_name
                     name += this.baseName();
                     // + suffix
-                    if (this.suffixes().length) {
-                        name += " " + this.suffixes()[0].getProp("Name");
+                    if (this.getSuffixes().length) {
+                        name += " " + this.getSuffixes()[0].getProp("Name");
                     }
                     
                     return name;
@@ -283,7 +319,7 @@
             var stats = {};
             
             // flatten mods.statsJoined()
-            $.each($.map(this.mods, function (mod) {
+            $.each($.map(this.asArray().concat(this.getImplicits()), function (mod) {
                 return mod.statsJoined();
             }), function (_, stat) {
                 var id = stat.getProp("Id");

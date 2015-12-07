@@ -9,16 +9,22 @@
             this._super(props);
         },
         isPrefix: function () {
-            return +this.getProp("GenerationType") === Mod.MOD_TYPE.PREFIX;
+            return this.isType("prefix");
         },
         isSuffix: function () {
-            return +this.getProp("GenerationType") === Mod.MOD_TYPE.SUFFIX;
+            return this.isType("suffix");
         },
-        isImplicit: function () {
-            return [Mod.MOD_TYPE.IMPLICIT, Mod.MOD_TYPE.VAAL].indexOf(+this.getProp("GenerationType")) !== -1;
+        isPremade: function () {
+            return this.isType("premade");
+        },
+        isType: function (type) {
+            return +this.getProp("GenerationType") === Mod.MOD_TYPE[type.toUpperCase()];
         },
         isAffix: function () {
             return this.isPrefix() || this.isSuffix();
+        },
+        implicitCandidate: function () {
+            return this.isPremade() || this.isType("vaal");
         },
         /**
          * @returns {Array<Stat>} all stats from this mod
@@ -100,7 +106,7 @@
     this.Mod.MOD_TYPE = {
         PREFIX: 1,
         SUFFIX: 2,
-        IMPLICIT: 3,
+        PREMADE: 3,
         NEMESIS: 4,
         VAAL: 5,
         BLOODLINES: 6,

@@ -78,7 +78,7 @@
             $mods.addClass(modGetter);
 
             // affixes
-            $.each(baseitem[modGetter](), function (i, mod) {
+            $.each(baseitem["get" + modGetter.ucfirst()](), function (i, mod) {
                 var $mod = create_from_template("li.mod", $mods);
 
                 $mod.data("primary", mod.getProp("Rows"));
@@ -144,7 +144,7 @@
         }));
         
         var implicits = Spawnable.calculateSpawnchance($.grep(applicable_mods, function (mod) {
-            return mod.isImplicit();
+            return mod.implicitCandidate();
         }));
         
         //console.log("implicits", implicits);
