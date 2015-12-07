@@ -185,7 +185,7 @@
                 $(".spawn_chance", $tr).text(mod.humanSpawnchance());
             }
             
-            $tr.prop("title", applicable_byte_human.strings.concat(spawnable_byte_human.strings).join(" and "));
+            $tr.prop("title", "`" + applicable_byte_human.strings.concat(spawnable_byte_human.strings).join("` and `") + "`");
             
             // ilvl
             $(".ilvl", $tr).text(mod.getProp("Level"));
@@ -285,7 +285,7 @@
                 $(".spawn_chance", $mod).text(mod.humanSpawnchance());
             }
             
-            $mod.prop("title", applicable_byte_human.strings.concat(spawnable_byte_human.strings).join(" and "));
+            $mod.prop("title", "`" + applicable_byte_human.strings.concat(spawnable_byte_human.strings).join("` and `") + "`");
             
             // ilvl
             $(".ilvl", $mod).text(mod.getProp("Level"));
