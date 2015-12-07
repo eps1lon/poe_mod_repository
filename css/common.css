@@ -181,3 +181,8 @@ fieldset.masterbenches {
 .loading_indicator[data-loading-state="3"]:after {
     content: ":fail";
 }
+
+#use_mod_gen[data-applicable="false"] {
+    background-color: #f00;
+    text-decoration: line-through;
+}

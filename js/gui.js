@@ -479,6 +479,7 @@
             display_available_mods(mod_generator, baseitem);
             $("#use_mod_gen .name").text(mod_generator.name());
             $("#use_mod_gen .craftingbenchoption").empty();
+            $("#use_mod_gen").attr("data-applicable", "");
             
             // remove craftingbenchoptions
             var $craftingbenchoptions = $("#craftingbenchoptions");
@@ -518,6 +519,7 @@
         // mod gen handle
         $("#use_mod_gen").on("click", function () {
             var args;
+            var $this = $(this);
             
             console.log(mod_generator, "@", baseitem);
             
@@ -545,8 +547,11 @@
                 display_baseitem(baseitem, "#used_baseitem");
                 display_available_mods(mod_generator, baseitem);
                 display_mod_gen_applicability(baseitem, mods);
+                
+                $this.attr("data-applicable", true);
             } else {
                 // flash error
+                $this.attr("data-applicable", false);
             }
 
             return true;
