@@ -1,0 +1,22 @@
+table.tablesorter .tablesorter-header {
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.tablesorter .tablesorter-headerUnSorted {
+    background-image: url(icons/tablesorter-unsorted.gif);
+}
+
+table.tablesorter .tablesorter-headerAsc {
+    background-image: url(icons/tablesorter-asc.gif);
+}
+
+table.tablesorter .tablesorter-headerDesc {
+    background-image: url(icons/tablesorter-desc.gif);
+}
+
+table.tablesorter .sorter-false {
+    background-image: none;
+    padding-right: 0px;
+}
