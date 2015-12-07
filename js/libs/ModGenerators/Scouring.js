@@ -30,7 +30,7 @@
                 locked_prefixes = item.inMods(MasterMod.METAMOD.LOCKED_PREFIXES) !== -1;
                 locked_suffixes = item.inMods(MasterMod.METAMOD.LOCKED_SUFFIXES) !== -1;
                 
-                $.each(item.affixes(), function (_, mod) {
+                $.each(item.getAffixes(), function (_, mod) {
                      if (mod.isPrefix() && !locked_prefixes) {
                          item.removeMod(mod);
                      } else if (mod.isSuffix() && !locked_suffixes) {
@@ -39,8 +39,8 @@
                 });
                 
                 // set correct rarity
-                remaining_prefixes = item.prefixes().length;
-                remaining_suffixes = item.suffixes().length;
+                remaining_prefixes = item.getPrefixes().length;
+                remaining_suffixes = item.getSuffixes().length;
                 
                 if (remaining_prefixes === 0 && remaining_suffixes === 0) {
                     item.rarity = Item.RARITY.NORMAL;
