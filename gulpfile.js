@@ -37,7 +37,7 @@ gulp.task('deploy', ['html'], function() {
 gulp.task('html', function() {
     return gulp.src(['*.html'])
         .pipe(useref())
-        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.js', uglify({preserveComments: 'license'})))
         .pipe(gulpif('*.css', minifyCss()))
         .pipe(gulp.dest(DIST));
 });

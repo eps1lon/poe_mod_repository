@@ -1,5 +1,10 @@
 /* global $, ModGeneratorFactory, ModGenerator, Mod, Spawnable, Item, ModFactory, ApplicableMod, MasterMod, ByteSet, Masterbench, DataDependency, Localization */
 /* jshint bitwise:false */
+/*!
+ * PoE Mod Repository
+ * By Sebastian Silbermann
+ * MIT Licensed.
+ */
 (function (__undefined) {
     // "tables"
     var mods = [],
