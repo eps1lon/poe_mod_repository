@@ -8,14 +8,14 @@
     border-style: solid;
     text-align: center;
     color: #7f7f7f;
-    width: 360px;
+
     position: relative;
 }
 
 .itemboxheader {
     font-size: 19px;
     display: block;
-    width: 360px;
+
 }
 
 .itemboxheader {
@@ -32,6 +32,8 @@
 
 .itemboxheader.double-line .itemName {
     min-height: 27px;
+    margin-left: 43px;
+    margin-right: 43px;
 }
 
 .itemboxheader .itemboxheader-left,

@@ -95,7 +95,7 @@
          * @param {Number} primary
          * @returns {ModContainer@call;getMod}
          */
-        getMod: function (primary) {
+        getImplicit: function (primary) {
             return this.implicits.getMod(primary);
         },
         /**
@@ -103,7 +103,7 @@
          * @param {Number} primary
          * @returns {ModContainer@call;inMods}
          */
-        inMods: function (primary) {
+        inImplicits: function (primary) {
             return this.implicits.inMods(primary);
         },
         /**
@@ -227,6 +227,9 @@
          * @returns {String}
          */
         baseName: function () {
+            if (this.rarity === Item.RARITY.MAGIC) {
+                return "";
+            }
             return this.entry.getProp("Name");
         },
         /**
@@ -242,7 +245,7 @@
                         name += this.getPrefixes()[0].getProp("Name") + " ";
                     }
                     // + base_name
-                    name += this.baseName();
+                    name += this.entry.getProp("Name");
                     // + suffix
                     if (this.getSuffixes().length) {
                         name += " " + this.getSuffixes()[0].getProp("Name");
