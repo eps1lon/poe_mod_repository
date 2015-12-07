@@ -28,8 +28,7 @@ gulp.task('deploy', ['html'], function() {
     // TODO consider gitignore
     gulp.src(SRC + 'css/icons/*.png')
         .pipe(gulp.dest(DIST + 'icons/'));
-    return;    
-        
+
     // deploy
     return gulp.src(DIST + '**/*')
         .pipe(ghPages());
