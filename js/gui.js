@@ -1,4 +1,4 @@
-/* global $, ModGeneratorFactory, ModGenerator, Mod, Spawnable, Item, ModFactory, ApplicableMod, MasterMod, ByteSet, Masterbench, DataDependency, Localization */
+/* global $, ModGeneratorFactory, ModGenerator, Mod, Spawnable, Item, ModFactory, ApplicableMod, MasterMod, ByteSet, Masterbench, DataDependency, Localization, baseitem */
 /* jshint bitwise:false */
 /*!
  * PoE Mod Repository
@@ -118,6 +118,7 @@
         
         // shown groups
         var $clicked_groups = $("#available_mods tbody.clicked");
+        var was_expanded = $("table.mods").hasClass("expanded");
                 
         // extends ModGenerator implements Applicable
         if (!(mod_generator instanceof ModGenerator)) {
@@ -239,6 +240,11 @@
         $clicked_groups.each(function () {
             $("#" + $(this).attr("id")).trigger("click");
         });
+        
+        // was expanded?
+        if (was_expanded) {
+            $("#expand_mods").trigger("click");
+        }
         
         return true;
     };
@@ -634,6 +640,23 @@
             display_baseitem(baseitem, "#used_baseitem");
             display_available_mods(mod_generator, baseitem);
             display_mod_gen_applicability(baseitem, mods);
+        });
+        
+        // expand mod groups
+        $("#expand_mods").on("click", function () {
+            console.log("expand");
+            $("table.mods").addClass("expanded");
+            
+            $("tbody.mods:not(.template)").show();
+            $("tbody.correct_group:not(.template)").hide();
+        });
+
+        // collapse mod groups = invert #expand_mods
+        $("#collapse_mods").on("click", function () {
+            $("table.mods").removeClass("expanded");
+            
+            $("tbody.mods:not(.template)").hide();
+            $("tbody.correct_group:not(.template)").show();
         });
         
         // test dom handles

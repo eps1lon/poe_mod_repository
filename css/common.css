@@ -198,3 +198,11 @@ fieldset.masterbenches {
     background-color: #f00;
     text-decoration: line-through;
 }
+
+a {
+    color: #A38B63;
+}
+
+a:hover {
+    color: #fff;
+}
