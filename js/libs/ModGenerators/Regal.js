@@ -15,6 +15,7 @@
          */
         init: function (all_mods) {
             this._super(all_mods, Transmute.mod_filter);
+            this.klass = "Regal";
         },
         /**
          * adds one random prop and upgrades to rare

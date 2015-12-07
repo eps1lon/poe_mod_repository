@@ -83,6 +83,9 @@
            
             // TODO spawnweight
             return mods[Math.floor(Math.random() * (mods.length - 1))];
+        },
+        name: function () {
+            return "AbstractModGenerator";
         }
     }); 
 })();

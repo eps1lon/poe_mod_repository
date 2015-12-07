@@ -14,6 +14,7 @@
          */
         init: function () {
             this._super([]);
+            this.klass = "Scouring";
         },
         /**
          * applies Orb of Scouring to an item

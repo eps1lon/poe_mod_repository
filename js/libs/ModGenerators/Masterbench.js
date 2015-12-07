@@ -154,6 +154,9 @@
             baseitem.rarity = old_rarity;
             
             return mods;
+        },
+        name: function () {
+            return this.craftingbenchoptions[0].MasterNameShort;
         }
     });
 })();

@@ -117,6 +117,9 @@
             
             baseitem.rarity = old_rarity;
             return mods;
+        },
+        name: function () {
+            return "Item Showcase";
         }
     });
 })();

@@ -15,6 +15,7 @@
          */
         init: function (all_mods) {
             this._super(all_mods, Transmute.mod_filter);
+            this.klass = "Exalted";
         },
         /**
          * adds one random property to an item

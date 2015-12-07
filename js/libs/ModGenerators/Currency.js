@@ -1,4 +1,4 @@
-/* global RollableMod, Mod, ModGenerator, ByteSet, this, Item, Applicable, Currency */
+/* global RollableMod, Mod, ModGenerator, ByteSet, this, Item, Applicable, Currency, ModGeneratorFactory */
 /* jshint bitwise:false */
 
 (function (__undefined) {
@@ -108,6 +108,16 @@
          */
         applicableCached: function () {
             return !ByteSet.byteBlacklisted(this.applicable_byte, Applicable.SUCCESS);
+        },
+        name: function () {
+            var that = this;
+            // grep object
+            return $.map(ModGeneratorFactory.GENERATORS, function (props) {
+                if (props.klass === that.klass) {
+                    return props.name;
+                }
+                return null;
+            })[0] || "AbstractCurrency";
         }
     });
     

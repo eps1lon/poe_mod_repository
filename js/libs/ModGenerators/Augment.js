@@ -15,6 +15,7 @@
          */
         init: function (all_mods) {
             this._super(all_mods, Transmute.mod_filter);
+            this.klass = "Augment";
         },
         /**
          * adds one random property

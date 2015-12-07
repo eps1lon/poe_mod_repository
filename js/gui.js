@@ -477,6 +477,8 @@
 
             // update gui
             display_available_mods(mod_generator, baseitem);
+            $("#use_mod_gen .name").text(mod_generator.name());
+            $("#use_mod_gen .craftingbenchoption").empty();
             
             // remove craftingbenchoptions
             var $craftingbenchoptions = $("#craftingbenchoptions");
@@ -504,7 +506,13 @@
                 // also selecting first visible yields to weird interactions
                 // with hidden options 
                 $("option:last", $craftingbenchoptions).prop("selected", true);
+                $craftingbenchoptions.trigger("change");
             }
+        });
+        
+        // changed craftingbenchoption handle
+        $("#craftingbenchoptions").on("change", function () {
+            $("#use_mod_gen .craftingbenchoption").text($("option:selected", this).text());
         });
         
         // mod gen handle
