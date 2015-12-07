@@ -101,7 +101,7 @@ th.correct_group {
     display: inline-block;
 }
 
-.mod-type-implicit .remove_mod {
+.implicits .remove_mod {
     display: none;
 }
 
