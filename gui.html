@@ -299,11 +299,21 @@
                 <li class="applicable" data-applicable_byte="16">iLvl to low</li>
                 <li class="applicable" data-applicable_byte="32">only LLD mods allowed</li>
             </ul>
-
             <ul class="legend spawnable RollableMod" data-klass="RollableMod" data-byte-ident="spawnable_byte">
                 <li class="spawnable">Success</li>
                 <li class="spawnable" data-spawnable_byte="2">No matching tags</li>
                 <li class="spawnable" data-spawnable_byte="4">Spawnchance is zero</li>
+            </ul>
+            
+            <ul class="legend applicable MasterMod" data-klass="MasterMod" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">No more Space for mods of this type</li>
+                <li class="applicable" data-applicable_byte="4">Modgroup already exists</li>
+                <li class="applicable" data-applicable_byte="8">Mod not applicable to this Item</li>
+                <li class="applicable" data-applicable_byte="16">iLvl to low</li>
+                <li class="applicable" data-applicable_byte="32">only LLD mods allowed</li>
+                <li class="applicable" data-applicable_byte="64">Not a valid itemclass</li>
+                <li class="applicable" data-applicable_byte="128">Already has a crafted mod (or needs Multimod)</li>
             </ul>
         </div>
         
