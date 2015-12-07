@@ -166,6 +166,7 @@
         $.each(implicits, function (_, mod) {
             var $tr = create_from_template("#implicits tbody tr.mod");
             var serialized = mod.serialize();
+            var title;
             
             $tr.attr("id", mod.domId());
             
@@ -185,7 +186,10 @@
                 $(".spawn_chance", $tr).text(mod.humanSpawnchance());
             }
             
-            $tr.prop("title", "`" + applicable_byte_human.strings.concat(spawnable_byte_human.strings).join("` and `") + "`");
+            title = applicable_byte_human.strings.concat(spawnable_byte_human.strings).join("` and `");
+            if (title) {
+                $tr.prop("title", "`" + title + "`");
+            }
             
             // ilvl
             $(".ilvl", $tr).text(mod.getProp("Level"));
@@ -207,7 +211,7 @@
             $tr.addClass(mod.modType());
             
             // possible? TODO better way? maybe scan byte
-            if ($tr.prop("title")) {
+            if (title) {
                 $(".add_mod", $tr).remove();
             }
             
@@ -249,6 +253,7 @@
         $.each(mods, function (_, mod) {
             var $mod = create_from_template("tbody.mods.template .mod", $table);
             var serialized = mod.serialize();
+            var title;
             
             $mod.attr("id", mod.domId());
             
@@ -285,7 +290,10 @@
                 $(".spawn_chance", $mod).text(mod.humanSpawnchance());
             }
             
-            $mod.prop("title", "`" + applicable_byte_human.strings.concat(spawnable_byte_human.strings).join("` and `") + "`");
+            title = applicable_byte_human.strings.concat(spawnable_byte_human.strings).join("` and `");
+            if (title) {
+                $mod.prop("title", "`" + title + "`");
+            }
             
             // ilvl
             $(".ilvl", $mod).text(mod.getProp("Level"));
@@ -300,7 +308,7 @@
             $mod.data("mod", serialized);
             
             // possible? TODO better way? maybe scan byte
-            if ($mod.prop("title")) {
+            if (title) {
                 $(".add_mod", $mod).remove();
             }
             
