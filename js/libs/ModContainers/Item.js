@@ -222,6 +222,9 @@
         getImplicits: function () {
             return this.implicits.asArray();
         },
+        getAllMods: function () {
+            return this.asArray().concat(this.getImplicits());
+        },
         /**
          * name of the base_item
          * @returns {String}
@@ -273,7 +276,7 @@
             var requirements = {};
             
             $.each({
-                Level: this.entry.getProp("DropLevel"),
+                Level: this.requiredLevel(),
                 Str: this.entry.getProp("ReqStr"),
                 Dex: this.entry.getProp("ReqDex"),
                 Int: this.entry.getProp("ReqInt")
@@ -284,6 +287,11 @@
             });
             
             return requirements;
+        },
+        requiredLevel: function () {
+            return Math.max.apply(Math, [+this.entry.getProp("DropLevel")].concat($.map(this.getAllMods(), function (mod) {
+                return Math.floor(0.8 * +mod.getProp("Level"));
+            })));
         },
         /**
          * string identifier of the item_class
