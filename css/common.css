@@ -170,16 +170,23 @@ fieldset.masterbenches {
     display: inline-block;
 }
 
+.loading_indicator:after {
+    position: relative;
+    
+    top: 4px;
+    margin-right: 5px;
+}
+
 .loading_indicator[data-loading-state="1"]:after {
-    content: ":loading";
+    content: url(icons/loading.png);
 }
 
 .loading_indicator[data-loading-state="2"]:after {
-    content: ":loaded";
+    content: url(icons/complete.png);
 }
 
 .loading_indicator[data-loading-state="3"]:after {
-    content: ":fail";
+    content: url(icons/fail.png);
 }
 
 #use_mod_gen[data-applicable="false"] {
