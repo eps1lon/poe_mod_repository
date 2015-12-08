@@ -194,15 +194,14 @@
      * @returns {void}
      */
     var display_mod_group = function (mods, $table, grouping) {
-        var $mod_template = create_from_template(".mod", $table);
         // empty mods
         if (grouping) {
             $("tbody:not(.template)", $table).remove();
         } else {
             $(".mod:not(.template)", $table).remove();
         }
-        
-        
+        var $mod_template = create_from_template(".mod", $table);
+
         // display affixes
         $("caption .count", $table).text(mods.length);
         $.each(mods, function (_, mod) {
