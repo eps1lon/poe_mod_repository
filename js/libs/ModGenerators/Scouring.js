@@ -93,7 +93,10 @@
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte, Scouring.APPLICABLE_BYTE, Scouring.APPLICABLE_BYTE.SUCCESS);
+            return ByteSet.human(this.applicable_byte, 
+                                 Scouring.APPLICABLE_BYTE, 
+                                 Scouring.APPLICABLE_BYTE.SUCCESS, 
+                                 "Scouring.applicable_byte");
         }
     });
     

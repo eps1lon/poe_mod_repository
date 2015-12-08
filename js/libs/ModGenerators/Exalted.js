@@ -61,7 +61,10 @@
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte, Exalted.APPLICABLE_BYTE, Exalted.APPLICABLE_BYTE.SUCCESS);
+            return ByteSet.human(this.applicable_byte, 
+                                 Exalted.APPLICABLE_BYTE, 
+                                 Exalted.APPLICABLE_BYTE.SUCCESS, 
+                                 "Exalted.applicable_byte");
         }
     });
     

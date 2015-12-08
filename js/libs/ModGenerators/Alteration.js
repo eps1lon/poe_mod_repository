@@ -68,7 +68,10 @@
             return !ByteSet.byteBlacklisted(this.applicable_byte, success);
         },
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte, Alteration.APPLICABLE_BYTE, Alteration.APPLICABLE_BYTE.SUCCESS);
+            return ByteSet.human(this.applicable_byte, 
+                                 Alteration.APPLICABLE_BYTE, 
+                                 Alteration.APPLICABLE_BYTE.SUCCESS, 
+                                 "Alteration.applicable_byte");
         }
     });
     

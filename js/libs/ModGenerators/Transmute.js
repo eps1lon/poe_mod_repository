@@ -100,7 +100,10 @@
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte, Transmute.APPLICABLE_BYTE, Transmute.APPLICABLE_BYTE.SUCCESS);
+            return ByteSet.human(this.applicable_byte, 
+                                 Transmute.APPLICABLE_BYTE, 
+                                 Transmute.APPLICABLE_BYTE.SUCCESS, 
+                                 "Transmute.applicable_byte");
         }
     });
     

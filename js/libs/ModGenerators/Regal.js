@@ -96,7 +96,10 @@
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte, Regal.APPLICABLE_BYTE, Regal.APPLICABLE_BYTE.SUCCESS);
+            return ByteSet.human(this.applicable_byte, 
+                                 Regal.APPLICABLE_BYTE, 
+                                 Regal.APPLICABLE_BYTE.SUCCESS, 
+                                 "Regal.applicable_byte");
         }
     });
     
