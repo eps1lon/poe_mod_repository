@@ -47,7 +47,7 @@ th.correct_group {
 }
 
 .template {
-    display: none;
+    display: none !important;
 }
 
 .mods .stats {
@@ -91,15 +91,6 @@ th.correct_group {
 
 .itembox input.ilvl {
     width: 3em;
-}
-
-.itembox ul {
-    list-style: none;
-    padding: 0;
-}
-
-.itembox ul.stats {
-    display: block;
 }
 
 .remove_mod {

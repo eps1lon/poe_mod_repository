@@ -40,13 +40,14 @@
         $("#item_rarities option[value='" + rarity_ident.toUpperCase() + "']").prop("selected", true);
         
         var $statsgroup_template = create_from_template(".itembox-statsgroup", $itembox);
-        var $statsgroup = $statsgroup_template.clone();
+        var $statsgroup = $statsgroup_template.clone(true);
         
         // name
         $(".itemboxheader .itemName", $itembox).text(baseitem.itemName());
         $(".itemboxheader .baseName", $itembox).text(baseitem.baseName());
         
         // item_class
+        $statsgroup.addClass("meta_data");
         $statsgroup.append(baseitem.itemclassIdent().toLowerCase().ucfirst());
         
         // tags
@@ -54,14 +55,22 @@
             return props.Id.underscoreToHuman();
         }).join(", "));
         
+        // sep
+        $(".itembox-stats", $itembox).append($statsgroup);
+        $statsgroup = $statsgroup_template.clone(true);
+        $statsgroup.addClass("localStats");
+        
         // stats
         $.each(baseitem.localStats(), function (stat_desc, value) {
             $statsgroup.append("<br>", stat_desc, ": ", "<span class='text-value'>" + value + "</span>");
         });
         
         // sep
-        $(".itembox-stats", $itembox).append($statsgroup);
-        $statsgroup = $statsgroup_template.clone();
+        if ($.trim($statsgroup.text()).length) {
+            $(".itembox-stats", $itembox).append($statsgroup);
+        }
+        $statsgroup = $statsgroup_template.clone(true);
+        $statsgroup.addClass("requirements");
         
         // Requirements
         $statsgroup.append("Requires ", $.map(baseitem.requirements(), function (requirement, key) {
@@ -70,14 +79,14 @@
         // ilvl
         $statsgroup.append(create_from_template(".ilvl", $itembox).val(baseitem.item_level));
         
-        // sep
-        $(".itembox-stats", $itembox).append($statsgroup);
-        $statsgroup = $statsgroup_template.clone();
-        
         $.each(["implicits", "affixes"], function (_, modGetter) {
             // sep
-            $(".itembox-stats", $itembox).append($statsgroup);
+            if ($.trim($statsgroup.text()).length) {
+                $(".itembox-stats", $itembox).append($statsgroup);
+            }
+            
             $statsgroup = $statsgroup_template.clone();
+            $statsgroup.addClass(modGetter);
 
             var $mods = create_from_template("ul.mods", $itembox);
             $mods.addClass(modGetter);
@@ -105,7 +114,9 @@
         });
 
         // sep
-        $(".itembox-stats", $itembox).append($statsgroup);
+        if ($.trim($statsgroup.text()).length) {
+            $(".itembox-stats", $itembox).append($statsgroup);
+        }
         //$(".itembox-stats", $itembox).append($separator_template.clone())
         //$statsgroup = $statsgroup_template.clone();
         
