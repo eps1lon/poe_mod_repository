@@ -617,6 +617,11 @@
             $("tbody.correct_group:not(.template)").show();
         });
         
+        // display stats with mods in itembox handle
+        $("#itembox_stats_with_mods").on("change", function () {
+            $(".itembox .mods .mod > *:not(.stats)").toggle($(this).prop("checked"));
+        });
+        
         // test dom handles
         $("#item_classes option:not(.template)").filter(function () {
             return $(this).text().toLowerCase() === "ring";

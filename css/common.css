@@ -98,7 +98,7 @@ th.correct_group {
 }
 
 .implicits .remove_mod {
-    display: none;
+    display: none !important;
 }
 
 
