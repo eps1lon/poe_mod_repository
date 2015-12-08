@@ -34,8 +34,10 @@
         lookupString: function (key, params) {
             var used_option = null;
             
+            // every option
             $.each(this.data[key], function (i, option) {
                 var and_bit = 1;
+                // loop through every and condition
                 $.each(option.and, function (j, range_string) {
                     and_bit &= +Localization.inRange(range_string, params[j]);
                     if (!and_bit) {
@@ -53,6 +55,7 @@
             
             if (used_option === null) {
                 console.log("no valid match for", this.data[key], "with", params);
+                
                 return this.data[key];
             }
             

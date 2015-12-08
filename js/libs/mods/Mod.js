@@ -53,6 +53,9 @@
             // TODO maybe check before localizing cause unique on long strings might
             // be inefficient. on the other hand we almost always handle < 10 mods
             return $.unique($.map(stats, function (stat) {
+                if (stat.values.isZero()) {
+                    return null;
+                }
                 return stat.t(stats, Mod.localization);
             })).join("\n");
         },
