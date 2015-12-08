@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var ghPages = require('gulp-gh-pages');
 var gulpif = require('gulp-if');
 var minifyCss = require('gulp-minify-css');
+var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
 var useref = require('gulp-useref');
 
@@ -28,6 +29,11 @@ gulp.task('deploy', ['html'], function() {
     // TODO consider gitignore
     gulp.src(SRC + 'css/icons/*.(gif|png|jpeg)')
         .pipe(gulp.dest(DIST + 'icons/'));
+        
+    // gui is index
+    gulp.src(DIST + 'gui.html')
+        .pipe(rename('index.html'))
+        .pipe(gulp.dest(DIST));
 
     // deploy
     return gulp.src(DIST + '**/*')
