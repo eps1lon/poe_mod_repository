@@ -20,6 +20,7 @@
         <script src="js/libs/concerns/Array.js"></script>
         <script src="js/libs/concerns/Object.js"></script>
         <script src="js/libs/concerns/String.js"></script>
+        <script src="js/libs/concerns/Math.js"></script>
         <script src="js/libs/concerns/Number.js"></script>
         <script src="js/libs/concerns/ByteSet.js"></script>
         
@@ -55,6 +56,8 @@
         <script src="js/libs/ModGenerators/Vaal.js"></script>
         <script src="js/libs/ModGenerators/Augment.js"></script>
         <script src="js/libs/ModGenerators/Alteration.js"></script>
+        <script src="js/libs/ModGenerators/Alchemy.js"></script>
+        <script src="js/libs/ModGenerators/Chaos.js"></script>
         <script src="js/libs/ModGenerators/Scouring.js"></script>
         <script src="js/libs/ModGenerators/ItemShowcase.js"></script>
         <script src="js/libs/ModGenerators/Regal.js"></script>
@@ -156,6 +159,20 @@
                             <img class="itemimg1x1" src="image/Art/2DItems/Currency/CurrencyUpgradeMagicToRare.png" alt="Regal Orb">
                         </label>
                         <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_regal" value="REGAL">
+                    </li>
+                    
+                    <li class="applicable">
+                        <label for="mod_generator_alchemy">
+                            <img class="itemimg1x1" src="image/Art/2DItems/Currency/CurrencyUpgradeToRare.png" alt="Alchemy Orb">
+                        </label>
+                        <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_alchemy" value="ALCHEMY">
+                    </li>
+                    
+                    <li class="applicable">
+                        <label for="mod_generator_chaos">
+                            <img class="itemimg1x1" src="image/Art/2DItems/Currency/CurrencyRerollRare.png" alt="Chaos Orb">
+                        </label>
+                        <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_chaos" value="CHAOS">
                     </li>
 
                     <li class="applicable">
@@ -367,6 +384,18 @@
                 <li class="applicable">Success</li>
                 <li class="applicable" data-applicable_byte="2">ModContainer needs to be an Item</li>
                 <li class="applicable" data-applicable_byte="4">Item needs to be of Normal Rarity</li>
+            </ul>
+            
+            <ul class="legend applicable Alchemy" data-klass="Alchemy" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">ModContainer needs to be an Item</li>
+                <li class="applicable" data-applicable_byte="4">Item needs to be of Normal Rarity</li>
+            </ul>
+            
+            <ul class="legend applicable Chaos" data-klass="Chaos" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">ModContainer needs to be an Item</li>
+                <li class="applicable" data-applicable_byte="4">Item needs to be of Rare Rarity</li>
             </ul>
         </div>
         

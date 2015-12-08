@@ -58,6 +58,24 @@
                 "Right click this item then left click a magic item to apply it. Current properties are retained and a new one is added."
             ]
         },
+        ALCHEMY: {
+            klass: "Alchemy",
+            name: "Orb of Alchemy",
+            stats: [
+                "Currency",
+                "Upgrades a normal item to rare item",
+                "Right click this item then left click a magic item to apply it. Current properties are retained and a new one is added."
+            ]
+        },
+        CHAOS: {
+            klass: "Chaos",
+            name: "Chaos Orb",
+            stats: [
+                "Currency",
+                "Upgrades a magic item to a rare item",
+                "Right click this item then left click a magic item to apply it. Current properties are retained and a new one is added."
+            ]
+        },
         EXALTED: {
             klass: "Exalted",
             name: "Exalted Orb",
