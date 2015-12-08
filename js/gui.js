@@ -158,76 +158,13 @@
         //console.log("suffix", suffixes);
         
         // display prefixes
-        display_mod_group(prefixes, $("#prefixes"));
+        display_mod_group(prefixes, $("#prefixes"), true);
         
         // display suffixes
-        display_mod_group(suffixes, $("#suffixes"));
+        display_mod_group(suffixes, $("#suffixes"), true);
         
         // display implicits 
-        // empty mods
-        $("#implicits tbody tr:not(.template)").remove();
-        
-        // display implicits
-        $("#implicits caption .count").text(implicits.length);
-        $.each(implicits, function (_, mod) {
-            var $tr = create_from_template("#implicits tbody tr.mod");
-            var serialized = mod.serialize();
-            var title;
-            
-            $tr.attr("id", mod.domId());
-            
-            // error
-            var applicable_byte_human = mod.applicableByteHuman();
-            $tr.attr("data-applicable_byte", applicable_byte_human.bits.join("-"));
-            
-            var spawnable_byte_human = {
-                strings: []
-            };
-            
-            if (Spawnable.implementedBy(mod)) {
-                spawnable_byte_human = mod.spawnableByteHuman();
-                $tr.attr("data-spawnable-byte", spawnable_byte_human.bits.join("-"));
-                
-                // chance
-                $(".spawn_chance", $tr).text(mod.humanSpawnchance());
-            }
-            
-            title = applicable_byte_human.strings.concat(spawnable_byte_human.strings).join("` and `");
-            if (title) {
-                $tr.prop("title", "`" + title + "`");
-            }
-            
-            // ilvl
-            $(".ilvl", $tr).text(mod.getProp("Level"));
-            
-            // name
-            //$(".name", $tr).text(mod.getProp("CorrectGroup"));
-            
-            // value
-            $(".stats", $tr).text(mod.t());
-            
-            // chance
-            $(".spawn_chance", $tr).text(mod.humanSpawnchance());
-            
-            // serialized
-            $tr.data("mod", serialized);
-            
-            // visual
-            $tr.addClass(serialized.klass);
-            $tr.addClass(mod.modType());
-            
-            // possible? TODO better way? maybe scan byte
-            if (title) {
-                $(".add_mod", $tr).remove();
-            }
-            
-            $tr.appendTo("#implicits");
-        });
-        
-        // let the plugin know that we made a update 
-        $("#implicits").trigger("update"); 
-        // sort on ilvl desc
-        $("#implicits").trigger("sorton",[[[0,1]]]);
+        display_mod_group(implicits, $("#implicits"), false);
         
         // remove not_rollable class if rollable
         $.each(prefixes.concat(suffixes), function (i, mod) {
@@ -253,37 +190,48 @@
      * 
      * @param {Array[Mod]} mods
      * @param {jQuery} $table visual container
-     * @returns {undefined}
+     * @param {Boolean} grouping wether to group mods of a group into tbodies
+     * @returns {void}
      */
-    var display_mod_group = function (mods, $table) {
+    var display_mod_group = function (mods, $table, grouping) {
+        var $mod_template = create_from_template(".mod", $table);
         // empty mods
-        $("tbody:not(.template)", $table).remove();
+        if (grouping) {
+            $("tbody:not(.template)", $table).remove();
+        } else {
+            $(".mod:not(.template)", $table).remove();
+        }
+        
         
         // display affixes
         $("caption .count", $table).text(mods.length);
         $.each(mods, function (_, mod) {
-            var $mod = create_from_template("tbody.mods.template .mod", $table);
+            var $mod = $mod_template.clone();
             var serialized = mod.serialize();
-            var title;
+            var title, correct_group, $correct_group;
             
             $mod.attr("id", mod.domId());
             
             // grouping
-            var correct_group = mod.getProp("CorrectGroup");
-            var $correct_group = $("tbody.mods[data-correct-group='" + correct_group + "']", $table);
-            
-            // new group?
-            if (!$correct_group.length) {
-                var $correct_group_header = create_from_template("tbody.correct_group", $table);
-                $correct_group = create_from_template("tbody.mods", $table).hide();
+            if (grouping) {
+                correct_group = mod.getProp("CorrectGroup");
+                $correct_group = $("tbody.mods[data-correct-group='" + correct_group + "']", $table);
                 
-                // maybe change do data() and filter()
-                $correct_group_header.attr("id", "correct-group-" + correct_group);
-                $correct_group.attr("data-correct-group", correct_group);
-                
-                $("th.correct_group", $correct_group_header).text(mod.correctGroupTranslated());
-                
-                $table.append($correct_group_header, $correct_group);
+                // new group?
+                if (!$correct_group.length) {
+                    var $correct_group_header = create_from_template("tbody.correct_group", $table);
+                    $correct_group = create_from_template("tbody.mods", $table).hide();
+
+                    // maybe change do data() and filter()
+                    $correct_group_header.attr("id", "correct-group-" + correct_group);
+                    $correct_group.attr("data-correct-group", correct_group);
+
+                    $("th.correct_group", $correct_group_header).text(mod.correctGroupTranslated());
+
+                    $table.append($correct_group_header, $correct_group);
+                }
+            } else {
+                $correct_group = $("tbody", $table);
             }
             
             // error
