@@ -206,7 +206,7 @@
         // display affixes
         $("caption .count", $table).text(mods.length);
         $.each(mods, function (_, mod) {
-            var $mod = $mod_template.clone();
+            var $mod = $mod_template.clone(true);
             var serialized = mod.serialize();
             var title, correct_group, $correct_group;
             
