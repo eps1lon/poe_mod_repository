@@ -559,13 +559,20 @@
             // assert baseitem instanceof baseitem
             var serialized = $(this).parents("tr").data("mod");
             var mod = ModFactory.deserialize(serialized);
+            var added = false;
             
             if (mod === null) {
                 console.log("could not deserialize", serialized);
             }
             console.log(baseitem, "+", mod);
             
-            if (baseitem.addMod(mod)) {
+            added = baseitem.addMod(mod);
+            // try at least one time to make more room for mods
+            if (!added && baseitem.upgradeRarity()) {
+                added = baseitem.addMod(mod);
+            }
+            
+            if (added) {
                 display_baseitem(baseitem, "#used_baseitem");
                 display_available_mods(mod_generator, baseitem);
                 display_mod_gen_applicability(baseitem, mods);

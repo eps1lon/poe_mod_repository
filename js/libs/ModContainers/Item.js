@@ -322,6 +322,24 @@
             })[0];
         },
         /**
+         * attempts to upgrade the rarity
+         * 
+         * @returns {Boolean} true on change in rarity
+         */
+        upgradeRarity: function () {
+            switch (this.rarity) {
+                case Item.RARITY.NORMAL:
+                case Item.RARITY.SHOWCASE:
+                    this.rarity = Item.RARITY.MAGIC;
+                    return true;
+                case Item.RARITY.MAGIC:
+                    this.rarity = Item.RARITY.RARE;
+                    return true;
+            }
+            
+            return false;
+        },
+        /**
          * stats of mods combined
          * 
          * @returns {Object} stat_id => value
