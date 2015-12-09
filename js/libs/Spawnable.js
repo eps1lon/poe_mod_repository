@@ -49,19 +49,23 @@
     /**
      * 
      * @param {Array<Spawnable>} spawnables
+     * @param {Function} if_cb optional callback to filter mods
      * @returns {float}
      */
-    this.Spawnable.calculateSpawnchance = function (spawnables) {
+    this.Spawnable.calculateSpawnchance = function (spawnables, if_cb) {
         var sum_spawnweight = 0;
+        if (typeof if_cb !== 'function') {
+            if_cb  = function () { return true; };
+        }
         
         $.each(spawnables, function (_, mod) {
-            if (Spawnable.implementedBy(mod)) {
+            if (Spawnable.implementedBy(mod) && if_cb(mod)) {
                 sum_spawnweight += mod.spawnweight;
             }
         });
         
         return $.map(spawnables, function (mod) {
-            if (Spawnable.implementedBy(mod) && mod.spawnweight !== null) {
+            if (Spawnable.implementedBy(mod) && mod.spawnweight !== null && if_cb(mod)) {
                 mod.spawnchance = mod.spawnweight / sum_spawnweight;
             }
             

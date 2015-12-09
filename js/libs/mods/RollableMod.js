@@ -74,14 +74,10 @@
                 precision = 2;
             }
             
-            if (this.spawnchance === null) {
-                return 'null';
-            }
-            
             var spawnchance = 0.0;
-            
+
             // spawnchance is basically zero if its not applicable
-            if (this.applicableCached()) {
+            if (this.spawnchance !== null && this.applicableCached()) {
                 spawnchance = this.spawnchance;
             }
 

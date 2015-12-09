@@ -154,15 +154,21 @@
         // mod groups
         var prefixes = Spawnable.calculateSpawnchance($.grep(applicable_mods, function (mod) {
             return mod.isPrefix();
-        }));
+        }), function (mod) {
+            return mod.applicableCached();
+        });
         
         var suffixes = Spawnable.calculateSpawnchance($.grep(applicable_mods, function (mod) {
             return mod.isSuffix();
-        }));
+        }), function (mod) {
+            return mod.applicableCached();
+        });
         
         var implicits = Spawnable.calculateSpawnchance($.grep(applicable_mods, function (mod) {
             return mod.implicitCandidate();
-        }));
+        }), function (mod) {
+            return mod.applicableCached();
+        });
         
         //console.log("implicits", implicits);
         //console.log("prefixes", prefixes);
