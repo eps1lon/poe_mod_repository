@@ -635,6 +635,20 @@
             $(".itembox .mods .mod > *:not(.stats)").toggle($(this).prop("checked"));
         });
         
+        // display group of ModGenerators handle
+        $("#show_currencies").on("click", function () {
+            $("#ModGenerator fieldset.currencies").toggle();
+        });
+        
+        $("#show_masterbenches").on("click", function () {
+            $("#ModGenerator fieldset.masterbenches").toggle();
+        });
+        
+        // hide group of ModGenerators handle
+        $("#ModGenerator fieldset a.close_fieldset").on("click", function () {
+            $(this).parents("fieldset").hide(); 
+        });
+        
         // test dom handles
         $("#item_classes option:not(.template)").filter(function () {
             return $(this).text().toLowerCase() === "ring";
