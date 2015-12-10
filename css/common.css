@@ -3,12 +3,6 @@
     Author     : eps1lon
 */
 
-h1 {
-    font-size: 2em;
-    margin: .66em 0;
-    text-transform: uppercase;
-}
-
 body {
     background: #000;
     color: #a38d6d;
@@ -16,9 +10,19 @@ body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
+header {
+    border-bottom: 2px solid #7f7f7f;
+}
+
+h1 {
+    font-size: 2em;
+    margin: .66em 0;
+    text-transform: uppercase;
+}
+
 #Item {
     position: fixed;
-    top: 7em;
+    top: 8em;
     width: 400px;
     margin-left: 5px;
 }
@@ -30,12 +34,24 @@ body {
 #right_side {
     border-left: 2px dashed #ff7;
     left: 420px;
+    top: 8em;
     padding-left: 5px;
     position: absolute;
-    top: 7em;
+    width: auto;
+}
+
+#ModGenerator {
+    max-width: 460px;
 }
 
 #available_mods {
+    
+}
+
+footer {
+    position: absolute;
+    right: 0px;
+    top: 0px;
 }
 
 .correct_group, #implicits caption {
@@ -52,10 +68,6 @@ th.correct_group {
     font-style: italic;
 }
 
-#available_mods {
-    overflow: hidden;
-}
-
 #available_mods #prefixes, #available_mods #suffixes {
     float: left;
 }
@@ -70,6 +82,10 @@ table.mods caption {
 
 .mods .stats {
     white-space: pre;
+}
+
+button.add_mod, button.remove_mode {
+    padding: 1px 0;
 }
 
 #available_mods tbody td {

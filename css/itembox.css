@@ -3,7 +3,7 @@
     Author     : eps1lon
 */
 .itembox {
-    background: url(icons/itembox/hover_background.png);
+    background: url(icons/GGG/hover_background.png);
     border-width: 1px;
     border-style: solid;
     text-align: center;
@@ -64,21 +64,21 @@
 }
 
 .itembox.unique .itemboxheader {
-    background-image: url(icons/itembox/ItemHeaderUniqueSingleLineMiddle.png);
+    background-image: url(icons/GGG/ItemHeaderUniqueSingleLineMiddle.png);
     color: #af6025;
 }
 
 .itembox.unique .itemboxheader.double-line {
-    background-image: url(icons/itembox/ItemHeaderUniqueMiddle.png);
+    background-image: url(icons/GGG/ItemHeaderUniqueMiddle.png);
 }
 
 .itembox.unique .double-line .itemboxheader-left {
-    background-image: url(icons/itembox/ItemHeaderUniqueLeft.png);
+    background-image: url(icons/GGG/ItemHeaderUniqueLeft.png);
 }
 
 
 .itembox.unique .double-line .itemboxheader-right {
-    background-image: url(icons/itembox/ItemHeaderUniqueRight.png);
+    background-image: url(icons/GGG/ItemHeaderUniqueRight.png);
 }
 
 /* rare */
@@ -88,24 +88,24 @@
 
 .itembox.rare .itemboxheader,
 .itembox.showcase .itemboxheader {
-    background-image: url(icons/itembox/ItemHeaderRareSingleLineMiddle.png);
+    background-image: url(icons/GGG/ItemHeaderRareSingleLineMiddle.png);
     color: #ff7;
 }
 
 .itembox.rare .itemboxheader.double-line,
 .itembox.showcase .itemboxheader.double-line {
-    background-image: url(icons/itembox/ItemHeaderRareMiddle.png);
+    background-image: url(icons/GGG/ItemHeaderRareMiddle.png);
 }
 
 .itembox.rare .double-line .itemboxheader-left,
 .itembox.showcase .double-line .itemboxheader-left {
-    background-image: url(icons/itembox/ItemHeaderRareLeft.png);
+    background-image: url(icons/GGG/ItemHeaderRareLeft.png);
 }
 
 
 .itembox.rare .double-line .itemboxheader-right,
 .itembox.showcase .double-line .itemboxheader-right {
-    background-image: url(icons/itembox/ItemHeaderRareRight.png);
+    background-image: url(icons/GGG/ItemHeaderRareRight.png);
 }
 
 /* magic */
@@ -114,7 +114,7 @@
 }
 
 .itembox.magic .itemboxheader {
-    background-image: url(icons/itembox/ItemHeaderMagicMiddle.png);
+    background-image: url(icons/GGG/ItemHeaderMagicMiddle.png);
     color: #88f;
 }
 
@@ -129,16 +129,16 @@
 }
 
 .itembox.magic .itemboxheader.double-line {
-    background-image: url(icons/itembox/ItemHeaderMagicMiddle.png);
+    background-image: url(icons/GGG/ItemHeaderMagicMiddle.png);
 }
 
 .itembox.magic .double-line .itemboxheader-left {
-    background-image: url(icons/itembox/ItemHeaderMagicLeft.png);
+    background-image: url(icons/GGG/ItemHeaderMagicLeft.png);
 }
 
 
 .itembox.magic .double-line .itemboxheader-right {
-    background-image: url(icons/itembox/ItemHeaderMagicRight.png);
+    background-image: url(icons/GGG/ItemHeaderMagicRight.png);
 }
 
 /* normal */
@@ -147,7 +147,7 @@
 }
 
 .itembox.normal .itemboxheader {
-    background-image: url(icons/itembox/ItemHeaderWhiteMiddle.png);
+    background-image: url(icons/GGG/ItemHeaderWhiteMiddle.png);
     color: #c8c8c8;
 }
 
@@ -162,16 +162,16 @@
 }
 
 .itembox.normal .itemboxheader.double-line {
-    background-image: url(icons/itembox/ItemHeaderWhiteMiddle.png);
+    background-image: url(icons/GGG/ItemHeaderWhiteMiddle.png);
 }
 
 .itembox.normal .double-line .itemboxheader-left {
-    background-image: url(icons/itembox/ItemHeaderWhiteLeft.png);
+    background-image: url(icons/GGG/ItemHeaderWhiteLeft.png);
 }
 
 
 .itembox.normal .double-line .itemboxheader-right {
-    background-image: url(icons/itembox/ItemHeaderWhiteRight.png);
+    background-image: url(icons/GGG/ItemHeaderWhiteRight.png);
 }
 
 .itembox .text-value {
@@ -192,7 +192,7 @@
 }
 
 .itembox-statsgroup {
-    background-image: url(icons/itembox/Hover_separator_normal.png);
+    background-image: url(icons/GGG/Hover_separator_normal.png);
     background-position: center bottom;
     background-repeat: no-repeat;
 }

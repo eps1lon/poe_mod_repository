@@ -26,9 +26,10 @@ gulp.task('deploy', ['html'], function() {
         .pipe(gulp.dest(DIST + 'js/data'));
         
     // assets
-    // TODO consider gitignore
-    gulp.src(SRC + 'css/icons/*.(gif|png|jpeg)')
-        .pipe(gulp.dest(DIST + 'icons/'));
+    gulp.src(SRC + 'css/icons/**')
+        .pipe(gulp.dest(DIST + 'icons'));
+    gulp.src(SRC + 'image/**')
+        .pipe(gulp.dest(DIST + 'image/'));
         
     // gui is index
     gulp.src(DIST + 'gui.html')

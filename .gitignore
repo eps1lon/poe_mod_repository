@@ -1,7 +1,3 @@
-/* ggg assets */
-css/icons/itembox
-image
-
 /* gulp deployment */
 dist
 .publish
