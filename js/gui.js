@@ -5,7 +5,7 @@
  * By Sebastian Silbermann
  * MIT Licensed.
  */
-(function (__undefined) {
+(function (window, __undefined) {
     // "tables"
     var mods = [],
         tags = [],
@@ -360,6 +360,9 @@
         var mod_generator = null;
         var baseitem = null;
         
+        // item scrolls fixed
+        var item_fixed_top;
+        
         var get_selected_mod_generator = function () {
             var $mod_generator = $("input.ModGenerator:radio:checked");
             
@@ -649,6 +652,19 @@
             $(this).parents("fieldset").hide(); 
         });
         
+        item_fixed_top = $("#Item").offset().top;
+        
+        // #Item fixed
+        $(window).on("scroll", function () {
+            var $window = $(window);
+            var $Item = $("#Item");
+            
+            var offset = $window.scrollTop() - item_fixed_top;
+            if (offset > 0) {
+                $Item.css({top: offset + "px"});
+            }
+        });
+        
         // test dom handles
         $("#item_classes option:not(.template)").filter(function () {
             return $(this).text().toLowerCase() === "ring";
@@ -663,4 +679,4 @@
         
         $("#use_mod_gen").trigger("click");
     });
-})();
+})(this);

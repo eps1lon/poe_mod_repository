@@ -82,226 +82,228 @@
                 <li class="loading_indicator" data-loading-state="1" id="data_loader_mod_correct_groups_loc">Modgroup localization</li>
             </ul> 
         </header>
-        <section id="Item">
-            <h2>Item</h2>
+        <div id="content">
+            <section id="Item">
+                <h2>Item</h2>
 
-            <label for="item_classes">Itemclass</label>
-            <select id="item_classes">
-                <option class="template"></option>
-            </select>
+                <label for="item_classes">Itemclass</label>
+                <select id="item_classes">
+                    <option class="template"></option>
+                </select>
 
-            <label for="baseitems">Base</label>
-            <select id="baseitems">
-                <option class="template"></option>
-            </select>
+                <label for="baseitems">Base</label>
+                <select id="baseitems">
+                    <option class="template"></option>
+                </select>
 
-            <h3>Preview</h3>
-            <input type="checkbox" id="itembox_stats_with_mods" checked="checked">
-            <label for="itembox_stats_with_mods">Stats with Mods</label>
-            <div id="used_baseitem"></div>
-            
-            <label for="item_rarities">Change Rarity</label>
-            <select id="item_rarities">
-                <option value="NORMAL">Normal</option>
-                <option value="MAGIC">Magic</option>
-                <option value="RARE">Rare</option>
-            </select>
-        </section>
+                <h3>Preview</h3>
+                <input type="checkbox" id="itembox_stats_with_mods" checked="checked">
+                <label for="itembox_stats_with_mods">Stats with Mods</label>
+                <div id="used_baseitem"></div>
 
-        <div id="right_side">
-          <section id="ModGenerator">
-                <span class="Itemshowcase applicable">
-                    <label for="mod_generator_showcase">All Affixes</label>
-                    <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_showcase" value="ITEMSHOWCASE">
-                </span>
-                <a href="#" id="show_currencies">Currencies</a>
-                <a href="#" id="show_masterbenches">Masterbenches</a>
-
-                <fieldset class="currencies">
-                    <legend>Currencies</legend>
-                    <a href="#" id="hide_currencies" class="close_fieldset"></a>
-                    <ul class="mod_generators currencies">
-                        <li class="applicable">
-                            <label for="mod_generator_transmute">
-                                <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyUpgradeToMagic.png" alt="Orb of Transmutation">
-                            </label>
-                            <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_transmute" value="TRANSMUTE">
-                        </li>
-
-                        <li class="applicable">
-                            <label for="mod_generator_augment">
-                                <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyAddModToMagic.png" alt="Orb of Augmentation">
-                            </label>
-                            <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_augment" value="AUGMENT">
-                        </li>
-
-                        <li class="applicable">
-                            <label for="mod_generator_alteration">
-                                <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyRerollMagic.png" alt="Orb of Alteration">
-                            </label>
-                            <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_alteration" value="ALTERATION">
-                        </li>
-
-                        <li class="applicable">
-                            <label for="mod_generator_regal">
-                                <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyUpgradeMagicToRare.png" alt="Regal Orb">
-                            </label>
-                            <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_regal" value="REGAL">
-                        </li>
-
-                        <li class="applicable">
-                            <label for="mod_generator_alchemy">
-                                <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyUpgradeToRare.png" alt="Alchemy Orb">
-                            </label>
-                            <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_alchemy" value="ALCHEMY">
-                        </li>
-
-                        <li class="applicable">
-                            <label for="mod_generator_chaos">
-                                <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyRerollRare.png" alt="Chaos Orb">
-                            </label>
-                            <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_chaos" value="CHAOS">
-                        </li>
-
-                        <li class="applicable">
-                            <label for="mod_generator_exalted">
-                                <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyAddModToRare.png" alt="Exalted Orb">
-                            </label>
-                            <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_exalted" value="EXALTED">
-                        </li>
-
-                        <li class="applicable">
-                            <label for="mod_generator_scouring">
-                                <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyConvertToNormal.png" alt="Orb of Scouring">
-                            </label>
-                            <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_scouring" value="SCOURING">
-                        </li>
-                    </ul>
-                </fieldset>
-
-                <fieldset class="masterbenches">
-                    <legend>Masterbenches</legend>
-                    <a href="#" id="hide_masterbenches"></a>
-
-                    <ul class="masterbenches">
-                        <li class="applicable">
-                            <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_catarina" value="MASTERBENCH" data-npc_master_key="2">
-                            <label for="mod_generator_catarina">Catarina</label>
-                        </li>
-                        <li class="applicable">
-                            <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_elreon" value="MASTERBENCH" data-npc_master_key="5">
-                            <label for="mod_generator_elreon">Elreon</label>
-                        </li>
-                        <li class="applicable">
-                            <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_haku" value="MASTERBENCH" data-npc_master_key="6">
-                            <label for="mod_generator_haku">Haku</label>
-                        </li>
-                        <li class="applicable">
-                            <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_leo" value="MASTERBENCH" data-npc_master_key="7">
-                            <label for="mod_generator_leo">Leo</label>
-                        </li>
-                        <li class="applicable">
-                            <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_tora" value="MASTERBENCH" data-npc_master_key="1">
-                            <label for="mod_generator_tora">Tora</label>
-                        </li>
-                        <li class="applicable">
-                            <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_vagan" value="MASTERBENCH" data-npc_master_key="4">
-                            <label for="mod_generator_vagan">Vagan</label>
-                        </li>
-                    </ul>
-
-                    <label for="craftingbenchoptions">Options</label>
-                    <select id="craftingbenchoptions">
-                        <option class="template craftingbenchoption"></option>
-                        <option id="no_craftingbenchoptions">No options applicable</option>
-                    </select>
-
-                </fieldset>
-
-                <button id="use_mod_gen" type="button">
-                    Use
-                    <em class="name"></em>
-                    <em class="craftingbenchoption"></em>
-                </button>
+                <label for="item_rarities">Change Rarity</label>
+                <select id="item_rarities">
+                    <option value="NORMAL">Normal</option>
+                    <option value="MAGIC">Magic</option>
+                    <option value="RARE">Rare</option>
+                </select>
             </section>
 
-            <section id="available_mods">
-                <h3>
-                    available Mods 
-                    <a id="expand_mods" href="#available_mods">Expand All</a>/
-                    <a id="collapse_mods" href="#available_mods">Collapse All</a>
-                </h3>
-                <table id="implicits" class="mods sortable">
-                    <caption id="implicits-caption">Implicits /<span class="count">0</span></caption>
-                    <thead>
-                        <th class="ilvl">iLvl</th>
-                        <th class="stats {sorter: false}">Stats</th>
-                        <th class="spawn_chance">Chance</th>
-                        <th class="{sorter: false}"></th>
-                    </thead>
-                    <tbody>
-                        <tr class="template mod applicable">
-                            <td class="ilvl"></td>
-                            <td class="stats"></td>
-                            <td class="spawn_chance"></td>
-                            <td><button type="button" class="add_mod">add</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table id="prefixes" class="mods sortable">
-                    <caption>Prefixes /<span class="count">0</span></caption>
-                    <thead>
-                        <tr>
-                            <th class="ilvl">iLvl</th>
-                            <th class="stats {sorter: false}">Stats</th>
-                            <th class="name {sorter: false}">Name</th>
-                            <th class="spawn_chance">Chance</th>
-                            <th class="{sorter: false}"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="template correct_group not_rollable tablesorter-no-sort">
-                        <tr>
-                            <th colspan="5" class="correct_group"></th>
-                        </tr>
-                    </tbody>
-                    <tbody class="template mods">
-                        <tr class="template mod applicable">
-                            <td class="ilvl"></td>
-                            <td class="stats"></td>
-                            <td class="name"></td>
-                            <td class="spawn_chance"></td>
-                            <td><button type="button" class="add_mod">add</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div id="right_side">
+              <section id="ModGenerator">
+                    <span class="Itemshowcase applicable">
+                        <label for="mod_generator_showcase">All Affixes</label>
+                        <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_showcase" value="ITEMSHOWCASE">
+                    </span>
+                    <a href="#" id="show_currencies">Currencies</a>
+                    <a href="#" id="show_masterbenches">Masterbenches</a>
 
-                <table id="suffixes" class="mods sortable">
-                    <caption>Suffixes /<span class="count">0</span></caption>
-                    <thead>
-                        <tr>
+                    <fieldset class="currencies">
+                        <legend>Currencies</legend>
+                        <a href="#" id="hide_currencies" class="close_fieldset"></a>
+                        <ul class="mod_generators currencies">
+                            <li class="applicable">
+                                <label for="mod_generator_transmute">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyUpgradeToMagic.png" alt="Orb of Transmutation">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_transmute" value="TRANSMUTE">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_augment">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyAddModToMagic.png" alt="Orb of Augmentation">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_augment" value="AUGMENT">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_alteration">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyRerollMagic.png" alt="Orb of Alteration">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_alteration" value="ALTERATION">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_regal">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyUpgradeMagicToRare.png" alt="Regal Orb">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_regal" value="REGAL">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_alchemy">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyUpgradeToRare.png" alt="Alchemy Orb">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_alchemy" value="ALCHEMY">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_chaos">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyRerollRare.png" alt="Chaos Orb">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_chaos" value="CHAOS">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_exalted">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyAddModToRare.png" alt="Exalted Orb">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_exalted" value="EXALTED">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_scouring">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyConvertToNormal.png" alt="Orb of Scouring">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_scouring" value="SCOURING">
+                            </li>
+                        </ul>
+                    </fieldset>
+
+                    <fieldset class="masterbenches">
+                        <legend>Masterbenches</legend>
+                        <a href="#" id="hide_masterbenches"></a>
+
+                        <ul class="masterbenches">
+                            <li class="applicable">
+                                <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_catarina" value="MASTERBENCH" data-npc_master_key="2">
+                                <label for="mod_generator_catarina">Catarina</label>
+                            </li>
+                            <li class="applicable">
+                                <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_elreon" value="MASTERBENCH" data-npc_master_key="5">
+                                <label for="mod_generator_elreon">Elreon</label>
+                            </li>
+                            <li class="applicable">
+                                <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_haku" value="MASTERBENCH" data-npc_master_key="6">
+                                <label for="mod_generator_haku">Haku</label>
+                            </li>
+                            <li class="applicable">
+                                <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_leo" value="MASTERBENCH" data-npc_master_key="7">
+                                <label for="mod_generator_leo">Leo</label>
+                            </li>
+                            <li class="applicable">
+                                <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_tora" value="MASTERBENCH" data-npc_master_key="1">
+                                <label for="mod_generator_tora">Tora</label>
+                            </li>
+                            <li class="applicable">
+                                <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_vagan" value="MASTERBENCH" data-npc_master_key="4">
+                                <label for="mod_generator_vagan">Vagan</label>
+                            </li>
+                        </ul>
+
+                        <label for="craftingbenchoptions">Options</label>
+                        <select id="craftingbenchoptions">
+                            <option class="template craftingbenchoption"></option>
+                            <option id="no_craftingbenchoptions">No options applicable</option>
+                        </select>
+
+                    </fieldset>
+
+                    <button id="use_mod_gen" type="button">
+                        Use
+                        <em class="name"></em>
+                        <em class="craftingbenchoption"></em>
+                    </button>
+                </section>
+
+                <section id="available_mods">
+                    <h3>
+                        available Mods 
+                        <a id="expand_mods" href="#available_mods">Expand All</a>/
+                        <a id="collapse_mods" href="#available_mods">Collapse All</a>
+                    </h3>
+                    <table id="implicits" class="mods sortable">
+                        <caption id="implicits-caption">Implicits /<span class="count">0</span></caption>
+                        <thead>
                             <th class="ilvl">iLvl</th>
                             <th class="stats {sorter: false}">Stats</th>
-                            <th class="name {sorter: false}">Name</th>
                             <th class="spawn_chance">Chance</th>
                             <th class="{sorter: false}"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="template correct_group not_rollable tablesorter-no-sort">
-                        <tr>
-                            <th colspan="5" class="correct_group"></th>
-                        </tr>
-                    </tbody>
-                    <tbody class="sortable template mods">
-                        <tr class="template mod applicable">
-                            <td class="ilvl"></td>
-                            <td class="stats"></td>
-                            <td class="name"></td>
-                            <td class="spawn_chance"></td>
-                            <td><button type="button" class="add_mod">add</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+                        </thead>
+                        <tbody>
+                            <tr class="template mod applicable">
+                                <td class="ilvl"></td>
+                                <td class="stats"></td>
+                                <td class="spawn_chance"></td>
+                                <td><button type="button" class="add_mod">add</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table id="prefixes" class="mods sortable">
+                        <caption>Prefixes /<span class="count">0</span></caption>
+                        <thead>
+                            <tr>
+                                <th class="ilvl">iLvl</th>
+                                <th class="stats {sorter: false}">Stats</th>
+                                <th class="name {sorter: false}">Name</th>
+                                <th class="spawn_chance">Chance</th>
+                                <th class="{sorter: false}"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="template correct_group not_rollable tablesorter-no-sort">
+                            <tr>
+                                <th colspan="5" class="correct_group"></th>
+                            </tr>
+                        </tbody>
+                        <tbody class="template mods">
+                            <tr class="template mod applicable">
+                                <td class="ilvl"></td>
+                                <td class="stats"></td>
+                                <td class="name"></td>
+                                <td class="spawn_chance"></td>
+                                <td><button type="button" class="add_mod">add</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table id="suffixes" class="mods sortable">
+                        <caption>Suffixes /<span class="count">0</span></caption>
+                        <thead>
+                            <tr>
+                                <th class="ilvl">iLvl</th>
+                                <th class="stats {sorter: false}">Stats</th>
+                                <th class="name {sorter: false}">Name</th>
+                                <th class="spawn_chance">Chance</th>
+                                <th class="{sorter: false}"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="template correct_group not_rollable tablesorter-no-sort">
+                            <tr>
+                                <th colspan="5" class="correct_group"></th>
+                            </tr>
+                        </tbody>
+                        <tbody class="sortable template mods">
+                            <tr class="template mod applicable">
+                                <td class="ilvl"></td>
+                                <td class="stats"></td>
+                                <td class="name"></td>
+                                <td class="spawn_chance"></td>
+                                <td><button type="button" class="add_mod">add</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
         </div>
         
         <footer>
