@@ -24,6 +24,11 @@ h1 {
     text-transform: uppercase;
 }
 
+ul {
+    list-style: none;
+    padding: 0;
+}
+
 #content {
     position: relative;
 }
@@ -56,12 +61,50 @@ h1 {
 }
 
 footer {
-    border-top: 2px solid #7f7f7f;
+    margin-top: 5px;
     text-align: right;
 }
 
 .correct_group, #implicits caption {
     cursor: pointer;
+}
+
+#item_classes, label[for="item_classes"] {
+    display: none;
+}
+
+#Item h2 {
+    display: none;
+}
+
+#Item h3 {
+    margin: 1px 4px;
+}
+
+ul.item_class_group {
+    padding: 0;
+    margin-bottom: 5px;
+    margin-top: 0px;
+    list-style: none;
+}
+
+.item_class_group a {
+    display: inline-block;
+    margin: 3px 6px;
+    text-transform: uppercase;
+}
+
+.item_class_group li.jewels:after {
+    content: 'Jewel';
+    text-transform: uppercase;
+}
+
+.sub_tag_selector {
+    display: none;
+}
+
+.sub_tag_selector li {
+    text-transform: uppercase;
 }
 
 #implicits tbody {

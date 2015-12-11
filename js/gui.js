@@ -1,4 +1,4 @@
-/* global $, ModGeneratorFactory, ModGenerator, Mod, Spawnable, Item, ModFactory, ApplicableMod, MasterMod, ByteSet, Masterbench, DataDependency, Localization, baseitem */
+/* global $, ModGeneratorFactory, ModGenerator, Mod, Spawnable, Item, ModFactory, ApplicableMod, MasterMod, ByteSet, Masterbench, DataDependency, Localization, baseitem, Hashbang */
 /* jshint bitwise:false */
 /*!
  * PoE Mod Repository
@@ -402,6 +402,7 @@
         $.each(Item.ITEMCLASSES, function (ident, item_class) {
             var $option = create_from_template("#item_classes option");
             
+            $option.addClass(ident);
             $option.text(ident);
             $option.data("ident", ident);
             
@@ -411,6 +412,7 @@
         // change item_class handle
         $("#item_classes").on("change", function () {
             var $selected = $("option:selected", this);
+            var sub_tag = $("#item_class_sub_tag").val();
             
             // selected ItemClass
             var item_class = Item.ITEMCLASSES[$selected.data("ident")];
@@ -421,7 +423,8 @@
             // baseitems that have this ItemClass
             // needs map instead of grep because table structure primary => table cols
             var baseitems = $.map(baseitemtypes, function (baseitemtype) {
-                if (item_class.PRIMARY === +baseitemtype.ItemClass) {
+                if (item_class.PRIMARY === +baseitemtype.ItemClass 
+                        && (!sub_tag || baseitemtype.TagsKeys.split(",").indexOf(sub_tag) !== -1)) {
                     return baseitemtype;
                 }
                 return null;
@@ -434,7 +437,8 @@
             $.each(baseitems, function (_, baseitem_props) {
                 var $option = create_from_template("#baseitems option");
                 $option.text(baseitem_props.Name);
-                $option.data("baseitem_primary", baseitem_props.primary);
+                $option.attr("data-baseitem_primary", baseitem_props.primary);
+                $option.attr("data-name", baseitem_props.Name);
                 $option.appendTo("#baseitems");
             });
             
@@ -455,7 +459,128 @@
             display_available_mods(mod_generator, baseitem);  
             display_mod_gen_applicability(baseitem, mods);
         }); 
-         
+        
+        var hashbang = new Hashbang();
+        var hashbang_change = function () {
+            var next_file;
+            var mappings = {
+                rings: 'RING',
+                amulets: 'AMULET',
+                belts: 'BELT',
+                jewels: 'JEWEL',
+                claws: 'CLAW',
+                daggers: 'DAGGER',
+                bows: 'BOW',
+                quivers: 'QUIVER',
+                staves: 'STAFF',
+                sceptres: 'SCEPTRE',
+                wands: 'WAND',
+                '1h_axes': 'AXE_1H',
+                '2h_axes': 'AXE_2H',
+                '1h_maces': 'MACE_1H',
+                '2h_maces': 'MACE_2H',
+                '1h_swords': 'SWORD_1H',
+                '2h_swords': 'SWORD_2H',
+                'maps': 'MAP',
+                armours: 'ARMOUR',
+                gloves: 'GLOVES',
+                boots: 'BOOTS',
+                helmets: 'HELMET',
+                shields: 'SHIELD'
+            };
+            var $baseitem;
+            var sub_tag = '';
+            
+            // itemclass
+            next_file = this.getPath().nextFile();
+            
+            if (mappings[next_file]) {
+                $('#item_classes .item_class.' + mappings[next_file]).prop("selected", true);
+            } else {
+                $('#item_classes .item_class.RING').prop("selected", true);
+            }
+            
+            if (["armours", "boots", "gloves", "helmets", "shields"].indexOf(next_file) !== -1) {
+                // set links to item_class
+                $("#tag_selector_req a").each(function () {
+                    var $this = $(this);
+                    $this.attr("href", "#!/" + next_file + "/" + $this.attr("data-sub_tag"));
+                });
+                
+                $("#tag_selector_req").show();
+            } else if (next_file === 'maps') {
+                $("#tag_selector_map").show();
+            } else {
+                $(".sub_tag_selector").hide();
+            }
+            
+            // sub group of itemclass? str_armour, dex_armour etc
+            next_file = this.getPath().nextFile();
+            if (typeof next_file === 'string') {
+                // select * from tags where Id = next_file
+                sub_tag = $.map(tags, function (tag) {
+                    if (tag.Id === next_file) {
+                        return tag;
+                    }
+                    return null;
+                })[0];
+                
+                // sub_tag found
+                if (sub_tag !== undefined) {
+                    sub_tag = sub_tag.primary;
+                    $(".sub_tag_selector").hide();
+                    
+                    // next directory
+                    next_file = this.getPath().nextFile();
+                }
+            }
+            $("#item_class_sub_tag").val(sub_tag);
+            
+            // no trigger itemclass change
+            $('#item_classes').trigger("change");
+            
+            // baseitem
+            if (typeof next_file === 'string') {
+                $baseitem = $("#baseitems option:not(.template)[data-name='" + next_file.replace(/_/, " ") + "']");
+                if ($baseitem.length) {
+                    $baseitem.prop("selected", true);
+
+                    next_file = this.getPath().nextFile();
+                }
+            }
+
+            // TODO catch not found
+            // Hashbang basic gui navigation
+            if (next_file === 'withRecipe') {
+                next_file = this.getPath().nextFile();
+                switch (next_file) {
+                    case 'no_attack_mods':
+                        break;
+                    case 'no_caster_mods':
+                        break;
+                    case 'no_attack_or_caster_mods':
+                        break;
+                    case 'lld_mods':
+                        break;
+                    default:
+                        throw new NotFoundException('recipe `' + next_file + '` not found');
+                        break;
+                }
+            }
+            
+        };
+
+        // TODO doesnt work
+        hashbang.onChange(hashbang_change);
+        
+        hashbang.withWindow(window);
+        hashbang_change.apply(hashbang);
+        
+        $(window).on("hashchange", function () {
+            hashbang.withWindow(window);
+            hashbang_change.apply(hashbang);
+        });
+
         // change modgen handle
         $("input.ModGenerator:radio").on("change", function () {
             // persistence
@@ -666,10 +791,6 @@
         });
         
         // test dom handles
-        $("#item_classes option:not(.template)").filter(function () {
-            return $(this).text().toLowerCase() === "ring";
-        }).prop("selected", true);
-        $("#item_classes").trigger("change");
         
         // all affixes selected by default
         $("input.ModGenerator:radio").filter(":first").prop("checked", true);

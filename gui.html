@@ -17,6 +17,8 @@
         <script src="js/libs/jquery/jquery.tablesorter.min.js"></script>
         <script src="js/libs/Inheritance.js"></script>
         
+        <script src="js/libs/Exceptions/NotFoundException.js"></script>
+        
         <script src="js/libs/concerns/Array.js"></script>
         <script src="js/libs/concerns/Object.js"></script>
         <script src="js/libs/concerns/String.js"></script>
@@ -25,6 +27,8 @@
         <script src="js/libs/concerns/ByteSet.js"></script>
         
         <script src="js/libs/DataDependency.js"></script>
+        <script src="js/libs/Path.js"></script>
+        <script src="js/libs/Hashbang.js"></script>
         
         <script src="js/libs/Applicable.js"></script>
         <script src="js/libs/Spawnable.js"></script>
@@ -88,8 +92,72 @@
 
                 <label for="item_classes">Itemclass</label>
                 <select id="item_classes">
-                    <option class="template"></option>
+                    <option class="template item_class"></option>
                 </select>
+                
+                <input type="hidden" id="item_class_sub_tag">
+                
+                <h3>Weapons</h3>
+                <ul class="item_class_group weapons">
+                    <li>
+                        <a href="#!/claws">Claw</a>
+                        <a href="#!/daggers">Daggers</a>
+                        <a href="#!/sceptres">Sceptres</a>
+                    </li>
+                    <li>
+                        <a href="#!/bows">Bows</a>
+                        <a href="#!/quivers">Quivers</a>
+                    </li>
+                    <li>
+                        <a href="#!/wands">Wands</a>
+                        <a href="#!/staves">Staves</a>
+                    </li>
+                    <li>
+                        <a href="#!/1h_axes">1H Axes</a>
+                        <a href="#!/2h_axes">2H Axes</a>
+                    </li>
+                    <li>
+                        <a href="#!/1h_maces">1H Maces</a>
+                        <a href="#!/2h_maces">2H Maces</a>
+                    </li>
+                    <li>
+                        <a href="#!/1h_swords">1H Swords</a>
+                        <a href="#!/2h_swords">2H Swords</a>
+                    </li>
+                </ul>
+                
+                <h3>Armour</h3>
+                <ul class="item_class_group">
+                    <li></li>
+                    <li>
+                        <a href="#!/armours">Body Armour</a>
+                        <a href="#!/boots">Boots</a>
+                        <a href="#!/gloves">Gloves</a>
+                        <a href="#!/helmets">Helmet</a>
+                    </li>
+                    <li><a href="#!/shields">Shield</a></li>
+                </ul>
+                
+                <h3>Jewelry</h3>
+                <ul class="item_class_group">
+                    <li>
+                        <a href="#!/amulets">Amulets</a>
+                        <a href="#!/rings">Rings</a>
+                        <a href="#!/belts">Belts</a>
+                    </li>
+                    <li class="jewels">
+                        <a href="#!/jewels/Cobalt_Jewel">Cobalt-</a>
+                        <a href="#!/jewels/Crimson_Jewel">Crimson-</a>
+                        <a href="#!/jewels/Viridian_Jewel">Viridian-</a>
+                    </li>
+                </ul>
+                
+                <h3>Misc</h3>
+                <ul class="item_class_group">
+                    <li>
+                        <a href="#!/maps">Maps</a>
+                    </li>
+                </ul>
 
                 <label for="baseitems">Base</label>
                 <select id="baseitems">
@@ -232,6 +300,24 @@
                         <a id="expand_mods" href="#available_mods">Expand All</a>/
                         <a id="collapse_mods" href="#available_mods">Collapse All</a>
                     </h3>
+                    
+                    <ul id="tag_selector_req" class="sub_tag_selector">
+                        <li><a href="" data-sub_tag="str_armour">Armour</a></li>
+                        <li><a href="" data-sub_tag="dex_armour">Evasion</a></li>
+                        <li><a href="" data-sub_tag="int_armour">Energy Shield</a></li>
+                        <li><a href="" data-sub_tag="str_dex_armour">Armour/Evasion</a></li>
+                        <li><a href="" data-sub_tag="str_int_armour">Armour/Energy Shield</a></li>
+                        <li><a href="" data-sub_tag="dex_int_armour">Evasion/Energy Shield</a></li>
+                        <li><a href="" data-sub_tag="str_dex_int_armour">Armour/Evasion/Energy Shield</a></li>
+                    </ul>
+                    
+                    <ul id="tag_selector_map" class="sub_tag_selector">
+                        <li><a href="#!/maps/old_map">Old Maps</a></li>
+                        <li><a href="#!/maps/low_tier_map">Low Tier</a></li>
+                        <li><a href="#!/maps/mid_tier_map">Mid Tier</a></li>
+                        <li><a href="#!/maps/top_tier_map">Top Tier</a></li>
+                    </ul>
+                    
                     <table id="implicits" class="mods sortable">
                         <caption id="implicits-caption">Implicits /<span class="count">0</span></caption>
                         <thead>
