@@ -26,8 +26,7 @@
         implicitCandidate: function () {
             return this.isPremade() 
                     || this.isType("vaal") 
-                    || this.isType("enchantment")
-                    || this.isType("talisman");
+                    || this.isType("enchantment");
         },
         /**
          * @returns {Array<Stat>} all stats from this mod
