@@ -155,6 +155,9 @@
                     return this.maxPrefixes();
                 case Mod.MOD_TYPE.SUFFIX:
                     return this.maxSuffixes();
+                case Mod.MOD_TYPE.ENCHANTMENT:
+                case Mod.MOD_TYPE.TALISMAN:
+                    return 1;
             }
             
             return -1;

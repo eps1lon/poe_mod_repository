@@ -1,4 +1,4 @@
-/* global Mod, MasterMod, ApplicableMod, Spawnable, Item, ModGenerator, Transmute, Vaal, RollableMod */
+/* global Mod, MasterMod, ApplicableMod, Spawnable, Item, ModGenerator, Transmute, Vaal, RollableMod, Talisman */
 
 (function (__undefined) {
     /**
@@ -15,8 +15,14 @@
         init: function (all_mods) {
             var mods = $.map(all_mods, function (mod) {
                 // transmute/vaal mods
-                if (!Transmute.mod_filter(mod) && !Vaal.mod_filter(mod)) {
+                if (!Transmute.mod_filter(mod) && 
+                        !Vaal.mod_filter(mod) &&
+                        !Talisman.mod_filter(mod)) {
                     return null;
+                }
+                
+                if (+mod.GenerationType === Mod.MOD_TYPE.TALISMAN) {
+                    return new ApplicableMod(mod);
                 }
                 
                 if (+mod.Domain === Mod.DOMAIN.MASTER) {

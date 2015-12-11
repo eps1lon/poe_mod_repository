@@ -24,7 +24,10 @@
             return this.isPrefix() || this.isSuffix();
         },
         implicitCandidate: function () {
-            return this.isPremade() || this.isType("vaal");
+            return this.isPremade() 
+                    || this.isType("vaal") 
+                    || this.isType("enchantment")
+                    || this.isType("talisman");
         },
         /**
          * @returns {Array<Stat>} all stats from this mod
@@ -114,7 +117,9 @@
         VAAL: 5,
         BLOODLINES: 6,
         TORMENT: 7,
-        TEMPEST: 8
+        TEMPEST: 8,
+        TALISMAN: 9,
+        ENCHANTMENT: 10
     };
     
     this.Mod.DOMAIN = {

@@ -49,7 +49,7 @@ ul {
     right: 0px;
     border-left: 2px dashed #ff7;
     padding-left: 10px;
-    max-width: 800px;
+    max-width: 1200px;
 }
 
 #ModGenerator {
@@ -191,7 +191,7 @@ button.add_mod, button.remove_mode {
     color: #8888ff;
 }
 
-.crafted-mod, .mod.MasterMod .stats, .mod.EnchantMod .stats{
+.crafted-mod, .mod.MasterMod .stats, .mod.enchantment .stats{
     color: #B8DAF2;
 }
 

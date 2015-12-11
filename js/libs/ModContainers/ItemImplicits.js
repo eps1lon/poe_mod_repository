@@ -28,9 +28,10 @@
          * @returns {Number} -1 if not possible at all
          */
         maxModsOfType: function (mod) {
+            console.log(mod);
             if  (+mod.getProp("GenerationType") === Mod.MOD_TYPE.PREMADE) {
-                return 1;
-            }
+                return 5;
+            } 
             return -1;
         }
     });

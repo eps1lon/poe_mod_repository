@@ -18,13 +18,6 @@
             this.resetApplicable();
         },
         /**
-         * checks if this mod might end up beeing an implicit
-         * @returns {boolean}
-         */
-        implicitCandidate: function () {
-            return this.isType("vaal") || this.isPremade();
-        },
-        /**
          * applicable logic
          * 
          * @param {Item} item
