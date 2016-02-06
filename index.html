@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Interactive Mod Repository</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="gui.css">
+        
+        <script src="gui.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Path of Exile Mod Repository</h1>
+            <ul id="data_loader">
+                <li class="loading_indicator" data-loading-state="1" id="data_loader_mods">mods</li>
+                <li class="loading_indicator" data-loading-state="1" id="data_loader_tags">tags</li>
+                <li class="loading_indicator" data-loading-state="1" id="data_loader_baseitemtypes">baseitems</li>
+                <li class="loading_indicator" data-loading-state="1" id="data_loader_stats">stats</li>
+                <li class="loading_indicator" data-loading-state="1" id="data_loader_stat_desc">localization</li>
+                <li class="loading_indicator" data-loading-state="1" id="data_loader_meta_data">meta data</li>
+                <li class="loading_indicator" data-loading-state="1" id="data_loader_craftingbenchoptions">masterbench options</li>
+                <li class="loading_indicator" data-loading-state="1" id="data_loader_mod_correct_groups_loc">Modgroup localization</li>
+            </ul> 
+        </header>
+        <div id="content">
+            <section id="Item">
+                <h2>Item</h2>
+
+                <label for="item_classes">Itemclass</label>
+                <select id="item_classes">
+                    <option class="template item_class"></option>
+                </select>
+                
+                <input type="hidden" id="item_class_sub_tag">
+                
+                <h3>Weapons</h3>
+                <ul class="item_class_group weapons">
+                    <li>
+                        <a href="#!/claws">Claw</a>
+                        <a href="#!/daggers">Daggers</a>
+                        <a href="#!/sceptres">Sceptres</a>
+                    </li>
+                    <li>
+                        <a href="#!/bows">Bows</a>
+                        <a href="#!/quivers">Quivers</a>
+                    </li>
+                    <li>
+                        <a href="#!/wands">Wands</a>
+                        <a href="#!/staves">Staves</a>
+                    </li>
+                    <li>
+                        <a href="#!/1h_axes">1H Axes</a>
+                        <a href="#!/2h_axes">2H Axes</a>
+                    </li>
+                    <li>
+                        <a href="#!/1h_maces">1H Maces</a>
+                        <a href="#!/2h_maces">2H Maces</a>
+                    </li>
+                    <li>
+                        <a href="#!/1h_swords">1H Swords</a>
+                        <a href="#!/2h_swords">2H Swords</a>
+                    </li>
+                </ul>
+                
+                <h3>Armour</h3>
+                <ul class="item_class_group">
+                    <li></li>
+                    <li>
+                        <a href="#!/armours">Body Armour</a>
+                        <a href="#!/boots">Boots</a>
+                        <a href="#!/gloves">Gloves</a>
+                        <a href="#!/helmets">Helmet</a>
+                    </li>
+                    <li><a href="#!/shields">Shield</a></li>
+                </ul>
+                
+                <h3>Jewelry</h3>
+                <ul class="item_class_group">
+                    <li>
+                        <a href="#!/amulets">Amulets</a>
+                        <a href="#!/rings">Rings</a>
+                        <a href="#!/belts">Belts</a>
+                    </li>
+                    <li class="jewels">
+                        <a href="#!/jewels/Cobalt_Jewel">Cobalt-</a>
+                        <a href="#!/jewels/Crimson_Jewel">Crimson-</a>
+                        <a href="#!/jewels/Viridian_Jewel">Viridian-</a>
+                    </li>
+                </ul>
+                
+                <h3>Misc</h3>
+                <ul class="item_class_group">
+                    <li>
+                        <a href="#!/maps">Maps</a>
+                    </li>
+                </ul>
+
+                <label for="baseitems">Base</label>
+                <select id="baseitems">
+                    <option class="template"></option>
+                </select>
+
+                <h3>Preview</h3>
+                <input type="checkbox" id="itembox_stats_with_mods" checked="checked">
+                <label for="itembox_stats_with_mods">Stats with Mods</label>
+                <div id="used_baseitem"></div>
+
+                <label for="item_rarities">Change Rarity</label>
+                <select id="item_rarities">
+                    <option value="NORMAL">Normal</option>
+                    <option value="MAGIC">Magic</option>
+                    <option value="RARE">Rare</option>
+                </select>
+            </section>
+
+            <div id="right_side">
+              <section id="ModGenerator">
+                    <span class="Itemshowcase applicable">
+                        <label for="mod_generator_showcase">All Affixes</label>
+                        <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_showcase" value="ITEMSHOWCASE">
+                    </span>
+                    <a href="#" id="show_currencies">Currencies</a>
+                    <a href="#" id="show_masterbenches">Masterbenches</a>
+
+                    <fieldset class="currencies">
+                        <legend>Currencies</legend>
+                        <a href="#" id="hide_currencies" class="close_fieldset"></a>
+                        <ul class="mod_generators currencies">
+                            <li class="applicable">
+                                <label for="mod_generator_transmute">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyUpgradeToMagic.png" alt="Orb of Transmutation">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_transmute" value="TRANSMUTE">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_augment">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyAddModToMagic.png" alt="Orb of Augmentation">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_augment" value="AUGMENT">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_alteration">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyRerollMagic.png" alt="Orb of Alteration">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_alteration" value="ALTERATION">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_regal">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyUpgradeMagicToRare.png" alt="Regal Orb">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_regal" value="REGAL">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_alchemy">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyUpgradeToRare.png" alt="Alchemy Orb">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_alchemy" value="ALCHEMY">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_chaos">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyRerollRare.png" alt="Chaos Orb">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_chaos" value="CHAOS">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_exalted">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyAddModToRare.png" alt="Exalted Orb">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_exalted" value="EXALTED">
+                            </li>
+
+                            <li class="applicable">
+                                <label for="mod_generator_scouring">
+                                    <img class="itemimg1x1" src="image/GGG/Art/2DItems/Currency/CurrencyConvertToNormal.png" alt="Orb of Scouring">
+                                </label>
+                                <input class="ModGenerator" type="radio" name="ModGenerator" id="mod_generator_scouring" value="SCOURING">
+                            </li>
+                        </ul>
+                    </fieldset>
+
+                    <fieldset class="masterbenches">
+                        <legend>Masterbenches</legend>
+                        <a href="#" id="hide_masterbenches"></a>
+
+                        <ul class="masterbenches">
+                            <li class="applicable">
+                                <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_catarina" value="MASTERBENCH" data-npc_master_key="2">
+                                <label for="mod_generator_catarina">Catarina</label>
+                            </li>
+                            <li class="applicable">
+                                <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_elreon" value="MASTERBENCH" data-npc_master_key="5">
+                                <label for="mod_generator_elreon">Elreon</label>
+                            </li>
+                            <li class="applicable">
+                                <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_haku" value="MASTERBENCH" data-npc_master_key="6">
+                                <label for="mod_generator_haku">Haku</label>
+                            </li>
+                            <li class="applicable">
+                                <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_leo" value="MASTERBENCH" data-npc_master_key="7">
+                                <label for="mod_generator_leo">Leo</label>
+                            </li>
+                            <li class="applicable">
+                                <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_tora" value="MASTERBENCH" data-npc_master_key="1">
+                                <label for="mod_generator_tora">Tora</label>
+                            </li>
+                            <li class="applicable">
+                                <input class="ModGenerator Masterbench" type="radio" name="ModGenerator" id="mod_generator_vagan" value="MASTERBENCH" data-npc_master_key="4">
+                                <label for="mod_generator_vagan">Vagan</label>
+                            </li>
+                        </ul>
+
+                        <label for="craftingbenchoptions">Options</label>
+                        <select id="craftingbenchoptions">
+                            <option class="template craftingbenchoption"></option>
+                            <option id="no_craftingbenchoptions">No options applicable</option>
+                        </select>
+
+                    </fieldset>
+
+                    <button id="use_mod_gen" type="button">
+                        Use
+                        <em class="name"></em>
+                        <em class="craftingbenchoption"></em>
+                    </button>
+                </section>
+
+                <section id="available_mods">
+                    <h3>
+                        available Mods 
+                        <a id="expand_mods" href="#available_mods">Expand All</a>/
+                        <a id="collapse_mods" href="#available_mods">Collapse All</a>
+                    </h3>
+                    
+                    <ul id="tag_selector_req" class="sub_tag_selector">
+                        <li><a href="" data-sub_tag="str_armour">Armour</a></li>
+                        <li><a href="" data-sub_tag="dex_armour">Evasion</a></li>
+                        <li><a href="" data-sub_tag="int_armour">Energy Shield</a></li>
+                        <li><a href="" data-sub_tag="str_dex_armour">Armour/Evasion</a></li>
+                        <li><a href="" data-sub_tag="str_int_armour">Armour/Energy Shield</a></li>
+                        <li><a href="" data-sub_tag="dex_int_armour">Evasion/Energy Shield</a></li>
+                        <li><a href="" data-sub_tag="str_dex_int_armour">Armour/Evasion/Energy Shield</a></li>
+                    </ul>
+                    
+                    <ul id="tag_selector_map" class="sub_tag_selector">
+                        <li><a href="#!/maps/old_map">Old Maps</a></li>
+                        <li><a href="#!/maps/low_tier_map">Low Tier</a></li>
+                        <li><a href="#!/maps/mid_tier_map">Mid Tier</a></li>
+                        <li><a href="#!/maps/top_tier_map">Top Tier</a></li>
+                    </ul>
+                    
+                    <table id="implicits" class="mods sortable">
+                        <caption id="implicits-caption">Implicits /<span class="count">0</span></caption>
+                        <thead>
+                            <th class="ilvl">iLvl</th>
+                            <th class="stats {sorter: false}">Stats</th>
+                            <th class="spawn_chance">Chance</th>
+                            <th class="{sorter: false}"></th>
+                        </thead>
+                        <tbody>
+                            <tr class="template mod applicable">
+                                <td class="ilvl"></td>
+                                <td class="stats"></td>
+                                <td class="spawn_chance"></td>
+                                <td><button type="button" class="add_mod">add</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table id="prefixes" class="mods sortable">
+                        <caption>Prefixes /<span class="count">0</span></caption>
+                        <thead>
+                            <tr>
+                                <th class="ilvl">iLvl</th>
+                                <th class="stats {sorter: false}">Stats</th>
+                                <th class="name {sorter: false}">Name</th>
+                                <th class="spawn_chance">Chance</th>
+                                <th class="{sorter: false}"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="template correct_group not_rollable tablesorter-no-sort">
+                            <tr>
+                                <th colspan="5" class="correct_group"></th>
+                            </tr>
+                        </tbody>
+                        <tbody class="template mods">
+                            <tr class="template mod applicable">
+                                <td class="ilvl"></td>
+                                <td class="stats"></td>
+                                <td class="name"></td>
+                                <td class="spawn_chance"></td>
+                                <td><button type="button" class="add_mod">add</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table id="suffixes" class="mods sortable">
+                        <caption>Suffixes /<span class="count">0</span></caption>
+                        <thead>
+                            <tr>
+                                <th class="ilvl">iLvl</th>
+                                <th class="stats {sorter: false}">Stats</th>
+                                <th class="name {sorter: false}">Name</th>
+                                <th class="spawn_chance">Chance</th>
+                                <th class="{sorter: false}"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="template correct_group not_rollable tablesorter-no-sort">
+                            <tr>
+                                <th colspan="5" class="correct_group"></th>
+                            </tr>
+                        </tbody>
+                        <tbody class="sortable template mods">
+                            <tr class="template mod applicable">
+                                <td class="ilvl"></td>
+                                <td class="stats"></td>
+                                <td class="name"></td>
+                                <td class="spawn_chance"></td>
+                                <td><button type="button" class="add_mod">add</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+        
+        <footer>
+            All images filed unter `GGG` directories are property of 
+            <a href="http://www.grindinggear.com/">Grinding Gear Games</a>.
+        </footer>
+        
+        <div id="legends">
+            <h4>Criteria</h4>
+            <ul class="legend applicable RollableMod" data-klass="RollableMod" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">No more Space for mods of this type</li>
+                <li class="applicable" data-applicable_byte="4">Modgroup already exists</li>
+                <li class="applicable" data-applicable_byte="8">Mod not applicable to this Item</li>
+                <li class="applicable" data-applicable_byte="16">iLvl to low</li>
+                <li class="applicable" data-applicable_byte="32">only LLD mods allowed</li>
+            </ul>
+            <ul class="legend spawnable RollableMod" data-klass="RollableMod" data-byte-ident="spawnable_byte">
+                <li class="spawnable">Success</li>
+                <li class="spawnable" data-spawnable_byte="2">No matching tags</li>
+                <li class="spawnable" data-spawnable_byte="4">Spawnchance is zero</li>
+            </ul>
+            
+            <ul class="legend applicable MasterMod" data-klass="MasterMod" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">No more Space for mods of this type</li>
+                <li class="applicable" data-applicable_byte="4">Modgroup already exists</li>
+                <li class="applicable" data-applicable_byte="8">Mod not applicable to this Item</li>
+                <li class="applicable" data-applicable_byte="16">iLvl to low</li>
+                <li class="applicable" data-applicable_byte="32">only LLD mods allowed</li>
+                <li class="applicable" data-applicable_byte="64">Not a valid itemclass</li>
+                <li class="applicable" data-applicable_byte="128">Already has a crafted mod (or needs Multimod)</li>
+            </ul>
+            
+            <ul class="legend applicable Alteration" data-klass="Alteration" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">ModContainer needs to be an Item</li>
+                <li class="applicable" data-applicable_byte="4">Item needs to be of Magic Rarity</li>
+            </ul>
+            
+            <ul class="legend applicable Augment" data-klass="Augment" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">ModContainer needs to be an Item</li>
+                <li class="applicable" data-applicable_byte="4">Item needs to be of Magic Rarity</li>
+            </ul>
+            
+            <ul class="legend applicable Exalted" data-klass="Exalted" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">ModContainer needs to be an Item</li>
+                <li class="applicable" data-applicable_byte="4">Item needs to be of Rare Rarity</li>
+            </ul>
+            
+            <ul class="legend applicable Regal" data-klass="Regal" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">ModContainer needs to be an Item</li>
+                <li class="applicable" data-applicable_byte="4">Item needs to be of Magic Rarity</li>
+            </ul>
+            
+            <ul class="legend applicable Scouring" data-klass="Scouring" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">ModContainer needs to be an Item</li>
+                <li class="applicable" data-applicable_byte="4">Item needs to be of Magic or Rare Rarity</li>
+            </ul>
+            
+            <ul class="legend applicable Transmute" data-klass="Transmute" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">ModContainer needs to be an Item</li>
+                <li class="applicable" data-applicable_byte="4">Item needs to be of Normal Rarity</li>
+            </ul>
+            
+            <ul class="legend applicable Alchemy" data-klass="Alchemy" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">ModContainer needs to be an Item</li>
+                <li class="applicable" data-applicable_byte="4">Item needs to be of Normal Rarity</li>
+            </ul>
+            
+            <ul class="legend applicable Chaos" data-klass="Chaos" data-byte-ident="applicable_byte">
+                <li class="applicable">Success</li>
+                <li class="applicable" data-applicable_byte="2">ModContainer needs to be an Item</li>
+                <li class="applicable" data-applicable_byte="4">Item needs to be of Rare Rarity</li>
+            </ul>
+        </div>
+        
+        <div class="template itembox">
+            <label class="ilvl template">iLvl: </label>
+            <input class="ilvl template" type="number" value="100">
+            <span class="itemboxheader double-line">
+                <span class="itemboxheader-left"></span>
+                <span class="itemName"></span>
+                <span class="baseName"></span>
+                <span class="itemboxheader-right"></span>
+            </span>
+            <span class="itembox-stats">
+                <span class="template itembox-statsgroup"></span>
+                <span class="template separator"></span>
+            </span>
+            <div class="itemboximage"></div>
+            <ul class="mods template">
+                <li class="mod template">
+                    <em class="name"></em>
+                    <button class="remove_mod" type="button">Remove</button>
+                    <ul class="stats"></ul>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
