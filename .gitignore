@@ -4,3 +4,9 @@ dist
 
 /* npm */
 node_modules
+
+/* config */
+/tasks/php/db.php
+
+/* temp files */
+/tasks/php/temp/**
