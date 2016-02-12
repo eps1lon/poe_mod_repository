@@ -117,12 +117,26 @@ th.correct_group {
     font-style: italic;
 }
 
-#available_mods #prefixes, #available_mods #suffixes {
-    float: left;
-}
-
 .template {
     display: none !important;
+}
+
+#affixes {
+    width: 100%;
+}
+
+#prefixes, #suffixes {
+    width: 49%;
+    display: table-cell;
+    vertical-align: top;
+}
+
+#prefixes {
+    border-right: 1px solid white;
+}
+
+#suffixes {
+    border-left: 1px solid white;
 }
 
 table.mods caption {
@@ -240,6 +254,7 @@ ul.masterbenches {
     margin: 1em 0 1em 5px;
     padding: 0;
     list-style: none;
+    display: none;
 }
 
 .loading_indicator {
