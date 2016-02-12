@@ -2,6 +2,10 @@
 /* jshint bitwise:false */
 
 (function (__undefined) {
+    require("./Inheritance");
+    require('./concerns/Array');
+    require('./concerns/Object');
+    
     /**
      * class Localization
      * 
@@ -23,7 +27,8 @@
          * @returns {Localization::lookupString}
          */
         t: function (key) {
-            return this.lookupString(key, Array.prototype.slice.call(arguments, 1));
+            var params = Array.prototype.slice.call(arguments, 1);
+            return Localization.fillString(this.lookupString(key, params), params);
         },
         /**
          * checks all possible strings from key against the params
@@ -34,8 +39,17 @@
         lookupString: function (key, params) {
             var used_option = null;
             
+            if (this.data[key] === __undefined) {
+                return null;
+            }
+            
             // every option
             $.each(this.data[key], function (i, option) {
+                if (isNaN(+i)) {
+                    // continue on string keys
+                    return true;
+                }
+                
                 var and_bit = 1;
                 // loop through every and condition
                 $.each(option.and, function (j, range_string) {
@@ -54,18 +68,22 @@
             });
             
             if (used_option === null) {
-                console.log("no valid match for", this.data[key], "with", params);
+                //console.log("no valid match for", this.data[key], "with", params);
                 
-                return this.data[key];
+                return null;
             }
-            
+
             if (used_option.handles) {
                 $.each(used_option.handles, function (i, handle) {
                     params[i-1] = $.map(params[i-1], Localization.handles[handle]);
                 });
             }
             
-            return Localization.fillString(used_option.text, params);
+            if (!used_option.text) {
+                console.log(this.data[key], used_option)
+            }
+            
+            return used_option.text;
         }
     });
     

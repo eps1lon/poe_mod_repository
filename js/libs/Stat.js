@@ -1,6 +1,9 @@
 /* global GgpkEntry, this, ValueRange, Stat */
 
 (function (__undefined) {
+    require('./GgpkEntry');
+    require('./concerns/Array');
+    
     /**
      * class Stat extends GgpkEntry
      */
@@ -20,9 +23,19 @@
                 return id;
             }
             
+            var params = this.tParams(other_stats, localization);
+            
+            return localization.t.apply(localization, [id].concat(params));
+        },
+        tParams: function (other_stats, localization) {
+            var id = this.getProp("Id");
+            var params = [this.values.toArray()];
+            
+            if (!localization.data[id]) {
+                return params;
+            }
             
             var other_params = localization.data[id].params;
-            var params = [this.values.toArray()];
             
             if (other_params !== __undefined && other_params.length > 1) {
                 params = $.map(other_params, function (param_id) {
@@ -39,7 +52,7 @@
                 });
             }
             
-            return localization.t.apply(localization, [id].concat(params));
+            return params;
         },
         valueString: function () {
             return "(" + this.values.toString() + ")";

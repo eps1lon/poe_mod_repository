@@ -1,6 +1,9 @@
 /* global Class */
 
 (function (__undefined) {
+    require('./Inheritance');
+    require('./concerns/Array');
+    
     /**
      * table row from content.ggpk
      */

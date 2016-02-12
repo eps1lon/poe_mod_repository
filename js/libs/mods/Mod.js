@@ -1,6 +1,11 @@
 /* global this, GgpkEntry, Mod, Stat, ValueRange */
 
 (function (__undefined) {
+    require('../GgpkEntry');
+    require('../Stat');
+    require('../ValueRange');
+    require('../concerns/Array');
+    
     /**
      * extends GgpkEntry implements Localizeable
      */
@@ -139,4 +144,3 @@
     // table `mods`
     this.mods = null;
 })();
-

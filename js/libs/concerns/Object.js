@@ -18,4 +18,41 @@
         }
         return o;
     };
+    
+    /**
+     * jQuery map equiv
+     * @param {type} callbackfn
+     * @returns {Array.prototype@call;map@call;filter}
+     *
+    Object.prototype.$map = function (callbackfn) {
+        return this.map(callbackfn).filter(function (value) {
+            return value !== null;
+        });
+    };
+    
+    Object.prototype.map = function (callbackfn) {
+        var self = this.valueOf();
+        
+        self.forEach(function (value, key) {
+            self[key] = callbackfn(value, key, self);
+        });
+        
+        return self;
+    };
+    
+    if (!$) {
+        Object.prototype.forEach = function (callbackfn) {
+            for (var key in this) {
+                if (!this.hasOwnProperty(key)) {
+                    continue;
+                }
+
+                /*
+                console.log('`value`:', this[key]);
+                console.log('`key`:', key);
+                console.log('`this`:', this);
+                callbackfn(this[key], key, this);
+            }
+        };
+    }//*/
 })();
