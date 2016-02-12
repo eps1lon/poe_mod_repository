@@ -242,7 +242,7 @@
                     $correct_group_header.attr("id", "correct-group-" + correct_group);
                     $correct_group.attr("data-correct-group", correct_group);
 
-                    $("th.correct_group", $correct_group_header).text(mod.correctGroupTranslated());
+                    $("th.correct_group", $correct_group_header).text(mod.correctGroupTranslated().replace(/\n/, " / "));
 
                     $table.append($correct_group_header, $correct_group);
                 }

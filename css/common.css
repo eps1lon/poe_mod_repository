@@ -130,7 +130,7 @@ table.mods caption {
 }
 
 .mods .stats {
-    
+    white-space: pre-line;
 }
 
 button.add_mod, button.remove_mode {
