@@ -92,6 +92,14 @@
                 "All Mods",
                 "shows all possible mods"
             ]
+        },
+        ENCHANTMENTBENCH: {
+            klass: "Enchantmentbench",
+            name: "Enchantmentbench",
+            stats: [
+                "Craftingbench",
+                "crafts implicit enchantments"
+            ]
         }
     };
 })();
