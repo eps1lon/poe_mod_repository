@@ -2,6 +2,7 @@
     var ModGenerator = require('./ModGenerator');
     var MasterMod = require('../mods/MasterMod');
     var Item = require('../ModContainers/Item');
+    var Mod = require('../mods/Mod');
     
     var $ = require('../jquery/jquery_node');
     
