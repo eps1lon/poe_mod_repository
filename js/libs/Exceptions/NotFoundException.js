@@ -1,9 +1,11 @@
-/* global Class */
-
 (function (__undefined) {
-    this.NotFoundException = Class.extend({
+    var Class = require('../Inheritance');
+    
+    var NotFoundException = Class.extend({
         init: function (msg) {
             this.message  = msg;
         }
     });
-})();
+    
+    module.exports = NotFoundException;
+}).call(this);

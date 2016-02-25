@@ -24,6 +24,7 @@
     var Localization        = require('./libs/Localization');
     var Hashbang            = require('./libs/Hashbang');
     var ByteSet             = require('./libs/concerns/ByteSet');
+    var NotFoundException   = require('./libs/Exceptions/NotFoundException');
     
     require('./libs/concerns/Array');
     require('./libs/concerns/ByteSet');
