@@ -10,7 +10,8 @@
         serialize: function () {
             return {
                 klass: "",
-                args: []
+                args: [],
+                constructor: null // a variable
             };
         }
     });
@@ -21,7 +22,7 @@
      * @returns {ModFactory_L1.ModFactory.deserialize.FactoryFunction}
      */
     Serializeable.deserialize = function (serialized) {
-        var constructor = window[serialized.klass];
+        var constructor = serialized.constructor;
         var args = [null].concat(serialized.args);
         var factoryFunction = constructor.bind.apply(constructor, args);
         return new factoryFunction();
