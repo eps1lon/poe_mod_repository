@@ -4,7 +4,7 @@
     var Currency = require('./Currency');
     var Item = require('../ModContainers/Item');
     var Applicable = require('../Applicable');
-    var RollableMod = require('../mods/Mod');
+    var Mod = require('../mods/Mod');
     
     var $ = require('../jquery/jquery_node');
     var ByteSet = require('../concerns/ByteSet');

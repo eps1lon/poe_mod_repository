@@ -1,5 +1,15 @@
 (function (__undefined) {
     var Class = require('../Inheritance');
+    var Transmute = require('./Transmute');
+    var Augment = require('./Augment');
+    var Alteration = require('./Alteration');
+    var Scouring = require('./Scouring');
+    var Regal = require('./Regal');
+    var Alchemy = require('./Alchemy');
+    var Chaos = require('./Chaos');
+    var Exalted = require('./Exalted');
+    var ItemShowcase = require('./ItemShowcase');
+    var Enchantmentbench = require('./Enchantmentbench');
     
     var ModGeneratorFactory = Class.extend({});
     
@@ -9,7 +19,7 @@
             console.log("could not identify ", ident);
             return null;
         }
-        return new window[generator.klass](all_mods);
+        return new generator.constructor(all_mods);
     };
     
     ModGeneratorFactory.GENERATORS = {
@@ -20,7 +30,8 @@
                 "Currency",
                 "Upgrades a normal item to a magic item",
                 "Right click this item then left click a normal item to apply"
-            ]
+            ],
+            constructor: Transmute
         },
         AUGMENT: {
             klass: "Augment",
@@ -29,7 +40,8 @@
                 "Currency",
                 "Enchants a magic item with a new random property",
                 "Right click this item then left click a normal item to apply"
-            ]
+            ],
+            constructor: Augment
         },
         ALTERATION: {
             klass: "Alteration",
@@ -38,7 +50,8 @@
                 "Currency",
                 "Reforges a magic item with new random properties",
                 "Right click this item then left click a normal item to apply"
-            ]
+            ],
+            constructor: Alteration
         },
         SCOURING: {
             klass: "Scouring",
@@ -47,7 +60,8 @@
                 "Currency",
                 "Removes all properties from an item",
                 "Right click this item then left click a normal item to apply"
-            ]
+            ],
+            constructor: Scouring
         },
         REGAL: {
             klass: "Regal",
@@ -56,7 +70,8 @@
                 "Currency",
                 "Upgrades a magic item to a rare item",
                 "Right click this item then left click a magic item to apply it. Current properties are retained and a new one is added."
-            ]
+            ],
+            constructor: Regal
         },
         ALCHEMY: {
             klass: "Alchemy",
@@ -65,7 +80,8 @@
                 "Currency",
                 "Upgrades a normal item to rare item",
                 "Right click this item then left click a magic item to apply it. Current properties are retained and a new one is added."
-            ]
+            ],
+            constructor: Alchemy
         },
         CHAOS: {
             klass: "Chaos",
@@ -74,7 +90,8 @@
                 "Currency",
                 "Upgrades a magic item to a rare item",
                 "Right click this item then left click a magic item to apply it. Current properties are retained and a new one is added."
-            ]
+            ],
+            constructor: Chaos
         },
         EXALTED: {
             klass: "Exalted",
@@ -83,7 +100,8 @@
                 "Currency",
                 "Enchants a rare item with a new random property",
                 "Right click this item then left click a rare item to apply it. Rare items can have up to six random properties."
-            ]
+            ],
+            constructor: Exalted
         },
         ITEMSHOWCASE: {
             klass: "ItemShowcase",
@@ -91,7 +109,8 @@
             stats: [
                 "All Mods",
                 "shows all possible mods"
-            ]
+            ],
+            constructor: ItemShowcase
         },
         ENCHANTMENTBENCH: {
             klass: "Enchantmentbench",
@@ -99,7 +118,8 @@
             stats: [
                 "Craftingbench",
                 "crafts implicit enchantments"
-            ]
+            ],
+            constructor: Enchantmentbench
         }
     };
     

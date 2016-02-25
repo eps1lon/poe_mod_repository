@@ -5,6 +5,11 @@
  * MIT Licensed.
  */
 (function (__undefined) {
+    if (window === __undefined) {
+        console.error("need window context");
+        return;
+    }
+    
     //node
     var ModGeneratorFactory = require('./libs/ModGenerators/ModGeneratorFactory');
     var ModGenerator        = require('./libs/ModGenerators/ModGenerator');
@@ -20,13 +25,12 @@
     var Hashbang            = require('./libs/Hashbang');
     var ByteSet             = require('./libs/concerns/ByteSet');
     
-    var window = this;
-    
-    if ($ === __undefined) {
-        console.error("need jQuery in window context");
-        var $;
-        return;
-    }
+    require('./libs/concerns/Array');
+    require('./libs/concerns/ByteSet');
+    require('./libs/concerns/Math');
+    require('./libs/concerns/Number');
+    require('./libs/concerns/Object');
+    require('./libs/concerns/String');
     
     // "tables"
     var mods = [],

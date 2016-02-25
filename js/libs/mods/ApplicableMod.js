@@ -3,6 +3,8 @@
 (function (__undefined) {
     var Mod = require('./Mod');
     var Applicable = require('../Applicable');
+    var META_MODS = require('./meta_mods');
+    
     var ByteSet = require('../concerns/ByteSet');
     var $ = require('../jquery/jquery_node');
     
@@ -56,7 +58,7 @@
                 this.applicable_byte |= ApplicableMod.APPLICABLE_BYTE.ALREADY_PRESENT;
             } 
             
-            if (+this.getProp("Level") > 28 && item.inMods(MasterMod.METAMOD.LLD_MODS) !== -1) {
+            if (+this.getProp("Level") > 28 && item.inMods(META_MODS.LLD_MOD) !== -1) {
                 this.applicable_byte |= ApplicableMod.APPLICABLE_BYTE.ABOVE_LLD_LEVEL;
             }
             

@@ -1,5 +1,3 @@
-/* global Class, Spawnable */
-
 (function (__undefined) {
     var Class = require('./Inheritance');
     
@@ -79,5 +77,5 @@
     Spawnable.UNSCANNED = 0;
     Spawnable.SUCCESS = 1;
     
-    module.export = Spawnable;
+    module.exports = Spawnable;
 }).call(this);

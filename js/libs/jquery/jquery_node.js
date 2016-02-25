@@ -338,8 +338,11 @@
         }
     };
     
-    if ($ === __undefined) {
-        var $ = jQuery;
+    var $;
+    if (window === __undefined || window.jQuery === __undefined) {
+        $ = jQuery;
+    } else {
+        $ = window.jQuery;
     }
     
     module.exports = $;

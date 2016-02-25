@@ -3,6 +3,7 @@
 (function (__undefined) {
     var ApplicableMod = require('./ApplicableMod');
     var Applicable = require('../Applicable');
+    var GgpkEntry = require('../GgpkEntry');
     
     var ByteSet = require('../concerns/ByteSet');
     var $ = require('../jquery/jquery_node');
@@ -87,14 +88,7 @@
         NO_MULTIMOD: 128
     };
     
-    MasterMod.METAMOD = {
-        LOCKED_PREFIXES: 4341,
-        LOCKED_SUFFIXES: 4342,
-        NO_ATTACK_MODS: 4343,
-        NO_CASTER_MODS: 4344,
-        MULTIMOD: 4345,
-        LLD_MODS: 4288
-    };
+    MasterMod.METAMOD = require('./meta_mods');
     
     // table `craftingbenchoptions`
     MasterMod.craftingbenchoptions = null;

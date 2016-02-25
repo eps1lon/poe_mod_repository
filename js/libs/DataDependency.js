@@ -2,13 +2,11 @@
     var Class = require('./Inheritance');
     require('./concerns/Array');
     
-    if ($ === __undefined) {
+    if (window.jQuery === __undefined) {
         console.error("need jQuery object with window context");
-        module.exports = null;
-        
-        var $ = null; // or else it throws $ not defined
         return;
     }
+    var $ = window.jQuery;
     
     /**
      * class DataDependency

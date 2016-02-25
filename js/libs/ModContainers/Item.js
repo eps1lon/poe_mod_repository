@@ -3,6 +3,9 @@
     var MetaData = require('../MetaData');
     var Mod = require('../mods/Mod');
     var ValueRange = require('../ValueRange');
+    var GgpkEntry = require('../GgpkEntry');
+    var ItemImplicits = require('./ItemImplicits');
+    var ApplicableMod = require('../mods/ApplicableMod');
     
     if ($ === __undefined) {
         var $ = require('../jquery/jquery_node');

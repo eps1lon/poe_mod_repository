@@ -6,6 +6,7 @@
     var Item = require('../ModContainers/Item');
     var Mod = require('../mods/Mod');
     var ApplicableMod = require('../mods/ApplicableMod');
+    var RollableMod = require('../mods/RollableMod');
     var MasterMod = require('../mods/MasterMod');
     var Spawnable = require('../Spawnable');
     

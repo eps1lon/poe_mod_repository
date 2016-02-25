@@ -58,7 +58,7 @@
         }
     });
     
-    this.Enchantmentbench.mod_filter = function (mod_props) {
+    Enchantmentbench.mod_filter = function (mod_props) {
         // talisman wildcard
         return [Mod.MOD_TYPE.ENCHANTMENT].indexOf(+mod_props.GenerationType) !== -1;
     };

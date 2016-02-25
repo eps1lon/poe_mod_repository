@@ -1,5 +1,6 @@
 (function (__undefined) {
     var Class = require('./Inheritance');
+    var Path = require('./Path');
     
     var Hashbang = Class.extend({
         init: function (prefix) {
