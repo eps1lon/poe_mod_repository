@@ -66,7 +66,8 @@
         serialize: function () {
             return {
                 klass: "MasterMod",
-                args: [this.props, this.bench.props]
+                args: [this.props, this.bench.props],
+                constructor: MasterMod
             };
         },
         applicableByteHuman: function() {

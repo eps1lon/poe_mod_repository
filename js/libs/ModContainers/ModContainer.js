@@ -39,6 +39,7 @@
          */
         addMod: function (new_mod) {
             if (!(new_mod instanceof Mod)) {
+                console.error('mod must be instance of `Mod`');
                 return false;
             }
             if (this.inMods(new_mod.getProp("Rows")) === -1) {

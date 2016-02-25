@@ -112,7 +112,8 @@
         serialize: function () {
             return {
                 klass: "RollableMod",
-                args: [this.props]
+                args: [this.props],
+                constructor: RollableMod
             };
         },
         rollableCached: function () {

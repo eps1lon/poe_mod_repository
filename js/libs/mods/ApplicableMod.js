@@ -96,7 +96,8 @@
         serialize: function () {
             return {
                 klass: "ApplicableMod",
-                args: [this.props]
+                args: [this.props],
+                constructor: ApplicableMod
             };
         },
         name: function () {

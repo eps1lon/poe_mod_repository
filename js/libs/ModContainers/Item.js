@@ -68,6 +68,7 @@
          */
         addMod: function (mod) {
             if (!(mod instanceof Mod)) {
+                console.error('mod must be instance of `Mod`');
                 return false;
             }
             
