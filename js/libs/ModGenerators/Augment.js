@@ -69,6 +69,9 @@
                                  Augment.APPLICABLE_BYTE, 
                                  Augment.APPLICABLE_BYTE.SUCCESS, 
                                  "Augment.applicable_byte");
+        },
+        name: function () {
+            return "Orb of Augmentation";
         }
     });
     

@@ -70,6 +70,9 @@
                                  Exalted.APPLICABLE_BYTE, 
                                  Exalted.APPLICABLE_BYTE.SUCCESS, 
                                  "Exalted.applicable_byte");
+        },
+        name: function () {
+            return "Exalted Orb";
         }
     });
     

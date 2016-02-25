@@ -80,6 +80,9 @@
                                  Chaos.APPLICABLE_BYTE, 
                                  Chaos.APPLICABLE_BYTE.SUCCESS, 
                                  "Chaos.applicable_byte");
+        },
+        name: function () {
+            return "Chaos Orb";
         }
     });
     

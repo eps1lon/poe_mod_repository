@@ -76,6 +76,9 @@
                                  Alteration.APPLICABLE_BYTE, 
                                  Alteration.APPLICABLE_BYTE.SUCCESS, 
                                  "Alteration.applicable_byte");
+        },
+        name: function () {
+            return "Orb of Alteration";
         }
     });
     

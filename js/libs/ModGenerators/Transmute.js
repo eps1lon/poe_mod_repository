@@ -111,6 +111,9 @@
                                  Transmute.APPLICABLE_BYTE, 
                                  Transmute.APPLICABLE_BYTE.SUCCESS, 
                                  "Transmute.applicable_byte");
+        },
+        name: function () {
+            return "Orb of Transmutation";
         }
     });
     

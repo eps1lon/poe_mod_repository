@@ -16,6 +16,9 @@
         init: function (all_mods) {
             this._super(all_mods, Vaal.mod_filter);
             this.klass = "Vaal";
+        },
+        name: function () {
+            return "Vaal Orb";
         }
     });
     

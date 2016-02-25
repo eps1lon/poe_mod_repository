@@ -105,6 +105,9 @@
                                  Regal.APPLICABLE_BYTE, 
                                  Regal.APPLICABLE_BYTE.SUCCESS, 
                                  "Regal.applicable_byte");
+        },
+        name: function () {
+            return "Regal Orb";
         }
     });
     

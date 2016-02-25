@@ -103,6 +103,9 @@
                                  Scouring.APPLICABLE_BYTE, 
                                  Scouring.APPLICABLE_BYTE.SUCCESS, 
                                  "Scouring.applicable_byte");
+        },
+        name: function () {
+            return "Orb of Scouring";
         }
     });
     

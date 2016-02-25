@@ -5,7 +5,6 @@
     var Applicable = require('../Applicable');
     var RollableMod = require('../mods/RollableMod');
     var Item = require('../ModContainers/Item');
-    var ModGeneratorFactory = require('../ModGenerators/ModGeneratorFactory');
     
     var $ = require('../jquery/jquery_node');
     var ByteSet = require('../concerns/ByteSet');
@@ -117,14 +116,7 @@
             return !ByteSet.byteBlacklisted(this.applicable_byte, Applicable.SUCCESS);
         },
         name: function () {
-            var that = this;
-            // grep object
-            return $.map(ModGeneratorFactory.GENERATORS, function (props) {
-                if (props.klass === that.klass) {
-                    return props.name;
-                }
-                return null;
-            })[0] || "AbstractCurrency";
+            return "AbstractCurrency";
         }
     });
     

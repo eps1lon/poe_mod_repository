@@ -124,6 +124,9 @@
                                  Alchemy.APPLICABLE_BYTE, 
                                  Alchemy.APPLICABLE_BYTE.SUCCESS, 
                                  "Alchemy.applicable_byte");
+        },
+        name: function () {
+            return "Orb of Alchemy";
         }
     });
     
