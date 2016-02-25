@@ -1,11 +1,33 @@
-/* global $, ModGeneratorFactory, ModGenerator, Mod, Spawnable, Item, ModFactory, ApplicableMod, MasterMod, ByteSet, Masterbench, DataDependency, Localization, baseitem, Hashbang */
 /* jshint bitwise:false */
 /*!
  * PoE Mod Repository
  * By Sebastian Silbermann
  * MIT Licensed.
  */
-(function (window, __undefined) {
+(function (__undefined) {
+    //node
+    var ModGeneratorFactory = require('./libs/ModGenerators/ModGeneratorFactory');
+    var ModGenerator        = require('./libs/ModGenerators/ModGenerator');
+    var Masterbench         = require('./libs/ModGenerators/Masterbench');
+    var Item                = require('./libs/ModContainers/Item');
+    var Mod                 = require('./libs/mods/Mod');
+    var ModFactory          = require('./libs/mods/ModFactory');
+    var ApplicableMod       = require('./libs/mods/ApplicableMod');
+    var MasterMod           = require('./libs/mods/MasterMod');
+    var Spawnable           = require('./libs/Spawnable');
+    var DataDependency      = require('./libs/DataDependency');
+    var Localization        = require('./libs/Localization');
+    var Hashbang            = require('./libs/Hashbang');
+    var ByteSet             = require('./libs/concerns/ByteSet');
+    
+    var window = this;
+    
+    if ($ === __undefined) {
+        console.error("need jQuery in window context");
+        var $;
+        return;
+    }
+    
     // "tables"
     var mods = [],
         tags = [],
@@ -800,4 +822,4 @@
         
         $("#use_mod_gen").trigger("click");
     });
-})(this);
+}).call(this);

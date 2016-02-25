@@ -1,10 +1,15 @@
-/* global Class, this, Applicable */
-
 (function (__undefined) {
+    var Class = require('../Inheritance');
+    var Applicable = require('../Applicable');
+    
+    if ($ === __undefined) {
+        var $ = require('../jquery/jquery_node');
+    }
+    
     /*
      * abstract Class ModGenerator implements Applicable
      */
-    this.ModGenerator = Class.extend({
+    var ModGenerator = Class.extend({
         /**
          * 
          * @param {Array[mods]} mod_collection
@@ -88,5 +93,7 @@
             return "AbstractModGenerator";
         }
     }); 
-})();
+    
+    module.exports = ModGenerator;
+}).call(this);
 

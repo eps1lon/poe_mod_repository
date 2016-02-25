@@ -1,10 +1,12 @@
 /* global Class, Spawnable */
 
 (function (__undefined) {
+    var Class = require('./Inheritance');
+    
     /**
      * Interface
      */
-    this.Spawnable = Class.extend({
+    var Spawnable = Class.extend({
         init: function () {
             this.spawnweight_cached = 0;
             this.spawnchance = null;
@@ -26,7 +28,7 @@
         }
     });
     
-    this.Spawnable.map = function (mod_collection, mod_container) {
+    Spawnable.map = function (mod_collection, mod_container) {
         return $.map(mod_collection.slice(), function (mod) {
             if (Spawnable.implementedBy(mod)) {
                 mod.spawnableOn(mod_container);
@@ -35,14 +37,14 @@
         });
     };
     
-    this.Spawnable.mods = function (mod_collection, mod_container, success) {
+    Spawnable.mods = function (mod_collection, mod_container, success) {
         return $.grep(mod_collection.slice(), function (mod) {
             return !Spawnable.implementedBy(mod) || mod.spawnableOn(mod_container, success);
         });
     };
     
     // interface pattern
-    this.Spawnable.implementedBy = function (clazz) {
+    Spawnable.implementedBy = function (clazz) {
         return  clazz.spawnableOn !== __undefined;
     };
     
@@ -52,7 +54,7 @@
      * @param {Function} if_cb optional callback to filter mods
      * @returns {float}
      */
-    this.Spawnable.calculateSpawnchance = function (spawnables, if_cb) {
+    Spawnable.calculateSpawnchance = function (spawnables, if_cb) {
         var sum_spawnweight = 0;
         if (typeof if_cb !== 'function') {
             if_cb  = function () { return true; };
@@ -74,6 +76,8 @@
     };
     
     // Convention
-    this.Spawnable.UNSCANNED = 0;
-    this.Spawnable.SUCCESS = 1;
-})();
+    Spawnable.UNSCANNED = 0;
+    Spawnable.SUCCESS = 1;
+    
+    module.export = Spawnable;
+}).call(this);

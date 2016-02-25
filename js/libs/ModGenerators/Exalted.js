@@ -1,13 +1,18 @@
-/* global Currency, Transmute, Applicable, ByteSet, this, Item, Exalted */
 /* jshint bitwise:false */
 
 (function (__undefined) {
+    var Currency = require('./Currency');
+    var Transmute = require('./Transmute');
+    var Item = require('../ModContainers/Item');
+    var Applicable = require('../Applicable');
+    
+    var ByteSet = require('../concerns/ByteSet');
     /**
      * class Exalted extends Currency
      * 
      * ingame representation of Exalted orb
      */
-    this.Exalted = Currency.extend({
+    var Exalted = Currency.extend({
         /**
          * @constructor
          * @param {Array} all_mods
@@ -68,7 +73,7 @@
         }
     });
     
-    this.Exalted.APPLICABLE_BYTE = {
+    Exalted.APPLICABLE_BYTE = {
         // Currency
         UNSCANNED: 0,
         SUCCESS: 1,
@@ -76,4 +81,6 @@
         // extended
         NOT_RARE: 4
     };
-})();
+    
+    module.exports = Exalted;
+}).call(this);

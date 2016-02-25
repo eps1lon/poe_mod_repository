@@ -1,15 +1,18 @@
-/* global this, GgpkEntry, Mod, Stat, ValueRange */
-
 (function (__undefined) {
-    require('../GgpkEntry');
-    require('../Stat');
-    require('../ValueRange');
     require('../concerns/Array');
+    
+    var GgpkEntry = require('../GgpkEntry');
+    var Stat = require('../Stat');
+    var ValueRange = require('../ValueRange');
+    
+    if ($ === __undefined) {
+        var $ = require('../jquery/jquery_node');
+    }
     
     /**
      * extends GgpkEntry implements Localizeable
      */
-    this.Mod = GgpkEntry.extend({
+    var Mod = GgpkEntry.extend({
         init: function (props) {
             this._super(props);
         },
@@ -109,11 +112,11 @@
         }
     });
     
-    this.Mod.domId = function (id) {
+    Mod.domId = function (id) {
         return "mod_" + id;
     };
     
-    this.Mod.MOD_TYPE = {
+    Mod.MOD_TYPE = {
         PREFIX: 1,
         SUFFIX: 2,
         PREMADE: 3,
@@ -126,7 +129,7 @@
         ENCHANTMENT: 10
     };
     
-    this.Mod.DOMAIN = {
+    Mod.DOMAIN = {
         ITEM: 1,
         FLASK: 2,
         MONSTER: 3,
@@ -137,10 +140,12 @@
         JEWEL: 11
     };
     
-    this.Mod.localization = null;
-    this.Mod.correct_group_localization = null;
-    this.Mod.all_stats = null;
+    Mod.localization = null;
+    Mod.correct_group_localization = null;
+    Mod.all_stats = null;
     
     // table `mods`
     this.mods = null;
-})();
+    
+    module.exports = Mod;
+}).call(this);

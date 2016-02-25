@@ -1,12 +1,13 @@
-/* global ModContainer, Mod */
-
 (function (__undefined) {
+    var ModContainer = require("./ModContainer");
+    var Mod = require('../mods/Mod');
+    
     /**
      * class ItemImplicits extends ModContainer
      * 
      * holds all implicits for items
      */
-    this.ItemImplicits = ModContainer.extend({
+    var ItemImplicits = ModContainer.extend({
         /**
          * 
          * @param {Mod} mod
@@ -34,4 +35,6 @@
             return -1;
         }
     });
-})();
+    
+    module.exports = ItemImplicits;
+}).call(this);

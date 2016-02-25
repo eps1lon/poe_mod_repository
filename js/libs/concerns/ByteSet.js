@@ -1,10 +1,12 @@
-/* global ByteSet, Class */
 /* jshint bitwise:false */
 
 (function (__undefined) {
-    // todo if-exists
-    this.ByteSet = Class.extend({});
+    var Class = require('../Inheritance');
+    var $ = require('../jquery/jquery_node');
     
+    // todo if-exists
+    var ByteSet = Class.extend({});
+
     // TODO blacklist instead of ignore
     ByteSet.human = function(byte, byte_set, ignore, localization_path) {
         var strings = [];
@@ -25,9 +27,9 @@
         };
     };
     
-    this.ByteSet.localization = null;
+    ByteSet.localization = null;
     
-    this.ByteSet.initLocalization = function ($legends) {
+    ByteSet.initLocalization = function ($legends) {
         ByteSet.localization = {};
         
         $("ul.legend", $legends).each(function () {
@@ -51,7 +53,9 @@
     };
     
     // turn of everything blacklisted (byte xor (byte & blacklist) = byte & !blacklist)
-    this.ByteSet.byteBlacklisted = function (byte, blacklist) {
+    ByteSet.byteBlacklisted = function (byte, blacklist) {
         return byte & ~blacklist;
     };
-})();
+    
+    module.exports = ByteSet;
+}).call(this);

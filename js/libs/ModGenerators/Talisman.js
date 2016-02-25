@@ -1,17 +1,20 @@
-/* global ModGenerator, Mod */
-
 (function (__undefined) {
+    var ModGenerator = require('./ModGenerator');
+    var Mod = require('../mods/Mod');
+    
     /**
      * TODO
      */
-    this.Talisman = ModGenerator.extend({
+    var Talisman = ModGenerator.extend({
         init: function () {
             
         }
     });
     
-    this.Talisman.mod_filter = function (mod_props) {
+    Talisman.mod_filter = function (mod_props) {
         // talisman wildcard
         return [Mod.MOD_TYPE.ENCHANTMENT].indexOf(+mod_props.GenerationType) !== -1;
     };
-})();
+    
+    module.exports = Talisman;
+}).call(this);

@@ -1,5 +1,7 @@
 (function (__undefined) {
-    this.Hashbang = Class.extend({
+    var Class = require('./Inheritance');
+    
+    var Hashbang = Class.extend({
         init: function (prefix) {
             this.params = {};
             this.path = new Path("");
@@ -75,17 +77,19 @@
         }
     });
     
-    this.Hashbang.fromWindow = function (window) {
+    Hashbang.fromWindow = function (window) {
         return new Hashbang().withWindow(window);
     };
     
-    this.Hashbang.parse = function (url) {
+    Hashbang.parse = function (url) {
         return new Hashbang.parse(url);
     };
     
-    this.Hashbang.query_string = function (params) {
+    Hashbang.query_string = function (params) {
         return $.map(params, function (value, key) {
             return key + "=" + value;
         }).join("&");
     };
-})();
+    
+    module.exports = Hashbang;
+}).call(this);

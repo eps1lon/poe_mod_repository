@@ -1,14 +1,16 @@
-/* global Class, this */
-
 (function (__undefined) {
+    var Class = require('./Inheritance');
+    
     /**
      * interface
      */
-    this.Localizeable = Class.extend({
+    var Localizeable = Class.extend({
         t: function (params) {
             return;
         }
     });
     
-    this.Localizeable.localization = null;
-})();
+    Localizeable.localization = null;
+    
+    module.exports = Localizeable;
+}).call(this);

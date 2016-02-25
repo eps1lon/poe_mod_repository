@@ -1,12 +1,13 @@
-/* global Currency, Mod, Vaal */
-
 (function (__undefined) {
+    var Currency = require('./Currency');
+    var Mod = require('../mods/Mod');
+    
     /**
      * class Vaal extends Currency
      * 
      * ingame representation of Vaal Orb only regarding implicit corruptions
      */
-    this.Vaal = Currency.extend({
+    var Vaal = Currency.extend({
         /**
          * @constructor
          * @param {type} all_mods
@@ -18,8 +19,10 @@
         }
     });
     
-    this.Vaal.mod_filter = function (mod_props) {
+    Vaal.mod_filter = function (mod_props) {
         // vaal implicits
         return [Mod.MOD_TYPE.VAAL].indexOf(+mod_props.GenerationType) !== -1;
     };
-})();
+    
+    module.exports = Vaal;
+}).call(this);

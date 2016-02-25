@@ -1,12 +1,21 @@
-/* global this, Class, DataDependency */
-
 (function (__undefined) {
+    var Class = require('./Inheritance');
+    require('./concerns/Array');
+    
+    if ($ === __undefined) {
+        console.error("need jQuery object with window context");
+        module.exports = null;
+        
+        var $ = null; // or else it throws $ not defined
+        return;
+    }
+    
     /**
      * class DataDependency
      * 
      * class for loading a json data
      */
-    this.DataDependency = Class.extend({
+    var DataDependency = Class.extend({
         /**
          * 
          * @param {String} path path to json data
@@ -39,7 +48,7 @@
         }
     });
     
-    this.DataDependency.STATE = {
+    DataDependency.STATE = {
         LOADING: 1,
         DONE: 2,
         FAIL: 3
@@ -48,5 +57,7 @@
     /**
      * default loading state attr
      */
-    this.DataDependency.STATE_ATTR = "data-loading-state";
-})();
+    DataDependency.STATE_ATTR = "data-loading-state";
+    
+    module.exports = DataDependency;
+}).call(this);

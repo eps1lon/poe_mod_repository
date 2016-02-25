@@ -1,12 +1,20 @@
-/* global Mod, MasterMod, ApplicableMod, Spawnable, Item, ModGenerator, Transmute, Vaal, RollableMod, Talisman */
-
 (function (__undefined) {
+    var ModGenerator = require('./ModGenerator');
+    var Transmute = require('./Transmute');
+    var Vaal = require('./Vaal');
+    var Talisman = require('./Talisman');
+    var Item = require('../ModContainers/Item');
+    var Mod = require('../mods/Mod');
+    var ApplicableMod = require('../mods/ApplicableMod');
+    var MasterMod = require('../mods/MasterMod');
+    var Spawnable = require('../Spawnable');
+    
     /**
      * class ItemShowcase extends ModGenerator
      * 
      * Masterbench/Currency hybrid
      */
-    this.ItemShowcase = ModGenerator.extend({
+    var ItemShowcase = ModGenerator.extend({
         /**
          * 
          * @param {Array} all_mods
@@ -128,4 +136,6 @@
             return "Item Showcase";
         }
     });
-})();
+    
+    module.exports = ItemShowcase;
+}).call(this);

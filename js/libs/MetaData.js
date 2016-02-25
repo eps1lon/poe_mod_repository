@@ -1,12 +1,12 @@
-/* global Class, this, MetaData */
-
 (function (__undefined) {
+    var Class = require('./Inheritance');
+    
     /**
      * class Metadata
      * 
      * representation of a .ot file in METADATA 
      */
-    this.MetaData = Class.extend({
+    var MetaData = Class.extend({
         init: function (clazz, props) {
             this.clazz = clazz;
             this.props = props;
@@ -33,7 +33,7 @@
         }
     });
     
-    this.MetaData.build = function (clazz, meta_datas) {
+    MetaData.build = function (clazz, meta_datas) {
         var meta_data = meta_datas[clazz];
         if (meta_data === __undefined) {
             return null;
@@ -42,9 +42,11 @@
         return new MetaData(clazz, meta_data);
     };
     
-    this.MetaData.EXPECT = {
+    MetaData.EXPECT = {
         NUMBER: 1,
         STRING: 2,
         ARRAY: 3
     };
-})();
+    
+    module.exports = MetaData;
+}).call(this);

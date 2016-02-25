@@ -1,7 +1,14 @@
-/* global Mod, Item, Currency, ByteSet, this, Applicable, Transmute */
 /* jshint bitwise: false */
 
 (function (__undefined) {
+    var Currency = require('./Currency');
+    var Transmute = require('./Transmute');
+    var Item = require('../ModContainers/Item');
+    var Applicable = require('../Applicable');
+    
+    var $ = require('../jquery/jquery_node');
+    var ByteSet = require('../concerns/ByteSet');
+    
     /**
      * class Alchemy extends Currency
      * 
@@ -9,7 +16,7 @@
      * mod generation most likely not accurate because we just roll 4-6 mods
      * and correlate #prefixs/suffixes to eache other if the ratio >= 3:1
      */
-    this.Alchemy = Currency.extend({
+    var Alchemy = Currency.extend({
         /**
          * @constructor
          * @param {type} all_mods
@@ -120,7 +127,7 @@
         }
     });
     
-    this.Alchemy.APPLICABLE_BYTE = {
+    Alchemy.APPLICABLE_BYTE = {
         // Currency
         UNSCANNED: 0,
         SUCCESS: 1,
@@ -128,4 +135,6 @@
         // extended
         NOT_WHITE: 4
     };
-})();
+    
+    module.exports = Alchemy;
+}).call(this);

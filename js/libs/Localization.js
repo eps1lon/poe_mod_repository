@@ -1,17 +1,20 @@
-/* global Class, this, Localization */
 /* jshint bitwise:false */
-
 (function (__undefined) {
-    require("./Inheritance");
+    var Class = require("./Inheritance");
+    
     require('./concerns/Array');
     require('./concerns/Object');
+    
+    if ($ === __undefined) {
+        var $ = require('./jquery/jquery_node');
+    }
     
     /**
      * class Localization
      * 
      * class for localizing a group of entities
      */
-    this.Localization = Class.extend({
+    var Localization = Class.extend({
         /**
          * 
          * @param {Object} data the localization json data
@@ -80,7 +83,7 @@
             }
             
             if (!used_option.text) {
-                console.log(this.data[key], used_option)
+                console.log(this.data[key], used_option);
             }
             
             return used_option.text;
@@ -94,7 +97,7 @@
      * @param {Array} params
      * @returns {String}
      */
-    this.Localization.fillString = function (string, params) {
+    Localization.fillString = function (string, params) {
         $.each(params, function (i, param) {
             string = string.replace("{param_" + (i + 1) + "}", Localization.rangeString(param));
         });
@@ -108,7 +111,7 @@
      * @param {type} values
      * @returns {Boolean}
      */
-    this.Localization.inRange = function (range_string, values) {
+    Localization.inRange = function (range_string, values) {
         if (range_string === __undefined || values === __undefined) {
             return false;
         }
@@ -132,7 +135,7 @@
         return false;
     };
     
-    this.Localization.rangeString = function (range) {
+    Localization.rangeString = function (range) {
         if (range.length < 2 || range[0] === range[1]) {
             return range[0];
         }
@@ -142,7 +145,7 @@
     /**
      * lambdas  for parameter handles
      */
-    this.Localization.handles = {
+    Localization.handles = {
         deciseconds_to_seconds: function (i) {
             return i * 10;
         },
@@ -186,4 +189,6 @@
             return i;
         }
     };
-})();
+    
+    module.exports = Localization;
+}).call(this);

@@ -1,14 +1,21 @@
 /* jshint bitwise:false */
 
-/* global Currency, Chaos, Transmute, Item, Applicable, this, ByteSet */
-
 (function (__undefined) {
+    var Currency = require('./Currency');
+    var Transmute = require('./Transmute');
+    var Alchemy = require('./Alchemy');
+    var Scouring = require('./Scouring');
+    var Exalted = require('./Exalted');
+    var Item = require('../ModContainers/Item');
+    var Applicable = require('../Applicable');
+    
+    var ByteSet = require('../concerns/ByteSet');
     /**
      * class Chaos extends Currency
      * 
      * represantation of Chaos Orb
      */
-    this.Chaos = Currency.extend({
+    var Chaos = Currency.extend({
         /**
          * @constructor
          * @param {Array} all_mods
@@ -76,7 +83,7 @@
         }
     });
     
-    this.Chaos.APPLICABLE_BYTE = {
+    Chaos.APPLICABLE_BYTE = {
         // Currency
         UNSCANNED: 0,
         SUCCESS: 1,
@@ -84,4 +91,6 @@
         // extended
         NOT_RARE: 4
     };
-})();
+    
+    module.exports = Chaos;
+}).call(this);

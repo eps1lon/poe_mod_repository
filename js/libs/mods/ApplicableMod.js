@@ -1,11 +1,15 @@
-/* global Applicable, ByteSet, this, MasterMod, Mod, ApplicableMod */
 /* jshint bitwise:false */
 
 (function (__undefined) {
+    var Mod = require('./Mod');
+    var Applicable = require('../Applicable');
+    var ByteSet = require('../concerns/ByteSet');
+    var $ = require('../jquery/jquery_node');
+    
     /**
      * class Applicable extends Mod impliements Applicable, Serializeable
      */
-    this.ApplicableMod = Mod.extend({
+    var ApplicableMod = Mod.extend({
         /**
          * 
          * @param {Object} props for GgpkEntry
@@ -101,7 +105,7 @@
         }
     });
     
-    this.ApplicableMod.APPLICABLE_BYTE = {
+    ApplicableMod.APPLICABLE_BYTE = {
         UNSCANNED: 0, // per convention 
         SUCCESS: 1, 
         // Applicable
@@ -111,4 +115,6 @@
         LOWER_ILVL: 16,
         ABOVE_LLD_LEVEL: 32
     };
-})();
+    
+    module.exports = ApplicableMod;
+}).call(this);

@@ -1,13 +1,18 @@
-/* global ApplicableMod, Applicable, this, ByteSet, GgpkEntry, MasterMod */
 /* jshint bitwise:false */
 
 (function (__undefined) {
+    var ApplicableMod = require('./ApplicableMod');
+    var Applicable = require('../Applicable');
+    
+    var ByteSet = require('../concerns/ByteSet');
+    var $ = require('../jquery/jquery_node');
+    
     /**
      * class MasterMod extends ApplicableMod
      * 
      * mod from a masterbench
      */
-    this.MasterMod = ApplicableMod.extend({
+    var MasterMod = ApplicableMod.extend({
         init: function (mod_props, bench_props) {
             this._super(mod_props);
 
@@ -68,7 +73,7 @@
         }
     });
     
-    this.MasterMod.APPLICABLE_BYTE = {
+    MasterMod.APPLICABLE_BYTE = {
         // ApplicableMod
         UNSCANNED: 0, // per convention 
         SUCCESS: 1, 
@@ -82,7 +87,7 @@
         NO_MULTIMOD: 128
     };
     
-    this.MasterMod.METAMOD = {
+    MasterMod.METAMOD = {
         LOCKED_PREFIXES: 4341,
         LOCKED_SUFFIXES: 4342,
         NO_ATTACK_MODS: 4343,
@@ -92,5 +97,7 @@
     };
     
     // table `craftingbenchoptions`
-    this.MasterMod.craftingbenchoptions = null;
-})();
+    MasterMod.craftingbenchoptions = null;
+    
+    module.exports = MasterMod;
+}).call(this);

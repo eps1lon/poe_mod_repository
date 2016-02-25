@@ -1,13 +1,20 @@
-/* global Mod, Item, Currency, ByteSet, this, Applicable, Transmute */
 /* jshint bitwise: false */
 
 (function (__undefined) {
+    var Currency = require('./Currency');
+    var Item = require('../ModContainers/Item');
+    var Applicable = require('../Applicable');
+    var RollableMod = require('../mods/Mod');
+    
+    var $ = require('../jquery/jquery_node');
+    var ByteSet = require('../concerns/ByteSet');
+    
     /**
      * class Transmute extends Currency
      * 
      * ingame representation of Orb of Transmutation
      */
-    this.Transmute = Currency.extend({
+    var Transmute = Currency.extend({
         /**
          * @constructor
          * @param {type} all_mods
@@ -107,7 +114,7 @@
         }
     });
     
-    this.Transmute.APPLICABLE_BYTE = {
+    Transmute.APPLICABLE_BYTE = {
         // Currency
         UNSCANNED: 0,
         SUCCESS: 1,
@@ -116,8 +123,10 @@
         NOT_WHITE: 4
     };
     
-    this.Transmute.mod_filter = function (mod_props) {
+    Transmute.mod_filter = function (mod_props) {
         // prefix/suffix only
         return [Mod.MOD_TYPE.PREFIX, Mod.MOD_TYPE.SUFFIX].indexOf(+mod_props.GenerationType) !== -1;
     };
-})();
+    
+    module.exports = Transmute;
+}).call(this);

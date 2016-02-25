@@ -1,12 +1,19 @@
-/* global this, Class, Mod */
-
 (function (__undefined) {
+    'use strict';
+    
+    var Class = require("../Inheritance");
+    var Mod = require("../mods/Mod");
+    
+    if ($ === __undefined) {
+        var $ = require('../jquery/jquery_node');
+    }
+    
     /*
      * ModContainer class
      * 
      * Container for @link Mod
      */
-    this.ModContainer = Class.extend({
+    var ModContainer = Class.extend({
         /**
          * @constructor
          * @param {Array} mods all mods
@@ -179,4 +186,6 @@
             return -1;
         }
     }); 
-})();
+    
+    module.exports = ModContainer;
+}).call(this);

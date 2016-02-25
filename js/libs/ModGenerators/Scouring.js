@@ -1,11 +1,17 @@
-/* global Item, Applicable, this, ByteSet, Currency, MasterMod, Scouring */
 /* jshint bitwise:false */
 
 (function (__undefined) {
+    var Currency = require('./Currency');
+    var Item = require('../ModContainers/Item');
+    var MasterMod = require('../mods/MasterMod');
+    var Applicable = require('../Applicable');
+    
+    var $ = require('../jquery/jquery_node');
+    var ByteSet = require('../concerns/ByteSet');
     /**
      * class Scouring extends @link Currency
      */
-    this.Scouring = Currency.extend({
+    var Scouring = Currency.extend({
         /**
          * no mods need for Scouring. it does the exact opposite of generating mods
          * 
@@ -103,7 +109,7 @@
     /**
      * failure bits
      */
-    this.Scouring.APPLICABLE_BYTE = {
+    Scouring.APPLICABLE_BYTE = {
         // Currency
         UNSCANNED: 0,
         SUCCESS: 1,
@@ -112,4 +118,6 @@
         ALREADY_WHITE: 4,
         UNIQUE: 8
     };
-})();
+    
+    module.exports = Scouring;
+}).call(this);

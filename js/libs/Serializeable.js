@@ -1,10 +1,12 @@
 /* global Class */
 
 (function (__undefined) {
+    var Class = require('./Inheritance');
+    
     /**
      * Interface Serializeable
      */
-    this.Serializeable = Class.extend({
+    var Serializeable = Class.extend({
         serialize: function () {
             return {
                 klass: "",
@@ -18,10 +20,12 @@
      * @param {Object} serialized
      * @returns {ModFactory_L1.ModFactory.deserialize.FactoryFunction}
      */
-    this.Serializeable.deserialize = function (serialized) {
+    Serializeable.deserialize = function (serialized) {
         var constructor = window[serialized.klass];
         var args = [null].concat(serialized.args);
         var factoryFunction = constructor.bind.apply(constructor, args);
         return new factoryFunction();
     };
-})();
+    
+    module.exports = Serializeable;
+}).call(this);

@@ -1,11 +1,16 @@
-/* global this, Spawnable, ByteSet, ApplicableMod, RollableMod */
 /* jshint bitwise:false */
 
 (function (__undefined) {
+    var ApplicableMod = require('./ApplicableMod');
+    var Spawnable = require('../Spawnable');
+    
+    var $ = require('../jquery/jquery_node');
+    var ByteSet = require('../concerns/ByteSet');
+    
     /**
      * class RollableMod extends ApplicableMod impliements Spawnable
      */
-    this.RollableMod = ApplicableMod.extend({
+    var RollableMod = ApplicableMod.extend({
         /**
          * 
          * @param {Object} props for GgpkEntry
@@ -115,15 +120,17 @@
         }
     });
     
-    this.RollableMod.SPAWNABLE_BYTE = {
+    RollableMod.SPAWNABLE_BYTE = {
         UNSCANNED: 0, // per convention 
         SUCCESS: 1,
         NO_MATCHING_TAGS: 2,
         SPAWNWEIGHT_ZERO: 4
     };
     
-    this.RollableMod.APPLICABLE_BYTE = ApplicableMod.APPLICABLE_BYTE;
+    RollableMod.APPLICABLE_BYTE = ApplicableMod.APPLICABLE_BYTE;
     
-    this.RollableMod.UNSCANNED = 0;
-    this.RollableMod.SUCCESS = true;
-})();
+    RollableMod.UNSCANNED = 0;
+    RollableMod.SUCCESS = true;
+    
+    module.exports = RollableMod;
+}).call(this);

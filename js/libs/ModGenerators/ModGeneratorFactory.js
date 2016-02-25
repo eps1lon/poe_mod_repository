@@ -1,9 +1,9 @@
-/* global this, Class, ModGeneratorFactory */
-
 (function (__undefined) {
-    this.ModGeneratorFactory = Class.extend({});
+    var Class = require('../Inheritance');
     
-    this.ModGeneratorFactory.build = function (ident, all_mods) {
+    var ModGeneratorFactory = Class.extend({});
+    
+    ModGeneratorFactory.build = function (ident, all_mods) {
         var generator = ModGeneratorFactory.GENERATORS[ident];
         if (!generator) {
             console.log("could not identify ", ident);
@@ -12,7 +12,7 @@
         return new window[generator.klass](all_mods);
     };
     
-    this.ModGeneratorFactory.GENERATORS = {
+    ModGeneratorFactory.GENERATORS = {
         TRANSMUTE: {
             klass: "Transmute",
             name: "Orb of Transmutation",
@@ -102,5 +102,7 @@
             ]
         }
     };
-})();
+    
+    module.exports = ModGeneratorFactory;
+}).call(this);
 

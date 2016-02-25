@@ -1,4 +1,4 @@
-(function () {
+(function (__undefined) {
     /**
      * 
      * @type StringjQuery utilities so we can run in browser and on server without browserify
@@ -335,9 +335,12 @@
             sortInput = null;
 
             return results;
-    }
+        }
     };
     
-    this.$ = jQuery;
-    this.jQuery = this.$;
-})();
+    if ($ === __undefined) {
+        var $ = jQuery;
+    }
+    
+    module.exports = $;
+}).call(this);

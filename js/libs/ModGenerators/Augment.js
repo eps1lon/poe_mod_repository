@@ -1,13 +1,19 @@
-/* global Item, this, Transmute, Applicable, ByteSet, Currency, Augment */
 /* jshint bitwise:false */
 
 (function (__undefined) {
+    var Currency = require('./Currency');
+    var Transmute = require('./Transmute');
+    var Item = require('../ModContainers/Item');
+    var Applicable = require('../Applicable');
+    
+    var $ = require('../jquery/jquery_node');
+    var ByteSet = require('../concerns/ByteSet');
     /**
      * class Augment extends Currency
      * 
      * represantation of Orb of Augmentation
      */
-    this.Augment = Currency.extend({
+    var Augment = Currency.extend({
         /**
          * @constructor
          * @param {Array} all_mods
@@ -66,7 +72,7 @@
         }
     });
     
-    this.Augment.APPLICABLE_BYTE = {
+    Augment.APPLICABLE_BYTE = {
         // Currency
         UNSCANNED: 0,
         SUCCESS: 1,
@@ -74,4 +80,6 @@
         // extended
         NOT_MAGIC: 4
     };
-})();
+    
+    module.exports = Augment;
+}).call(this);

@@ -1,6 +1,13 @@
-/* global Mod, MetaData, ValueRange, this, ModContainer, Item, GgpkEntry, ApplicableMod */
-
 (function (__undefined) {
+    var ModContainer = require('./ModContainer');
+    var MetaData = require('../MetaData');
+    var Mod = require('../mods/Mod');
+    var ValueRange = require('../ValueRange');
+    
+    if ($ === __undefined) {
+        var $ = require('../jquery/jquery_node');
+    }
+    
     /**
      * 
      * Item Class extends @link ModContainer
@@ -9,7 +16,7 @@
      * the class only represents the explicits and is a fascade for an 
      * additional implicit container
      */
-    this.Item = ModContainer.extend({
+    var Item = ModContainer.extend({
         /**
          * @constructor
          * @param {Object} props for @link GgpkEntry
@@ -462,7 +469,7 @@
      * @param {Number} precision
      * @returns {ValueRange}
      */
-    this.Item.applyStat = function (value, stat, precision) {
+    Item.applyStat = function (value, stat, precision) {
         var result = null;
         
         if (stat === __undefined) {
@@ -485,12 +492,12 @@
     /**
      * meta data object uninitialized
      */
-    this.Item.meta_data = null;
+    Item.meta_data = null;
     
     /**
      * all possible rarities
      */
-    this.Item.RARITY = {
+    Item.RARITY = {
         NORMAL: 1,
         MAGIC: 2,
         RARE: 3,
@@ -501,11 +508,11 @@
     /**
      * maximum item level
      */
-    this.Item.MAX_ILVL = 100;
+    Item.MAX_ILVL = 100;
     
     /* tags are obsolte. they are derivated from the inheritance chain
      * they are kept for historic reasons */
-    this.Item.ITEMCLASSES = {
+    Item.ITEMCLASSES = {
         AMULET: {
             PRIMARY: 5, 
             // amulet, default
@@ -636,5 +643,7 @@
             TAGS: [0]
         }
     };
-})();
+    
+    module.exports = Item;
+}).call(this);
 

@@ -1,13 +1,15 @@
-/* global Class */
-
 (function (__undefined) {
-    require('./Inheritance');
+    var Class = require('./Inheritance');
     require('./concerns/Array');
+    
+    if ($ === __undefined) {
+        var $ = require('./jquery/jquery_node');
+    }
     
     /**
      * table row from content.ggpk
      */
-    this.GgpkEntry = Class.extend({
+    var GgpkEntry = Class.extend({
         init: function (props) {
             this.props = props;
         },
@@ -43,7 +45,6 @@
             }
         }
     });
-})();
-
-
-
+    
+    module.exports = GgpkEntry;
+}).call(this);

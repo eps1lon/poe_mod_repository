@@ -1,12 +1,16 @@
-/* global ModGenerator, Mod, MasterMod, Item */
-
 (function (__undefined) {
+    var ModGenerator = require('./ModGenerator');
+    var MasterMod = require('../mods/MasterMod');
+    var Item = require('../ModContainers/Item');
+    
+    var $ = require('../jquery/jquery_node');
+    
     /**
      * class Masterbench extends ModGenerator
      * 
      * ingame representation of a Craftingbench
      */
-    this.Masterbench = ModGenerator.extend({
+    var Masterbench = ModGenerator.extend({
         /**
          * MasterMod.craftingbenchoptions needs to be initialized
          * @constructor
@@ -159,4 +163,6 @@
             return this.craftingbenchoptions[0].MasterNameShort;
         }
     });
-})();
+    
+    module.exports = Masterbench;
+}).call(this);

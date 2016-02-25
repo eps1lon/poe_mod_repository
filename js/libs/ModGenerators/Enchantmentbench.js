@@ -1,12 +1,16 @@
-/* global ModGenerator, Mod, ApplicableMod */
-
 (function (__undefined) {
+    var ModGenerator = require('./ModGenerator');
+    var Mod = require('../mods/Mod');
+    var RollableMod = require('../mods/RollableMod');
+    
+    var $ = require('../jquery/jquery_node');
+    
     /**
      * class EnchantmentBench extends ModGenerator
      * 
      * ingame representation of a enchantment bench
      */
-    this.Enchantmentbench = ModGenerator.extend({
+    var Enchantmentbench = ModGenerator.extend({
         init: function (all_mods, and_filter) {
             if (and_filter === __undefined) {
                 // dummy filter
@@ -58,4 +62,6 @@
         // talisman wildcard
         return [Mod.MOD_TYPE.ENCHANTMENT].indexOf(+mod_props.GenerationType) !== -1;
     };
-})();
+    
+    module.exports = Enchantmentbench;
+}).call(this);

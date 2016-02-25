@@ -1,13 +1,12 @@
-/* global GgpkEntry, this, ValueRange, Stat */
-
 (function (__undefined) {
-    require('./GgpkEntry');
+    var GgpkEntry = require('./GgpkEntry');
+    var ValueRange = require('./ValueRange');
     require('./concerns/Array');
     
     /**
      * class Stat extends GgpkEntry
      */
-    this.Stat = GgpkEntry.extend({
+    var Stat = GgpkEntry.extend({
         init: function (props) {
             this._super(props);
             this.values = new ValueRange(0, 0);
@@ -59,5 +58,7 @@
         }
     });
     
-    this.Stat.localization = null;
+    Stat.localization = null;
+    
+    module.exports = Stat;
 })();

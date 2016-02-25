@@ -1,13 +1,15 @@
 /* global Class, ValueRange */
 
 (function (__undefined) {
+    var Class = require("./Inheritance");
+    
     /**
      * class ValueRange
      * 
      * a 2-dimensional array with operations for certain mathematical operations
      * can create recursive structures [(2-4)-(6-8)]
      */
-    this.ValueRange = Class.extend({
+    var ValueRange = Class.extend({
         init: function (min, max) {
             this.min = min;
             this.max = max;
@@ -94,6 +96,8 @@
         }
     });
     
-    this.ValueRange.sepOdd = " to ";
-    this.ValueRange.sepEven = "-";
+    ValueRange.sepOdd = " to ";
+    ValueRange.sepEven = "-";
+    
+    module.exports = ValueRange;
 })();

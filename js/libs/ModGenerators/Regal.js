@@ -1,13 +1,18 @@
-/* global Item, Currency, ByteSet, this, Applicable, Transmute, Regal */
 /* jshint bitwise:false */
 
 (function (__undefined) {
+    var Currency = require('./Currency');
+    var Transmute = require('./Transmute');
+    var Item = require('../ModContainers/Item');
+    var Applicable = require('../Applicable');
+    
+    var ByteSet = require('../concerns/ByteSet');
     /**
      * class Regal extrends @link Currency
      * 
      * ingame representation of Regal Orb
      */
-    this.Regal = Currency.extend({
+    var Regal = Currency.extend({
         /**
          * @constructor
          * @param {Array} all_mods
@@ -103,7 +108,7 @@
         }
     });
     
-    this.Regal.APPLICABLE_BYTE = {
+    Regal.APPLICABLE_BYTE = {
         // Currency
         UNSCANNED: 0,
         SUCCESS: 1,
@@ -111,4 +116,6 @@
         // extended
         NOT_MAGIC: 4
     };
-})();
+    
+    module.exports = Regal;
+}).call(this);

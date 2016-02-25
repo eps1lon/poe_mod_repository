@@ -1,14 +1,22 @@
-/* global RollableMod, Mod, ModGenerator, ByteSet, this, Item, Applicable, Currency, ModGeneratorFactory */
 /* jshint bitwise:false */
 
 (function (__undefined) {
+    var ModGenerator = require('./ModGenerator');
+    var Applicable = require('../Applicable');
+    var RollableMod = require('../mods/RollableMod');
+    var Item = require('../ModContainers/Item');
+    var ModGeneratorFactory = require('../ModGenerators/ModGeneratorFactory');
+    
+    var $ = require('../jquery/jquery_node');
+    var ByteSet = require('../concerns/ByteSet');
+    
     /**
      * abstract class Currency extends ModGenerator
      * 
      * abstract representation of ingame currency which only accepts
      * prefixes, suffixes and implicits
      */
-    this.Currency = ModGenerator.extend({
+    var Currency = ModGenerator.extend({
         /**
          * 
          * @param {Array} all_mods
@@ -120,11 +128,13 @@
         }
     });
     
-    this.Currency.APPLICABLE_BYTE = {
+    Currency.APPLICABLE_BYTE = {
         // Convention of Applicable
         UNSCANNED: 0,
         SUCCESS: 1,
         // Currency
         NOT_AN_ITEM: 2
     };
-})();
+    
+    module.exports = Currency;
+}).call(this);

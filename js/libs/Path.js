@@ -1,7 +1,9 @@
 /* global Class */
 
 (function (__undefined) {
-    this.Path = Class.extend({
+    var Class = require('./Inheritance');
+    
+    var Path = Class.extend({
         init: function (path_string) {
             this.path = path_string.split("/");
             
@@ -26,4 +28,6 @@
             return this.getBasename();
         }
     });
-})();
+    
+    module.exports = Path;
+}).call(this);
