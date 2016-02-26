@@ -1,4 +1,5 @@
 /* gulp deployment */
+build
 dist
 .publish
 
