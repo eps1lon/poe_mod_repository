@@ -1,7 +1,7 @@
 /* gulp deployment */
 build
 dist
-.publish
+.publish /* gulp-gh-pages */
 
 /* npm */
 node_modules

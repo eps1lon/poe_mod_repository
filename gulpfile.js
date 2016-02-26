@@ -10,6 +10,9 @@ var uglify = require('gulp-uglify');
 var useref = require('gulp-useref');
 var browserify = require('gulp-browserify');
 
+var del = require('del');
+var mkdirp = require('mkdirp');
+
 var SRC = './';
 var DIST = './dist/';
 var BUILD = './build/';
@@ -25,13 +28,15 @@ gulp.task('default', ['deploy'], function() {
 gulp.task('deploy', ['stage-deploy'], function() {
     // deploy
     return gulp.src(DIST + '**/*')
-        .pipe(ghPages());
+                .pipe(ghPages());
 });
 
 /*
  * prepares DIST folder
  */
 gulp.task('stage-deploy', ['html'], function () {
+    mkdirp.sync(DIST);
+    
     // copy json files
     gulp.src(SRC + 'js/data/**')
         .pipe(gulp.dest(DIST + 'js/data'));
@@ -43,9 +48,9 @@ gulp.task('stage-deploy', ['html'], function () {
         .pipe(gulp.dest(DIST + 'image/'));
         
     // gui is index
-    gulp.src(DIST + 'gui.html')
-        .pipe(rename('index.html'))
-        .pipe(gulp.dest(DIST));
+    return gulp.src(DIST + 'gui.html')
+                .pipe(rename('index.html'))
+                .pipe(gulp.dest(DIST));
 });
 
 /*
@@ -64,7 +69,16 @@ gulp.task('html', ['browserify'], function() {
 
 // browserify
 gulp.task('browserify', function () {
-    gulp.src(SRC + 'js/*.js')
-        .pipe(browserify())
-        .pipe(gulp.dest(BUILD));
+    mkdirp.sync(BUILD);
+    
+    return gulp.src(SRC + 'js/*.js')
+                .pipe(browserify())
+                .pipe(gulp.dest(BUILD));
+});
+
+/*
+ * clears dist/build
+ */
+gulp.task('clean', function () {
+    return del([DIST + "**", BUILD + "**"]);
 });
