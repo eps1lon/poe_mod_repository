@@ -310,6 +310,7 @@ ul.masterbenches {
 
 a {
     color: #A38B63;
+    cursor: pointer;
 }
 
 a:hover {

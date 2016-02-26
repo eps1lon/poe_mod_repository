@@ -793,10 +793,12 @@
         // display group of ModGenerators handle
         $("#show_currencies").on("click", function () {
             $("#ModGenerator fieldset.currencies").toggle();
+            return false;
         });
         
         $("#show_masterbenches").on("click", function () {
             $("#ModGenerator fieldset.masterbenches").toggle();
+            return false;
         });
         
         // hide group of ModGenerators handle
