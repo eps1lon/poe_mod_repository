@@ -497,7 +497,7 @@
                 rings: 'RINGS',
                 amulets: 'AMULETS',
                 belts: 'BELTS',
-                jewels: 'JEWELS',
+                jewels: 'JEWEL',
                 claws: 'CLAWS',
                 daggers: 'DAGGERS',
                 bows: 'BOWS',
@@ -575,6 +575,7 @@
                 $baseitem = $("#baseitems option:not(.template)[data-name='" + next_file.replace(/_/, " ") + "']");
                 if ($baseitem.length) {
                     $baseitem.prop("selected", true);
+                    $('#baseitems').trigger("change");
 
                     next_file = this.getPath().nextFile();
                 }
