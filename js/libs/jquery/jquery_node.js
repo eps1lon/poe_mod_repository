@@ -339,7 +339,12 @@
     };
     
     var $;
-    if (window === __undefined || window.jQuery === __undefined) {
+    
+    if (window === __undefined) {
+        var window = {};
+    }
+    
+    if (window.jQuery === __undefined) {
         $ = jQuery;
     } else {
         $ = window.jQuery;
