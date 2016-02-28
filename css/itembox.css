@@ -210,3 +210,8 @@
 .itembox ul.stats {
     display: block;
 }
+
+.text-corrupted {
+    color: #d20000;
+    text-transform: uppercase;
+}

@@ -144,8 +144,11 @@
         if ($.trim($statsgroup.text()).length) {
             $(".itembox-stats", $itembox).append($statsgroup);
         }
-        //$(".itembox-stats", $itembox).append($separator_template.clone())
-        //$statsgroup = $statsgroup_template.clone();
+        
+        // display corruption state
+        if (baseitem.isCorrupted()) {
+            $(".itembox-statsgroup:last", $itembox).append("<br><span class='text-corrupted'>Corrupted</span>");
+        }
         
         // append new one
         return $("#used_baseitem").append($itembox);

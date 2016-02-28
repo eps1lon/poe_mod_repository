@@ -28,7 +28,7 @@
         init: function (props) {
             var that = this;
             if (Item.meta_data === null) {
-                console.log("pls init meta data");
+                console.error("pls init meta data");
                 return null;
             }
             
@@ -36,9 +36,11 @@
             this._super();
             
             // default
-            this.rarity = Item.RARITY.NORMAL;
-            this.item_level = Item.MAX_ILVL;
+            this.rarity      = Item.RARITY.NORMAL;
+            this.item_level  = Item.MAX_ILVL;
             this.random_name = "Random Name";
+            this.corrupted   = true;
+            this.mirrored    = false;
             
             // parse entry
             this.entry = new GgpkEntry(props);
@@ -462,6 +464,35 @@
             
             // TODO color stats
             return local_stats;
+        },
+        isCorrupted: function () {
+            return this.corrupted;
+        },
+        /**
+         * sets corrupted flag
+         * logs 
+         * @returns {undefined}error if already corrupted
+         */
+        corrupt: function () {
+            if (this.isCorrupted()) {
+                console.error("invalid state:", this, "is already corrupted");
+            } else {
+                this.corrupted = true;
+            }
+        },
+        isMirrored: function () {
+            return this.mirrored;
+        },
+        /**
+         * sets mirrored flag
+         * logs error if already mirrored
+         */
+        mirror: function () {
+            if (this.isMirrored()) {
+                console.error("invalid state:", this, "is already mirrored");
+            } else {
+                this.mirrored = true;
+            }
         }
     });
     
