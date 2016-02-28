@@ -339,16 +339,11 @@
     };
     
     var $;
-    
-    if (window === __undefined) {
-        var window = {};
-    }
-    
-    if (window.jQuery === __undefined) {
-        $ = jQuery;
+    if (jQuery.isWindow(this) && this.jQuery !== __undefined) {
+        $ = this.jQuery;
     } else {
-        $ = window.jQuery;
+        $ = jQuery;
     }
     
     module.exports = $;
-}).call(this);
+})();
