@@ -39,7 +39,7 @@
             this.rarity      = Item.RARITY.NORMAL;
             this.item_level  = Item.MAX_ILVL;
             this.random_name = "Random Name";
-            this.corrupted   = true;
+            this.corrupted   = false;
             this.mirrored    = false;
             
             // parse entry
