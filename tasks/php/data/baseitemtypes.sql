@@ -1,4 +1,4 @@
-SELECT item.`Rows` as `primary`, item.`Rows`, item.`Name`, item.ItemClassesKey + 1 as ItemClass, 
+SELECT item.`Rows` as `primary`, item.`Rows`, item.`Name`, item.ItemClassesKey as ItemClass, 
     item.Width, item.Height, item.TagsKeys, item.Implicit_ModsKeys, 
     item.DropLevel, item.InheritsFrom,
     weapon.Critical, weapon.Speed, weapon.DamageMin, weapon.DamageMax, weapon.RangeMax,
