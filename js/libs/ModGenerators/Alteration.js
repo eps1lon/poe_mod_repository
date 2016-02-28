@@ -87,8 +87,9 @@
         UNSCANNED: 0,
         SUCCESS: 1,
         NOT_AN_ITEM: 2,
+        CORRUPTED: 4,
         // extended
-        NOT_MAGIC: 4
+        NOT_MAGIC: 8
     };
     
     module.exports = Alteration;

@@ -10,6 +10,7 @@
     var Exalted = require('./Exalted');
     var ItemShowcase = require('./ItemShowcase');
     var Enchantmentbench = require('./Enchantmentbench');
+    var Vaal = require('./Vaal');
     
     var ModGeneratorFactory = Class.extend({});
     
@@ -120,6 +121,15 @@
                 "crafts implicit enchantments"
             ],
             constructor: Enchantmentbench
+        },
+        VAAL: {
+            klass: "Vaal",
+            name: "Vaal Orb",
+            stats: [
+                "Corrupts an item, modifying it",
+                "unpredictably"
+            ],
+            constructor: Vaal
         }
     };
     

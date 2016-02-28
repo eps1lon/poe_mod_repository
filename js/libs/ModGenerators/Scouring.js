@@ -117,9 +117,11 @@
         UNSCANNED: 0,
         SUCCESS: 1,
         NOT_AN_ITEM: 2,
+        CORRUPTED: 4,
+        MIRRORED: 8,
         // extended
-        ALREADY_WHITE: 4,
-        UNIQUE: 8
+        ALREADY_WHITE: 16,
+        UNIQUE: 32
     };
     
     module.exports = Scouring;

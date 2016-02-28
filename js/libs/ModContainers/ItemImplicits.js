@@ -15,6 +15,7 @@
          */
         addMod: function (mod) {
             if (!(mod instanceof Mod)) {
+                console.error('mod must be instance of `Mod`');
                 return false;
             }
             
@@ -33,6 +34,8 @@
             if  (generation_type === Mod.MOD_TYPE.PREMADE) {
                 return 5;
             } else if (generation_type === Mod.MOD_TYPE.ENCHANTMENT) {
+                return 1;
+            } else if (generation_type === Mod.MOD_TYPE.VAAL) {
                 return 1;
             }
             return -1;

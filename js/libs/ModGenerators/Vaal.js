@@ -17,6 +17,25 @@
             this._super(all_mods, Vaal.mod_filter);
             this.klass = "Vaal";
         },
+        /**
+         * replaces implicit with vaal implicit
+         * TODO: white sockets, reroll (brick(, nothing
+         * @param {type} item
+         * @returns {Boolean}
+         */
+        applyTo: function (item) {
+            if (this.applicableTo(item)) {
+                
+                item.removeAllImplicits();
+
+                if (item.addImplicits(this.chooseMod(item))) {
+                    item.corrupt();
+                    return true;
+                }
+            }
+            
+            return false;
+        },
         name: function () {
             return "Vaal Orb";
         }

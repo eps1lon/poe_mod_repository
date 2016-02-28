@@ -122,8 +122,10 @@
         UNSCANNED: 0,
         SUCCESS: 1,
         NOT_AN_ITEM: 2,
+        CORRUPTED: 4,
+        MIRRORED: 8,
         // extended
-        NOT_WHITE: 4
+        NOT_WHITE: 16
     };
     
     Transmute.mod_filter = function (mod_props) {

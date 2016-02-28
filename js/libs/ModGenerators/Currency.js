@@ -39,6 +39,7 @@
          * @returns {Boolean}
          */
         applyTo: function (mod_container) {
+            console.error("didnt override abstract function applyTo(mod_container)");
             return false;
         },
         /**
@@ -71,11 +72,11 @@
         /**
          * currency only applies to items
          * 
-         * @param {ModContainer} mod_container
+         * @param {Item} item
          * @param {byte} success whitelist
          * @returns {Boolean}
          */
-        applicableTo: function (mod_container, success) {
+        applicableTo: function (item, success) {
             this.resetApplicable();
             
             if (success === __undefined) {
@@ -84,8 +85,12 @@
                 success |= Applicable.SUCCESS;
             }
             
-            if (!(mod_container instanceof Item)) {
+            if (!(item instanceof Item)) {
                 this.applicable_byte |= Currency.APPLICABLE_BYTE.NOT_AN_ITEM;
+            }
+            
+            if (item.isCorrupted()) {
+                this.applicable_byte |= Currency.APPLICABLE_BYTE.CORRUPTED;
             }
             
             if (!this.applicable_byte) {
@@ -125,7 +130,9 @@
         UNSCANNED: 0,
         SUCCESS: 1,
         // Currency
-        NOT_AN_ITEM: 2
+        NOT_AN_ITEM: 2,
+        CORRUPTED: 4,
+        MIRRORED: 8
     };
     
     module.exports = Currency;

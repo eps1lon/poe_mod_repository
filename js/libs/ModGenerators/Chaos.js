@@ -91,8 +91,10 @@
         UNSCANNED: 0,
         SUCCESS: 1,
         NOT_AN_ITEM: 2,
+        CORRUPTED: 4,
+        MIRRORED: 8,
         // extended
-        NOT_RARE: 4
+        NOT_RARE: 16
     };
     
     module.exports = Chaos;

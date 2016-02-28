@@ -116,8 +116,10 @@
         UNSCANNED: 0,
         SUCCESS: 1,
         NOT_AN_ITEM: 2,
+        CORRUPTED: 4,
+        MIRRORED: 8,
         // extended
-        NOT_MAGIC: 4
+        NOT_MAGIC: 16
     };
     
     module.exports = Regal;
