@@ -1,28 +1,38 @@
 (function (__undefined) {
-    var ModGenerator = require('./ModGenerator');
+    var Currency = require('./Currency');
     var Mod = require('../mods/Mod');
     var RollableMod = require('../mods/RollableMod');
     
     var $ = require('../jquery/jquery_node');
     
     /**
-     * class EnchantmentBench extends ModGenerator
+     * class EnchantmentBench extends Currency
      * 
      * ingame representation of a enchantment bench
      */
-    var Enchantmentbench = ModGenerator.extend({
+    var Enchantmentbench = Currency.extend({
         init: function (all_mods, and_filter) {
             if (and_filter === __undefined) {
                 // dummy filter
                 and_filter = function () { return true; };
             }
             
-            this._super(all_mods, RollableMod, function (mod) {
-                return mod.SpawnWeight_TagsKeys !== "" && 
-                        Enchantmentbench.mod_filter(mod);
+            this._super(all_mods, function (mod_props) {
+                return Enchantmentbench.mod_filter(mod_props) 
+                        && and_filter(mod_props);
             });
         },
-        applyTo: function (mod_container) {
+        /**
+         * replaces implicits with new enchantment mod
+         * @param {Item} item
+         * @returns {Boolean}
+         */
+        applyTo: function (item) {
+            if (this.applicableTo(item)) {
+                item.removeAllImplicits();
+                
+                return item.addImplicits(this.chooseMod(item));
+            }
             return false;
         },
         /**
@@ -59,7 +69,6 @@
     });
     
     Enchantmentbench.mod_filter = function (mod_props) {
-        // talisman wildcard
         return [Mod.MOD_TYPE.ENCHANTMENT].indexOf(+mod_props.GenerationType) !== -1;
     };
     

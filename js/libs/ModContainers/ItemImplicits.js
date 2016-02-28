@@ -29,9 +29,12 @@
          * @returns {Number} -1 if not possible at all
          */
         maxModsOfType: function (mod) {
-            if  (+mod.getProp("GenerationType") === Mod.MOD_TYPE.PREMADE) {
+            var generation_type = +mod.getProp("GenerationType");
+            if  (generation_type === Mod.MOD_TYPE.PREMADE) {
                 return 5;
-            } 
+            } else if (generation_type === Mod.MOD_TYPE.ENCHANTMENT) {
+                return 1;
+            }
             return -1;
         }
     });

@@ -11,6 +11,10 @@
      */
     var GgpkEntry = Class.extend({
         init: function (props) {
+            if (typeof props !== 'object') {
+                console.error(props, "must be an object");
+            }
+            
             this.props = props;
         },
         /**

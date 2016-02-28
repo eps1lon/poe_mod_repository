@@ -1,6 +1,7 @@
 (function (__undefined) {
     var Class = require('../Inheritance');
     var Applicable = require('../Applicable');
+    var GgpkEntry = require('../GgpkEntry');
     
     if ($ === __undefined) {
         var $ = require('../jquery/jquery_node');
@@ -13,7 +14,7 @@
         /**
          * 
          * @param {Array[mods]} mod_collection
-         * @param {String} mod_klass
+         * @param {? extends Mod} mod_klass
          * @param {Function} filter filter for mod_props
          * @returns {ModGenerator}
          */
@@ -25,17 +26,16 @@
                 filter = function () { return true; };
             }
             
-            // already filtered?
-            if (mod_collection[0] instanceof mod_klass) {
-                this.available_mods = mod_collection;
-            } else {
-                this.available_mods = $.map(mod_collection, function (mod_props) {
-                    if (filter(mod_props)) {
-                        return new mod_klass(mod_props);
-                    }
-                    return null;
-                });
-            }
+            this.available_mods = $.map(mod_collection, function (mod) {
+                if (!(mod instanceof mod_klass)) {
+                    mod = new mod_klass(mod);
+                }
+                
+                if (filter(mod.props)) {
+                    return mod;
+                }
+                return null;
+            });
             
             // Applicable
             this.applicable_byte = Applicable.UNSCANNED;
