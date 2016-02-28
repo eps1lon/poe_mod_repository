@@ -75,7 +75,7 @@
         
         // item_class
         $statsgroup.addClass("meta_data");
-        $statsgroup.append(baseitem.itemclassIdent().toLowerCase().ucfirst());
+        $statsgroup.append(baseitem.itemclassName());
         
         // tags
         $statsgroup.append("<br>", $.map(baseitem.getTagsWithProps(tags), function (props) {
@@ -494,29 +494,30 @@
         var hashbang_change = function () {
             var next_file;
             var mappings = {
-                rings: 'RING',
-                amulets: 'AMULET',
-                belts: 'BELT',
-                jewels: 'JEWEL',
-                claws: 'CLAW',
-                daggers: 'DAGGER',
-                bows: 'BOW',
-                quivers: 'QUIVER',
-                staves: 'STAFF',
-                sceptres: 'SCEPTRE',
-                wands: 'WAND',
-                '1h_axes': 'AXE_1H',
-                '2h_axes': 'AXE_2H',
-                '1h_maces': 'MACE_1H',
-                '2h_maces': 'MACE_2H',
-                '1h_swords': 'SWORD_1H',
-                '2h_swords': 'SWORD_2H',
-                'maps': 'MAP',
+                rings: 'RINGS',
+                amulets: 'AMULETS',
+                belts: 'BELTS',
+                jewels: 'JEWELS',
+                claws: 'CLAWS',
+                daggers: 'DAGGERS',
+                bows: 'BOWS',
+                quivers: 'QUIVERS',
+                staves: 'STAVES',
+                sceptres: 'SCEPTRES',
+                wands: 'WANDS',
+                '1h_axes': 'ONE_HAND_AXES',
+                '2h_axes': 'TWO_HAND_AXES',
+                '1h_maces': 'ONE_HAND_MACES',
+                '2h_maces': 'TWO_HAND_MACES',
+                '1h_swords': 'ONE_HAND_SWORDS',
+                '1h_swords_thrusting': 'THRUSTING_ONE_HAND_SWORDS',
+                '2h_swords': 'TWO_HAND_SWORDS',
+                'maps': 'MAPS',
                 armours: 'ARMOUR',
                 gloves: 'GLOVES',
                 boots: 'BOOTS',
-                helmets: 'HELMET',
-                shields: 'SHIELD'
+                helmets: 'HELMETS',
+                shields: 'SHIELDS'
             };
             var $baseitem;
             var sub_tag = '';
@@ -527,7 +528,7 @@
             if (mappings[next_file]) {
                 $('#item_classes .item_class.' + mappings[next_file]).prop("selected", true);
             } else {
-                $('#item_classes .item_class.RING').prop("selected", true);
+                $('#item_classes .item_class.RINGS').prop("selected", true);
             }
             
             if (["armours", "boots", "gloves", "helmets", "shields"].indexOf(next_file) !== -1) {

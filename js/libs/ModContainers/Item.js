@@ -7,6 +7,8 @@
     var ItemImplicits = require('./ItemImplicits');
     var ApplicableMod = require('../mods/ApplicableMod');
     
+    require('../concerns/String');
+    
     if ($ === __undefined) {
         var $ = require('../jquery/jquery_node');
     }
@@ -324,6 +326,9 @@
                 return null;
             })[0];
         },
+        itemclassName: function () {
+            return Item.ITEMCLASSES[this.itemclassIdent()]['Name'];
+        },
         /**
          * string identifier of the item rarity
          * 
@@ -546,139 +551,18 @@
      */
     Item.MAX_ILVL = 100;
     
-    /* tags are obsolte. they are derivated from the inheritance chain
-     * they are kept for historic reasons */
-    Item.ITEMCLASSES = {
-        AMULET: {
-            PRIMARY: 4, 
-            // amulet, default
-            TAGS: [3, 0]
-        },
-        RING: {
-            PRIMARY: 5, 
-            // ring, default
-            TAGS: [2, 0]
-        },
-        CLAW: {
-            PRIMARY: 6, 
-            // claw, onehandweapon, weapon
-            TAGS: [14, 81, 8]
-        },
-        DAGGER: { 
-            PRIMARY: 7, 
-            // dagger, onehandweapon, weapon
-            TAGS: [13, 81, 8]
-        },
-        WAND: { 
-            PRIMARY: 8, 
-            // wand, onehandweapon, weapon, ranged
-            TAGS: [9, 81, 8, 32]
-        },
-        SWORD_1H: { 
-            PRIMARY: 9, 
-            // sword, onehandweapon, weapon
-            TAGS: [12, 81, 8]
-        },
-        THRUSTING_SWORD_1H: {
-            PRIMARY: 10, 
-            // sword, onehandweapon, weapon
-            TAGS: [12, 81, 8]
-        },
-        AXE_1H: {
-            PRIMARY: 11, 
-            // axe, onehandweapon, weapon
-            TAGS: [15, 81, 8]
-        },
-        MACE_1H: { 
-            PRIMARY: 12, 
-            // mace, onehandweapon, weapon
-            TAGS: [11, 81, 8]
-        },
-        BOW: {
-            PRIMARY: 13,
-            // bow, twohandweapon, weapon, ranged
-            TAGS: [5, 82, 8, 32]
-        },
-        STAFF: { 
-            PRIMARY: 14, 
-            // Staff, twohandweapon, weapon
-            TAGS: [10, 82, 8]
-        },
-        SWORD_2H: { 
-            PRIMARY: 15, 
-            // sword, twohandweapon, weapon
-            TAGS: [12, 82, 8]
-        },
-        AXE_2H: { 
-            PRIMARY: 16, 
-            // axe, twohandweapon, weapon
-            TAGS: [15, 82, 8]
-        },
-        MACE_2H: {
-            PRIMARY: 17, 
-            // mace, twohandweapon, weapon
-            TAGS: [11, 82, 8]
-        },
-        QUIVER: {
-            PRIMARY: 20, 
-            // quiver, default
-            TAGS: [21, 0]
-        },
-        BELT: {
-            PRIMARY: 21, 
-            // belt, default
-            TAGS: [26, 0]
-        },
-        GLOVES: {
-            PRIMARY: 22, 
-            // gloves, armour, default
-            TAGS: [22, 7, 0]
-        },
-        BOOTS: {
-            PRIMARY: 23, 
-            // boots, armour, default
-            TAGS: [4, 7, 0]
-        },
-        ARMOUR: {
-            PRIMARY: 24, 
-            // body_armour, armour, default
-            TAGS: [16, 7, 0]
-        },
-        HELMET: {
-            PRIMARY: 25, 
-            // helmet, armour, default
-            TAGS: [25, 7, 0]
-        },
-        SHIELD: { 
-            PRIMARY: 26, 
-            // shield, armour, default
-            TAGS: [1, 7, 0]
-        },
-        SCEPTRE: {
-            PRIMARY: 32, 
-            // sceptre, onehandweapon, weapon
-            TAGS: [37, 81, 8]
-        },
-        MAP: {
-            PRIMARY: 35, 
-            // default
-            TAGS: [0]
-        },
-        FISHING_ROD: {
-            PRIMARY: 37, 
-            // fishing_rod
-            TAGS: [80]
-        },
-        MAP_FRAGMENT: { 
-            PRIMARY: 38,
-            TAGS: []
-        },
-        JEWEL: {
-            PRIMARY: 41, 
-            // default
-            TAGS: [0]
+    Item.ITEMCLASSES = {};
+    $.each(require('../../data/itemclasses.json'), function (_, props) {
+        if (!props['Name']) {
+            return true;
         }
-    };
+        
+        var ident = props['Name'].replace(/ /g, "_").toUpperCase();
+        Item.ITEMCLASSES[ident] = {
+            PRIMARY: +props['primary'],
+            Name: props['Name']
+        };
+    });
     
     module.exports = Item;
 }).call(this);

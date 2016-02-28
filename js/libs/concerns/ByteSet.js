@@ -2,7 +2,12 @@
 
 (function (__undefined) {
     var Class = require('../Inheritance');
-    var $ = require('../jquery/jquery_node');
+    
+    if (window.jQuery === __undefined) {
+        console.error("need jQuery object with window context");
+        return;
+    }
+    var $ = window.jQuery;
     
     // todo if-exists
     var ByteSet = Class.extend({});
