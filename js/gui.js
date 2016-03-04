@@ -379,7 +379,8 @@
         }),
         new DataDependency("js/data/translations/English/mod_correct_groups.json", "#data_loader_mod_correct_groups_loc").getJSON(function (json) {
             Mod.correct_group_localization = json;
-        })
+        }),
+        $.ready
     ).then(function () {
         console.log("loaded " + mods.length + " mods",
                     "loaded " + tags.length + " tags",
@@ -427,6 +428,9 @@
             } 
             return baseitem;
         };
+        
+        var game_version = require('./data/game_version');
+        $('#game_version').text(game_version.version + '.' + game_version.clients[game_version.client]);
         
         // display item_classes
         $.each(Item.ITEMCLASSES, function (ident, item_class) {

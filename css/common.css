@@ -24,6 +24,11 @@ h1 {
     text-transform: uppercase;
 }
 
+#client {
+    text-transform: none;
+    font-size: .5em;
+}
+
 ul {
     list-style: none;
     padding: 0;
