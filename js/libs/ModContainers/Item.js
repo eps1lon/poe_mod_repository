@@ -57,9 +57,14 @@
             // implicits
             this.implicits = new ItemImplicits([]);
             $.each(this.entry.valueAsArray("Implicit_ModsKeys"), function (_, mod_key) {
-                if (!that.implicits.addMod(new ApplicableMod(Mod.mods[mod_key]))) {
-                    console.log("could not add", mod_key);
+                try {
+                    if (!that.implicits.addMod(new ApplicableMod(Mod.mods[mod_key]))) {
+                        throw "addMod returned false";
+                    }
+                } catch (e) {
+                    console.log(mod_key, e);
                 }
+                    
             });
         },
         /**

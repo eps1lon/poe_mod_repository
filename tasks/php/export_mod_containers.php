@@ -7,7 +7,7 @@ header("Content-Type: text/plain; charset=$script_encoding");
 require_once dirname(__FILE__) . '/db.php';
 
 define("TEMP_DIR", dirname(__FILE__) . "/temp");
-define("GGPK_DIR", "C:/Development/src/ggpk/poe/2.1.2b");
+define("GGPK_DIR", "C:/Development/src/ggpk/poe/2.2.1e");
 
 $db = new mysqli(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB);
 
