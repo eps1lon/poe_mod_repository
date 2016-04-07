@@ -450,7 +450,7 @@
             
             // selected ItemClass
             var item_class = Item.ITEMCLASSES[$selected.data("ident")];
-            if (item_class === null) {
+            if (item_class === __undefined) {
                 return false;
             }
 
@@ -517,7 +517,7 @@
                 '1h_swords_thrusting': 'THRUSTING_ONE_HAND_SWORDS',
                 '2h_swords': 'TWO_HAND_SWORDS',
                 'maps': 'MAPS',
-                armours: 'ARMOUR',
+                armours: 'ARMOURS',
                 gloves: 'GLOVES',
                 boots: 'BOOTS',
                 helmets: 'HELMETS',
