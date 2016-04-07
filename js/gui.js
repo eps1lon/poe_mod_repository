@@ -517,7 +517,7 @@
                 '1h_swords_thrusting': 'THRUSTING_ONE_HAND_SWORDS',
                 '2h_swords': 'TWO_HAND_SWORDS',
                 'maps': 'MAPS',
-                armours: 'ARMOURS',
+                armours: 'BODY_ARMOURS',
                 gloves: 'GLOVES',
                 boots: 'BOOTS',
                 helmets: 'HELMETS',
