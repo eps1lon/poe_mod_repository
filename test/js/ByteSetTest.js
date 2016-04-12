@@ -12,7 +12,9 @@
     
     var ByteSet = require(src_path + "/ByteSet");
     
+    var initial_value = 3;
     var byte_set = new ByteSet(["bit1", "bit2", "bit3"]);
+    byte_set.value = initial_value;
     
     var tests = [
         function () {
@@ -31,40 +33,37 @@
         },
         function () {
             // test isSet
-            var byte = 3;
-            assert.equal(byte_set.isSet(byte, "bit1"), true);
-            assert.equal(byte_set.isSet(byte, "bit2"), true);
-            assert.equal(byte_set.isSet(byte, "bit3"), false);
+            assert.equal(byte_set.isSet("bit1"), true);
+            assert.equal(byte_set.isSet("bit2"), true);
+            assert.equal(byte_set.isSet("bit3"), false);
             
             return true;
         },
         function () {
             // test enable
-            var byte = 3;
-            byte = byte_set.enable(byte, "bit3");
-            assert.equal(byte_set.isSet(byte, "bit1"), true);
-            assert.equal(byte_set.isSet(byte, "bit2"), true);
-            assert.equal(byte_set.isSet(byte, "bit3"), true);
-            assert.equal(byte, 7);
+            byte_set.enable("bit3");
+            assert.equal(byte_set.isSet("bit1"), true);
+            assert.equal(byte_set.isSet("bit2"), true);
+            assert.equal(byte_set.isSet("bit3"), true);
+            assert.equal(byte_set.value, 7);
             
+            byte_set.value = initial_value;
             return true;
         },
         function () {
-            // test disable
-            var byte = 3;
-            byte = byte_set.disable(byte, "bit2");
+            // test disabl
+            byte_set.disable("bit2");
             
-            assert.equal(byte_set.isSet(byte, "bit1"), true);
-            assert.equal(byte_set.isSet(byte, "bit2"), false);
-            assert.equal(byte, 1);
+            assert.equal(byte_set.isSet("bit1"), true);
+            assert.equal(byte_set.isSet("bit2"), false);
+            assert.equal(byte_set.value, 1);
             
+            byte_set.value = initial_value;
             return true;
         }, 
         function () {
             // test isSet(byte)
-            var byte = 3;
-            
-            assert.deepEqual(byte_set.isSet(byte), {"bit1": true, "bit2": true, "bit3": false, "bit4": false});
+            assert.deepEqual(byte_set.isSet(), {"bit1": true, "bit2": true, "bit3": false, "bit4": false});
             
             return true;
         }
