@@ -94,8 +94,8 @@
                 }
                 
                 // vaals replace so we dont care about full or not
-                if (mod.isType("vaal") && mod.applicable_byte & ApplicableMod.APPLICABLE_BYTE.DOMAIN_FULL) {
-                    mod.applicable_byte ^= ApplicableMod.APPLICABLE_BYTE.DOMAIN_FULL;
+                if (mod.isType("vaal")) {
+                    mod.applicable_byte.disable('DOMAIN_FULL');
                 }
                 
                 return mod;
@@ -121,8 +121,8 @@
                 if (mod.applicableTo(baseitem, success) && 
                         (!Spawnable.implementedBy(mod) || mod.spawnableOn(baseitem))) {
                     // vaals replace so we dont care about full or not
-                    if (mod.isType("vaal") && mod.applicable_byte & ApplicableMod.APPLICABLE_BYTE.DOMAIN_FULL) {
-                        mod.applicable_byte ^= ApplicableMod.APPLICABLE_BYTE.DOMAIN_FULL;
+                    if (mod.isType("vaal")) {
+                        mod.applicable_byte.disable('DOMAIN_FULL');
                     }
                     
                     return mod;

@@ -1,8 +1,6 @@
 /* jshint bitwise:false */
 
 (function (__undefined) {
-    var Class = require('../Inheritance');
-    
     if (window.jQuery === __undefined) {
         console.error("need jQuery object with window context");
         return;
@@ -10,20 +8,23 @@
     var $ = window.jQuery;
     
     // todo if-exists
-    var ByteSet = Class.extend({});
+    var ByteSet = require("../ByteSet");
 
-    // TODO blacklist instead of ignore
-    ByteSet.human = function(byte, byte_set, ignore, localization_path) {
+    ByteSet.human = function(byte_set, localization_path, ignore) {
         var strings = [];
         var bits = [];
+        
+        Object.keys(
+            ByteSet
+                .byteBlacklisted(byte_set, ignore)
+                .filterBits(function (v) { 
+                    return v; 
+                })
+        ).forEach(function (name) {
+            bits.push(name);
 
-        $.each(byte_set, function (key, bit) {
-            if (byte & bit && !(byte & ignore)) {
-                bits.push(bit);
-                
-                var localized = Object.byString(ByteSet.localization, localization_path + "." + bit);
-                strings.push(localized ? localized : key);
-            }
+            var localized = Object.byString(ByteSet.localization, localization_path + "." + name);
+            strings.push(localized ? localized : name);
         });
 
         return {
@@ -55,11 +56,6 @@
         });
         
         console.log(ByteSet.localization);
-    };
-    
-    // turn of everything blacklisted (byte xor (byte & blacklist) = byte & !blacklist)
-    ByteSet.byteBlacklisted = function (byte, blacklist) {
-        return byte & ~blacklist;
     };
     
     module.exports = ByteSet;

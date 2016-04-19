@@ -3,11 +3,10 @@
 (function (__undefined) {
     var Currency = require('./Currency');
     var Item = require('../ModContainers/Item');
-    var Applicable = require('../Applicable');
     var Mod = require('../mods/Mod');
     
     var $ = require('../jquery/jquery_node');
-    var ByteSet = require('../concerns/ByteSet');
+    var ByteSet = require('../ByteSet');
     
     /**
      * class Transmute extends Currency
@@ -23,6 +22,10 @@
         init: function (all_mods) {
             this._super(all_mods, Transmute.mod_filter);
             this.klass = "Transmute";
+            
+            // Applicable
+            this.applicable_byte = Transmute.APPLICABLE_BYTE.clone();
+            this.resetApplicable();
         },
         /**
          * adds 1-2 mods
@@ -83,51 +86,30 @@
          */
         applicableTo: function (baseitem, success) {
             this._super(baseitem, success);
-            // remove SUCCESS byte
-            this.applicable_byte &= ~Applicable.SUCCESS;
-            
-            if (success === __undefined) {
-                success = Applicable.SUCCESS;
-            } else {
-                success |= Applicable.SUCCESS;
-            }
             
             if (baseitem.rarity !== Item.RARITY.NORMAL) {
-                this.applicable_byte |= Transmute.APPLICABLE_BYTE.NOT_WHITE;
+                this.applicable_byte.enable('SUCCESS');
             }
             
-            if (!this.applicable_byte) {
-                this.applicable_byte = Applicable.SUCCESS;         
-            }
-            
-            return !ByteSet.byteBlacklisted(this.applicable_byte, success);
+            return !ByteSet.byteBlacklisted(this.applicable_byte, success).anySet();
         },
         /**
          *
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte, 
-                                 Transmute.APPLICABLE_BYTE, 
-                                 Transmute.APPLICABLE_BYTE.SUCCESS, 
-                                 "Transmute.applicable_byte");
+            return ByteSet.human(this.applicable_byte
+                                 , "Transmute.applicable_byte");
         },
         name: function () {
             return "Orb of Transmutation";
         }
     });
     
-    Transmute.APPLICABLE_BYTE = {
-        // Currency
-        UNSCANNED: 0,
-        SUCCESS: 1,
-        NOT_AN_ITEM: 2,
-        CORRUPTED: 4,
-        MIRRORED: 8,
-        // extended
-        NOT_WHITE: 16
-    };
-    
+    Transmute.APPLICABLE_BYTE = Currency.APPLICABLE_BYTE.clone();
+    Transmute.APPLICABLE_BYTE.add('NOT_WHITE');
+    Transmute.APPLICABLE_BYTE.reset();
+
     Transmute.mod_filter = function (mod_props) {
         // prefix/suffix only
         return [Mod.MOD_TYPE.PREFIX, Mod.MOD_TYPE.SUFFIX].indexOf(+mod_props.GenerationType) !== -1;

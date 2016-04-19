@@ -4,10 +4,9 @@
     var Currency = require('./Currency');
     var Item = require('../ModContainers/Item');
     var MasterMod = require('../mods/MasterMod');
-    var Applicable = require('../Applicable');
-    
     var $ = require('../jquery/jquery_node');
-    var ByteSet = require('../concerns/ByteSet');
+    var ByteSet = require('../ByteSet');
+    
     /**
      * class Scouring extends @link Currency
      */
@@ -21,6 +20,10 @@
         init: function () {
             this._super([]);
             this.klass = "Scouring";
+            
+            // Applicable
+            this.applicable_byte = Scouring.APPLICABLE_BYTE.clone();
+            this.resetApplicable();
         },
         /**
          * applies Orb of Scouring to an item
@@ -70,39 +73,25 @@
          */
         applicableTo: function (baseitem, success) {
             this._super(baseitem, success);
-            // remove SUCCESS byte
-            this.applicable_byte &= ~Applicable.SUCCESS;
-            
-            if (success === __undefined) {
-                success = Applicable.SUCCESS;
-            } else {
-                success |= Applicable.SUCCESS;
-            }
             
             switch (baseitem.rarity) {
                 case Item.RARITY.NORMAL:
-                    this.applicable_byte |= Scouring.APPLICABLE_BYTE.ALREADY_WHITE;
+                    this.applicable_byte.enable('ALREADY_WHITE');
                     break;
                 case Item.RARITY.UNIQUE:
-                    this.applicable_byte |= Scouring.APPLICABLE_BYTE.UNIQUE;
+                    this.applicable_byte.enable('UNIQUE');
                     break;
             }
             
-            if (!this.applicable_byte) {
-                this.applicable_byte = Applicable.SUCCESS;         
-            }
-            
-            return !ByteSet.byteBlacklisted(this.applicable_byte, success);
+            return !ByteSet.byteBlacklisted(this.applicable_byte, success).anySet();
         },
         /**
          * 
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte, 
-                                 Scouring.APPLICABLE_BYTE, 
-                                 Scouring.APPLICABLE_BYTE.SUCCESS, 
-                                 "Scouring.applicable_byte");
+            return ByteSet.human(this.applicable_byte
+                                 , "Scouring.applicable_byte");
         },
         name: function () {
             return "Orb of Scouring";
@@ -112,17 +101,10 @@
     /**
      * failure bits
      */
-    Scouring.APPLICABLE_BYTE = {
-        // Currency
-        UNSCANNED: 0,
-        SUCCESS: 1,
-        NOT_AN_ITEM: 2,
-        CORRUPTED: 4,
-        MIRRORED: 8,
-        // extended
-        ALREADY_WHITE: 16,
-        UNIQUE: 32
-    };
+    Scouring.APPLICABLE_BYTE = Currency.APPLICABLE_BYTE.clone();
+    Scouring.APPLICABLE_BYTE.add('ALREADY_WHITE');
+    Scouring.APPLICABLE_BYTE.add('UNIQUE');
+    Scouring.APPLICABLE_BYTE.reset();
     
     module.exports = Scouring;
 }).call(this);

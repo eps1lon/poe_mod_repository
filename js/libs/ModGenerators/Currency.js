@@ -7,7 +7,7 @@
     var Item = require('../ModContainers/Item');
     
     var $ = require('../jquery/jquery_node');
-    var ByteSet = require('../concerns/ByteSet');
+    var ByteSet = require('../ByteSet');
     
     /**
      * abstract class Currency extends ModGenerator
@@ -32,6 +32,10 @@
                 return mod.SpawnWeight_TagsKeys !== "" && 
                         and_filter(mod);
             });
+            
+            // Applicable
+            this.applicable_byte = Currency.APPLICABLE_BYTE.clone();
+            this.resetApplicable();
         },
         /**
          * @abstract
@@ -79,61 +83,40 @@
         applicableTo: function (item, success) {
             this.resetApplicable();
             
-            if (success === __undefined) {
-                success = Applicable.SUCCESS;
-            } else {
-                success |= Applicable.SUCCESS;
-            }
-            
             if (!(item instanceof Item)) {
-                this.applicable_byte |= Currency.APPLICABLE_BYTE.NOT_AN_ITEM;
+                this.applicable_byte.enable('NOT_AN_ITEM');
             }
             
             if (item.isCorrupted()) {
-                this.applicable_byte |= Currency.APPLICABLE_BYTE.CORRUPTED;
+                this.applicable_byte.enable('CORRUPTED');
             }
             
-            if (!this.applicable_byte) {
-                this.applicable_byte = Applicable.SUCCESS;         
-            }
-            
-            return !ByteSet.byteBlacklisted(this.applicable_byte, success);
-        },
-        /**
-         * sets the class back to unscanned
-         * @returns {void}
-         */
-        resetApplicable: function () {
-            this.applicable_byte = Applicable.UNSCANNED;
+            return !ByteSet.byteBlacklisted(this.applicable_byte, success).anySet();
         },
         /**
          *
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte, Currency.APPLICABLE_BYTE, Currency.APPLICABLE_BYTE.SUCCESS);
+            return ByteSet.human(this.applicable_byte
+                                 , "Currency.applicable_byte");
         },
         /**
          *
          * @returns {ByteSet.human}
          */
         applicableCached: function () {
-            return !ByteSet.byteBlacklisted(this.applicable_byte, Applicable.SUCCESS);
+            return !this.applicable_byte.anySet();
         },
         name: function () {
             return "AbstractCurrency";
         }
     });
     
-    Currency.APPLICABLE_BYTE = {
-        // Convention of Applicable
-        UNSCANNED: 0,
-        SUCCESS: 1,
-        // Currency
-        NOT_AN_ITEM: 2,
-        CORRUPTED: 4,
-        MIRRORED: 8
-    };
+    Currency.APPLICABLE_BYTE = Applicable.BYTESET.clone();
+    Currency.APPLICABLE_BYTE.add("NOT_AN_ITEM");
+    Currency.APPLICABLE_BYTE.add("CORRUPTED");
+    Currency.APPLICABLE_BYTE.add("MIRRORED"); 
     
     module.exports = Currency;
 }).call(this);

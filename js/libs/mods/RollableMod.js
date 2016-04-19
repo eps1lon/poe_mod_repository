@@ -5,7 +5,7 @@
     var Spawnable = require('../Spawnable');
     
     var $ = require('../jquery/jquery_node');
-    var ByteSet = require('../concerns/ByteSet');
+    var ByteSet = require('../ByteSet');
     
     /**
      * class RollableMod extends ApplicableMod impliements Spawnable
@@ -20,16 +20,18 @@
             this._super(props);
             
             // Spawnable
+            this.spawnable_byte = RollableMod.SPAWNABLE_BYTE.clone();
             this.resetSpawnable();
             
-            this.rollable = RollableMod.UNSCANNED;
+            this.rollable = null;
         },
         /**
          * 
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function() {
-            return ByteSet.human(this.applicable_byte, RollableMod.APPLICABLE_BYTE, RollableMod.APPLICABLE_BYTE.SUCCESS, "RollableMod.applicable_byte");
+            return ByteSet.human(this.applicable_byte
+                                 , "RollableMod.applicable_byte");
         },
         /**
          * checks if spawnable and sets the spawnweight
@@ -39,18 +41,12 @@
          * @returns {Boolean}
          */
         spawnableOn: function (mod_container, success) {
-            if (success === __undefined) {
-                success = Spawnable.SUCCESS;
-            } else {
-                success |= Spawnable.SUCCESS;
-            }
-            
             var spawnweight_tags = $(this.valueAsArray("SpawnWeight_TagsKeys")).filter(mod_container.getTags()).toArray();
             // reset
             this.resetSpawnable();
             
             if (spawnweight_tags.length === 0) {
-                this.spawnable_byte = RollableMod.SPAWNABLE_BYTE.NO_MATCHING_TAGS;
+                this.spawnable_byte.enable('NO_MATCHING_TAGS');
                 return false;
             }
 
@@ -60,14 +56,10 @@
             
             if (this.spawnweight <= 0) {
                 this.spawnweight = 0;
-                this.spawnable_byte |= RollableMod.SPAWNABLE_BYTE.SPAWNWEIGHT_ZERO;
+                this.spawnable_byte.enable('SPAWNWEIGHT_ZERO');
             }
             
-            if (!this.spawnable_byte) {
-                this.spawnable_byte = Spawnable.SUCCESS;         
-            }
-            
-            return !ByteSet.byteBlacklisted(this.spawnable_byte, success);
+            return !ByteSet.byteBlacklisted(this.spawnable_byte, success).anySet();
         },
         /**
          * spawnchance in [%]
@@ -91,13 +83,14 @@
         resetSpawnable: function () {
             this.spawnweight = 0;
             this.spawnchance = null;
-            this.spawnable_byte = Spawnable.UNSCANNED;
+            this.spawnable_byte.reset();
         },
         spawnableByteHuman: function() {
-            return ByteSet.human(this.spawnable_byte, RollableMod.SPAWNABLE_BYTE, RollableMod.SPAWNABLE_BYTE.SUCCESS, "RollableMod.spawnable_byte");
+            return ByteSet.human(this.spawnable_byte
+                                 , "RollableMod.spawnable_byte");
         },
         spawnableCached: function () {
-            return !ByteSet.byteBlacklisted(this.spawnable_byte, Spawnable.SUCCESS);
+            return !this.spawnable_byte.anySet();
         },
         rollableOn: function (mod_container) {
             this.rollable = this.applicableTo(mod_container) && 
@@ -121,17 +114,13 @@
         }
     });
     
-    RollableMod.SPAWNABLE_BYTE = {
-        UNSCANNED: 0, // per convention 
-        SUCCESS: 1,
-        NO_MATCHING_TAGS: 2,
-        SPAWNWEIGHT_ZERO: 4
-    };
+    RollableMod.SPAWNABLE_BYTE = Spawnable.BYTESET.clone();
+    RollableMod.SPAWNABLE_BYTE.add('NO_MATCHING_TAGS');
+    RollableMod.SPAWNABLE_BYTE.add('SPAWNWEIGHT_ZERO');
+    RollableMod.SPAWNABLE_BYTE.reset();
     
-    RollableMod.APPLICABLE_BYTE = ApplicableMod.APPLICABLE_BYTE;
-    
-    RollableMod.UNSCANNED = 0;
-    RollableMod.SUCCESS = true;
-    
+    RollableMod.APPLICABLE_BYTE = ApplicableMod.APPLICABLE_BYTE.clone();
+    RollableMod.APPLICABLE_BYTE.reset();
+
     module.exports = RollableMod;
 }).call(this);

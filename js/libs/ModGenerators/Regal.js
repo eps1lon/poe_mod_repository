@@ -4,9 +4,7 @@
     var Currency = require('./Currency');
     var Transmute = require('./Transmute');
     var Item = require('../ModContainers/Item');
-    var Applicable = require('../Applicable');
-    
-    var ByteSet = require('../concerns/ByteSet');
+    var ByteSet = require('../ByteSet');
     /**
      * class Regal extrends @link Currency
      * 
@@ -21,6 +19,10 @@
         init: function (all_mods) {
             this._super(all_mods, Transmute.mod_filter);
             this.klass = "Regal";
+            
+            // Applicable
+            this.applicable_byte = Regal.APPLICABLE_BYTE.clone();
+            this.resetApplicable();
         },
         /**
          * adds one random prop and upgrades to rare
@@ -77,50 +79,29 @@
          */
         applicableTo: function (baseitem, success) {
             this._super(baseitem, success);
-            // remove SUCCESS byte
-            this.applicable_byte &= ~Applicable.SUCCESS;
-            
-            if (success === __undefined) {
-                success = Applicable.SUCCESS;
-            } else {
-                success |= Applicable.SUCCESS;
-            }
             
             if (baseitem.rarity !== Item.RARITY.MAGIC) {
-                this.applicable_byte |= Regal.APPLICABLE_BYTE.NOT_MAGIC;
+                this.applicable_byte.enable('NOT_MAGIC');
             }
             
-            if (!this.applicable_byte) {
-                this.applicable_byte = Applicable.SUCCESS;         
-            }
-            
-            return !ByteSet.byteBlacklisted(this.applicable_byte, success);
+            return !ByteSet.byteBlacklisted(this.applicable_byte, success).anySet();
         },
         /**
          *
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte, 
-                                 Regal.APPLICABLE_BYTE, 
-                                 Regal.APPLICABLE_BYTE.SUCCESS, 
-                                 "Regal.applicable_byte");
+            return ByteSet.human(this.applicable_byte
+                                 , "Regal.applicable_byte");
         },
         name: function () {
             return "Regal Orb";
         }
     });
     
-    Regal.APPLICABLE_BYTE = {
-        // Currency
-        UNSCANNED: 0,
-        SUCCESS: 1,
-        NOT_AN_ITEM: 2,
-        CORRUPTED: 4,
-        MIRRORED: 8,
-        // extended
-        NOT_MAGIC: 16
-    };
+    Regal.APPLICABLE_BYTE = Currency.APPLICABLE_BYTE.clone();
+    Regal.APPLICABLE_BYTE.add('NOT_MAGIC');
+    Regal.APPLICABLE_BYTE.reset();
     
     module.exports = Regal;
 }).call(this);

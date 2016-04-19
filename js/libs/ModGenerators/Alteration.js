@@ -4,9 +4,8 @@
     var Currency = require('./Currency');
     var Transmute = require('./Transmute');
     var Item = require('../ModContainers/Item');
-    var Applicable = require('../Applicable');
+    var ByteSet = require('../ByteSet');
     
-    var ByteSet = require('../concerns/ByteSet');
     /**
      * class Augment extends Currency
      * 
@@ -21,6 +20,10 @@
         init: function (all_mods) {
             this._super(all_mods, Transmute.mod_filter);
             this.klass = "Alteration";
+            
+            // Applicable
+            this.applicable_byte = Alteration.APPLICABLE_BYTE.clone();
+            this.resetApplicable();
         },
         /**
          * adds one random property
@@ -52,45 +55,25 @@
          */
         applicableTo: function (baseitem, success) {
             this._super(baseitem, success);
-            // remove SUCCESS byte
-            this.applicable_byte &= ~Applicable.SUCCESS;
-            
-            if (success === __undefined) {
-                success = Applicable.SUCCESS;
-            } else {
-                success |= Applicable.SUCCESS;
-            }
             
             if (baseitem.rarity !== Item.RARITY.MAGIC) {
-                this.applicable_byte |= Alteration.APPLICABLE_BYTE.NOT_MAGIC;
+                this.applicable_byte.enable('NOT_MAGIC');
             }
             
-            if (!this.applicable_byte) {
-                this.applicable_byte = Applicable.SUCCESS;         
-            }
-            
-            return !ByteSet.byteBlacklisted(this.applicable_byte, success);
+            return !ByteSet.byteBlacklisted(this.applicable_byte, success).anySet();
         },
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte, 
-                                 Alteration.APPLICABLE_BYTE, 
-                                 Alteration.APPLICABLE_BYTE.SUCCESS, 
-                                 "Alteration.applicable_byte");
+            return ByteSet.human(this.applicable_byte
+                                 , "Alteration.applicable_byte");
         },
         name: function () {
             return "Orb of Alteration";
         }
     });
     
-    Alteration.APPLICABLE_BYTE = {
-        // Currency
-        UNSCANNED: 0,
-        SUCCESS: 1,
-        NOT_AN_ITEM: 2,
-        CORRUPTED: 4,
-        // extended
-        NOT_MAGIC: 8
-    };
+    Alteration.APPLICABLE_BYTE = Currency.APPLICABLE_BYTE.clone();
+    Alteration.APPLICABLE_BYTE.add('NOT_MAGIC');
+    Alteration.APPLICABLE_BYTE.reset();
     
     module.exports = Alteration;
 }).call(this);

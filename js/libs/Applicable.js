@@ -1,18 +1,20 @@
 (function (__undefined) {
     var Class = require('./Inheritance');
+    var ByteSet = require('./ByteSet');
     
     /**
      * interface Applicable
      */
     var Applicable = Class.extend({
         init: function () {
-            this.applicable_byte = Applicable.SUCCESS;
+            this.applicable_byte = Applicable.BYTESET.clone();
+            this.resetApplicable();
         },
         applicableTo: function (mod_container) {
             
         },
         resetApplicable: function () {
-            
+            this.applicable_byte.reset();
         },
         applicableByteHuman: function () {
             
@@ -42,8 +44,7 @@
         return  clazz.applicableTo !== __undefined;
     };
     
-    Applicable.UNSCANNED = 0;
-    Applicable.SUCCESS = 1;
+    Applicable.BYTESET = new ByteSet([]);
     
     module.exports = Applicable;
 }).call(this);

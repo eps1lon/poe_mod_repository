@@ -1,7 +1,6 @@
 (function (__undefined) {
     var Class = require('../Inheritance');
     var Applicable = require('../Applicable');
-    var GgpkEntry = require('../GgpkEntry');
     
     if ($ === __undefined) {
         var $ = require('../jquery/jquery_node');
@@ -38,7 +37,8 @@
             });
             
             // Applicable
-            this.applicable_byte = Applicable.UNSCANNED;
+            this.applicable_byte = Applicable.BYTESET.clone();
+            this.resetApplicable();
         },
         /**
          * abstract
@@ -70,7 +70,7 @@
             return false;
         },
         resetApplicable: function () {
-            this.applicable_byte = Applicable.UNSCANNED;
+            this.applicable_byte.reset();
         },
         /**
          * abstract

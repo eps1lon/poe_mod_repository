@@ -2,10 +2,9 @@
 
 (function (__undefined) {
     var ApplicableMod = require('./ApplicableMod');
-    var Applicable = require('../Applicable');
     var GgpkEntry = require('../GgpkEntry');
     
-    var ByteSet = require('../concerns/ByteSet');
+    var ByteSet = require('../ByteSet');
     var $ = require('../jquery/jquery_node');
     
     /**
@@ -18,6 +17,9 @@
             this._super(mod_props);
 
             this.bench = new GgpkEntry(bench_props);
+            
+            this.applicable_byte = MasterMod.APPLICABLE_BYTE.clone();
+            this.resetApplicable();
         },
         /**
          * modname with basic stats
@@ -35,33 +37,22 @@
          * @returns {Boolean}
          */
         applicableTo: function (item, success) {
-            var base_item_classes;
-            if (success === __undefined) {
-                success = Applicable.SUCCESS;
-            } else {
-                success |= Applicable.SUCCESS;
-            }
-            
+            var base_item_classes;            
             this._super(item, success);
             
             base_item_classes = this.bench.valueAsArray("BaseItemClassesKeys");
             if (base_item_classes.length > 0 && base_item_classes.indexOf(+item.entry.getProp("ItemClass")) === -1) {
-                this.applicable_byte |= MasterMod.APPLICABLE_BYTE.WRONG_ITEMCLASS;
+                this.applicable_byte.enable('WRONG_ITEMCLASS');
             }
             
             // grep MasterMods and set failure if we cant multimod
             if ($.grep(item.mods, function (mod) {
                 return mod instanceof MasterMod;
             }).length > 0 && item.inMods(MasterMod.METAMOD.MULTIMOD) === -1) {
-                this.applicable_byte |= MasterMod.APPLICABLE_BYTE.NO_MULTIMOD;
+                this.applicable_byte.enable('NO_MULTIMOD');
             }
             
-            // remove SUCCESS Bit from super if additional failure bits set
-            if ((this.applicable_byte & Applicable.SUCCESS) &&  this.applicable_byte > Applicable.SUCCESS) {
-                this.applicable_byte ^= Applicable.SUCCESS;
-            }
-            
-            return !ByteSet.byteBlacklisted(this.applicable_byte, success);
+            return !ByteSet.byteBlacklisted(this.applicable_byte, success).anySet();
         },
         serialize: function () {
             return {
@@ -71,23 +62,15 @@
             };
         },
         applicableByteHuman: function() {
-            return ByteSet.human(this.applicable_byte, MasterMod.APPLICABLE_BYTE, MasterMod.APPLICABLE_BYTE.SUCCESS, "MasterMod.applicable_byte");
+            return ByteSet.human(this.applicable_byte
+                                 , "MasterMod.applicable_byte");
         }
     });
     
-    MasterMod.APPLICABLE_BYTE = {
-        // ApplicableMod
-        UNSCANNED: 0, // per convention 
-        SUCCESS: 1, 
-        DOMAIN_FULL: 2,
-        ALREADY_PRESENT: 4,
-        WRONG_DOMAIN: 8,
-        LOWER_ILVL: 16,
-        ABOVE_LLD_LEVEL: 32,
-        // MasterMod
-        WRONG_ITEMCLASS: 64,
-        NO_MULTIMOD: 128
-    };
+    MasterMod.APPLICABLE_BYTE = ApplicableMod.APPLICABLE_BYTE.clone();
+    MasterMod.APPLICABLE_BYTE.add('WRONG_ITEMCLASS');
+    MasterMod.APPLICABLE_BYTE.add('NO_MULTIMOD');
+    MasterMod.APPLICABLE_BYTE.reset();
     
     MasterMod.METAMOD = require('./meta_mods');
     

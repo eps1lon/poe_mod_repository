@@ -1,5 +1,6 @@
 (function (__undefined) {
     var Class = require('./Inheritance');
+    var ByteSet = require('./ByteSet');
     
     /**
      * Interface
@@ -8,7 +9,8 @@
         init: function () {
             this.spawnweight_cached = 0;
             this.spawnchance = null;
-            this.spawnable_byte = Spawnable.SUCCESS;
+            this.spawnable_byte = Spawnable.BYTESET.clone();
+            this.spawnable_byte.reset();
         },
         spawnableOn: function (mod_container) {
             
@@ -73,9 +75,7 @@
         });
     };
     
-    // Convention
-    Spawnable.UNSCANNED = 0;
-    Spawnable.SUCCESS = 1;
+    Spawnable.BYTESET = new ByteSet([]);
     
     module.exports = Spawnable;
 }).call(this);
