@@ -101,6 +101,28 @@
             });
             
             return filtered;
+        },
+        human: function (localization_path, blacklist) {
+            var strings = [];
+            var bits = [];
+
+            Object.keys(
+                ByteSet
+                    .byteBlacklisted(this, blacklist)
+                    .filterBits(function (v) { 
+                        return v; 
+                    })
+            ).forEach(function (name) {
+                bits.push(name);
+
+                var localized = Object.byString(ByteSet.localization, localization_path + "." + name);
+                strings.push(localized ? localized : name);
+            });
+
+            return {
+                strings: strings,
+                bits: bits
+            };
         }
     });
     
@@ -117,6 +139,12 @@
         
         return new_byte_set;
     };
+    
+    /**
+     * object which holds localization
+     * localization_path => {bit_name => translation[,..]}
+     */
+    ByteSet.localization = null;
     
     module.exports = ByteSet;
 }).call(this);

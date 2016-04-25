@@ -30,8 +30,7 @@
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function() {
-            return ByteSet.human(this.applicable_byte
-                                 , "RollableMod.applicable_byte");
+            return this.applicable_byte.human("RollableMod.applicable_byte");
         },
         /**
          * checks if spawnable and sets the spawnweight
@@ -86,8 +85,7 @@
             this.spawnable_byte.reset();
         },
         spawnableByteHuman: function() {
-            return ByteSet.human(this.spawnable_byte
-                                 , "RollableMod.spawnable_byte");
+            return this.spawnable_byte.human("RollableMod.spawnable_byte");
         },
         spawnableCached: function () {
             return !this.spawnable_byte.anySet();

@@ -55,8 +55,7 @@
             return !ByteSet.byteBlacklisted(this.applicable_byte, success).anySet();
         },
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte
-                                 , "Augment.applicable_byte");
+            return this.applicable_byte.human("Augment.applicable_byte");
         },
         name: function () {
             return "Orb of Augmentation";

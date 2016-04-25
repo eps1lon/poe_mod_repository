@@ -67,8 +67,7 @@
             return !ByteSet.byteBlacklisted(this.applicable_byte, success).anySet();
         },
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte
-                                 , "Chaos.applicable_byte");
+            return this.applicable_byte.human("Chaos.applicable_byte");
         },
         name: function () {
             return "Chaos Orb";

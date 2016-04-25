@@ -62,8 +62,7 @@
             };
         },
         applicableByteHuman: function() {
-            return ByteSet.human(this.applicable_byte
-                                 , "MasterMod.applicable_byte");
+            return this.applicable_byte.human("MasterMod.applicable_byte");
         }
     });
     

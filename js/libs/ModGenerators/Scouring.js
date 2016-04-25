@@ -90,8 +90,7 @@
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte
-                                 , "Scouring.applicable_byte");
+            return this.applicable_byte.human("Scouring.applicable_byte");
         },
         name: function () {
             return "Orb of Scouring";

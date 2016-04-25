@@ -91,8 +91,7 @@
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte
-                                 , "Regal.applicable_byte");
+            return this.applicable_byte.human("Regal.applicable_byte");
         },
         name: function () {
             return "Regal Orb";

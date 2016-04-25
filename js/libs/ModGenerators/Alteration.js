@@ -63,8 +63,7 @@
             return !ByteSet.byteBlacklisted(this.applicable_byte, success).anySet();
         },
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte
-                                 , "Alteration.applicable_byte");
+            return this.applicable_byte.human("Alteration.applicable_byte");
         },
         name: function () {
             return "Orb of Alteration";

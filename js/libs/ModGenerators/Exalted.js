@@ -57,8 +57,7 @@
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte
-                                 , "Exalted.applicable_byte");
+            return this.applicable_byte.human("Exalted.applicable_byte");
         },
         name: function () {
             return "Exalted Orb";

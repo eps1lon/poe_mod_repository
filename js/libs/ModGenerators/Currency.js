@@ -98,8 +98,7 @@
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte
-                                 , "Currency.applicable_byte");
+            return this.applicable_byte.human("Currency.applicable_byte");
         },
         /**
          *

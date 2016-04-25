@@ -5,7 +5,6 @@
     var Transmute = require('./Transmute');
     var Item = require('../ModContainers/Item');
     var ByteSet = require('../ByteSet');
-    require('../concerns/ByteSet');
     
     /**
      * class Alchemy extends Currency
@@ -110,8 +109,7 @@
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte
-                                 , "Alchemy.applicable_byte");
+            return this.applicable_byte.human("Alchemy.applicable_byte");
         },
         name: function () {
             return "Orb of Alchemy";

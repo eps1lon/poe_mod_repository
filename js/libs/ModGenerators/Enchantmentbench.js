@@ -1,7 +1,6 @@
 (function (__undefined) {
     var Currency = require('./Currency');
     var Mod = require('../mods/Mod');
-    var RollableMod = require('../mods/RollableMod');
     
     var $ = require('../jquery/jquery_node');
     

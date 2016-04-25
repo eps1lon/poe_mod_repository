@@ -5,7 +5,6 @@
     var Item = require('../ModContainers/Item');
     var Mod = require('../mods/Mod');
     
-    var $ = require('../jquery/jquery_node');
     var ByteSet = require('../ByteSet');
     
     /**
@@ -98,8 +97,7 @@
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function () {
-            return ByteSet.human(this.applicable_byte
-                                 , "Transmute.applicable_byte");
+            return this.applicable_byte.human("Transmute.applicable_byte");
         },
         name: function () {
             return "Orb of Transmutation";

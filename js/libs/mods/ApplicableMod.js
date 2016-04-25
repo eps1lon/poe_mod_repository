@@ -78,8 +78,7 @@
          * @returns {ByteSet.human}
          */
         applicableByteHuman: function() {
-            return ByteSet.human(this.applicable_byte
-                                 , "ApplicableMod.applicable_byte");
+            return this.applicable_byte.human("ApplicableMod.applicable_byte");
         },
         /**
          * 

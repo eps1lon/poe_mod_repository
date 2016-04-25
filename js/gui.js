@@ -23,11 +23,10 @@
     var DataDependency      = require('./libs/DataDependency');
     var Localization        = require('./libs/Localization');
     var Hashbang            = require('./libs/Hashbang');
-    var ByteSet             = require('./libs/concerns/ByteSet');
+    var ByteSet             = require('./libs/ByteSet');
     var NotFoundException   = require('./libs/Exceptions/NotFoundException');
     
     require('./libs/concerns/Array');
-    require('./libs/concerns/ByteSet');
     require('./libs/concerns/Math');
     require('./libs/concerns/Number');
     require('./libs/concerns/Object');
@@ -407,7 +406,26 @@
         };
         
         // get localization for byteset
-        ByteSet.initLocalization($("#legends"));
+        ByteSet.localization = {};
+        
+        $("ul.legend", $('#legends')).each(function () {
+            var $legend = $(this);
+            var klass = $legend.data("klass");
+            var byte_ident = $legend.data("byte-ident");
+            
+            if (ByteSet.localization[klass] === __undefined) {
+                ByteSet.localization[klass] = {};
+            }
+            
+            ByteSet.localization[klass][byte_ident] = {};
+            
+            $("li", this).each(function () {
+                var $li = $(this);
+                ByteSet.localization[klass][byte_ident][$li.data(byte_ident)] = $li.text();
+            });
+        });
+        
+        console.log(ByteSet.localization);
         
         var get_selected_baseitem = function () {
             var baseitem_key = $("#baseitems option:selected").data("baseitem_primary");
