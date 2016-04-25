@@ -3,6 +3,7 @@
 (function (__undefined) {
     var Currency = require('./Currency');
     var Transmute = require('./Transmute');
+    var Scouring = require('./Scouring');
     var Item = require('../ModContainers/Item');
     var ByteSet = require('../ByteSet');
     
