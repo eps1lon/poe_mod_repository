@@ -624,18 +624,16 @@
                 }
             }
             
+            return true;
         };
 
-        // TODO doesnt work
         hashbang.onChange(hashbang_change);
-        
-        hashbang.withWindow(window);
-        hashbang_change.apply(hashbang);
         
         $(window).on("hashchange", function () {
             hashbang.withWindow(window);
-            hashbang_change.apply(hashbang);
         });
+        
+        $(window).trigger("hashchange");
 
         // change modgen handle
         $("input.ModGenerator:radio").on("change", function () {

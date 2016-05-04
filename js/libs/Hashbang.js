@@ -1,14 +1,12 @@
 (function (__undefined) {
     var Class = require('./Inheritance');
     var Path = require('./Path');
+    var $ = require('./jquery/jquery_node');
     
     var Hashbang = Class.extend({
-        init: function (prefix) {
+        init: function () {
             this.params = {};
             this.path = new Path("");
-            this.prefix = prefix;
-            
-            this.on_change = null;
         },
         onChange: function (cb) {
             this.on_change = cb;
