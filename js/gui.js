@@ -630,7 +630,7 @@
         hashbang.onChange(hashbang_change);
         
         $(window).on("hashchange", function () {
-            hashbang.withWindow(window);
+            hashbang.withWindow(window).triggerChange();
         });
         
         $(window).trigger("hashchange");

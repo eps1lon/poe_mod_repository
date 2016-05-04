@@ -11,6 +11,13 @@
         onChange: function (cb) {
             this.on_change = cb;
         },
+        /**
+         * calls on_change
+         * 
+         * should never be called from within a class method (implicit call)
+         * 
+         * @returns {Hashbang_L1.HashbangAnonym$0@pro;on_change@call;apply}
+         */
         triggerChange: function () {
             if (typeof this.on_change === 'function') {
                 return this.on_change.apply(this);
@@ -66,7 +73,6 @@
             if (url_match !== null) {
                 this.setPath(url_match[1]);
                 this.setParams(url_match[2]);
-                this.triggerChange();
             }
 
             return this;
