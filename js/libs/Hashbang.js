@@ -96,5 +96,10 @@
         }).join("&");
     };
     
+    Hashbang.windowHasHashbang = function (window) {
+        var hash = window.location.hash.slice(1);
+        return hash[0] === __undefined || hash[0] === '!';
+    };
+    
     module.exports = Hashbang;
 }).call(this);
