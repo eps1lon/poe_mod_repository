@@ -17,15 +17,15 @@
         toArray: function () {
             return [this.min, this.max];
         },
-        toFixed: function (precision) {
+        toFixedPoe: function (precision) {
             // will turn 2.1 into 2.10 
-            var min = this.min.toFixed(precision);
+            var min = this.min.toFixedPoe(precision);
             if (!(min instanceof ValueRange)) {
                 // but with leading + we will get a number again
                 min = +min;
             }
             
-            var max = this.max.toFixed(precision);
+            var max = this.max.toFixedPoe(precision);
             if (!(max instanceof ValueRange)) {
                 // but with leading + we will get a number again
                 max = +max;
@@ -33,29 +33,45 @@
             
             return new ValueRange(min, max);
         },
-        toString: function (depth) {
+        /**
+         * 
+         * @param {int} depth aktuelle tiefe
+         * @param {int} max_depth maximal tiefe
+         * @param {int} max_depth_value wenn maximale tiefe überschritten ist minimale linke grenze(=any) oder maximale rechte grenze (=1)
+         * @returns {ValueRange_L3.ValueRangeAnonym$0@pro;min@call;getMinDeep|ValueRange_L3.ValueRangeAnonym$0@pro;min@call;toString|Array|String|ValueRange_L3.ValueRangeAnonym$0@pro;max@call;getMaxDeep}
+         */
+        toString: function (depth, max_depth, max_depth_value) {
             if (this.min.equals(this.max)) {
                 return this.min.toString();
+            }
+            
+            if (max_depth === __undefined) {
+                max_depth = Number.POSITIVE_INFINITY;
             }
             
             if (depth === __undefined) {
                 depth = 0;
             }
             
+            if (depth >= max_depth) {
+                if (max_depth_value === 1) {
+                    return this.getMaxDeep();
+                } 
+                return this.getMinDeep();
+            }
+            
             // signature of number.toString(radix) varies from this method sig 
             var min = this.min;
             if (min instanceof ValueRange) {
-                min = min.toString(depth + 1);
+                min = min.toString(depth + 1, max_depth, 0);
             } 
             
             var max = this.max;
             if (max instanceof ValueRange) {
-                max = max.toString(depth + 1);
+                max = max.toString(depth + 1, max_depth, 1);
             } 
             
-            return (depth > 0 ? "(" : "") + 
-                    [min, max].join(depth % 2 ? ValueRange.sepEven : ValueRange.sepOdd) + 
-                    (depth > 0 ? ")" : "");
+            return [min, max].join(depth % 2 ? ValueRange.sepEven : ValueRange.sepOdd);
         },
         clone: function () {
             return new ValueRange(this.min, this.max);
@@ -93,6 +109,18 @@
         },
         isZero: function () {
             return this.toArray().isZero();
+        },
+        getMinDeep: function () {
+            if (this.min instanceof ValueRange) {
+                return this.min.getMinDeep();
+            }
+            return this.min;
+        },
+        getMaxDeep: function () {
+            if (this.max instanceof ValueRange) {
+                return this.max.getMaxDeep();
+            }
+            return this.max;
         }
     });
     

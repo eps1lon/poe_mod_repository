@@ -17,7 +17,6 @@
     var Item                = require('./libs/ModContainers/Item');
     var Mod                 = require('./libs/mods/Mod');
     var ModFactory          = require('./libs/mods/ModFactory');
-    var ApplicableMod       = require('./libs/mods/ApplicableMod');
     var MasterMod           = require('./libs/mods/MasterMod');
     var Spawnable           = require('./libs/Spawnable');
     var DataDependency      = require('./libs/DataDependency');
@@ -25,6 +24,7 @@
     var Hashbang            = require('./libs/Hashbang');
     var ByteSet             = require('./libs/ByteSet');
     var NotFoundException   = require('./libs/Exceptions/NotFoundException');
+    var ValueRange          = require('./libs/ValueRange');
     
     require('./libs/concerns/Array');
     require('./libs/concerns/Math');
@@ -88,7 +88,14 @@
         
         // stats
         $.each(baseitem.localStats(), function (stat_desc, value) {
-            $statsgroup.append("<br>", stat_desc, ": ", "<span class='text-value'>" + value + "</span>");
+            var value_string;
+            if (value instanceof ValueRange) {
+                value_string = value.toString(0, 2);
+            } else {
+                value_string = value.toString();
+            }
+            
+            $statsgroup.append("<br>", stat_desc, ": ", "<span class='text-value'>" + value_string + "</span>");
         });
         
         // sep

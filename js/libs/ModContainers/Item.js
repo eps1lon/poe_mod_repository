@@ -524,7 +524,6 @@
             // 100% increased := 2 = (100% / 100) + 1
             var multiplier = stat.values.multiply(1 / 100).add(1);
 
-
             if (value instanceof ValueRange) {
                 result = value.multiply(multiplier);
             } else {
@@ -532,7 +531,7 @@
             }
         }
         
-        return result.toFixed(precision);
+        return result.toFixedPoe(precision);
     };
     
     /**
