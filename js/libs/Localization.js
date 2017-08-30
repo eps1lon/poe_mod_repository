@@ -197,6 +197,9 @@
         },
         mod_value_to_item_class: function (i) {
             return i;
+        },
+        '60%_of_value': function (i) {
+            return i * .6;
         }
     };
     
