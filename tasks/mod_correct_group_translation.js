@@ -4,11 +4,11 @@
     'use strict';
     
     var fs = require('fs');
+    var $ = require('../js/libs/jquery/jquery_node');
     
-    require('../js/libs/Localization');
-    require('../js/libs/mods/Mod');
-    require('../js/libs/Stat');
-    require('../js/libs/jquery/jquery_node');
+    var Localization = require('../js/libs/Localization');
+    var Mod = require('../js/libs/mods/Mod');
+    var Stat = require('../js/libs/Stat');
 
     var MOD_CORRECT_GROUP_TRANSLATION_FILE = '../js/data/translations/English/mod_correct_groups.json';
     
@@ -22,7 +22,7 @@
     var mods = Mod.mods.map(function (props) {
                     return new Mod(props);
                 }).filter(function (mod) {
-                    return mod.isAffix();
+                    return true;
                 });
     
     mods.forEach(function (mod) {
