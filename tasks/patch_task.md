@@ -15,7 +15,8 @@ When new patch (content.ggpk update) hits:
  1. `ini2json.php > config.json`
  2. `import_json.php`
  3. `translation2json.php > poe_mod_repository/js/data/translations`
-8. poe_mod_repository
+8. poe_mod_repository/tasks
  1. data/export.php
  2. export_mod_containers.php
  3. move temp files to respective js/data destination
+ 4. node mod_correct_group_translation
