@@ -2,6 +2,10 @@
     var GgpkEntry = require('./GgpkEntry');
     var ValueRange = require('./ValueRange');
     require('./concerns/Array');
+
+    if ($ === __undefined) {
+        var $ = require('./jquery/jquery_node');
+    }
     
     /**
      * class Stat extends GgpkEntry
