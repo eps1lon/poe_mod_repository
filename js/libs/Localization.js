@@ -78,7 +78,13 @@
 
             if (used_option.handles) {
                 $.each(used_option.handles, function (i, handle) {
-                    params[i-1] = $.map(params[i-1], Localization.handles[handle]);
+                    try {
+                        params[i-1] = $.map(params[i-1], Localization.handles[handle]);
+                    } catch (err) {
+                        console.warn(handle);
+                        throw err;
+                    }
+                    
                 });
             }
             
@@ -174,6 +180,10 @@
             return parseInt(Math.round(i / 60, 0), 10);
         },
         per_minute_to_per_second_2dp: function (i) {
+            return parseInt(Math.round(i / 60, 2), 10);
+        },
+        // TODO what does "if_required" mean
+        per_minute_to_per_second_2dp_if_required: function (i) {
             return parseInt(Math.round(i / 60, 2), 10);
         },
         milliseconds_to_seconds_0dp: function (i) {
